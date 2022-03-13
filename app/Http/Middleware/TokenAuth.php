@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use App\Exceptions\UnauthorizedException;
+use App\Exceptions\WrongContentTypeException;
+use App\Models\User;
+use Closure;
+use Illuminate\Http\Request;
+
+class TokenAuth
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     */
+    public function handle(Request $request, Closure $next)
+    {
+        if($request->method() == 'POST' && (!$request->hasHeader('Content-Type') || !$request->header('Content-Type') == 'application/json')){
+            throw new WrongContentTypeException();
+        }
+        if($request->hasHeader('Authorization') && User::where('token',  $request->bearerToken())->exists()){
+            return $next($request);
+        }
+        throw new UnauthorizedException();
+    }
+}
