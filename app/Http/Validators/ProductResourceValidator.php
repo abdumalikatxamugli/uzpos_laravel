@@ -1,54 +1,21 @@
 <?php
-
-namespace App\Console\Commands;
-
-use Illuminate\Console\Command;
-
-class MakeApiValidator extends Command
-{
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'make:apiValidator {name}';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Create Api Validator Class';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
-    public function handle(){
-        $name = $this->argument('name');
-        $dir = getcwd();
-        $f = fopen("$dir\app\Http\Validators\\$name.php", "w");
-        fwrite($f, '<?php
 namespace App\Http\Validators;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Http\Exceptions\HttpResponseException;
-
-class '.$name.'{
+/**
+ * It is quality rather than quantity that matters. - Lucius Annaeus Seneca
+ */
+class ProductResourceValidator{
     public function store(Request $request){
         $validator = Validator::make($request->all(), [
+            "id"=>"prohibited",
             "name" => "required",
+            "metric" => "nullable",
+            "bar_code" => "nullable",
+            "bulk_price" => "nullable",
+            "one_price" => "nullable",
+            "alert_limit" => "nullable"
         ]);
         if ($validator->fails()) {
             $message = [
@@ -61,8 +28,13 @@ class '.$name.'{
     }
     public function update(Request $request){
         $validator = Validator::make($request->all(), [
-            "id" => "prohibited",
-            "name" => "required",
+            "id"=>"prohibited",
+            "name" => "nullable",
+            "metric" => "nullable",
+            "bar_code" => "nullable",
+            "bulk_price" => "nullable",
+            "one_price" => "nullable",
+            "alert_limit" => "nullable"
         ]);
         if ($validator->fails()) {
             $message = [
@@ -72,8 +44,5 @@ class '.$name.'{
             throw new HttpResponseException(response()->json($message), 422);
         }
         return $validator->validated();
-    }
-}');
-        return 0;
     }
 }

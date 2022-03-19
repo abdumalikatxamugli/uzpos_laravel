@@ -3,7 +3,16 @@
 namespace App\Http\Controllers\CRUD;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Exceptions\NotFoundException;
+use App\Exceptions\UnexpectedErrorException;
+use App\Http\Validators\PaymentResourceValidator;
+use App\Models\Payment;
+use App\Models\User;
+use App\Responses\CustomPaginatedResponse;
+use App\Responses\ErrorMessageResponse;
+use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\App;
 
 class PaymentController extends Controller
 {
@@ -14,17 +23,8 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $paginator = new CustomPaginatedResponse( Payment::paginate(10) );
+        return $paginator->json();
     }
 
     /**
@@ -33,9 +33,16 @@ class PaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(User $user)
     {
-        //
+        $validated = $this->validate_store();
+        try{
+            $payment = Payment::createFromArrayWithUser($validated, $user);
+            return $payment;
+        }catch(Exception $e){
+            throw $e;
+            throw new UnexpectedErrorException();
+        }
     }
 
     /**
@@ -46,19 +53,15 @@ class PaymentController extends Controller
      */
     public function show($id)
     {
-        //
+        try{
+            return Payment::findOrFail($id);
+        }catch(ModelNotFoundException $e){
+            throw new NotFoundException();
+        }catch(Exception $e){
+            throw new UnexpectedErrorException();
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -67,9 +70,18 @@ class PaymentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, User $user)
     {
-        //
+        $validated = $this->validate_update();
+        try{
+            $payment = Payment::updateFromArrayWithUser($validated, $id, $user);
+            return $payment;
+        }catch(ModelNotFoundException $e){
+            throw new NotFoundException();
+        }catch(Exception $e){
+            // throw $e;
+            throw new UnexpectedErrorException();
+        }
     }
 
     /**
@@ -80,6 +92,20 @@ class PaymentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $payment = Payment::findOrFail($id);
+            $payment->delete();
+            return ErrorMessageResponse::send(0, "success");
+        }catch(ModelNotFoundException $e){
+            throw new NotFoundException();
+        }catch(Exception $e){
+            throw new UnexpectedErrorException();
+        }
+    }
+    public function __call($method, $args){
+        $method = explode("_", $method)[1];
+        return App::call([new PaymentResourceValidator, $method]);
     }
 }
+
+?>

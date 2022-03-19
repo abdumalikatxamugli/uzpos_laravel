@@ -2,8 +2,19 @@
 
 namespace App\Http\Controllers\CRUD;
 
+
+use App\Exceptions\NotFoundException;
+use App\Exceptions\UnexpectedErrorException;
 use App\Http\Controllers\Controller;
+use App\Http\Validators\ProductResourceValidator;
+use App\Models\Product;
+use App\Models\User;
+use App\Responses\CustomPaginatedResponse;
+use App\Responses\ErrorMessageResponse;
+use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class ProductController extends Controller
 {
@@ -14,17 +25,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $paginator = new CustomPaginatedResponse( Product::paginate(10) );
+        return $paginator->json();
     }
 
     /**
@@ -33,9 +35,16 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(User $user)
     {
-        //
+        $validated = $this->validate_store();
+        try{
+            $product = Product::createFromArrayWithUser($validated, $user);
+            return $product;
+        }catch(Exception $e){
+            throw $e;
+            throw new UnexpectedErrorException();
+        }
     }
 
     /**
@@ -46,19 +55,15 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        try{
+            return Product::findOrFail($id);
+        }catch(ModelNotFoundException $e){
+            throw new NotFoundException();
+        }catch(Exception $e){
+            throw new UnexpectedErrorException();
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -67,9 +72,18 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, User $user)
     {
-        //
+        $validated = $this->validate_update();
+        try{
+            $product = Product::updateFromArrayWithUser($validated, $id, $user);
+            return $product;
+        }catch(ModelNotFoundException $e){
+            throw new NotFoundException();
+        }catch(Exception $e){
+            // throw $e;
+            throw new UnexpectedErrorException();
+        }
     }
 
     /**
@@ -80,6 +94,18 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $product = Product::findOrFail($id);
+            $product->delete();
+            return ErrorMessageResponse::send(0, 'success');
+        }catch(ModelNotFoundException $e){
+            throw new NotFoundException();
+        }catch(Exception $e){
+            throw new UnexpectedErrorException();
+        }
+    }
+    public function __call($method, $args){
+        $method = explode("_", $method)[1];
+        return App::call([new ProductResourceValidator, $method]);
     }
 }

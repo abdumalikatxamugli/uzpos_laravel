@@ -3,7 +3,16 @@
 namespace App\Http\Controllers\CRUD;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Exceptions\NotFoundException;
+use App\Exceptions\UnexpectedErrorException;
+use App\Http\Validators\ClientResourceValidator;
+use App\Models\Client;
+use App\Models\User;
+use App\Responses\CustomPaginatedResponse;
+use App\Responses\ErrorMessageResponse;
+use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\App;
 
 class ClientController extends Controller
 {
@@ -14,7 +23,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $paginator = new CustomPaginatedResponse( Client::paginate(10) );
+        return $paginator->json();
     }
 
     /**
@@ -23,9 +33,16 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(User $user)
     {
-        //
+        $validated = $this->validate_store();
+        try{
+            $client = Client::createFromArrayWithUser($validated, $user);
+            return $client;
+        }catch(Exception $e){
+            throw $e;
+            throw new UnexpectedErrorException();
+        }
     }
 
     /**
@@ -36,7 +53,13 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        //
+        try{
+            return Client::findOrFail($id);
+        }catch(ModelNotFoundException $e){
+            throw new NotFoundException();
+        }catch(Exception $e){
+            throw new UnexpectedErrorException();
+        }
     }
 
 
@@ -47,9 +70,18 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, User $user)
     {
-        //
+        $validated = $this->validate_update();
+        try{
+            $client = Client::updateFromArrayWithUser($validated, $id, $user);
+            return $client;
+        }catch(ModelNotFoundException $e){
+            throw new NotFoundException();
+        }catch(Exception $e){
+            // throw $e;
+            throw new UnexpectedErrorException();
+        }
     }
 
     /**
@@ -60,6 +92,20 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $client = Client::findOrFail($id);
+            $client->delete();
+            return ErrorMessageResponse::send(0, "success");
+        }catch(ModelNotFoundException $e){
+            throw new NotFoundException();
+        }catch(Exception $e){
+            throw new UnexpectedErrorException();
+        }
+    }
+    public function __call($method, $args){
+        $method = explode("_", $method)[1];
+        return App::call([new ClientResourceValidator, $method]);
     }
 }
+
+?>

@@ -1,12 +1,47 @@
 <?php
 
+namespace App\Console\Commands;
+
+use Illuminate\Console\Command;
+
+class MakeApiResource extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'make:apiResource {name}';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'To create api resource controller with create, store, index, destroy methods';
+
+    /**
+     * Execute the console command.
+     *
+     * @return int
+     */
+    public function handle()
+    {
+        $name = $this->argument('name');
+        $dir = getcwd();
+        $controllerName = ucfirst($name)."Controller";
+        $modelName = ucfirst($name);
+        $validatorName = ucfirst($name)."ResourceValidator";
+        $f = fopen("$dir\app\Http\Controllers\CRUD\\$controllerName.php", "w");
+        fwrite($f, '<?php
+
 namespace App\Http\Controllers\CRUD;
 
 use App\Http\Controllers\Controller;
 use App\Exceptions\NotFoundException;
 use App\Exceptions\UnexpectedErrorException;
-use App\Http\Validators\ItemResourceValidator;
-use App\Models\Item;
+use App\Http\Validators\\'.$validatorName.';
+use App\Models\\'.$modelName.';
 use App\Models\User;
 use App\Responses\CustomPaginatedResponse;
 use App\Responses\ErrorMessageResponse;
@@ -14,7 +49,7 @@ use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\App;
 
-class ItemController extends Controller
+class '.$controllerName.' extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +58,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $paginator = new CustomPaginatedResponse( Item::paginate(10) );
+        $paginator = new CustomPaginatedResponse( '.$modelName.'::paginate(10) );
         return $paginator->json();
     }
 
@@ -37,8 +72,8 @@ class ItemController extends Controller
     {
         $validated = $this->validate_store();
         try{
-            $item = Item::createFromArrayWithUser($validated, $user);
-            return $item;
+            $'.$name.' = '.$modelName.'::createFromArrayWithUser($validated, $user);
+            return $'.$name.';
         }catch(Exception $e){
             throw $e;
             throw new UnexpectedErrorException();
@@ -54,7 +89,7 @@ class ItemController extends Controller
     public function show($id)
     {
         try{
-            return Item::findOrFail($id);
+            return '.$modelName.'::findOrFail($id);
         }catch(ModelNotFoundException $e){
             throw new NotFoundException();
         }catch(Exception $e){
@@ -74,8 +109,8 @@ class ItemController extends Controller
     {
         $validated = $this->validate_update();
         try{
-            $item = Item::updateFromArrayWithUser($validated, $id, $user);
-            return $item;
+            $'.$name.' = '.$modelName.'::updateFromArrayWithUser($validated, $id, $user);
+            return $'.$name.';
         }catch(ModelNotFoundException $e){
             throw new NotFoundException();
         }catch(Exception $e){
@@ -93,8 +128,8 @@ class ItemController extends Controller
     public function destroy($id)
     {
         try{
-            $item = Item::findOrFail($id);
-            $item->delete();
+            $'.$name.' = '.$modelName.'::findOrFail($id);
+            $'.$name.'->delete();
             return ErrorMessageResponse::send(0, "success");
         }catch(ModelNotFoundException $e){
             throw new NotFoundException();
@@ -104,8 +139,11 @@ class ItemController extends Controller
     }
     public function __call($method, $args){
         $method = explode("_", $method)[1];
-        return App::call([new ItemResourceValidator, $method]);
+        return App::call([new '.$validatorName.', $method]);
     }
 }
 
-?>
+?>');
+        return 0;
+    }
+}
