@@ -21,13 +21,13 @@ class AuthValidator{
         }
         return $validator->validated();
     }
-    public function loginFromInterface(Request $request){
+    public function dashboardLogin(Request $request){
         $validator = Validator::make($request->all(), [
             "username" => "required",
             "password" => "required",
         ]);
         if ($validator->fails()) {
-            $request->session()->flash('errors', $validator->errors() );
+            session()->flash('errors', $validator->errors() );
             redirect()->back();
         }
         return $validator->validated();

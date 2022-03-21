@@ -32,19 +32,19 @@ Route::prefix("v1")->group(function(){
 });
 Route::prefix("v1")->middleware('token_auth')->group(function(){
     Route::get('/current/user',  [AuthController::class, 'getCurrentUser']);
-    Route::resource("/staff", UserController::class)->except(['create', 'edit']);
-    Route::resource("/points", PointController::class)->except(['create', 'edit']);
-    Route::resource("/metrics", MetricController::class)->except(['create', 'edit']);
-    Route::resource("/products", ProductController::class)->except(['create', 'edit']);
-    Route::resource("/party", PartyController::class)->except(['create', 'edit']);
-    Route::resource("/items", ItemController::class)->except(['create', 'edit']);
-    Route::resource("/transfers", TransferController::class)->except(['create', 'edit']);
-    Route::resource("/transfer_items", TransferItemController::class)->except(['create', 'edit']);
-    Route::resource("/clients", ClientController::class)->except(['create', 'edit']);
-    Route::resource("/orders", OrderController::class)->except(['create', 'edit']);
-    Route::resource("/order_items", OrderItemController::class)->except(['create', 'edit']);
-    Route::resource("/point_products", PointProductController::class)->except(['create', 'edit']);
-    Route::resource("/payments", PaymentController::class)->except(['create', 'edit']);
+    Route::apiResource("/staff", UserController::class);
+    Route::apiResource("/points", PointController::class);
+    Route::apiResource("/metrics", MetricController::class);
+    Route::apiResource("/products", ProductController::class);
+    Route::apiResource("/party", PartyController::class);
+    Route::apiResource("/items", ItemController::class);
+    Route::apiResource("/transfers", TransferController::class);
+    Route::apiResource("/transfer_items", TransferItemController::class);
+    Route::apiResource("/clients", ClientController::class);
+    Route::apiResource("/orders", OrderController::class);
+    Route::apiResource("/order_items", OrderItemController::class);
+    Route::apiResource("/point_products", PointProductController::class);
+    Route::apiResource("/payments", PaymentController::class);
 });
 
 /*

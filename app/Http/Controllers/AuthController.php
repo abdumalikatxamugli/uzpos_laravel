@@ -7,7 +7,6 @@ use App\Exceptions\WrongCredentialsException;
 use App\Http\Validators\AuthValidator;
 use App\Models\User;
 use Exception;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -56,15 +55,20 @@ class AuthController extends Controller
      * @expects username:password
      * @return View
      */
-    public function login_from_interface(Request $request){
-        $validated = $this->validate_loginFromInterface();
+    public function dashboardLogin(){
+        $validated = $this->validate_dashboardLogin();
         try{
            $user = User::login($validated);
            Auth::login($user);
+           return redirect()->route('dashboard.main');
         }catch(WrongCredentialsException $e){
             return back()->withErrors(['username'=>'Credentials does not match']);
         }
     }
+    /**
+     *
+     * __call function for validation methods to work
+     */
     public function __call($method, $args){
         $method = explode("_", $method)[1];
         return App::call([new AuthValidator, $method]);

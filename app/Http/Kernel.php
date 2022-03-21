@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckAuthenticated;
 use App\Http\Middleware\TokenAuth;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 

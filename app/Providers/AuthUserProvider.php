@@ -29,6 +29,9 @@ class AuthUserProvider extends ServiceProvider
             if($request->hasHeader('Authorization') && User::where('token', $request->bearerToken())->exists()){
                 return User::where('token', $request->bearerToken())->first();
             }
+            if(auth()->user()){
+                return auth()->user();
+            }
         });
     }
 }
