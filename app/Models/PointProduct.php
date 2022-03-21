@@ -2,10 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Traits\Fabricatable;
 
-class PointProduct extends Model
+class PointProduct extends UuidModel
 {
-    use HasFactory;
+    /**
+    * Traits
+    */
+   use Fabricatable;
+    /**
+     * Properties
+     */
+   protected $table = 'uzpos_core_pointproduct';
 }

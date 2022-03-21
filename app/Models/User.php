@@ -6,8 +6,9 @@ use App\Exceptions\WrongCredentialsException;
 use App\Traits\Fabricatable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {
     /**
      *

@@ -10,7 +10,7 @@ class PartyResourceValidator{
     public function store(Request $request){
         $validator = Validator::make($request->all(), [
             "id"=>"prohibited",
-            "point" => "required",
+            "point_id" => "required",
             "check_in"=>"required"
         ]);
         if ($validator->fails()) {
@@ -25,7 +25,7 @@ class PartyResourceValidator{
     public function update(Request $request){
         $validator = Validator::make($request->all(), [
             "id"=>"prohibited",
-            "point" => "nullable",
+            "point_id" => "nullable",
             "check_in"=>"nullable"
         ]);
         if ($validator->fails()) {

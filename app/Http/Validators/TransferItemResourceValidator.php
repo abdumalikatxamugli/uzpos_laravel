@@ -8,8 +8,8 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 class TransferItemResourceValidator{
     public function store(Request $request){
         $validator = Validator::make($request->all(), [
-            "product" => "required",
-            "transfer" => "required",
+            "product_id" => "required",
+            "transfer_id" => "required",
             "quantity" => "required"
         ]);
 
@@ -25,8 +25,8 @@ class TransferItemResourceValidator{
     public function update(Request $request){
         $validator = Validator::make($request->all(), [
             "id" => "prohibited",
-            "product" => "nullable",
-            "transfer" => "nullable",
+            "product_id" => "nullable",
+            "transfer_id" => "nullable",
             "quantity" => "nullable"
         ]);
         if ($validator->fails()) {

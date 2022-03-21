@@ -2,10 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Traits\Fabricatable;
 
-class Client extends Model
+class Client extends UuidModel
 {
-    use HasFactory;
+      /**
+    * Traits
+    */
+   use Fabricatable;
+   /**
+    * Properties
+    */
+   protected $table = 'uzpos_sales_client';
 }

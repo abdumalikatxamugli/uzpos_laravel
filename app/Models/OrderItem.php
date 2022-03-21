@@ -2,10 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Traits\Fabricatable;
 
-class OrderItem extends Model
+class OrderItem extends UuidModel
 {
-    use HasFactory;
+    /**
+    * Traits
+    */
+   use Fabricatable;
+    /**
+     * Properties
+     */
+   protected $table = 'uzpos_sales_orderitem';
 }
+

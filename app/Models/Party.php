@@ -2,10 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Traits\Fabricatable;
 
-class Party extends Model
+class Party extends UuidModel
 {
-    use HasFactory;
+    /**
+    * Traits
+    */
+   use Fabricatable;
+    /**
+     * Properties
+     */
+   protected $table = 'uzpos_core_party';
 }
+

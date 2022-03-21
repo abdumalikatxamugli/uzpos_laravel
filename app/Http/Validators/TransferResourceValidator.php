@@ -9,8 +9,8 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 class TransferResourceValidator{
     public function store(Request $request){
         $validator = Validator::make($request->all(), [
-            "from_point" => "required",
-            "to_point" => "required",
+            "from_point_id " => "required",
+            "to_point_id" => "required",
             "reason" => "nullable",
             "transfer_date" => "required",
             "is_accepted" => "nullable"
@@ -27,8 +27,8 @@ class TransferResourceValidator{
     public function update(Request $request){
         $validator = Validator::make($request->all(), [
             "id" => "prohibited",
-            "from_point" => "nullable",
-            "to_point" => "nullable",
+            "from_point_id" => "nullable",
+            "to_point_id" => "nullable",
             "reason" => "nullable",
             "transfer_date" => "nullable",
             "is_accepted" => "nullable"

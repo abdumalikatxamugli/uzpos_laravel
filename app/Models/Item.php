@@ -2,10 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Traits\Fabricatable;
 
-class Item extends Model
+class Item extends UuidModel
 {
-    use HasFactory;
+    /**
+    * Traits
+    */
+    use Fabricatable;
+    /**
+    * Properties
+    */
+    protected $table = 'uzpos_core_item';
 }
