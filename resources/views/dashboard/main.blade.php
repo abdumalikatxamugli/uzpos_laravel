@@ -1,1 +1,7 @@
-hello world
+@extends('layouts.app')
+
+@section('content')
+    <div class="card-body">
+        hello world
+    </div>
+@endsection

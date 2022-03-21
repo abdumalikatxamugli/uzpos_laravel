@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserResourceController extends Controller
@@ -92,4 +91,3 @@ class UserResourceController extends Controller
         return redirect()->route("dashboard.user.index");
     }
 }
-        

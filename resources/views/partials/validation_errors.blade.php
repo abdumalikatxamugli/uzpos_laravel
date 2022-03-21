@@ -1,5 +1,5 @@
 @if(session('errors'))
-    <div>
+    <div class="alert alert-danger text-white text-sm">
         @foreach( session('errors')->getMessages() as $field => $errors)
             <span>{{ $field }}</span>
             <ul>
