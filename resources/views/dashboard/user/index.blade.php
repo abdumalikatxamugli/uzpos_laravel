@@ -13,7 +13,7 @@
         <thead>
             <tr>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">username</th>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Edit</th>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Delete</th>
             </tr>
@@ -22,7 +22,7 @@
             @foreach($users as $number => $user)
                 <tr>
                     <td>{{$number+1}}</td>
-                    <td class="mb-0 text-sm">{{$user->name}}</td>
+                    <td class="mb-0 text-sm">{{$user->username}}</td>
                     <td class="mb-0 text-sm">
                         <a href="{{ route('dashboard.user.edit', $user->id) }}" class="bnt btn-warning btn-sm text-dark font-weight-bold text-xs btn-hover">Edit</a>
                     </td>

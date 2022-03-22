@@ -22,9 +22,9 @@
             <tr>
                 <td class="mb-0 text-sm">{{$key+1}}</td>
                 <td class="mb-0 text-sm">{{$product->name}}</td>
-                <td><a class="bnt btn-warning btn-sm text-dark font-weight-bold text-xs btn-hover" href="{{ route('dashboard.point.edit', $point->id) }}">Edit</a></td>
+                <td><a class="bnt btn-warning btn-sm text-dark font-weight-bold text-xs btn-hover" href="{{ route('dashboard.product.edit', $product->id) }}">Edit</a></td>
                 <td>
-                    <form action="{{ route('dashboard.point.destroy', $point->id) }}" method="POST">
+                    <form action="{{ route('dashboard.product.destroy', $product->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger btn-sm text-white font-weight-bold text-xs btn-hover">Delete</button>

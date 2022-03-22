@@ -24,9 +24,16 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            "name"=>"required"
+            "client_type"=>"required",
+            "fname"=>"exclude_if:client_type,1|required",
+            "lname"=>"exclude_if:client_type,1|required",
+            "mname"=>"exclude_if:client_type,1|required",
+            "dbirth"=>"exclude_if:client_type,1|required",
+            "occupation"=>"exclude_if:client_type,1|required",
+            "inn"=>"exclude_if:client_type,0|required",
+            "company_name"=>"exclude_if:client_type,0|required",
+            "phone_number"=>"required",
         ];
     }
 }
 
-        

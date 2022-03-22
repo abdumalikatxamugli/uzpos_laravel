@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
+use App\Models\Point;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,8 @@ class UserResourceController extends Controller
      */
     public function create()
     {
-        return view("dashboard.user.create");
+        $points = Point::all();
+        return view("dashboard.user.create")->with('points', $points);
     }
 
     /**
@@ -40,7 +42,7 @@ class UserResourceController extends Controller
     public function store(StoreRequest $request, User $user)
     {
         $validated = $request->validated();
-        User::createFromArrayWithUser($validated, $user);
+        User::createFromArray($validated, $user);
         return redirect()->route("dashboard.user.index");
     }
 
@@ -63,7 +65,12 @@ class UserResourceController extends Controller
      */
     public function edit(User $user)
     {
-        return view("dashboard.user.edit")->with("user", $user);
+        $points = Point::all();
+        return view("dashboard.user.edit")->with(
+            [
+                "user"=>$user,
+                'points'=>$points
+            ]);
     }
 
     /**

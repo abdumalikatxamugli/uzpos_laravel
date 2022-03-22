@@ -32,6 +32,7 @@
   <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="/assets/css/soft-ui-dashboard.css" rel="stylesheet" />
+  <script src="{{asset('alpine.min.js')}}" defer></script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">

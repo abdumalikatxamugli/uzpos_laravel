@@ -11,6 +11,10 @@
         @csrf
         @method('PUT')
         <input type="text" name="name" value="{{ $point->name }}" class="form-control mb-4">
+        <select name="point_type" class="form-control mb-3">
+            <option value="1" {{$point->point_type == 1 ? "selected":""}}>Склад</option>
+            <option value="2" {{$point->point_type == 2 ? "selected":""}}>Магазин</option>
+        </select>
         <button class="btn btn-sm font-weight-bold btn-info">update</button>
     </form>
 </div>
