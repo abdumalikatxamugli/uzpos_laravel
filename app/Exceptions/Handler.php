@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Responses\ErrorMessageResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -35,34 +36,19 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->renderable(function (UnexpectedErrorException $e) {
-            return response()->json([
-                'error'=>-1,
-                'message'=>'unexpected error occured'
-            ], 500);
+            return ErrorMessageResponse::send(-1, 'unexpected error occured', 500);
         });
         $this->renderable(function (WrongCredentialsException $e) {
-            return response()->json([
-                'error'=>-1,
-                'message'=>'Wrong credentials'
-            ], 400);
+            return ErrorMessageResponse::send(-1, 'Wrong credentials', 400);
         });
         $this->renderable(function (UnauthorizedException $e) {
-            return response()->json([
-                'error'=>-1,
-                'message'=>'Unauthorized'
-            ], 400);
+            return ErrorMessageResponse::send(-1, 'Unauthorized', 400);
         });
         $this->renderable(function (WrongContentTypeException $e) {
-            return response()->json([
-                'error'=>-1,
-                'message'=>'Set content type to application/json'
-            ], 500);
+            return ErrorMessageResponse::send(-1, 'Set content type to application/json', 500);
         });
         $this->renderable(function (NotFoundException $e) {
-            return response()->json([
-                'error'=>-1,
-                'message'=>'Not found'
-            ], 404);
+            return ErrorMessageResponse::send(-1, 'Not found', 400);
         });
     }
 }
