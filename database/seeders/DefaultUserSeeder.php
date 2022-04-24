@@ -17,8 +17,8 @@ class DefaultUserSeeder extends Seeder
     public function run()
     {
         $user = new User();
-        $user->username = 'root2';
-        $user->password = hash('sha3-256', User::salt.'r00t');
+        $user->username = 'root3';
+        $user->password = 'r00t';
         $user->first_name = 'admin';
         $user->last_name = 'admin';
         $user->is_active = 1;
