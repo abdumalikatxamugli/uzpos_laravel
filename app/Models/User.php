@@ -22,6 +22,15 @@ class User extends Authenticatable
     protected $hidden = ['password', 'token'];
     public $timestamps = false;
     const salt = 'ujEdKc.{u2-?f(y5';
+    const roles = [
+        'ADMIN' => 0,
+        'SELLER' => 1,
+        'WAREHOUSE_MANAGER' => 3,
+        'COLLECTOR' => 4,
+        'ACCOUNTANT' => 5,
+        'SHOP_MANAGER' => 6,
+        'DELIVER' => 7
+    ];
     /**
      *
      * Mutators
