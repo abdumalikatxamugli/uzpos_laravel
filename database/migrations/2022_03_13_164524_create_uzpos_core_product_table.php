@@ -23,6 +23,10 @@ class CreateUzposCoreProductTable extends Migration
             $table->dateTime('created_at', 6)->nullable();
             $table->dateTime('updated_at', 6);
             $table->bigInteger('created_by_id')->nullable()->index('uzpos_core_product_created_by_id_f3523f07_fk_auth_user_id');
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('uzpos_core_category')->constrained();
+            $table->unsignedBigInteger('brand_id')->nullable();
+            $table->foreign('brand_id')->references('id')->on('uzpos_core_brand')->constrained();
             $table->char('metric_id')->nullable()->index('uzpos_core_product_metric_id_351d010a_fk_uzpos_core_metric_id');
         });
     }

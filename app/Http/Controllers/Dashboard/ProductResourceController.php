@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\StoreRequest;
 use App\Http\Requests\Product\UpdateRequest;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Metric;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -29,7 +32,13 @@ class ProductResourceController extends Controller
      */
     public function create()
     {
-        return view("dashboard.product.create");
+        $categories = Category::all();
+        $brands = Brand::all();
+        $metrics = Metric::all();
+        return view("dashboard.product.create")
+                    ->with('categories', $categories)
+                    ->with('brands', $brands)
+                    ->with('metrics', $metrics);
     }
 
     /**
@@ -64,7 +73,14 @@ class ProductResourceController extends Controller
      */
     public function edit(Product $product)
     {
-        return view("dashboard.product.edit")->with("product", $product);
+        $categories = Category::all();
+        $brands = Brand::all();
+        $metrics = Metric::all();
+        return view("dashboard.product.edit")
+                    ->with("product", $product)
+                    ->with('categories', $categories)
+                    ->with('brands', $brands)
+                    ->with('metrics', $metrics);
     }
 
     /**

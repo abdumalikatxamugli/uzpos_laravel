@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Dashboard\BrandResourceController;
+use App\Http\Controllers\Dashboard\CategoryResourceController;
 use App\Http\Controllers\Dashboard\ClientResourceController;
 use App\Http\Controllers\Dashboard\MetricResourceControlller;
 use App\Http\Controllers\Dashboard\OrderListController;
@@ -20,6 +22,8 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
     Route::resource('client', ClientResourceController::class, ['as'=>'dashboard']);
     Route::resource('product', ProductResourceController::class, ['as'=>'dashboard']);
     Route::resource('user', UserResourceController::class, ['as'=>'dashboard']);
+    Route::resource('category', CategoryResourceController::class, ['as'=>'dashboard']);
+    Route::resource('brand', BrandResourceController::class, ['as'=>'dashboard']);
     Route::get("orders", OrderListController::class, ['as'=>'dashboard']);
     Route::get('logout', [AuthController::class, 'logout'])->name('dashboard.logout');
 });

@@ -28,7 +28,10 @@ class StoreRequest extends FormRequest
             "bar_code"=>"required",
             "bulk_price"=>"required",
             "one_price"=>"required",
-            "alert_limit"=>"required"
+            "alert_limit"=>"required",
+            "category_id"=>"nullable",
+            "brand_id"=>"nullable",
+            "metric_id"=>"nullable"
         ];
     }
 }

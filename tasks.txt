@@ -1,0 +1,5 @@
+tasks:
+1. create interface for CRUD category
+2. create interface for CRUD brand
+3. add category and brand select boxes to product
+4. Party CRUD

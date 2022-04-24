@@ -26,6 +26,35 @@
             <input type="text" name="alert_limit" class="form-control mb-3" placeholder="Минимальная количество" value="{{$product->alert_limit}}">
         </div>
     </div>
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <div class="mb-3">Категория</div>
+            <select name="category_id" class="form-control mb-3">
+                <option value="" selected disabled>--Выберите--</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{ $category->id == $product->category_id ? 'selected' : '' }}>{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-md-4">
+            <div class="mb-3">Бренд</div>
+            <select name="brand_id" class="form-control mb-3">
+                <option value="" selected disabled>--Выберите--</option>
+                @foreach($brands as $brand)
+                    <option value="{{ $brand->id }}"  {{ $brand->id == $product->brand_id ? 'selected' : '' }}>{{ $brand->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-md-4">
+            <div class="mb-3">Единица измерения</div>
+            <select name="metric_id" class="form-control mb-3">
+                <option value="" selected disabled>--Выберите--</option>
+                @foreach($metrics as $metric)
+                    <option value="{{ $metric->id }}" {{ $metric->id == $product->metric_id ? 'selected' : '' }} >{{ $metric->name }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
     <button class="btn btn-success btn-sm font-weight-bold">save</button>
 </form>
 
