@@ -3,7 +3,7 @@
 @section('content')
 <div class="card-header mb-4 pb-0">
     <div class="d-flex justify-content-between">
-        <h3>Points</h3>
+        <h3>Магазины и склады</h3>
         <a href="{{ route('dashboard.point.create') }}" class="btn btn-info btn-sm text-dark font-weight-bold"> Create </a>
     </div>
 </div>

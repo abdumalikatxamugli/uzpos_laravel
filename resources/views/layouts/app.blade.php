@@ -50,49 +50,56 @@
           <a class="nav-link" href="{{ route('dashboard.metric.index') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
             </div>
-            <span class="nav-link-text ms-1">Measurement</span>
+            <span class="nav-link-text ms-1">Единицы измерение</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ route('dashboard.category.index') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
             </div>
-            <span class="nav-link-text ms-1">Category</span>
+            <span class="nav-link-text ms-1">Категории</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ route('dashboard.brand.index') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
             </div>
-            <span class="nav-link-text ms-1">Brand</span>
+            <span class="nav-link-text ms-1">Бренды</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ route('dashboard.point.index') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
             </div>
-            <span class="nav-link-text ms-1">Point</span>
+            <span class="nav-link-text ms-1">Магазины и склады</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ route('dashboard.product.index') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
             </div>
-            <span class="nav-link-text ms-1">Product</span>
+            <span class="nav-link-text ms-1">Продукты</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ route('dashboard.user.index') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
             </div>
-            <span class="nav-link-text ms-1">Staff</span>
+            <span class="nav-link-text ms-1">Персонал</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ route('dashboard.client.index') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
             </div>
-            <span class="nav-link-text ms-1">Client</span>
+            <span class="nav-link-text ms-1">Клиенты</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('dashboard.party.index') }}">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+            </div>
+            <span class="nav-link-text ms-1">Приход товаров</span>
           </a>
         </li>
       </ul>

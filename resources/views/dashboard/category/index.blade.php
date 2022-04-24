@@ -4,7 +4,7 @@
 
 <div class="card-header mb-4 pb-0">
     <div class="d-flex justify-content-between">
-        <h3>Categories</h3>
+        <h3>Категории</h3>
         <a href="{{ route('dashboard.category.create') }}" class="btn btn-info btn-sm text-dark font-weight-bold"> Create </a>
     </div>
 </div>

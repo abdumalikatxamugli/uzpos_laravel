@@ -4,8 +4,8 @@
 
 <div class="card-header mb-4 pb-0">
     <div class="d-flex justify-content-between">
-        <h3>Measurements</h3>
-        <a href="{{ route('dashboard.metric.create') }}" class="btn btn-info btn-sm text-dark font-weight-bold"> Create </a>
+        <h3>Единицы измерение</h3>
+        <a href="{{ route('dashboard.metric.create') }}" class="btn btn-info btn-sm text-dark font-weight-bold"> Добавить </a>
     </div>
 </div>
 <div class="card-body  px-0 pt-0 pb-2">

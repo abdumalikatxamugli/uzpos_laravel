@@ -16,9 +16,10 @@ class CreateUzposCorePartyTable extends Migration
         Schema::create('uzpos_core_party', function (Blueprint $table) {
             $table->char('id')->primary();
             $table->dateTime('check_in', 6)->nullable();
-            $table->dateTime('updated_at', 6);
             $table->bigInteger('created_by_id')->nullable()->index('uzpos_core_party_created_by_id_6d08e149_fk_auth_user_id');
             $table->char('point_id')->nullable()->index('uzpos_core_party_point_id_132b3347_fk_uzpos_core_point_id');
+            $table->dateTime('created_at', 6);
+            $table->dateTime('updated_at', 6);
         });
     }
 

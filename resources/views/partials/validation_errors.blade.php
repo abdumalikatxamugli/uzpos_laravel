@@ -1,4 +1,4 @@
-@if(session('errors'))
+@if(session('errors') && is_object( session('errors') ) )
     <div class="alert alert-danger text-white text-sm">
         @foreach( session('errors')->getMessages() as $field => $errors)
             <span>{{ $field }}</span>
