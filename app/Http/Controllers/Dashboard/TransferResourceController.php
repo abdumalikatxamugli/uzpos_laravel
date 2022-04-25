@@ -47,8 +47,8 @@ class TransferResourceController extends Controller
     public function store(StoreRequest $request, User $user)
     {
         $validated = $request->validated();
-        Transfer::createFromArrayWithUser($validated, $user);
-        return redirect()->route("dashboard.transfer.index");
+        $transfer = Transfer::createFromArrayWithUser($validated, $user);
+        return redirect()->route("dashboard.transfer.edit", $transfer);
     }
 
     /**
