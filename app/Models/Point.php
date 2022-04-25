@@ -14,4 +14,11 @@ class Point extends UuidModel
       * Properties
       */
     protected $table = 'uzpos_core_point';
+    
+    /**
+     * Relations
+     */
+    public function pointProducts(){
+      return $this->hasMany(PointProduct::class, 'point_id', 'id');
+    }
 }

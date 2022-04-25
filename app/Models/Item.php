@@ -2,10 +2,7 @@
 
 namespace App\Models;
 
-use App\Exceptions\WarehouseOutOfProductException;
-use App\Http\Validators\PointProductResourceValidator;
 use App\Traits\Fabricatable;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Str;
 
 class Item extends UuidModel

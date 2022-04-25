@@ -102,6 +102,20 @@
             <span class="nav-link-text ms-1">Приход товаров</span>
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('dashboard.transfer.index') }}">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+            </div>
+            <span class="nav-link-text ms-1">Перемешения товаров</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('dashboard.goodsReport') }}">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+            </div>
+            <span class="nav-link-text ms-1">Отчет по товарам</span>
+          </a>
+        </li>
       </ul>
     </div>
     <div class="sidenav-footer mx-3 ">

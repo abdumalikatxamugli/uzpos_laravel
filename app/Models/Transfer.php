@@ -14,4 +14,8 @@ class Transfer extends UuidModel
      * Properties
      */
    protected $table = 'uzpos_core_transfer';
+
+  public function items(){
+    return $this->hasMany(TransferItem::class,'transfer_id', 'id');
+  }
 }
