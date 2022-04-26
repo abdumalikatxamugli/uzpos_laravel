@@ -12,32 +12,22 @@
         <div class="row">
             <div class="col-md-4">
                 <div>Дата перемешения</div>
-                <input type="date" name="transfer_date" class="form-control mb-3" value="{{ date('Y-m-d', strtotime($transfer->transfer_date) ) }}">
+                <h5>{{ date('d.m.Y', strtotime($transfer->transfer_date) ) }}</h5>
             </div>
             <div class="col-md-4">
                 <div>От Пункта</div>
-                <select name="from_point_id" class="form-control mb-3">
-                    @foreach($points as $point)
-                        <option value="{{ $point->id }}" {{ $transfer->from_point_id == $point->id ? 'selected' : '' }}>{{ $point->name }}</option>
-                    @endforeach
-                </select>
+                <h5>{{ $transfer->from_point->name }}</h5>
             </div>
             <div class="col-md-4">
                 <div>К Пункту</div>
-                <select name="to_point_id" class="form-control mb-3">
-                    @foreach($points as $point)
-                        <option value="{{ $point->id }}" {{ $transfer->to_point_id == $point->id ? 'selected' : '' }}>{{ $point->name }}</option>
-                    @endforeach
-                </select>
+                <h5>{{ $transfer->to_point->name }}</h5>
             </div>
         </div>
-        <button class="btn btn-success btn-sm font-weight-bold">save</button>
     </form>
 
 </div>
 <hr/>
 <div class="card-body px-0 pt-0 pb-2">
-    @include('partials.partial_validation_errors')
     <table class="table  text-center">
         <thead>
             <tr>

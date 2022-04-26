@@ -13,23 +13,20 @@
         <div class="row">
             <div class="col-md-6">
                 <div>Дата приема</div>
-                <input type="date" name="check_in" class="form-control mb-3" value="{{ date( 'Y-m-d' , strtotime( $party->check_in ) ) }}">
+                <h5>{{ date( 'd.m.Y' , strtotime( $party->check_in ) ) }}</h5>
             </div>
             <div class="col-md-6">
                 <div>Пункт приема</div>
-                <select name="point_id" class="form-control mb-3">
-                    @foreach($points as $point)
-                        <option value="{{ $point->id }}" {{ $party->point_id == $point->id ? 'selected' : '' }}>{{ $point->name }}</option>
-                    @endforeach
-                </select>
+                <h5>
+                    {{ $party->point->name }}
+                </h5>
             </div>
         </div>
-        <button class="btn btn-sm font-weight-bold btn-info">update</button>
     </form>
 </div>
 <hr/>
 <div class="card-body px-0 pt-0 pb-2">
-    @include('partials.partial_validation_errors')
+
     <table class="table  text-center">
         <thead>
             <tr>

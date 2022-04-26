@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Exceptions\WarehouseOutOfProductException;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TransferItem\DeleteRequest;
 use App\Http\Requests\TransferItem\StoreRequest;
 use App\Http\Requests\TransferItem\UpdateRequest;
 use App\Models\TransferItem;
@@ -41,17 +42,8 @@ class TransferItemResourceController extends Controller
      */
     public function store(StoreRequest $request, User $user)
     {
-        try{
-            $validated = $request->validated();
-            TransferItem::createFromArrayWithUser($validated, $user);
-        }catch(WarehouseOutOfProductException $e){
-            $message = [
-                "messages"=>[
-                    'Not enough products error' => 'Warehouse or Shop does not have enough items to transfer'
-                ]
-            ];
-            session()->flash('partial_errors', (object) $message);
-        }
+        $validated = $request->validated();
+        TransferItem::createFromArrayWithUser($validated, $user);
         return redirect()->back();
     }
 
@@ -96,18 +88,9 @@ class TransferItemResourceController extends Controller
      * @param  \App\Models\TransferItem  $transferItem
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TransferItem $transferItem)
+    public function destroy(DeleteRequest $request, TransferItem $transferItem)
     {
-        try{
-            $transferItem->delete();
-        }catch(WarehouseOutOfProductException $e){
-            $message = [
-                "messages"=>[
-                    'Not enough products error' => 'Warehouse or Shop does not have enough items to revert the transfer'
-                ]
-            ];
-            session()->flash('partial_errors', (object) $message);
-        }
+        $transferItem->delete();
         return redirect()->back();
     }
 }

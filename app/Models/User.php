@@ -45,6 +45,8 @@ class User extends Authenticatable
             set: fn($value) => hash('sha3-256', self::salt.$value)
         );
     }
+   
+
 
     /**
      *

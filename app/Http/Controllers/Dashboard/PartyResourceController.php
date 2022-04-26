@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Party\DeleteRequest;
 use App\Http\Requests\Party\StoreRequest;
 use App\Http\Requests\Party\UpdateRequest;
 use App\Models\Item;
@@ -32,8 +33,7 @@ class PartyResourceController extends Controller
      */
     public function create()
     {
-        $points = Point::all();
-        return view("dashboard.party.create")->with('points', $points);
+        return view("dashboard.party.create");
     }
 
     /**
@@ -71,7 +71,6 @@ class PartyResourceController extends Controller
         $points = Point::all();
         $products = Product::all();
         return view("dashboard.party.edit")->with("party", $party)
-                                        ->with('points', $points)
                                         ->with('products', $products);
     }
 
@@ -94,7 +93,7 @@ class PartyResourceController extends Controller
      * @param  \App\Models\Party  $party
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Party $party)
+    public function destroy(DeleteRequest $request, Party $party)
     {
         $party->delete();
         return redirect()->route("dashboard.party.index");

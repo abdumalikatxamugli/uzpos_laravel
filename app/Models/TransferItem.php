@@ -25,10 +25,8 @@ class TransferItem extends UuidModel
     }
     protected static function booted()
     {
-        static::creating(function ($object) {
-            $object->id = (string) Str::uuid();
-        });
         static::creating(function ($item) {
+            $item->id = (string) Str::uuid();
             PointProduct::transferItem($item);
         });
         static::deleting(function ($item) {

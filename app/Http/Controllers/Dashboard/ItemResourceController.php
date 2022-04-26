@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Exceptions\WarehouseOutOfProductException;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Item\DeleteRequest;
 use App\Http\Requests\Item\StoreRequest;
 use App\Http\Requests\Item\UpdateRequest;
 use App\Models\Item;
@@ -88,18 +89,9 @@ class ItemResourceController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Item $item)
+    public function destroy(DeleteRequest $request,Item $item)
     {
-        try{
-            $item->delete();
-        }catch(WarehouseOutOfProductException $e){
-            $message = [
-                "messages"=>[
-                    'Not enough products error' => 'Warehouse or Shop does not have enough items to delete this entity'
-                ]
-            ];
-            session()->flash('partial_errors', (object) $message);
-        }
+        $item->delete();
         return redirect()->back();
     }
 }

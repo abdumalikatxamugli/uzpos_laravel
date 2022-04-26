@@ -5,6 +5,7 @@
 
 @include('partials.validation_errors')
 
+
 <div class="card-body">
 
     <form action="{{ route('dashboard.party.store') }}" method="POST">
@@ -27,5 +28,6 @@
     </form>
 
 </div>
+
 
 @endsection

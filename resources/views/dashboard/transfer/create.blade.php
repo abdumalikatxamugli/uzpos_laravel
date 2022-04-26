@@ -17,7 +17,7 @@
             <div class="col-md-4">
                 <div>От Пункта</div>
                 <select name="from_point_id" class="form-control mb-3">
-                    @foreach($points as $point)
+                    @foreach($fromPoints as $point)
                         <option value="{{ $point->id }}">{{ $point->name }}</option>
                     @endforeach
                 </select>
@@ -25,7 +25,7 @@
             <div class="col-md-4">
                 <div>К Пункту</div>
                 <select name="to_point_id" class="form-control mb-3">
-                    @foreach($points as $point)
+                    @foreach($toPoints as $point)
                         <option value="{{ $point->id }}">{{ $point->name }}</option>
                     @endforeach
                 </select>

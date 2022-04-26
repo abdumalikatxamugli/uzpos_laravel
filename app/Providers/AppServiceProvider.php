@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Point;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
@@ -40,8 +41,54 @@ class AppServiceProvider extends ServiceProvider
                 ->with('products', $products);
         });
         View::composer('dashboard.reports.goodsReport', function ($view) {
-            $points = Point::all();
+
+            $points = Point::where(function($query){
+                $user = auth()->user();
+                if($user->user_role != User::roles['ADMIN']){
+                    $query->where('id', $user->point_id);
+                }                
+            })->get();
             $view->with('points', $points);
+        });
+        View::composer('dashboard.party.create', function ($view) {
+
+            $points = Point::where(function($query){
+                $user = auth()->user();
+                if($user->user_role != User::roles['ADMIN']){
+                    $query->where('id', $user->point_id);
+                }                
+            })->get();
+            $view->with('points', $points);
+        });
+        View::composer('dashboard.party.edit', function ($view) {
+
+            $points = Point::where(function($query){
+                $user = auth()->user();
+                if($user->user_role != User::roles['ADMIN']){
+                    $query->where('id', $user->point_id);
+                }                
+            })->get();
+            $view->with('points', $points);
+        });
+        View::composer('dashboard.transfer.create', function ($view) {
+
+            $points = Point::where(function($query){
+                $user = auth()->user();
+                if($user->user_role != User::roles['ADMIN']){
+                    $query->where('id', $user->point_id);
+                }                
+            })->get();
+            $view->with('fromPoints', $points);
+        });
+        View::composer('dashboard.transfer.create', function ($view) {
+
+            $points = Point::where(function($query){
+                $user = auth()->user();
+                if($user->user_role != User::roles['ADMIN']){
+                    $query->where('id', '<>', $user->point_id);
+                }                
+            })->get();
+            $view->with('toPoints', $points);
         });
     }
 }

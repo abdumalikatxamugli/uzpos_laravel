@@ -15,8 +15,15 @@ class Party extends UuidModel
      */
     protected $table = 'uzpos_core_party';
 
+    /**
+     * Relations
+     */
     public function items(){
       return $this->hasMany(Item::class,'party_id', 'id');
     }
+    public function point(){
+      return $this->belongsTo(Point::class, 'point_id', 'id');
+    }
+
 }
 

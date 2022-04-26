@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Transfer\DeleteRequest;
 use App\Http\Requests\Transfer\StoreRequest;
 use App\Http\Requests\Transfer\UpdateRequest;
 use App\Models\Point;
@@ -31,10 +32,8 @@ class TransferResourceController extends Controller
      */
     public function create()
     {   
-        $points = Point::all();
         $products = Product::all();
         return view("dashboard.transfer.create")
-                                        ->with('points', $points)
                                         ->with('products', $products);
     }
 
@@ -92,7 +91,7 @@ class TransferResourceController extends Controller
      * @param  \App\Models\Transfer  $transfer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transfer $transfer)
+    public function destroy(DeleteRequest $request,Transfer $transfer)
     {
         $transfer->delete();
         return redirect()->route("dashboard.transfer.index");
