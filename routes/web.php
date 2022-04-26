@@ -10,7 +10,7 @@ use App\Http\Controllers\Dashboard\OrderListController;
 use App\Http\Controllers\Dashboard\PartyResourceController;
 use App\Http\Controllers\Dashboard\PointResourceController;
 use App\Http\Controllers\Dashboard\ProductResourceController;
-use App\Http\Controllers\dashboard\ReportContoller;
+use App\Http\Controllers\Dashboard\ReportContoller;
 use App\Http\Controllers\Dashboard\TransferItemResourceController;
 use App\Http\Controllers\Dashboard\TransferResourceController;
 use App\Http\Controllers\Dashboard\UserResourceController;
