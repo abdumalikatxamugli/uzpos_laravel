@@ -36,8 +36,8 @@ class StoreRequest extends FormRequest
                         'product_id'=> $item->product_id,        
                         'point_id'=> $item->transfer->from_point_id
                     ])->first();
-              
-                    if($fromPointProduct->quantity < $item->quantity){
+                        
+                    if(!$fromPoint || $fromPointProduct->quantity < $item->quantity){
                         $fail('Warehouse or Shop does not have enough items to complete this operation');
                     }
                 }
