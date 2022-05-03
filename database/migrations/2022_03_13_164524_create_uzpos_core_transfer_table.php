@@ -18,7 +18,7 @@ class CreateUzposCoreTransferTable extends Migration
             $table->longText('reason')->nullable();
             $table->dateTime('created_at', 6)->nullable();
             $table->dateTime('transfer_date', 6);
-            $table->integer('is_accepted')->nullable();
+            $table->integer('status')->default(1);
             $table->dateTime('updated_at', 6);
             $table->bigInteger('created_by_id')->nullable()->index('uzpos_core_transfer_created_by_id_4b845bf0_fk_auth_user_id');
             $table->char('from_point_id')->index('uzpos_core_transfer_from_point_id_c7497fee_fk_uzpos_cor');

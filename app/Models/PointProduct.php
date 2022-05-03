@@ -95,6 +95,20 @@ class PointProduct extends UuidModel
         }
       });
     }
+    public static function transferItemBulk($transfer){
+      DB::transaction(function() use($transfer){
+        foreach($transfer->items as $item){
+          self::transferItem($item);
+        }
+      });
+    }
+    public static function revertTranferItemBulk($transfer){
+      DB::transaction(function() use($transfer){
+        foreach($transfer->items as $item){
+          self::revertTranferItem($item);
+        }
+      });
+    }
     public static function transferItem($item){
       $fromPointProduct = PointProduct::where([
           'product_id'=> $item->product_id,        

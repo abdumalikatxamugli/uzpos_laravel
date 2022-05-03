@@ -23,14 +23,4 @@ class TransferItem extends UuidModel
     public function transfer(){
         return $this->belongsTo(Transfer::class,'transfer_id', 'id');
     }
-    protected static function booted()
-    {
-        static::creating(function ($item) {
-            $item->id = (string) Str::uuid();
-            PointProduct::transferItem($item);
-        });
-        static::deleting(function ($item) {
-            PointProduct::revertTranferItem($item);
-        });
-    }
 }
