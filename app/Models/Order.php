@@ -150,5 +150,15 @@ class Order extends Model
       }
       return true;
     }
-    
+    public function getShortages(){
+      $shortages = [];
+      foreach($this->items as $item){
+        $quantityToSubtract = $item->quantity;
+        $quantityAvailable = PointProduct::getAvailableAmount($item->product_id, $this->shop_id);
+        if($quantityAvailable - $quantityToSubtract < 0){
+          array_push($shortages, $item);
+        }
+      }
+      return $shortages;
+    }    
 }

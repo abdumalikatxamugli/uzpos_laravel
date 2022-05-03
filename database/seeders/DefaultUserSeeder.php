@@ -38,6 +38,34 @@ class DefaultUserSeeder extends Seeder
         $user->is_active = 1;
         $user->point_id = $shop->id;
         $user->user_role = User::roles['WAREHOUSE_MANAGER'];
-        $user->save(); 
+        $user->save();
+        
+        $shop = new Point();
+        $shop->name = 'sklad2';
+        $shop->save();
+
+        $user = new User();
+        $user->username = 'sklad2';
+        $user->password = 'sklad2';
+        $user->first_name = 'sklad2';
+        $user->last_name = 'sklad2';
+        $user->is_active = 1;
+        $user->point_id = $shop->id;
+        $user->user_role = User::roles['WAREHOUSE_MANAGER'];
+        $user->save();
+
+        $shop = new Point();
+        $shop->name = 'sklad3';
+        $shop->save();
+
+        $user = new User();
+        $user->username = 'sklad3';
+        $user->password = 'sklad3';
+        $user->first_name = 'sklad3';
+        $user->last_name = 'sklad3';
+        $user->is_active = 1;
+        $user->point_id = $shop->id;
+        $user->user_role = User::roles['WAREHOUSE_MANAGER'];
+        $user->save();
     }
 }

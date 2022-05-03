@@ -9,6 +9,7 @@ use App\Http\Requests\Payment\StoreRequest;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Payment;
+use App\Models\PointProduct;
 use Exception;
 use Illuminate\Http\Request;
 use PDO;
@@ -94,6 +95,17 @@ class OrderController extends Controller
         }
         return redirect()->back();
     
+    }
+    /**
+     * get list of shops that have enough items to satisfy the full or part of the order
+     */
+    public function searchAvailableItems(Order $order){
+        $shortages = $order->getShortages();
+        $matches = PointProduct::getMatches($shortages);
+        $fullMatches = $matches['fullMatches'];
+        $partialMatches = $matches['partialMatches'];
+        return view('dashboard.order.matches')->with('fullMatches', $fullMatches)
+                                    ->with('partialMatches', $partialMatches);
     }
     /**
      * Show the form for creating a new resource.

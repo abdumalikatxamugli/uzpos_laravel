@@ -166,4 +166,44 @@ class PointProduct extends UuidModel
       }
       return $pp->quantity;
     }
+
+    /**
+     * 
+     * get matching shops to satisfy the shortages
+     */
+    public static function getMatches($items){
+      $fullMatches = collect([]);
+      $partialMatches = collect([]);
+      $shops = Point::all();
+      foreach($shops as $shop){
+        $match = true;
+        foreach($items as $item){
+          $available = self::where(['point_id'=>$shop->id, 'product_id'=>$item->product_id])->where('quantity', '>=', $item->quantity)->first();
+          if(!$available){
+            $match = false;
+          }
+          if($available &&  $partialMatches->has($shop->id)){
+            
+            $initial = $partialMatches->get($shop->id);
+            $items = $initial->get('items');
+            $items->push($item);
+            $initial->put('items', $items);
+            $partialMatches->put($shop->id, $initial );
+          }
+          if($available &&  !$partialMatches->has($shop->id)){
+            $partialMatches->put($shop->id, collect(['shop'=>$shop, 'items'=>collect([$item])]) );
+          }
+        }
+        if($match){
+          $fullMatches->put($shop->id,$shop);
+        }
+      }
+      foreach($fullMatches as $key=>$fm){
+        $partialMatches->forget($key);
+      }
+      return [
+        'fullMatches'=>$fullMatches,
+        'partialMatches'=>$partialMatches
+      ];
+    }
 }
