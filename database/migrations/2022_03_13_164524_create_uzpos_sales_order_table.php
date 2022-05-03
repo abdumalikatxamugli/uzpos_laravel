@@ -19,7 +19,7 @@ class CreateUzposSalesOrderTable extends Migration
             $table->dateTime('updated_at', 6)->useCurrent();
             $table->integer('order_type');
             $table->longText('address')->nullable();
-            $table->integer('status')->nullable();
+            $table->integer('status')->default(1)->nullable();
             $table->char('client_id')->nullable()->index('uzpos_sales_order_client_id_8deb8f05_fk_uzpos_sales_client_id');
             $table->bigInteger('collector_id')->nullable()->index('uzpos_sales_order_collector_id_e874c9c3_fk_auth_user_id');
             $table->bigInteger('created_by_id')->nullable()->index('uzpos_sales_order_created_by_id_0abd7c9d_fk_auth_user_id');

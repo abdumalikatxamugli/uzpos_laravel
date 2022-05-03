@@ -49,6 +49,6 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
     Route::get('order/item/delete/{orderItem}', [OrderController::class, 'deleteItem'])->name('dashboard.order.item.delete'); 
     Route::post('order/payment/save', [OrderController::class, 'addPayment'])->name('order.append.payments');
     Route::get('order/payment/delete/{payment}', [OrderController::class, 'deletePayment'])->name('order.payments.delete');
-
-
+    Route::get('order/confirm/{order}', [OrderController::class, 'confirm'])->name('order.confirm');
+    Route::get('order/break/{order}', [OrderController::class, 'break'])->name('order.break');
 });

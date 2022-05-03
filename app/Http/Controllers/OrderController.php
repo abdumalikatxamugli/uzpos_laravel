@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\WarehouseOutOfProductException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderItem\BulkStoreRequest;
 use App\Http\Requests\Payment\StoreRequest;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Payment;
+use Exception;
 use Illuminate\Http\Request;
 use PDO;
 
@@ -20,7 +22,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::paginate(10);
+        $orders = Order::orderBy('order_no')->paginate(10);
         return view('dashboard.order.index')->with('orders', $orders);
     }
     /**
@@ -72,6 +74,26 @@ class OrderController extends Controller
     public function deletePayment(Payment $payment){
         $payment->delete();
         return redirect()->back();
+    }
+    public function confirm(Order $order){
+        try{
+            $order->status = 2;
+            $order->save();
+        }catch(WarehouseOutOfProductException $e){
+    
+        }
+        return redirect()->back();
+    
+    }
+    public function break(Order $order){
+        try{
+            $order->status = 3;
+            $order->save();
+        }catch(Exception $e){
+    
+        }
+        return redirect()->back();
+    
     }
     /**
      * Show the form for creating a new resource.

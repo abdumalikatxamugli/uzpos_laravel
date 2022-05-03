@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Exceptions\WarehouseOutOfProductException;
 use App\Traits\Fabricatable;
+use Illuminate\Support\Facades\DB;
 
 class PointProduct extends UuidModel
 {
@@ -58,6 +59,41 @@ class PointProduct extends UuidModel
       }else{
         throw new WarehouseOutOfProductException(); 
       }
+    }
+    public static function removeItemByOrder($order){
+      DB::transaction(function() use($order){
+        foreach($order->items as $item){
+          $pointProduct = PointProduct::where([
+            'product_id'=> $item->product_id,        
+            'point_id'=> $order->shop_id
+          ])->first();
+
+          if($pointProduct->quantity >= $item->quantity ){
+            $pointProduct->quantity = $pointProduct->quantity - $item->quantity;
+            $pointProduct->save();
+          }else{
+            throw new WarehouseOutOfProductException(); 
+          }
+        }
+      });
+    }
+    public static function addItemByOrder($order){
+      DB::transaction(function() use($order){
+        foreach($order->items as $item){
+          $pointProduct = PointProduct::where([
+            'product_id'=> $item->product_id,        
+            'point_id'=> $order->shop_id
+          ])->first();
+          if(!$pointProduct){
+            $pointProduct = new PointProduct();
+            $pointProduct->point_id = $order->shop_id;
+            $pointProduct->product_id = $item->product_id;
+            $pointProduct->save();
+          }
+          $pointProduct->quantity = $pointProduct->quantity + $item->quantity;
+          $pointProduct->save();
+        }
+      });
     }
     public static function transferItem($item){
       $fromPointProduct = PointProduct::where([
@@ -117,5 +153,17 @@ class PointProduct extends UuidModel
         $toPointProduct->quantity = $toPointProduct->quantity - $item->quantity;
         $toPointProduct->save();        
       }
+    }
+
+    /**
+     * get available products
+     */
+
+    public static function getAvailableAmount($product_id, $shop_id){
+      $pp = self::where(['point_id'=>$shop_id, 'product_id'=>$product_id])->first();
+      if(!$pp){
+        return 0;
+      }
+      return $pp->quantity;
     }
 }

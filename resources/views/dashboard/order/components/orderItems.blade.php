@@ -24,9 +24,11 @@
                         <td>{{$item->price}}</td>
                         <td>{{$item->quantity*$item->price}}</td>
                         <td>
-                            <form action="{{ route('dashboard.order.item.delete', $item->id) }}">
-                                <button class="btn btn-danger btn-sm mb-0">Убрать</button>
-                            </form>
+                            @if($order->status == 1)
+                                <form action="{{ route('dashboard.order.item.delete', $item->id) }}">
+                                    <button class="btn btn-danger btn-sm mb-0">Убрать</button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -35,68 +37,70 @@
         <hr/>
     @endif
     @include('partials.validation_errors')
-    <form action="{{ route('dashboard.order.items.save') }}" method="POST">
-        @csrf
-        <table class="table text-center table-bordered" >
-            <thead>
-                <tr>
-                    <th width="2%">#</th>
-                    <th class="fs-6 text-info" width="30%">Название</th>
-                    <th class="fs-6 text-info" width="10%">Количество</th>
-                    <th class="fs-6 text-info">Цена</th>
-                    <th class="fs-6 text-info">Общая цена</th>
-                    <th class="fs-6 text-info">Убрать</th>
-                </tr>
-            </thead>
-            <tbody>
-                <template x-for="(item, index) in items">   
+    @if($order->status == 1)
+        <form action="{{ route('dashboard.order.items.save') }}" method="POST">
+            @csrf
+            <table class="table text-center table-bordered" >
+                <thead>
                     <tr>
-                        <td x-text="index+1"></td>
-                        <td>
-                            <input type="hidden" x-bind:name="'items['+index+'][order_id]'" value="{{ $order->id }}">
-                            <select x-bind:name="'items['+index+'][product_id]'" id="" class="form-control" x-model="item.product_id" x-init="init_row($el, index)">
-                                <option></option>
-                                @foreach($products as $product)
-                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
-                                @endforeach
-                            </select>
-                        </td>
-                        <td>
-                            <input  x-bind:name="'items['+index+'][quantity]'"  type="number" class="form-control" x-model="item.quantity">
-                        </td>
-                        <td>
-                            <input type="hidden" x-bind:name="'items['+index+'][price]'" x-model="item.cost">
-                            <span x-text="item.cost"   ></span>
-                        </td>
-                        <td>
-                            <span x-text="new Intl.NumberFormat().format(item.quantity * item.cost)" ></span>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-danger btn-sm mb-0" x-on:click="removeItem(index)">Убрать</button>
-                        </td>
+                        <th width="2%">#</th>
+                        <th class="fs-6 text-info" width="30%">Название</th>
+                        <th class="fs-6 text-info" width="10%">Количество</th>
+                        <th class="fs-6 text-info">Цена</th>
+                        <th class="fs-6 text-info">Общая цена</th>
+                        <th class="fs-6 text-info">Убрать</th>
                     </tr>
-                </template>
-                
-                <tr>
-                    <td></td>
-                    <td class="text-secondary">Итого</td>
-                    <td x-text="calcTotalQuantity"></td>
-                    <td></td>
-                    <td x-text="calcTotalCost"></td>
-                </tr>
-            </tbody>
-        </table>
-    
-        <div class="d-flex align-items-center justify-content-center">
-            <button type="button" class="btn btn-info p-3" x-on:click="addItem">
-                ещё
-            </button>
-        </div>
-        <hr/>
-        <div class="d-flex justify-content-end">
-            <button class="btn btn-success btn-lg">Сохранить</button>       
-        </div>
-    </form>
+                </thead>
+                <tbody>
+                    <template x-for="(item, index) in items">   
+                        <tr>
+                            <td x-text="index+1"></td>
+                            <td>
+                                <input type="hidden" x-bind:name="'items['+index+'][order_id]'" value="{{ $order->id }}">
+                                <select x-bind:name="'items['+index+'][product_id]'" id="" class="form-control" x-model="item.product_id" x-init="init_row($el, index)">
+                                    <option></option>
+                                    @foreach($products as $product)
+                                        <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td>
+                                <input  x-bind:name="'items['+index+'][quantity]'"  type="number" class="form-control" x-model="item.quantity">
+                            </td>
+                            <td>
+                                <input type="hidden" x-bind:name="'items['+index+'][price]'" x-model="item.cost">
+                                <span x-text="item.cost"   ></span>
+                            </td>
+                            <td>
+                                <span x-text="new Intl.NumberFormat().format(item.quantity * item.cost)" ></span>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-sm mb-0" x-on:click="removeItem(index)">Убрать</button>
+                            </td>
+                        </tr>
+                    </template>
+                    
+                    <tr>
+                        <td></td>
+                        <td class="text-secondary">Итого</td>
+                        <td x-text="calcTotalQuantity"></td>
+                        <td></td>
+                        <td x-text="calcTotalCost"></td>
+                    </tr>
+                </tbody>
+            </table>
+        
+            <div class="d-flex align-items-center justify-content-center">
+                <button type="button" class="btn btn-info p-3" x-on:click="addItem">
+                    ещё
+                </button>
+            </div>
+            <hr/>
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-success btn-lg">Сохранить</button>       
+            </div>
+        </form>
+    @endif
 </div>
 <script>
     function start() {

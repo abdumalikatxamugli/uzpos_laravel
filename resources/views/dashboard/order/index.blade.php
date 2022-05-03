@@ -11,6 +11,8 @@
                 <tr>
                     <td>#</td>
                     <td>Уникальный ID заказа</td>
+                    <td>Номер заказа</td>
+                    <td>Статус заказа</td>
                     <td>Клиент</td>
                     <td>Количество товаров</td>
                     <td>Сумма</td>
@@ -23,6 +25,8 @@
                 <tr>
                     <td>{{ $index+1 }}</td>
                     <td>{{ $order->id}}</td>
+                    <td>{{ $order->order_no}}</td>
+                    <td>{{ $order->status_name}}</td>
                     <td>{{ $order->getClientFullName() }}</td>
                     <td>{{ $order->getTotalItemCount() }}</td>
                     <td>{{ $order->getTotalCost() }}</td>

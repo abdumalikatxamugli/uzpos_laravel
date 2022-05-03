@@ -2,20 +2,25 @@
 
 @section('content')
     <div class="card-body">
-        <h4>Оптовый заказ</h4>
+        <h4>Заказ</h4>
         <small>ID: {{ $order->id }}</small> <br/>
         <small>Общая сумма: {{ number_format($order->getTotalCost(), 2,'.', ' ')}}</small><br/>
         <small>Оплачено: {{number_format($order->getTotalPaid(),2, '.', ' ') }}</small><br/>
         <small>Долг: {{number_format( $order->getTotalCost() - $order->getTotalPaid(), 2, '.', ' ') }}</small><br/>
+        <div class="d-flex align-items-center" style="gap:10px">
+            <small>Статус: </small><button class="btn btn-sm btn-primary mb-0">{{$order->status_name}}</button>
+        </div>
     </div>
     <hr>
     <div class="card-body">
         <h5 class="mb-5 d-flex justify-content-between">
             <b>Данные клиента</b>
-            <button class="btn btn-info mb-0 d-flex align-items-center justify-content-center" style="gap:10px;" onclick="addClient()">
-                <i class="ni ni-circle-08" style="font-size:14px;"></i>
-                <span >Добавить</span>
-            </button>
+            @if($order->status == 1)
+                <button class="btn btn-info mb-0 d-flex align-items-center justify-content-center" style="gap:10px;" onclick="addClient()">
+                    <i class="ni ni-circle-08" style="font-size:14px;"></i>
+                    <span >Добавить</span>
+                </button>
+            @endif
         </h5>
         <div>
             
@@ -87,69 +92,92 @@
                         {{ $payment->amount_real }}
                     </td>
                     <td>
-                        <form action="{{route('order.payments.delete', $payment->id)}}">
-                            @csrf
-                            <button class="btn btn-danger btn-sm mb-0">Убрать</button>
-                        </form>
+                        @if($order->status == 1)
+                            <form action="{{route('order.payments.delete', $payment->id)}}">
+                                @csrf
+                                <button class="btn btn-danger btn-sm mb-0">Убрать</button>
+                            </form>
+                        @endif
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
         <hr/>
-        <form action="{{route('order.append.payments')}}" method="POST">
-            @csrf
-            <div x-data="{currency_type:0, currency_kurs: 1, amount:0}">
-                <table class="table text-center">
-                    <thead>
+        @if($order->status == 1)
+            <form action="{{route('order.append.payments')}}" method="POST">
+                @csrf
+                <div x-data="{currency_type:0, currency_kurs: 1, amount:0}">
+                    <table class="table text-center">
+                        <thead>
+                            <tr>
+                                <td>Дата оплаты</td>
+                                <td>Тип оплаты</td>
+                                <td>Валюта</td>
+                                <td>Сумма</td>
+                                <td>Курс</td>
+                                <td>Сумма в сумах</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                    
+                    <tbody>
                         <tr>
-                            <td>Дата оплаты</td>
-                            <td>Тип оплаты</td>
-                            <td>Валюта</td>
-                            <td>Сумма</td>
-                            <td>Курс</td>
-                            <td>Сумма в сумах</td>
-                            <td></td>
+                            <td>
+                                <input type="hidden" name="order_id" value="{{ $order->id }}">
+                                <input type="date" class="form-control" name="payment_date">
+                            </td>
+                            <td>
+                                <select id="" class="form-control" name="payment_type" >
+                                        @foreach($payment_types as $ptype)
+                                            <option value="{{ $ptype['code'] }}">{{ $ptype['name'] }}</option>
+                                        @endforeach
+                                </select>
+                            </td>
+                            <td>
+                                <select id="" class="form-control" name="currency" x-model = "currency_type">
+                                    @foreach($currencies as $ptype)
+                                            <option value="{{ $ptype['code'] }}">{{ $ptype['name'] }}</option>
+                                        @endforeach
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" name="amount" x-model = "amount">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" name="currency_kurs" x-model = "currency_kurs">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" readonly name="amount_real" x-bind:value = "currency_kurs * amount">
+                            </td>
+                            <td>
+                                <button class="btn btn-info">Сохранить</button>
+                            </td>
                         </tr>
-                    </thead>
-                
-                <tbody>
-                    <tr>
-                        <td>
-                            <input type="hidden" name="order_id" value="{{ $order->id }}">
-                            <input type="date" class="form-control" name="payment_date">
-                        </td>
-                        <td>
-                            <select id="" class="form-control" name="payment_type" >
-                                    @foreach($payment_types as $ptype)
-                                        <option value="{{ $ptype['code'] }}">{{ $ptype['name'] }}</option>
-                                    @endforeach
-                            </select>
-                        </td>
-                        <td>
-                            <select id="" class="form-control" name="currency" x-model = "currency_type">
-                                @foreach($currencies as $ptype)
-                                        <option value="{{ $ptype['code'] }}">{{ $ptype['name'] }}</option>
-                                    @endforeach
-                            </select>
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" name="amount" x-model = "amount">
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" name="currency_kurs" x-model = "currency_kurs">
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" readonly name="amount_real" x-bind:value = "currency_kurs * amount">
-                        </td>
-                        <td>
-                            <button class="btn btn-info">Сохранить</button>
-                        </td>
-                    </tr>
-                </tbody>
-                </table>
-            </div>           
-        </form> 
+                    </tbody>
+                    </table>
+                </div>           
+            </form> 
+        @endif
+        <hr>
+        @if($order->status == 1)
+            <div class="my-3">
+                @if($order->canBeConfirmed() && $order->client)
+                    <form action="{{ route('order.confirm', $order->id) }}">
+                        @csrf
+                        <button class="btn btn-info w-100 p-3">ПОДВЕРЖДАТЬ</button>
+                    </form>
+                @else
+                    @include('dashboard.order.components.confirmation_errors')
+                @endif
+            </div>
+        @endif
+        @if($order->status == 2)
+            <form action="{{ route('order.break', $order->id) }}">
+                @csrf
+                <button class="btn btn-danger w-100 p-3">Отбраковать заказ</button>
+            </form>
+        @endif
     </div>
     <script>
         function addClient(){
