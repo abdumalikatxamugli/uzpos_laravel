@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Point;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -23,6 +24,20 @@ class DefaultUserSeeder extends Seeder
         $user->last_name = 'admin';
         $user->is_active = 1;
         $user->user_role = User::roles['ADMIN'];
-        $user->save();   
+        $user->save(); 
+        
+        $shop = new Point();
+        $shop->name = 'sklad';
+        $shop->save();
+
+        $user = new User();
+        $user->username = 'sklad';
+        $user->password = 'sklad';
+        $user->first_name = 'sklad';
+        $user->last_name = 'sklad';
+        $user->is_active = 1;
+        $user->point_id = $shop->id;
+        $user->user_role = User::roles['WAREHOUSE_MANAGER'];
+        $user->save(); 
     }
 }

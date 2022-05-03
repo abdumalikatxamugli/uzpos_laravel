@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Payment;
 use App\Models\Point;
 use App\Models\Product;
 use App\Models\User;
@@ -90,5 +91,13 @@ class AppServiceProvider extends ServiceProvider
             })->get();
             $view->with('toPoints', $points);
         });
+        View::composer('dashboard.order.edit', function($view){
+            $products = Product::all()->keyBy('id');
+            $payment_types =  Payment::PAYMENT_TYPES;
+            $currencies = Payment::CURRENCIES;
+            $view->with('products', $products)
+                ->with('payment_types', $payment_types)
+                ->with('currencies', $currencies);
+       });
     }
 }

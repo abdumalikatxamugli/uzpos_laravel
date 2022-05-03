@@ -6,7 +6,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CRUD\ClientController;
 use App\Http\Controllers\CRUD\ItemController;
 use App\Http\Controllers\CRUD\MetricController;
-use App\Http\Controllers\CRUD\OrderController;
 use App\Http\Controllers\CRUD\OrderItemController;
 use App\Http\Controllers\CRUD\PartyController;
 use App\Http\Controllers\CRUD\PaymentController;
@@ -16,6 +15,7 @@ use App\Http\Controllers\CRUD\ProductController;
 use App\Http\Controllers\CRUD\TransferController;
 use App\Http\Controllers\CRUD\TransferItemController;
 use App\Http\Controllers\CRUD\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -41,10 +41,12 @@ Route::prefix("v1")->middleware('token_auth')->group(function(){
     Route::apiResource("/transfers", TransferController::class);
     Route::apiResource("/transfer_items", TransferItemController::class);
     Route::apiResource("/clients", ClientController::class);
-    Route::apiResource("/orders", OrderController::class);
+    // Route::apiResource("/orders", OrderResourceController::class);
     Route::apiResource("/order_items", OrderItemController::class);
     Route::apiResource("/point_products", PointProductController::class);
     Route::apiResource("/payments", PaymentController::class);
+ 
+    
 });
 
 /*

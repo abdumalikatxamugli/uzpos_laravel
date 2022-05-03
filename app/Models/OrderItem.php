@@ -14,5 +14,14 @@ class OrderItem extends UuidModel
      * Properties
      */
    protected $table = 'uzpos_sales_orderitem';
+
+   public $timestamps = false;
+
+   /**
+    * Relations
+    */
+    public function product(){
+      return $this->belongsTo(Product::class, 'product_id', 'id');
+    }
 }
 
