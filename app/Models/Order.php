@@ -110,35 +110,22 @@ class Order extends Model
      * check if order has enough payment and shop has enough items to accept the order
      */
     public function canBeConfirmed(){
-      $shouldBePaid = $this->getTotalCost();
-      $paid = 0;
-      foreach($this->payments as $payment){
-        $paid = $paid + $payment->amount;
-      }
-      if($shouldBePaid > $paid){
-        return false;
-      }
-
-      foreach($this->items as $item){
-        $quantityToSubtract = $item->quantity;
-        $quantityAvailable = PointProduct::getAvailableAmount($item->product_id, $this->shop_id);
-        if($quantityAvailable - $quantityToSubtract < 0){
-          return false;
-        }
-      }
-      return true;
+      $hasEnoughPayment = $this->hasEnoughPayment();
+      $hasEnoughItems = $this->hasEnoughItems();
+      return $hasEnoughPayment && $hasEnoughItems;
     }
 
     public function hasEnoughPayment(){
       $shouldBePaid = $this->getTotalCost();
       $paid = 0;
       foreach($this->payments as $payment){
-        $paid = $paid + $payment->amount;
+        $paid = $paid + $payment->amount_real;
       }
-      if($shouldBePaid > $paid){
-        return false;
+      
+      if((string) $shouldBePaid == (string) $paid){
+        return true;
       }
-      return true;
+      return false;
     }
     public function hasEnoughItems(){
       foreach($this->items as $item){

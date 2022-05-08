@@ -9,7 +9,9 @@ use App\Http\Requests\Payment\StoreRequest;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Payment;
+use App\Models\Point;
 use App\Models\PointProduct;
+use App\Models\Transfer;
 use Exception;
 use Illuminate\Http\Request;
 use PDO;
@@ -105,7 +107,16 @@ class OrderController extends Controller
         $fullMatches = $matches['fullMatches'];
         $partialMatches = $matches['partialMatches'];
         return view('dashboard.order.matches')->with('fullMatches', $fullMatches)
-                                    ->with('partialMatches', $partialMatches);
+                                    ->with('partialMatches', $partialMatches)
+                                    ->with('order', $order);
+    }
+    /**
+     * open transfer request from other shop 
+     */
+    public function openTransfer(Order $order, Point $point){
+        Transfer::createFromOrder($order, $point);
+        session()->flash('message', 'Запрос отправлен');
+        return redirect()->back();
     }
     /**
      * Show the form for creating a new resource.

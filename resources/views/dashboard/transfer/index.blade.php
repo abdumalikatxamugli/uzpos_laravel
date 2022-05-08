@@ -15,7 +15,11 @@
             <tr>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Дата</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Edit</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Статус</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">От</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">К</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Причина</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Посмотреть</th>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Отменить</th>
             </tr>
         </thead>
@@ -24,15 +28,23 @@
                 <tr>
                     <td>{{$number+1}}</td>
                     <td class="mb-0 text-sm">{{ date( 'd.m.Y', strtotime( $transfer->transfer_date ) ) }}</td>
+                    <td class="mb-0 text-sm">{{ $transfer->status_name}}</td>
+                    <td class="mb-0 text-sm">{{ $transfer->from_point->name}}</td>
+                    <td class="mb-0 text-sm">{{ $transfer->to_point->name}}</td>
+                    <td class="mb-0 text-sm">{{ $transfer->reason}}</td>
                     <td class="mb-0 text-sm">
-                        <a href="{{ route('dashboard.transfer.edit', $transfer->id) }}" class="bnt btn-warning btn-sm text-dark font-weight-bold text-xs btn-hover">Edit</a>
+                        <a href="{{ route('dashboard.transfer.edit', $transfer->id) }}" class="bnt btn-warning btn-sm text-dark font-weight-bold text-xs btn-hover">
+                            Посмотреть
+                        </a>
                     </td>
                     <td class="mb-0 text-sm">
-                        <form action="{{ route('dashboard.transfer.destroy', $transfer->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger btn-sm text-white font-weight-bold text-xs btn-hover">Отменить</button>
-                        </form>
+                        @if($transfer->status == 1)
+                            <form action="{{ route('dashboard.transfer.destroy', $transfer->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm text-white font-weight-bold text-xs btn-hover">Отменить</button>
+                            </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach

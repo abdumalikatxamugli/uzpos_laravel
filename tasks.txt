@@ -1,5 +1,3 @@
 tasks:
-1. create interface for CRUD category
-2. create interface for CRUD brand
-3. add category and brand select boxes to product
-4. Party CRUD
+1. Transfer do change only on status update;  1-draft, 2-done
+2. Form transfer from scarce items

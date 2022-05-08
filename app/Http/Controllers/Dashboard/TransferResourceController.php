@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Transfer\DeleteRequest;
+use App\Http\Requests\Transfer\FinishRequest;
 use App\Http\Requests\Transfer\StoreRequest;
 use App\Http\Requests\Transfer\UpdateRequest;
 use App\Models\Point;
 use App\Models\Product;
 use App\Models\Transfer;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 
 class TransferResourceController extends Controller
@@ -95,6 +97,14 @@ class TransferResourceController extends Controller
     {
         $transfer->delete();
         return redirect()->route("dashboard.transfer.index");
+    }
+    /**
+     * finish the transfer and actually move products
+     *  
+     */
+     public function finish(FinishRequest $request, Transfer $transfer){
+        $transfer->finishTransfer();
+        return redirect()->back();
     }
 }
         

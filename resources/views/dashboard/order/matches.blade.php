@@ -3,6 +3,11 @@
 @section('content')
     <div class="card-body">
         <h4>FULL MATCH</h4>
+        @if(session('message'))
+            <div class="p-3 alert alert-danger text-white">
+                {{ session('message') }}
+            </div>
+        @endif
         <table class="table table-striped text-center mb-5">
             <thead>
                 <tr>
@@ -15,7 +20,9 @@
                 <tr>
                     <td>{{ $fm->name }}</td>
                     <td>
-                        <button class="btn btn-warning btn-sm mb-0">Отправить запрос</button>
+                        <form action="{{route('order.openTransfer', ['order'=>$order, 'point'=>$fm])}}">
+                            <button class="btn btn-warning btn-sm mb-0">Отправить запрос</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

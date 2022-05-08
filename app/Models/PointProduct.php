@@ -197,7 +197,6 @@ class PointProduct extends UuidModel
             $match = false;
           }
           if($available &&  $partialMatches->has($shop->id)){
-            
             $initial = $partialMatches->get($shop->id);
             $items = $initial->get('items');
             $items->push($item);

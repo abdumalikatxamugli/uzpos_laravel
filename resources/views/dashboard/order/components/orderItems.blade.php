@@ -24,7 +24,7 @@
                         <td>{{$item->price}}</td>
                         <td>{{$item->quantity*$item->price}}</td>
                         <td>
-                            @if($order->status == 1)
+                            @if($order->status == 1  && $order->shop_id == auth()->user()->point_id)
                                 <form action="{{ route('dashboard.order.item.delete', $item->id) }}">
                                     <button class="btn btn-danger btn-sm mb-0">Убрать</button>
                                 </form>
@@ -37,7 +37,7 @@
         <hr/>
     @endif
     @include('partials.validation_errors')
-    @if($order->status == 1)
+    @if($order->status == 1 && $order->shop_id == auth()->user()->point_id)
         <form action="{{ route('dashboard.order.items.save') }}" method="POST">
             @csrf
             <table class="table text-center table-bordered" >
@@ -75,7 +75,9 @@
                                 <span x-text="new Intl.NumberFormat().format(item.quantity * item.cost)" ></span>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-danger btn-sm mb-0" x-on:click="removeItem(index)">Убрать</button>
+                                    <button type="button" class="btn btn-danger btn-sm mb-0" x-on:click="removeItem(index)">
+                                        Убрать
+                                    </button>
                             </td>
                         </tr>
                     </template>

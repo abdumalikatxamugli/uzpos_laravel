@@ -8,6 +8,11 @@ use Illuminate\Support\Str;
 
 class Transfer extends Model
 {
+   /**
+     * Settings
+     */
+    public $incrementing = false;
+    protected $keyType = 'string';
     /**
     * Traits
     */
@@ -23,10 +28,10 @@ class Transfer extends Model
 
     protected static function booted()
     {
-        // static::creating(function ($item) {
-        //     $item->id = (string) Str::uuid();
-        //     PointProduct::transferItem($item);
-        // });
+        static::creating(function ($item) {
+            $item->id = (string) Str::uuid();
+            // PointProduct::transferItem($item);
+        });
         // static::deleting(function ($item) {
         //     PointProduct::revertTranferItem($item);
         // });
@@ -53,5 +58,44 @@ class Transfer extends Model
   
   public function to_point(){
     return $this->belongsTo(Point::class, 'to_point_id', 'id');
+  }
+  /**
+   * accessors
+   * 
+   */
+  public function getStatusNameAttribute(){
+    switch($this->status){
+      case 1: return 'Черновек';
+      case 2: return 'Завершен';
+      default: return 'Не понятно';
+    }
+  }
+  /**
+   * custom orders
+   */
+  public function finishTransfer(){
+    $this->status = 2;
+    $this->save();
+  }
+  /**
+   * create transfer from order for the fullmatch shop
+   */
+  public static function createFromOrder($order, $point){
+    $transfer = new self();
+    $transfer->transfer_date = date('Y-m-d');
+    $transfer->status = 1;
+    $transfer->from_point_id = $point->id;
+    $transfer->to_point_id = $order->shop_id;
+    $transfer->created_by_id = auth()->user()->id;
+    $transfer->reason = "Для заказа {$order->order_no}";
+    $transfer->save();
+    foreach($order->items as $item){
+      $transfer_item = new TransferItem();
+      $transfer_item->quantity = $item->quantity;
+      $transfer_item->product_id = $item->product_id;
+      $transfer_item->transfer_id = $transfer->id;
+      $transfer_item->created_by_id = auth()->user()->id;
+      $transfer_item->save();
+    }
   }
 }

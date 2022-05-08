@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div>Дата перемешения</div>
-                <input type="date" name="transfer_date" class="form-control mb-3">
+                <input type="date" name="transfer_date" class="form-control mb-3" value="{{ date('Y-m-d') }}" readonly>
             </div>
             <div class="col-md-4">
                 <div>От Пункта</div>

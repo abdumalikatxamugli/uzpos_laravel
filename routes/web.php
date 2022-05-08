@@ -33,6 +33,7 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
     Route::resource('party', PartyResourceController::class, ['as'=>'dashboard']);
     Route::resource('item', ItemResourceController::class, ['as'=>'dashboard']);
     Route::resource('transfer', TransferResourceController::class, ['as'=>'dashboard']);
+    Route::get('transfer/finish/{transfer}', [TransferResourceController::class, 'finish'])->name('dashboard.transfer.finish');
     Route::resource('transferItem', TransferItemResourceController::class, ['as'=>'dashboard']);
     // Route::get("orders", OrderListController::class, ['as'=>'dashboard']);
     Route::get("goodsReport", [ReportContoller::class, 'goodsReport'])->name('dashboard.goodsReport');
@@ -52,4 +53,6 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
     Route::get('order/confirm/{order}', [OrderController::class, 'confirm'])->name('order.confirm');
     Route::get('order/break/{order}', [OrderController::class, 'break'])->name('order.break');
     Route::get('order/searchAvailableItems/{order}', [OrderController::class, 'searchAvailableItems'])->name('order.searchAvailableItems');
+    //send transfer request to other point
+    Route::get('order/openTransfer/{order}/{point}', [OrderController::class, 'openTransfer'])->name('order.openTransfer');
 });

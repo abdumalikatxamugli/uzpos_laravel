@@ -15,7 +15,7 @@
     <div class="card-body">
         <h5 class="mb-5 d-flex justify-content-between">
             <b>Данные клиента</b>
-            @if($order->status == 1)
+            @if($order->status == 1 && $order->shop_id == auth()->user()->point_id)
                 <button class="btn btn-info mb-0 d-flex align-items-center justify-content-center" style="gap:10px;" onclick="addClient()">
                     <i class="ni ni-circle-08" style="font-size:14px;"></i>
                     <span >Добавить</span>
@@ -92,7 +92,7 @@
                         {{ $payment->amount_real }}
                     </td>
                     <td>
-                        @if($order->status == 1)
+                        @if($order->status == 1 && $order->shop_id == auth()->user()->point_id)
                             <form action="{{route('order.payments.delete', $payment->id)}}">
                                 @csrf
                                 <button class="btn btn-danger btn-sm mb-0">Убрать</button>
@@ -104,7 +104,7 @@
             </tbody>
         </table>
         <hr/>
-        @if($order->status == 1)
+        @if($order->status == 1 && $order->shop_id == auth()->user()->point_id)
             <form action="{{route('order.append.payments')}}" method="POST">
                 @csrf
                 <div x-data="{currency_type:0, currency_kurs: 1, amount:0}">
@@ -160,7 +160,7 @@
             </form> 
         @endif
         <hr>
-        @if($order->status == 1)
+        @if($order->status == 1 && $order->shop_id == auth()->user()->point_id)
             <div class="my-3">
                 @if($order->canBeConfirmed() && $order->client)
                     <form action="{{ route('order.confirm', $order->id) }}">
@@ -172,7 +172,7 @@
                 @endif
             </div>
         @endif
-        @if($order->status == 2)
+        @if($order->status == 2 && $order->shop_id == auth()->user()->point_id)
             <form action="{{ route('order.break', $order->id) }}">
                 @csrf
                 <button class="btn btn-danger w-100 p-3">Отбраковать заказ</button>
@@ -185,7 +185,6 @@
         }
         function triggerRefresh() {
             window.location.assign(window.location.href);
-        }
-        
+        }        
     </script>
 @endsection

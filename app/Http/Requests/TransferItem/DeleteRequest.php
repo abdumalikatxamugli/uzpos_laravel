@@ -25,20 +25,20 @@ class DeleteRequest extends FormRequest
     public function rules()
     {
         return [
-            'item' => [
-                function($attribute, $item, $fail){
+            // 'item' => [
+            //     function($attribute, $item, $fail){
                     
-                    $toPointProduct = PointProduct::where([
-                        'product_id'=> $item->product_id,        
-                        'point_id'=> $item->transfer->to_point_id
-                    ])->first();
+            //         $toPointProduct = PointProduct::where([
+            //             'product_id'=> $item->product_id,        
+            //             'point_id'=> $item->transfer->to_point_id
+            //         ])->first();
               
-                    if($toPointProduct->quantity < $item->quantity){
-                        $fail('Warehouse or shop does not have enough items to cancel the record');   
-                    }
+            //         if($toPointProduct->quantity < $item->quantity){
+            //             $fail('Warehouse or shop does not have enough items to cancel the record');   
+            //         }
                     
-                }
-            ]
+            //     }
+            // ]
         ];
     }
     public function all($keys = null){
