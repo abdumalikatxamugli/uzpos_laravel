@@ -17,6 +17,11 @@ class Payment extends UuidModel
    /**
     * constants
     */
+    const TERMINAL = 0;
+    const CASH = 1;
+    const ACCRUAL = 2;
+    const DEBT = 3;
+
     const PAYMENT_TYPES = [
       'TERMINAL'=>[
         'code'=>0,

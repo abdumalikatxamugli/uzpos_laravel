@@ -15,6 +15,7 @@ use App\Http\Controllers\Dashboard\TransferItemResourceController;
 use App\Http\Controllers\Dashboard\TransferResourceController;
 use App\Http\Controllers\Dashboard\UserResourceController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DebtController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
@@ -56,4 +57,7 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
     //send transfer request to other point
     Route::get('order/openTransfer/{order}/{point}', [OrderController::class, 'openTransfer'])->name('order.openTransfer');
     Route::post('order/openTransferPartial/{order}/{point}', [OrderController::class, 'openTransferPartial'])->name('order.openTransferPartial');
+    //debt logic
+    Route::get('debts/{client}', [DebtController::class, 'index'])->name('debt.client.index');
+
 });

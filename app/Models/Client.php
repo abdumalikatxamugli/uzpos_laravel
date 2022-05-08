@@ -23,6 +23,15 @@ class Client extends UuidModel
     */
     const FIZ = 0;
     const YUR = 1;
+
+  /**
+   * Relations
+   * 
+   */
+  public function orders(){
+    return $this->hasMany(Order::class, 'client_id', 'id');
+  }
+
    /**accessors */
 
    public function getFullNameAttribute(){

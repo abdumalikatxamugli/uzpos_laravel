@@ -14,6 +14,7 @@
                 <tr>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Долги</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Edit</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Delete</th>
                 </tr>
@@ -23,9 +24,16 @@
                     <tr>
                         <td>{{$number+1}}</td>
                         <td class="mb-0 text-sm">{{$client->client_type == 0 ? $client->fname . ' ' . $client->lname . ' ' . $client->mname : $client->company_name}}</td>
-                        <td class="mb-0 text-sm">
-                            <a href="{{ route('dashboard.client.edit', $client->id) }}" class="bnt btn-warning btn-sm text-dark font-weight-bold text-xs btn-hover">Edit</a>
+                        <td>
+                            <a href="{{ route('debt.client.index', $client) }}" target="_blank" class="btn btn-success btn-sm mb-0">
+                                Показать долги
+                            </a>
                         </td>
+                        <td class="mb-0 text-sm">
+                            <a href="{{ route('dashboard.client.edit', $client->id) }}" class="bnt btn-warning btn-sm text-dark font-weight-bold text-xs btn-hover">
+                                Edit
+                            </a>
+                        </td>                        
                         <td class="mb-0 text-sm">
                             <form action="{{ route('dashboard.client.destroy', $client->id) }}" method="POST">
                                 @csrf
