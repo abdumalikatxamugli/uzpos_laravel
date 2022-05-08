@@ -119,6 +119,15 @@ class OrderController extends Controller
         return redirect()->back();
     }
     /**
+     * open transfer request from other shop to satify the needed items partially
+     */
+    public function openTransferPartial(Request $request, Order $order, Point $point){
+        $items = collect( json_decode( $request->input('items') ) );
+        Transfer::createFromOrderPartial($order, $point, $items);
+        session()->flash('message', 'Запрос отправлен');
+        return redirect()->back();
+    }
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

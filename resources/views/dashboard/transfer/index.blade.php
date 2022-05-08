@@ -38,7 +38,7 @@
                         </a>
                     </td>
                     <td class="mb-0 text-sm">
-                        @if($transfer->status == 1)
+                        @if($transfer->status == 1 && $transfer->from_point_id == auth()->user()->point_id)
                             <form action="{{ route('dashboard.transfer.destroy', $transfer->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')

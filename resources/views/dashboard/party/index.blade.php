@@ -29,11 +29,13 @@
                         <a href="{{ route('dashboard.party.edit', $party->id) }}" class="bnt btn-warning btn-sm text-dark font-weight-bold text-xs btn-hover">Edit</a>
                     </td>
                     <td class="mb-0 text-sm">
-                        <form action="{{ route('dashboard.party.destroy', $party->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger btn-sm text-white font-weight-bold text-xs btn-hover">Delete</button>
-                        </form>
+                        @if($party->point_id == auth()->user()->point_id)
+                            <form action="{{ route('dashboard.party.destroy', $party->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm text-white font-weight-bold text-xs btn-hover">Delete</button>
+                            </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach

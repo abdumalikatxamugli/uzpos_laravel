@@ -55,4 +55,5 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
     Route::get('order/searchAvailableItems/{order}', [OrderController::class, 'searchAvailableItems'])->name('order.searchAvailableItems');
     //send transfer request to other point
     Route::get('order/openTransfer/{order}/{point}', [OrderController::class, 'openTransfer'])->name('order.openTransfer');
+    Route::post('order/openTransferPartial/{order}/{point}', [OrderController::class, 'openTransferPartial'])->name('order.openTransferPartial');
 });

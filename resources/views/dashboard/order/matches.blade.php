@@ -52,7 +52,11 @@
                         </ul>
                     </td>
                     <td>
-                        <button class="btn btn-warning btn-sm mb-0">Отправить запрос</button>
+                        <form action="{{ route('order.openTransferPartial', ['order'=>$order, 'point'=> $pm->get('shop')]) }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="items" value="{{ $pm->get('items')->toJson() }}">
+                            <button class="btn btn-warning btn-sm mb-0">Отправить запрос</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

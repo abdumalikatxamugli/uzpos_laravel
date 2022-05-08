@@ -43,11 +43,13 @@
                 <td class="mb-0 text-sm">{{ $item->product->name }}</td>
                 <td class="mb-0 text-sm">{{ $item->quantity }} </td>
                 <td class="mb-0 text-sm">
-                    <form action="{{ route('dashboard.item.destroy', $item->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger btn-sm text-white font-weight-bold text-xs btn-hover">Delete</button>
-                    </form>
+                    @if($party->created_by_id == auth()->user()->id)
+                        <form action="{{ route('dashboard.item.destroy', $item->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm text-white font-weight-bold text-xs btn-hover">Delete</button>
+                        </form>
+                    @endif
                 </td>
             </tr>
             @endforeach
@@ -56,5 +58,7 @@
 </div>
 
 <hr/>
-@include('dashboard.item.create')
+@if($party->point_id == auth()->user()->point_id)
+    @include('dashboard.item.create')
+@endif
 @endsection

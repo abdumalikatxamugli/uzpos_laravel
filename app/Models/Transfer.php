@@ -98,4 +98,22 @@ class Transfer extends Model
       $transfer_item->save();
     }
   }
+  public static function createFromOrderPartial($order, $point, $items){
+    $transfer = new self();
+    $transfer->transfer_date = date('Y-m-d');
+    $transfer->status = 1;
+    $transfer->from_point_id = $point->id;
+    $transfer->to_point_id = $order->shop_id;
+    $transfer->created_by_id = auth()->user()->id;
+    $transfer->reason = "Для заказа {$order->order_no}";
+    $transfer->save();
+    foreach($items as $item){
+      $transfer_item = new TransferItem();
+      $transfer_item->quantity = $item->quantity;
+      $transfer_item->product_id = $item->product_id;
+      $transfer_item->transfer_id = $transfer->id;
+      $transfer_item->created_by_id = auth()->user()->id;
+      $transfer_item->save();
+    }
+  }
 }
