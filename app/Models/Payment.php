@@ -15,6 +15,12 @@ class Payment extends UuidModel
      */
    protected $table = 'uzpos_sales_payment';
    /**
+    * Relations
+    */
+    public function repayments(){
+      return $this->hasMany(Repayment::class, 'payment_id', 'id');
+    }
+   /**
     * constants
     */
     const TERMINAL = 0;

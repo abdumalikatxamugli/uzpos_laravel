@@ -31,15 +31,24 @@
                 <hr/>
                 <b>{{$order->client? $order->client->client_type_name : '' }}</b>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <h6>ФИО/Название</h6>
                 <hr/>
                 <b>{{$order->getClientFullName()}}</b>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <h6>Реквизиты</h6>
                 <hr/>
                 <b>{{$order->client ? $order->client->getClientCredentials() : ''}}</b>
+            </div>
+            <div class="col-md-2">
+                <h6>Долги</h6>
+                <hr/>
+                @if($order->client)
+                    <a href="{{ route('debt.client.index', $order->client->id) }}" class="btn btn-link mb-0 btn-sm text-danger" target="_blank">
+                        Посмотреть историю долгов
+                    </a>
+                @endif
             </div>
         </div>
         
