@@ -148,4 +148,7 @@ class Order extends Model
       }
       return $shortages;
     }    
+    public static function getClientOrders($clientId){
+      return $clientId;
+    }
 }

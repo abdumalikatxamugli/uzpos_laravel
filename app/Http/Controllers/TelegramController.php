@@ -29,13 +29,28 @@ class TelegramController extends Controller
         $telegram->token = Telegram::CLIENT_BOT_TOKEN;
         $telegram->chatId = Telegram::getChatId($request);
         $telegram->data = $request->all();
-                
+       
+        print_r($step);
 
         if($step == Telegram::STEP_START){
-            $telegram->start();            
+            $telegram->start();  
+            return;          
         }
         if($step == Telegram::STEP_AUTH && $telegram->isOwnPhone()){
-            Chat::login($telegram->getPhone(), Chat::CLIENT);            
+            if(Chat::login($telegram->getPhone(), Chat::CLIENT_TYPE, $telegram->chatId)){
+                $telegram->send_orders_step();
+            }else{
+                $telegram->unauthorized_error();
+            }  
+            return;         
+        }
+        $telegram->clientId = Chat::auth($telegram->chatId, Chat::CLIENT_TYPE);
+        if(!$telegram->clientId){
+            $telegram->unauthorized_error();
+            return;
+        }
+        if($step == Telegram::STEP_ORDERS){
+            $telegram->send_orders();
         }
     } 
 }

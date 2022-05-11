@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreign('userId')->references('id')->on('auth_user');
             $table->char('clientId')->nullable();
             $table->foreign('clientId')->references('id')->on('uzpos_sales_client');
+            $table->string("chatId");
             $table->timestamps();
         });
     }

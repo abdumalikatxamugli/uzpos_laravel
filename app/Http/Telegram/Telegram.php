@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Telegram;
 
+use App\Models\Order;
+
 /**
  * Telegram bot
  */
@@ -15,6 +17,7 @@ class Telegram{
 
     const STEP_START = 0;
     const STEP_AUTH = 1;
+    const STEP_ORDERS = 2;
 
     public $data;
     public $chatId;
@@ -68,6 +71,9 @@ class Telegram{
         if(isset($data['message']['contact'])){
             return self::STEP_AUTH;
         }
+        if(isset($data['message']['text']) && $data['message']['text']=='мои заказы'){
+            return self::STEP_ORDERS;
+        }
     }
     public static function getChatId($request){
         $data = $request->all();
@@ -95,7 +101,6 @@ class Telegram{
         return $this->data['message']['contact']['phone_number'];
     }
     public function isOwnPhone(){
-        print_r(json_encode($this->data['message']['contact'], JSON_PRETTY_PRINT));
         if($this->data['message']['chat']['id'] != $this->data['message']['contact']['user_id']){
             $message = [
                 'text'=>"Авторизация не удалась. Поделитесь, пожалуйста, своим номером.",
@@ -105,5 +110,57 @@ class Telegram{
             return false;
         }
         return true;
+    }
+    public function unauthorized_error(){
+         $message = [
+            'text'=>"Вы не авторизованы.",
+            'chat_id'=>$this->chatId,
+            "reply_markup"=>[
+                "resize_keyboard"=>true,
+                "keyboard"=>[
+                    [
+                        [
+                            "text"=>"authorize",
+                            "request_contact"=>true
+                        ]
+                    ]
+                ]
+            ]
+        ];
+        $this->rawSend($message, $this->token);
+    }
+    public function send_orders_step(){
+        $message = [
+            'text'=>"Авторизация прошла успешно.",
+            'chat_id'=>$this->chatId,
+            "reply_markup"=>[
+                "resize_keyboard"=>true,
+                "keyboard"=>[
+                    [
+                        [
+                            "text"=>"мои заказы"
+                        ]
+                    ]
+                ]
+            ]
+        ];
+        $this->rawSend($message, $this->token);
+    }
+    public function send_orders(){
+        $message = [
+            'text'=>Order::getClientOrders($this->clientId),
+            'chat_id'=>$this->chatId,
+            'reply_markup'=>[
+                'inline_keyboard'=>[
+                    [
+                        [
+                            "text"=>">>",
+                            "callback_data"=>json_encode(['type'=>'pagination', 'step'=>1])
+                        ]
+                    ]
+                ]
+            ]
+        ];
+        $this->sendMessage($message); 
     }
 }
