@@ -52,4 +52,4 @@ Route::prefix("v1")->middleware('token_auth')->group(function(){
 
 // Telegram bot
 
-Route::post("/tg/bot", TelegramController::class);
+Route::post("/tg/{botname}", TelegramController::class);
