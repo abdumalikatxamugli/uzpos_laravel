@@ -29,8 +29,5 @@ class Telegram{
         if (curl_errno($ch)) {
             $error_msg = curl_error($ch);
         }
-
-        curl_close($ch);
     }
-
 }
