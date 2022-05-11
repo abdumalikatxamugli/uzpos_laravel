@@ -15,6 +15,7 @@ use App\Http\Controllers\CRUD\ProductController;
 use App\Http\Controllers\CRUD\TransferController;
 use App\Http\Controllers\CRUD\TransferItemController;
 use App\Http\Controllers\CRUD\UserController;
+use App\Http\Controllers\TelegramController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,15 +50,6 @@ Route::prefix("v1")->middleware('token_auth')->group(function(){
     
 });
 
-/*
-1. Product CRUD
-2. Party
-3. Items
-4. transfers
-5. transfer_items
-6. clients
-7. orders
-8. order items
-9. point products
-10. payments - LC
-*/
+// Telegram bot
+
+Route::post("/tg/bot", TelegramController::class);
