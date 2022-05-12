@@ -202,7 +202,6 @@ class Order extends Model
       }
       $border = "\n---------------------\n";
       $response = $response.$title.$body.$itog.$border.$payment_info; 
-      $response = $response.$title; 
       
       return $response;
     }
