@@ -200,7 +200,7 @@ class Order extends Model
         $payment_type = Payment::PAYMENT_TYPES_REVERT[$payment->payment_type];
         $payment_info = $payment_info."{$index}. {$payment_type} - {$payment->amount_real} \n";
       }
-      $border = " - - - - - - ";
+      $border = "\n---------------------\n";
       $response = $response.$title.$body.$itog.$border.$payment_info; 
       $response = $response.$title; 
       
