@@ -164,19 +164,34 @@ class Telegram{
     }
     public function send_orders(){
         $pageNum = 1;
+        $method="sendMessage";
         if($this->step == self::STEP_ORDERS_NEXT){
             $pageNum = json_decode($this->data['callback_query']['data'])->page;
+            $messageId = $this->data['callback_query']['data']['message']['id'];
+            $method="editMessageText";
         }
         $orders = Order::getClientOrders($this->clientId, $pageNum);
-        $message = [
-            'text'=>$orders->text,
-            'chat_id'=>$this->chatId,
-            'reply_markup'=>[
-                'inline_keyboard'=>[
-                    $orders->links
+        if($this->step == self::STEP_ORDERS_NEXT){
+            $message = [
+                'text'=>$orders->text,
+                'mesage_id'=>$messageId,
+                'reply_markup'=>[
+                    'inline_keyboard'=>[
+                        $orders->links
+                    ]
                 ]
-            ]
-        ];
+            ];
+        }else{
+            $message = [
+                'text'=>$orders->text,
+                'chat_id'=>$this->chatId,
+                'reply_markup'=>[
+                    'inline_keyboard'=>[
+                        $orders->links
+                    ]
+                ]
+            ];
+        }
         // dd($message);
         $this->sendMessage($message); 
         $this->answerCallbackQuery();
