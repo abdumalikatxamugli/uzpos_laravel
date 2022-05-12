@@ -147,20 +147,17 @@ class Telegram{
         $this->rawSend($message, $this->token);
     }
     public function send_orders(){
+        $orders = Order::getClientOrders($this->clientId);
         $message = [
-            'text'=>Order::getClientOrders($this->clientId),
+            'text'=>$orders->text,
             'chat_id'=>$this->chatId,
             'reply_markup'=>[
                 'inline_keyboard'=>[
-                    [
-                        [
-                            "text"=>">>",
-                            "callback_data"=>json_encode(['type'=>'pagination', 'step'=>1])
-                        ]
-                    ]
+                    $orders->links
                 ]
             ]
         ];
+        // dd($message);
         $this->sendMessage($message); 
     }
 }

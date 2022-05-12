@@ -148,7 +148,55 @@ class Order extends Model
       }
       return $shortages;
     }    
-    public static function getClientOrders($clientId){
-      return $clientId;
+    public static function getClientOrders($clientId, $pageNum=1){
+      $paginator = self::where('client_id', $clientId)->orderByDesc('id')->paginate(
+        $perPage = 1, $columns = ['*'], $pageName = 'orders', $pageNum
+      );
+      $links = [];
+      if($pageNum!=1){
+        array_push($links, [
+          "text"=>"<<",
+          "callback_data"=>json_encode(['type'=>'paginateOrder', 'page'=>$pageNum-1])
+        ]);
+      }
+      $orders = $paginator->items();
+      $response = "";
+      
+      foreach($orders as $index=>$order){
+        $index = $index + 1;
+        $title = "{$index}. Заказ № {$order->order_no} от {$order->created_at} \nСтатус: {$order->status_name} \n\n";
+        $response = $response.$title; 
+        array_push($links, [
+          "text"=>"{$index}",
+          "callback_data"=>json_encode(['type'=>'selOrd', 'id'=>$order->id])
+        ]);             
+      }
+      if($paginator->hasMorePages()){
+        array_push($links, [
+          "text"=>">>",
+          "callback_data"=>json_encode(['type'=>'paginateOrder', 'page'=>$pageNum+1])
+        ]);
+      }
+      return (object) ['text'=>$response, 'links'=>$links];
     }
 }
+// $body = "Список: \n";
+        // $overall_total = 0;
+        // foreach($order->items as $index=>$item){
+        //   $index = $index + 1;
+        //   $body = $body."{$index}. {$item->product->name} \n";
+        //   $body = $body."По цене: {$item->price} \n";
+        //   $body = $body."Количество: {$item->quantity} \n";
+        //   $total = $item->price * $item->quantity;
+        //   $overall_total = $overall_total + $total;
+        //   $body = $body."Цена: {$total} \n\n";
+        // }
+        // $itog = "Итого: {$overall_total} \n\n";
+        // $payment_info = "Оплата:\n";
+        // foreach($order->payments as $index=>$payment){
+        //   $index = $index + 1;
+        //   $payment_type = Payment::PAYMENT_TYPES_REVERT[$payment->payment_type];
+        //   $payment_info = $payment_info."{$index}. {$payment_type} - {$payment->amount_real} \n";
+        // }
+        // $border = " - - - - - - ";
+        // $response = $response.$title.$body.$itog.$payment_info.$border; 
