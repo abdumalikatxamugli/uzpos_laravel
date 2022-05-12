@@ -180,4 +180,12 @@ class Telegram{
         // dd($message);
         $this->sendMessage($message); 
     }
+    public function answerCallbackQuery(){
+        if($this->data['callback_query']){
+            $message = [
+                'callback_query_id'=>$this->data['callback_query']['id']
+            ];
+        }
+        $this->sendMessage($message, 'answerCallbackQuery');
+    }
 }
