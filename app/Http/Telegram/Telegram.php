@@ -179,9 +179,7 @@ class Telegram{
         ];
         // dd($message);
         $this->sendMessage($message); 
-        if($pageNum > 1){
-            $this->answerCallbackQuery();
-        }
+        $this->answerCallbackQuery();
     }
     public function answerCallbackQuery(){
         if($this->data['callback_query']){
