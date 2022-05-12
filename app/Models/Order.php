@@ -179,6 +179,33 @@ class Order extends Model
       }
       return (object) ['text'=>$response, 'links'=>$links];
     }
+    public  function getClientOrderDetail(){
+      $response = "";
+      $title = "Заказ № {$this->order_no} от {$this->created_at} \nСтатус: {$this->status_name} \n\n";
+      $body = "Список: \n";
+      $overall_total = 0;
+      foreach($this->items as $index=>$item){
+        $index = $index + 1;
+        $body = $body."{$index}. {$item->product->name} \n";
+        $body = $body."По цене: {$item->price} \n";
+        $body = $body."Количество: {$item->quantity} \n";
+        $total = $item->price * $item->quantity;
+        $overall_total = $overall_total + $total;
+        $body = $body."Цена: {$total} \n\n";
+      }
+      $itog = "Итого: {$overall_total} \n\n";
+      $payment_info = "Оплата:\n";
+      foreach($this->payments as $index=>$payment){
+        $index = $index + 1;
+        $payment_type = Payment::PAYMENT_TYPES_REVERT[$payment->payment_type];
+        $payment_info = $payment_info."{$index}. {$payment_type} - {$payment->amount_real} \n";
+      }
+      $border = " - - - - - - ";
+      $response = $response.$title.$body.$itog.$border.$payment_info; 
+      $response = $response.$title; 
+      
+      return $response;
+    }
 }
 // $body = "Список: \n";
         // $overall_total = 0;

@@ -177,9 +177,18 @@ class Telegram{
                 ]
             ]
         ];
-        // dd($message);
         $this->sendMessage($message); 
         $this->answerCallbackQuery();
+    }
+    public function send_order_details(){
+        $orderId = json_decode($this->data['callback_query']['data'])->id;
+        $order = Order::where('id', $orderId)->first();
+        $text = $order->getClientOrderDetail();
+        $message = [
+            'text'=>$text,
+            'chat_id'=>$this->chatId
+        ];
+        $this->sendMessage($message); 
     }
     public function answerCallbackQuery(){
         if(isset($this->data['callback_query'])){
