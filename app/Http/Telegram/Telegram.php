@@ -174,7 +174,7 @@ class Telegram{
         if($this->step == self::STEP_ORDERS_NEXT){
             $message = [
                 'text'=>$orders->text,
-                'mesage_id'=>$messageId,
+                'inline_message_id'=>$messageId,
                 'reply_markup'=>[
                     'inline_keyboard'=>[
                         $orders->links
