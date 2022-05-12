@@ -193,7 +193,7 @@ class Telegram{
             ];
         }
         // dd($message);
-        $this->sendMessage($message, $method); 
+        $this->sendMessage($message); 
         $this->answerCallbackQuery();
     }
     public function answerCallbackQuery(){
