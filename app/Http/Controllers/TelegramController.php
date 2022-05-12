@@ -29,6 +29,7 @@ class TelegramController extends Controller
         $telegram->token = Telegram::CLIENT_BOT_TOKEN;
         $telegram->chatId = Telegram::getChatId($request);
         $telegram->data = $request->all();
+        $telegram->step = $step;
        
         print_r($step);
 
@@ -50,6 +51,9 @@ class TelegramController extends Controller
             return;
         }
         if($step == Telegram::STEP_ORDERS){
+            $telegram->send_orders();
+        }
+        if($step == Telegram::STEP_ORDERS_NEXT){
             $telegram->send_orders();
         }
     } 

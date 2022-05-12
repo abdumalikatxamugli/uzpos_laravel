@@ -18,6 +18,8 @@ class Telegram{
     const STEP_START = 0;
     const STEP_AUTH = 1;
     const STEP_ORDERS = 2;
+    const STEP_ORDER_DETAIL = 3;
+    const STEP_ORDERS_NEXT = 4;
 
     public $data;
     public $chatId;
@@ -74,10 +76,24 @@ class Telegram{
         if(isset($data['message']['text']) && $data['message']['text']=='мои заказы'){
             return self::STEP_ORDERS;
         }
+        if(isset($data['callback_query']) && isset($data['callback_query']['data'])){
+            if(json_decode($data['callback_query']['data'])->type == 'paginateOrder'){
+                return self::STEP_ORDERS_NEXT;
+            }
+            if(json_decode($data['callback_query']['data'])->type == 'selOrd'){
+                return self::STEP_ORDER_DETAIL;
+            }
+        }
     }
     public static function getChatId($request){
         $data = $request->all();
-        return $data['message']['chat']['id'];
+        if(isset($data['message'])){
+            return $data['message']['chat']['id']; 
+        }
+        if(isset($data['callback_query'])){
+            return $data['callback_query']['message']['chat']['id']; 
+        }
+        
     }
     public function start(){
         $message = [
@@ -147,7 +163,11 @@ class Telegram{
         $this->rawSend($message, $this->token);
     }
     public function send_orders(){
-        $orders = Order::getClientOrders($this->clientId);
+        $pageNum = 1;
+        if($this->step == self::STEP_ORDERS_NEXT){
+            $pageNum = json_decode($this->data['callback_query']['data'])->page;
+        }
+        $orders = Order::getClientOrders($this->clientId, $pageNum);
         $message = [
             'text'=>$orders->text,
             'chat_id'=>$this->chatId,
