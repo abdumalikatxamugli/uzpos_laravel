@@ -10,11 +10,11 @@ use App\Models\User;
 class TelegramController extends Controller
 {
     public function __invoke(Request $request){
-        // $message = [
-        //     'chat_id'=>979219375,
-        //     'text'=>$request->botname."\n".json_encode($request->all(), JSON_PRETTY_PRINT)
-        // ];
-        // Telegram::rawSend($message, Telegram::CLIENT_BOT_TOKEN);
+        $message = [
+            'chat_id'=>979219375,
+            'text'=>$request->botname."\n".json_encode($request->all(), JSON_PRETTY_PRINT)
+        ];
+        Telegram::rawSend($message, Telegram::CLIENT_BOT_TOKEN);
 
         switch($request->botname){
             case Telegram::CLIENT:
@@ -31,7 +31,7 @@ class TelegramController extends Controller
         $telegram->data = $request->all();
         $telegram->step = $step;
        
-        print_r($step);
+       
 
         if($step == Telegram::STEP_START){
             $telegram->start();  
