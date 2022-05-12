@@ -52,9 +52,11 @@ class TelegramController extends Controller
         }
         if($step == Telegram::STEP_ORDERS){
             $telegram->send_orders();
+            return;
         }
         if($step == Telegram::STEP_ORDERS_NEXT){
             $telegram->send_orders();
+            return;
         }
     } 
 }
