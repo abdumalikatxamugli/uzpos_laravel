@@ -167,7 +167,7 @@ class Telegram{
         $method="sendMessage";
         if($this->step == self::STEP_ORDERS_NEXT){
             $pageNum = json_decode($this->data['callback_query']['data'])->page;
-            $messageId = $this->data['callback_query']['data']['message']['id'];
+            $messageId = $this->data['callback_query']['message']['message_id'];
             $method="editMessageText";
         }
         $orders = Order::getClientOrders($this->clientId, $pageNum);
@@ -193,7 +193,7 @@ class Telegram{
             ];
         }
         // dd($message);
-        $this->sendMessage($message); 
+        $this->sendMessage($message, $method); 
         $this->answerCallbackQuery();
     }
     public function answerCallbackQuery(){
