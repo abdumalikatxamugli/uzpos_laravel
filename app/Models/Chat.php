@@ -63,6 +63,6 @@ class Chat extends Model
         if(!$chat){
             return false;
         }
-        return $chat->clientId;
+        return $type == self::CLIENT_TYPE ? $chat->clientId : $chat->userId;
     }
 }

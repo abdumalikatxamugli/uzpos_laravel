@@ -210,4 +210,26 @@ class Order extends Model
       
       return $response;
     }
+
+    public  function getCollectorOrderDetail(){
+      $response = "";
+      $title = "Заказ № {$this->order_no} от {$this->created_at} \nСтатус: {$this->status_name} \n\n";
+      $body = "Список: \n";
+      foreach($this->items as $index=>$item){
+        $index = $index + 1;
+        $body = $body."{$index}. {$item->product->name} \n";
+        $body = $body."Количество: {$item->quantity} \n";
+      }
+      $response = $response.$title.$body; 
+      
+      return $response;
+    }
+
+    public static function getCollectorOrder($collector_id){
+      $collectionRequest = CollectionRequest::where('assigned_id', $collector_id)->first();
+      if(!$collectionRequest){
+        return 'У вас пока нету задач';
+      }
+      return $collectionRequest->order->getCollectorOrderDetail();
+    }
 }

@@ -85,5 +85,15 @@ class TelegramController extends Controller
             }  
             return;         
         }
+        $telegram->staffId = Chat::auth($telegram->chatId, Chat::STAFF_TYPE);
+        if(!$telegram->staffId){
+            $telegram->unauthorized_error();
+            return;
+        }
+
+        if($step == Telegram::STEP_GET_MY_TASKS){
+            $telegram->send_my_tasks();
+            return;
+        }
     }
 }

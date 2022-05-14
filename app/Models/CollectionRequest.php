@@ -19,6 +19,9 @@ class CollectionRequest extends Model
      public function assigned(){
          return $this->belongsTo(User::class, 'assigned_id','id');
      }
+     public function order(){
+         return $this->belongsTo(Order::class, 'order_id', 'id');
+     }
 
     /**
      * 
@@ -28,4 +31,10 @@ class CollectionRequest extends Model
         $status = $this->status == 1 ? 'Актив':'Завершен';
         return "{$status} : {$this->assigned->full_name}";
     }
+
+    /**
+     * 
+     * custom function
+     */
+    
 }

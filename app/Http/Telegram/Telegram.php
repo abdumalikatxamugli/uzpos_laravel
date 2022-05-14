@@ -20,6 +20,7 @@ class Telegram{
     const STEP_ORDERS = 2;
     const STEP_ORDER_DETAIL = 3;
     const STEP_ORDERS_NEXT = 4;
+    const STEP_GET_MY_TASKS = 5;
 
     public $data;
     public $chatId;
@@ -83,6 +84,9 @@ class Telegram{
             if(json_decode($data['callback_query']['data'])->type == 'selOrd'){
                 return self::STEP_ORDER_DETAIL;
             }
+        }
+        if(isset($data['message']['text']) && $data['message']['text']=='мои задачи'){
+            return self::STEP_GET_MY_TASKS;
         }
     }
     public static function getChatId($request){
@@ -208,6 +212,23 @@ class Telegram{
     public function send_get_my_tasks(){
         $message = [
             'text'=>"Авторизация прошла успешно.",
+            'chat_id'=>$this->chatId,
+            "reply_markup"=>[
+                "resize_keyboard"=>true,
+                "keyboard"=>[
+                    [
+                        [
+                            "text"=>"мои задачи"
+                        ]
+                    ]
+                ]
+            ]
+        ];
+        $this->rawSend($message, $this->token);
+    }
+    public function send_my_tasks(){
+        $message = [
+            'text'=>Order::getCollectorOrder($this->staffId),
             'chat_id'=>$this->chatId,
             "reply_markup"=>[
                 "resize_keyboard"=>true,
