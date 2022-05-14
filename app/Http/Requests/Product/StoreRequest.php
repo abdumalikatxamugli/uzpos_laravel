@@ -25,7 +25,7 @@ class StoreRequest extends FormRequest
     {
         return [
             "name"=>"required",
-            "bar_code"=>"required",
+            "bar_code"=>"nullable",
             "bulk_price"=>"required",
             "one_price"=>"required",
             "alert_limit"=>"required",

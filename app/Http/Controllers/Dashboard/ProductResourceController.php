@@ -50,6 +50,10 @@ class ProductResourceController extends Controller
     public function store(StoreRequest $request, User $user)
     {
         $validated = $request->validated();
+        if(!$validated['bar_code']){
+            $barcode = Product::genBarcode();
+            $validated['bar_code'] = $barcode;
+        }
         Product::createFromArrayWithUser($validated, $user);
         return redirect()->route("dashboard.product.index");
     }

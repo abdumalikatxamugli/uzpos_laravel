@@ -13,6 +13,7 @@
         <tr>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Штрих код</th>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Edit</th>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Delete</th>
         </tr>
@@ -22,6 +23,7 @@
             <tr>
                 <td class="mb-0 text-sm">{{$key+1}}</td>
                 <td class="mb-0 text-sm">{{$product->name}}</td>
+                <td class="mb-0 text-sm">{{$product->bar_code}}</td>
                 <td><a class="bnt btn-warning btn-sm text-dark font-weight-bold text-xs btn-hover" href="{{ route('dashboard.product.edit', $product->id) }}">Edit</a></td>
                 <td>
                     <form action="{{ route('dashboard.product.destroy', $product->id) }}" method="POST">
