@@ -35,7 +35,7 @@ class StoreRequest extends FormRequest
             "occupation"=>"exclude_if:client_type,1|required",
             "inn"=>"exclude_if:client_type,0|required",
             "company_name"=>"exclude_if:client_type,0|required",
-            "phone_number"=>"required",
+            "phone_number"=>"required|unique:uzpos_sales_client",
         ];
     }
 }
