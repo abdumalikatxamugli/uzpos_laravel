@@ -233,15 +233,22 @@ class Telegram{
     }
     public function send_my_tasks(){
         $order = Order::getCollectorOrder($this->staffId);
-        $message = [
-            'text'=>$order->text,
-            'chat_id'=>$this->chatId,
-            'reply_markup'=>[
-                'inline_keyboard'=>[
-                    $order->links
+        if($order->links){
+            $message = [
+                'text'=>$order->text,
+                'chat_id'=>$this->chatId,
+                'reply_markup'=>[
+                    'inline_keyboard'=>[
+                        $order->links
+                    ]
                 ]
-            ]
-        ];
+            ];
+        }else{
+            $message = [
+                'text'=>$order->text,
+                'chat_id'=>$this->chatId
+            ];
+        }
         // dd($message);
         $this->rawSend($message, $this->token);
     }
