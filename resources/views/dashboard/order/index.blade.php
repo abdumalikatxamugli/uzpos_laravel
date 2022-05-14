@@ -73,7 +73,7 @@
                                         @csrf
                                         <input type="hidden" name="order_id" value="{{ $order->id }}">
                                         <input type="hidden" name="status" value="1">
-                                        <input type="text" name="address" placeholder="Адрес" class="form-control mb-1">
+                                        <input type="text" name="to_address" placeholder="Адрес" class="form-control mb-1">
                                         <input type="hidden" name="status" value="1">
                                         <select name="assigned_id" class="form-control mb-2">
                                             @foreach($delivers as $deliver)

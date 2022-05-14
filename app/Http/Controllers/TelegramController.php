@@ -10,15 +10,17 @@ use App\Models\User;
 class TelegramController extends Controller
 {
     public function __invoke(Request $request){
-        // $message = [
-        //     'chat_id'=>979219375,
-        //     'text'=>$request->botname."\n".json_encode($request->all(), JSON_PRETTY_PRINT)
-        // ];
-        // Telegram::rawSend($message, Telegram::CLIENT_BOT_TOKEN);
+        $message = [
+            'chat_id'=>979219375,
+            'text'=>$request->botname."\n".json_encode($request->all(), JSON_PRETTY_PRINT)
+        ];
+        Telegram::rawSend($message, Telegram::COLLECTOR_BOT_TOKEN);
 
         switch($request->botname){
             case Telegram::CLIENT:
                 return $this->clientIndex($request);
+            case Telegram::COLLECTOR:
+                return $this->collectorIndex($request);
             default:
                 return [];
         }
@@ -63,4 +65,25 @@ class TelegramController extends Controller
             return;
         }
     } 
+    public function collectorIndex(Request $request){
+        $step = Telegram::getStep($request);
+        $telegram = new Telegram();
+        $telegram->token = Telegram::CLIENT_BOT_TOKEN;
+        $telegram->chatId = Telegram::getChatId($request);
+        $telegram->data = $request->all();
+        $telegram->step = $step;
+
+        if($step == Telegram::STEP_START){
+            $telegram->start();  
+            return;          
+        }
+        if($step == Telegram::STEP_AUTH && $telegram->isOwnPhone()){
+            if(Chat::login($telegram->getPhone(), Chat::STAFF_TYPE, $telegram->chatId)){
+                
+            }else{
+                $telegram->unauthorized_error();
+            }  
+            return;         
+        }
+    }
 }
