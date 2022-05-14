@@ -36,6 +36,27 @@ class Chat extends Model
             
             return true;
         }
+
+        if($type == self::STAFF_TYPE){
+            $staff = User::where('phone', $phone)->first();
+            if(!$staff){
+                return false;
+            }
+            $chat = self::where('userId', $staff->id)->first();
+            if($chat){
+                $chat->delete();
+            }
+          
+            $chat = new Chat();
+            $chat->userId = $staff->id;
+            $chat->chatId = $chatId;
+            $chat->chat_type=$type;
+            $chat->save();
+            
+            return true;
+        }
+
+        return false;
     }
     public static function auth($chatId, $type){
         $chat = self::where(['chatId'=>$chatId, 'chat_type'=>$type])->first();

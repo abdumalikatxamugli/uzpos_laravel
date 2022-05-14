@@ -199,4 +199,27 @@ class Telegram{
         }
         
     }
+
+
+    /**
+     * 
+     * Collector and Delivery
+     */
+    public function send_get_my_tasks(){
+        $message = [
+            'text'=>"Авторизация прошла успешно.",
+            'chat_id'=>$this->chatId,
+            "reply_markup"=>[
+                "resize_keyboard"=>true,
+                "keyboard"=>[
+                    [
+                        [
+                            "text"=>"мои задачи"
+                        ]
+                    ]
+                ]
+            ]
+        ];
+        $this->rawSend($message, $this->token);
+    }
 }

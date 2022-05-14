@@ -79,7 +79,7 @@ class TelegramController extends Controller
         }
         if($step == Telegram::STEP_AUTH && $telegram->isOwnPhone()){
             if(Chat::login($telegram->getPhone(), Chat::STAFF_TYPE, $telegram->chatId)){
-                
+                $telegram->send_get_my_tasks();
             }else{
                 $telegram->unauthorized_error();
             }  
