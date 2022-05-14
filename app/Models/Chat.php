@@ -15,7 +15,7 @@ class Chat extends Model
     const CLIENT_TYPE = 0;
     const STAFF_TYPE = 1;
 
-    public static function login($phone, $type, $chatId){
+    public static function login($phone, $type, $chatId, $isCollector = false){
         $phone = str_replace("+998", "", $phone);
 
         if($type == self::CLIENT_TYPE){
@@ -38,7 +38,11 @@ class Chat extends Model
         }
 
         if($type == self::STAFF_TYPE){
-            $staff = User::where('phone', $phone)->first();
+            if($isCollector){
+                $staff = User::where('phone', $phone)->where('user_role', User::roles['COLLECTOR'])->first();
+            }else{
+                $staff = User::where('phone', $phone)->where('user_role', User::roles['DELIVERY'])->first();
+            }
             if(!$staff){
                 return false;
             }
