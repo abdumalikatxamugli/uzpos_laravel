@@ -68,7 +68,7 @@ class TelegramController extends Controller
     public function collectorIndex(Request $request){
         $step = Telegram::getStep($request);
         $telegram = new Telegram();
-        $telegram->token = Telegram::CLIENT_BOT_TOKEN;
+        $telegram->token = Telegram::COLLECTOR_BOT_TOKEN;
         $telegram->chatId = Telegram::getChatId($request);
         $telegram->data = $request->all();
         $telegram->step = $step;
