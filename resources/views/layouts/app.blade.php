@@ -47,6 +47,18 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
+          <button class="nav-link" data-href="{{ route('dashboard.order.new', 2) }}" onclick="openModal(this)">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+            </div>
+            <span class="nav-link-text ms-1">Розничный заказ</span>
+          </button>
+          <script>
+            function openModal(el){
+              window.open(`${el.dataset.href}`, 'name' + Math.random(), 'width=1200,height=800');
+            }
+          </script>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="{{ route('dashboard.metric.index') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
             </div>

@@ -99,5 +99,14 @@ class AppServiceProvider extends ServiceProvider
                 ->with('payment_types', $payment_types)
                 ->with('currencies', $currencies);
        });
+       View::composer('dashboard.order.edit_retail_order', function($view){
+            $products = Product::all()->keyBy('bar_code');
+            $payment_types =  Payment::PAYMENT_TYPES;
+            $currencies = Payment::CURRENCIES;
+            $view->with('products', $products)
+                ->with('payment_types', $payment_types)
+                ->with('currencies', $currencies);
+        });
+       
     }
 }

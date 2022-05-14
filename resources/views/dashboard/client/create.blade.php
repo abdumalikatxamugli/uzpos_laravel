@@ -22,6 +22,15 @@
             <template x-if="client_type==0">
                 <div class="row">
                     <div class="col-md-4">
+                        <input type="text" name="pinfl" class="form-control mb-3" placeholder="ПИНФЛ">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" name="psery" class="form-control mb-3" placeholder="Серия паспорта">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" name="pnumber" class="form-control mb-3" placeholder="Номер паспорта">
+                    </div>
+                    <div class="col-md-4">
                         <input type="text" name="fname" class="form-control mb-3" placeholder="Фамилия">
                     </div>
                     <div class="col-md-4">

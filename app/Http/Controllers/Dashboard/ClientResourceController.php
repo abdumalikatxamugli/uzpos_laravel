@@ -41,6 +41,7 @@ class ClientResourceController extends Controller
     public function store(StoreRequest $request, User $user)
     {
         $validated = $request->validated();
+        $validated['client_no'] = Client::getClientNumber();
         Client::createFromArrayWithUser($validated, $user);
         return redirect()->route("dashboard.client.index");
     }
@@ -76,7 +77,8 @@ class ClientResourceController extends Controller
      */
     public function update(UpdateRequest $request, Client $client)
     {
-        $client->updateFromArray($request->validated(), $client->id);
+        $validated = $request->validated();
+        $client->updateFromArray($validated, $client->id);
         return redirect()->route("dashboard.client.index");
     }
 

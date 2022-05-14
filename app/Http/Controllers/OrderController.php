@@ -31,7 +31,13 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::orderBy('order_no')->paginate(10);
+        switch(auth()->user()->user_role){
+            case User::roles['ADMIN'] : 
+                $orders = Order::orderBy('order_no')->paginate(10);
+                break;
+            default:
+                $orders = Order::where('shop_id', auth()->user()->point_id)->orderBy('order_no')->paginate(10);        
+        }
         $collectors = User::where('user_role', User::roles['COLLECTOR'])->where('busy', USER::FREE)->get();
         $delivers = User::where('user_role', User::roles['DELIVERY'])->where('busy', USER::FREE)->get();
         return view('dashboard.order.index')->with('orders', $orders)
@@ -39,11 +45,11 @@ class OrderController extends Controller
                                             ->with('delivers', $delivers);
     }
     /**
-     * create new emplty order
+     * create new empty order
      */
-    public function new(){
+    public function new(Request $request){
         $order = new Order();
-        $order->order_type = 1;
+        $order->order_type = $request->type;
         $order->shop_id = auth()->user()->point_id;
         $last_order = Order::latest()->first();
         if($last_order){
@@ -142,7 +148,11 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {   
-        return view('dashboard.order.edit')->with('order', $order);
+        if($order->order_type == 1){
+            return view('dashboard.order.edit')->with('order', $order);
+        }else{
+            return view('dashboard.order.edit_retail_order')->with('order', $order);
+        }
     }
 
     public function assignCollector(Order $order, CollectionHttpRequest $request){

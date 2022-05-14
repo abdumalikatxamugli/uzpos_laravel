@@ -63,6 +63,9 @@ class Order extends Model
     const CONFIRMED = 2;
     const BROKEN = 3;
 
+    const BULKY_TYPE = 1;
+    const RETAIL_TYPE = 2;
+
     /**
      * 
      * Accessors 
@@ -77,6 +80,9 @@ class Order extends Model
         case 3:
           return 'БРАК';
        }
+     }
+     public function getOrderTypeNameAttribute(){
+       return $this->order_type == self::RETAIL_TYPE ? 'Розничный' : 'Оптовый';
      }
     /**
      * custom functions

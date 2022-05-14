@@ -4,7 +4,7 @@
     <div class="card-body">
         <h4 class="d-flex justify-content-between mb-5">
             <span>Заказы</span>
-            <a class="btn btn-success btn-sm mb-0" href="{{route('dashboard.order.new')}}">Добавить</a>
+            <a class="btn btn-success btn-sm mb-0" href="{{route('dashboard.order.new', 1)}}">Добавить</a>
         </h4>
         @include('partials.validation_errors')
         <table class="table text-center">
@@ -14,6 +14,7 @@
                     <!-- <td>Уникальный ID заказа</td> -->
                     <td>Номер заказа</td>
                     <td>Статус заказа</td>
+                    <td>Тип</td>
                     <td>Клиент</td>
                     <td>Количество товаров</td>
                     <td>Сумма</td>
@@ -30,6 +31,7 @@
                     <!-- <td>{{ $order->id}}</td> -->
                     <td>{{ $order->order_no}}</td>
                     <td>{{ $order->status_name}}</td>
+                    <td>{{ $order->order_type_name}}</td>
                     <td>{{ $order->getClientFullName() }}</td>
                     <td>{{ $order->getTotalItemCount() }}</td>
                     <td>{{ $order->getTotalCost() }}</td>
@@ -93,5 +95,6 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $orders->links() }}
     </div>
 @endsection

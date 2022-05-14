@@ -1,5 +1,5 @@
 tasks:
-1. Assign to collector, Assign to Delivery
-2. Collector, Delivery bots
-3. Retail order
+1. Assign to collector, Assign to Delivery - done
+2. Collector, Delivery bots - done
+3. Retail orde
 4. Menu permission separation

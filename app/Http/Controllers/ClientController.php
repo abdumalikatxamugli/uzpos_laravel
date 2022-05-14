@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Client\StoreRequest;
+use App\Http\Validators\ClientAppendValidator;
 use App\Models\Client;
 use App\Models\Order;
 use Exception;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class ClientController extends Controller
 {
@@ -40,8 +43,13 @@ class ClientController extends Controller
     /**
      * Create client and append to order
      */
-    public function createAndAppendtoOrder(StoreRequest $request, Order $order){
+    public function createAndAppendtoOrder(Request $request, Order $order){
         try{
+            try{
+                $this->validate_store($request);
+            }catch(HttpResponseException $e){
+               return $e->getResponse();
+            }
             $clientData = $request->validated();
             $clientData['client_no'] = Client::getClientNumber();
             $client = Client::createFromArrayWithUser($clientData, auth()->user());
@@ -51,5 +59,9 @@ class ClientController extends Controller
         }catch(Exception $e){
             return ['error'=>-1];
         }
+    }
+    public function __call($method, $args){
+        $method = explode("_", $method)[1];
+        return App::call([new ClientAppendValidator, $method]);
     }
 }

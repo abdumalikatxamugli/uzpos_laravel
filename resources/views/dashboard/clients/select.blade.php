@@ -173,6 +173,12 @@
                                   window.opener.triggerRefresh();
                                   window.close();
                               }
+                              if(response.error == -1 && response.messages){
+                                  alert("Ошибки возникли:"+JSON.stringify(response.messages));
+                              }
+                              if(response.error == -1 && !response.messages){
+                                  alert("Возникла непредвиденная ошибка");
+                              }
                           })
                           .catch(err=>console.log(err))
                     }    

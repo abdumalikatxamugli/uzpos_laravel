@@ -42,7 +42,7 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
 
 
     //order routes
-    Route::get('neworder', [OrderController::class, 'new'])->name('dashboard.order.new');
+    Route::get('neworder/{type}', [OrderController::class, 'new'])->name('dashboard.order.new');
     Route::resource('orders', OrderController::class, ['as'=>'dashboard']);  
     Route::get('client/select/{order}', [ClientController::class, 'select'])->name('dashboard.order.client.select'); 
     Route::get('client/append/{order}/{client}', [ClientController::class, 'appendToOrder'])->name('dashboard.client.appendToOrder');
