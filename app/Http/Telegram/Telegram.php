@@ -232,7 +232,7 @@ class Telegram{
         $this->rawSend($message, $this->token);
     }
     public function send_my_tasks(){
-        $order = Order::getCollectorOrder($this->staffId);
+        $order = Order::getTasksOrder($this->staffId);
         if($order->links){
             $message = [
                 'text'=>$order->text,

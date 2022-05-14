@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Requests\Order\DeliverRequest;
 use App\Traits\Fabricatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -225,17 +226,33 @@ class Order extends Model
       return $response;
     }
 
-    public static function getCollectorOrder($collector_id){
-      $collectionRequest = CollectionRequest::where('assigned_id', $collector_id)->where('status', 1)->first();
-      if(!$collectionRequest){
-        return (object) ['text'=>'У вас пока нету задач', 'links'=>null];
+    public static function getTasksOrder($staff_id){
+      $staff = User::where('id', $staff_id)->first();
+      if($staff->user_role == User::roles['COLLECTOR']){
+        $task = CollectionRequest::where('assigned_id', $staff_id)->where('status', 1)->first();
+        if(!$task){
+          return (object) ['text'=>'У вас пока нету задач', 'links'=>null];
+        }
+        $links = [
+          [
+            "text"=>"Я закончил",
+            "callback_data"=>json_encode(['type'=>'finishOrderCollector', 'cNo'=>$task->id])
+          ]
+        ];
       }
-      $links = [
-        [
-          "text"=>"Я закончил",
-          "callback_data"=>json_encode(['type'=>'finishOrderCollector', 'cNo'=>$collectionRequest->id])
-        ]
-      ];
-      return (object) ['text'=>$collectionRequest->order->getCollectorOrderDetail(), 'links'=>$links];
+      if($staff->user_role == User::roles['DELIVERY']){
+        $task = DeliverRequest::where('assigned_id', $staff_id)->where('status', 1)->first();
+        if(!$task){
+          return (object) ['text'=>'У вас пока нету задач', 'links'=>null];
+        }
+        $links = [
+          [
+            "text"=>"Я закончил",
+            "callback_data"=>json_encode(['type'=>'finishOrderDelivert', 'dNo'=>$task->id])
+          ]
+        ];
+      }
+
+      return (object) ['text'=>$task->order->getCollectorOrderDetail(), 'links'=>$links];
     }
 }

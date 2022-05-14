@@ -21,6 +21,8 @@ class TelegramController extends Controller
                 return $this->clientIndex($request);
             case Telegram::COLLECTOR:
                 return $this->collectorIndex($request);
+            case Telegram::DELIVERY:
+                return $this->deliveryIndex($request);
             default:
                 return [];
         }
@@ -86,6 +88,41 @@ class TelegramController extends Controller
             return;         
         }
         $telegram->staffId = Chat::auth($telegram->chatId, Chat::COLLECTOR_TYPE);
+        if(!$telegram->staffId){
+            $telegram->unauthorized_error();
+            return;
+        }
+
+        if($step == Telegram::STEP_GET_MY_TASKS){
+            $telegram->send_my_tasks();
+            return;
+        }
+        if($step == Telegram::STEP_I_FINISH_COLLECTION){
+            $telegram->finishCollection();
+            return;
+        }
+    }
+    public function deliveryIndex(Request $request){
+        $step = Telegram::getStep($request);
+        $telegram = new Telegram();
+        $telegram->token = Telegram::COLLECTOR_BOT_TOKEN;
+        $telegram->chatId = Telegram::getChatId($request);
+        $telegram->data = $request->all();
+        $telegram->step = $step;
+
+        if($step == Telegram::STEP_START){
+            $telegram->start();  
+            return;          
+        }
+        if($step == Telegram::STEP_AUTH && $telegram->isOwnPhone()){
+            if(Chat::login($telegram->getPhone(), Chat::DELIVER_TYPE, $telegram->chatId)){
+                $telegram->send_get_my_tasks();
+            }else{
+                $telegram->unauthorized_error();
+            }  
+            return;         
+        }
+        $telegram->staffId = Chat::auth($telegram->chatId, Chat::DELIVER_TYPE);
         if(!$telegram->staffId){
             $telegram->unauthorized_error();
             return;
