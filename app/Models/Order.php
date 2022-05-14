@@ -226,7 +226,7 @@ class Order extends Model
     }
 
     public static function getCollectorOrder($collector_id){
-      $collectionRequest = CollectionRequest::where('assigned_id', $collector_id)->where('status', 0)->first();
+      $collectionRequest = CollectionRequest::where('assigned_id', $collector_id)->where('status', 1)->first();
       if(!$collectionRequest){
         return (object) ['text'=>'У вас пока нету задач', 'links'=>null];
       }
