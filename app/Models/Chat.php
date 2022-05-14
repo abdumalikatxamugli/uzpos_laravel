@@ -57,6 +57,24 @@ class Chat extends Model
             
             return true;
         }
+        if($type == self::DELIVER_TYPE){
+            $staff = User::where('phone', $phone)->where('user_role', User::roles['DELIVERY'])->first();
+            if(!$staff){
+                return false;
+            }
+            $chat = self::where('userId', $staff->id)->first();
+            if($chat){
+                $chat->delete();
+            }
+          
+            $chat = new Chat();
+            $chat->userId = $staff->id;
+            $chat->chatId = $chatId;
+            $chat->chat_type=$type;
+            $chat->save();
+            
+            return true;
+        }
 
         return false;
     }
