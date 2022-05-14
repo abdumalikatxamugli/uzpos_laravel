@@ -44,97 +44,155 @@
       </a>
     </div>
     <hr class="horizontal dark mt-0">
+    
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <button class="nav-link" data-href="{{ route('dashboard.order.new', 2) }}" onclick="openModal(this)">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
-            </div>
-            <span class="nav-link-text ms-1">Розничный заказ</span>
-          </button>
-          <script>
-            function openModal(el){
-              window.open(`${el.dataset.href}`, 'name' + Math.random(), 'width=1200,height=800');
-            }
-          </script>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('dashboard.metric.index') }}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
-            </div>
-            <span class="nav-link-text ms-1">Единицы измерение</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('dashboard.category.index') }}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
-            </div>
-            <span class="nav-link-text ms-1">Категории</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('dashboard.brand.index') }}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
-            </div>
-            <span class="nav-link-text ms-1">Бренды</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('dashboard.point.index') }}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
-            </div>
-            <span class="nav-link-text ms-1">Магазины и склады</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('dashboard.product.index') }}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
-            </div>
-            <span class="nav-link-text ms-1">Продукты</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('dashboard.user.index') }}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
-            </div>
-            <span class="nav-link-text ms-1">Персонал</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('dashboard.client.index') }}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
-            </div>
-            <span class="nav-link-text ms-1">Клиенты</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('dashboard.party.index') }}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
-            </div>
-            <span class="nav-link-text ms-1">Приход товаров</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('dashboard.transfer.index') }}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
-            </div>
-            <span class="nav-link-text ms-1">Перемешения товаров</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('dashboard.goodsReport') }}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
-            </div>
-            <span class="nav-link-text ms-1">Отчет по товарам</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('dashboard.orders.index') }}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
-            </div>
-            <span class="nav-link-text ms-1">Заказы</span>
-          </a>
-        </li> 
+        @if(auth()->user()->user_role == 0)
+          @if(auth()->user()->username == 'owner')
+            <li class="nav-item">
+              <button class="nav-link" data-href="{{ route('dashboard.order.new', 2) }}" onclick="openModal(this)">
+                <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+                </div>
+                <span class="nav-link-text ms-1">Розничный заказ</span>
+              </button>
+              <script>
+                function openModal(el){
+                  window.open(`${el.dataset.href}`, 'name' + Math.random(), 'width=1200,height=800');
+                }
+              </script>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('dashboard.orders.index') }}">
+                <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+                </div>
+                <span class="nav-link-text ms-1">Заказы</span>
+              </a>
+            </li> 
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('dashboard.client.index') }}">
+                <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+                </div>
+                <span class="nav-link-text ms-1">Клиенты</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('dashboard.party.index') }}">
+                <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+                </div>
+                <span class="nav-link-text ms-1">Приход товаров</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('dashboard.transfer.index') }}">
+                <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+                </div>
+                <span class="nav-link-text ms-1">Перемешения товаров</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('dashboard.goodsReport') }}">
+                <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+                </div>
+                <span class="nav-link-text ms-1">Отчет по товарам</span>
+              </a>
+            </li>
+          @endif
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('dashboard.metric.index') }}">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+              </div>
+              <span class="nav-link-text ms-1">Единицы измерение</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('dashboard.category.index') }}">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+              </div>
+              <span class="nav-link-text ms-1">Категории</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('dashboard.brand.index') }}">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+              </div>
+              <span class="nav-link-text ms-1">Бренды</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('dashboard.point.index') }}">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+              </div>
+              <span class="nav-link-text ms-1">Магазины и склады</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('dashboard.product.index') }}">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+              </div>
+              <span class="nav-link-text ms-1">Продукты</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('dashboard.user.index') }}">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+              </div>
+              <span class="nav-link-text ms-1">Персонал</span>
+            </a>
+          </li>
+        @endif
+
+        @if(auth()->user()->user_role == 1 || auth()->user()->user_role == 3)
+          <li class="nav-item">
+            <button class="nav-link" data-href="{{ route('dashboard.order.new', 2) }}" onclick="openModal(this)">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+              </div>
+              <span class="nav-link-text ms-1">Розничный заказ</span>
+            </button>
+            <script>
+              function openModal(el){
+                window.open(`${el.dataset.href}`, 'name' + Math.random(), 'width=1200,height=800');
+              }
+            </script>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('dashboard.orders.index') }}">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+              </div>
+              <span class="nav-link-text ms-1">Заказы</span>
+            </a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('dashboard.client.index') }}">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+              </div>
+              <span class="nav-link-text ms-1">Клиенты</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('dashboard.party.index') }}">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+              </div>
+              <span class="nav-link-text ms-1">Приход товаров</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('dashboard.transfer.index') }}">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+              </div>
+              <span class="nav-link-text ms-1">Перемешения товаров</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('dashboard.goodsReport') }}">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+              </div>
+              <span class="nav-link-text ms-1">Отчет по товарам</span>
+            </a>
+          </li>
+        @endif
+
+        
       </ul>
     </div>
     <div class="sidenav-footer mx-3 ">

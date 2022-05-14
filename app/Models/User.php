@@ -29,7 +29,8 @@ class User extends Authenticatable
         'COLLECTOR' => 4,
         'ACCOUNTANT' => 5,
         'SHOP_MANAGER' => 6,
-        'DELIVERY' => 7
+        'DELIVERY' => 7,
+        'OWNER'=>8
     ];
     const BUSY = 1;
     const FREE = 0;
