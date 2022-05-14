@@ -19,6 +19,9 @@ class DeliveryRequest extends Model
      public function assigned(){
          return $this->belongsTo(User::class, 'assigned_id','id');
      }
+     public function order(){
+         return $this->belongsTo(Order::class, 'order_id', 'id');
+     }
 
     /**
      * 

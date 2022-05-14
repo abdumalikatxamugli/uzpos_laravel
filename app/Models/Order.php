@@ -248,7 +248,7 @@ class Order extends Model
         $links = [
           [
             "text"=>"Я закончил",
-            "callback_data"=>json_encode(['type'=>'finishOrderDelivert', 'dNo'=>$task->id])
+            "callback_data"=>json_encode(['type'=>'finishOrderDelivery', 'dNo'=>$task->id])
           ]
         ];
       }
