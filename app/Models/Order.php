@@ -155,7 +155,7 @@ class Order extends Model
     }    
     public static function getClientOrders($clientId, $pageNum=1){
       $paginator = self::where('client_id', $clientId)->orderByDesc('id')->paginate(
-        $perPage = 1, $columns = ['*'], $pageName = 'orders', $pageNum
+        $perPage = 5, $columns = ['*'], $pageName = 'orders', $pageNum
       );
       $links = [];
       if($pageNum!=1){
