@@ -225,6 +225,25 @@ class Order extends Model
       return $response;
     }
 
+    public  function getDeliveryOrderDetail(){
+      $response = "";
+      $title = "Заказ № {$this->order_no} от {$this->created_at} \nСтатус: {$this->status_name} \n\n";
+      $body = "Список: \n";
+      foreach($this->items as $index=>$item){
+        $index = $index + 1;
+        $body = $body."{$index}. {$item->product->name} \n";
+        $body = $body."Количество: {$item->quantity} \n";
+      }
+      $address = "";
+      if($this->deliveryRequest){
+        $address = "Адрес: {$this->deliveryRequest->to_address} \n";
+      }
+      $phone = "Телефон: {$this->client->phone_number} \n";
+      $response = $response.$title.$body.$address.$phone; 
+      
+      return $response;
+    }
+
     public static function getTasksOrder($staff_id){
       $staff = User::where('id', $staff_id)->first();
       if($staff->user_role == User::roles['COLLECTOR']){
@@ -238,6 +257,7 @@ class Order extends Model
             "callback_data"=>json_encode(['type'=>'finishOrderCollector', 'cNo'=>$task->id])
           ]
         ];
+        return (object) ['text'=>$task->order->getCollectorOrderDetail(), 'links'=>$links];
       }
       if($staff->user_role == User::roles['DELIVERY']){
         $task = DeliveryRequest::where('assigned_id', $staff_id)->where('status', 1)->first();
@@ -250,8 +270,9 @@ class Order extends Model
             "callback_data"=>json_encode(['type'=>'finishOrderDelivery', 'dNo'=>$task->id])
           ]
         ];
+        return (object) ['text'=>$task->order->getDeliveryOrderDetail(), 'links'=>$links];
       }
 
-      return (object) ['text'=>$task->order->getCollectorOrderDetail(), 'links'=>$links];
+      
     }
 }
