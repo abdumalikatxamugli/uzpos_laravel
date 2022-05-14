@@ -14,7 +14,7 @@ class TelegramController extends Controller
             'chat_id'=>979219375,
             'text'=>$request->botname."\n".json_encode($request->all(), JSON_PRETTY_PRINT)
         ];
-        Telegram::rawSend($message, Telegram::COLLECTOR_BOT_TOKEN);
+        Telegram::rawSend($message, Telegram::DELIVERY_BOT_TOKEN);
 
         switch($request->botname){
             case Telegram::CLIENT:
