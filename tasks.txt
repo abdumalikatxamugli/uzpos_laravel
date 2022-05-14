@@ -1,3 +1,5 @@
 tasks:
-1. Transfer do change only on status update;  1-draft, 2-done
-2. Form transfer from scarce items
+1. Assign to collector, Assign to Delivery
+2. Collector, Delivery bots
+3. Retail order
+4. Menu permission separation

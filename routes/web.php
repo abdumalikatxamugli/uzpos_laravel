@@ -62,4 +62,12 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
     Route::post('debts/repay/{payment}', [DebtController::class, 'repay'] )->name('debt.repay');
     Route::get('debts/repays/{payment}', [DebtController::class, 'repay_history'])->name('debt.repay_history');
 
+
+    /**
+     * 
+     * Collector and delivery
+     */
+
+     Route::post('order/assignCollector/', [OrderController::class, 'assignCollector'])->name('assignCollector');
+     Route::post('order/assignDeliver/', [OrderController::class, 'assignDeliver'])->name('assignDeliver');
 });

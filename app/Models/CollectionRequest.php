@@ -5,11 +5,11 @@ namespace App\Models;
 use App\Traits\Fabricatable;
 use Illuminate\Database\Eloquent\Model;
 
-class DeliveryRequest extends Model
+class CollectionRequest extends Model
 {
     use Fabricatable;
 
-    protected $table = "uzpos_sales_deliveryrequest";
+    protected $table = "uzpos_collectionrequest";
 
     /**
      * 

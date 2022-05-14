@@ -29,8 +29,10 @@ class User extends Authenticatable
         'COLLECTOR' => 4,
         'ACCOUNTANT' => 5,
         'SHOP_MANAGER' => 6,
-        'DELIVER' => 7
+        'DELIVERY' => 7
     ];
+    const BUSY = 1;
+    const FREE = 0;
     /**
      *
      * Mutators
@@ -46,7 +48,15 @@ class User extends Authenticatable
         );
     }
    
-
+    /**
+     * 
+     * 
+     * Accessors
+     */
+    
+     public function getFullNameAttribute(){
+         return "{$this->last_name} {$this->first_name}";
+     }
 
     /**
      *
@@ -79,5 +89,14 @@ class User extends Authenticatable
         $user->save();
         return $user;
     }
-    
+    public static function makeBusy($user_id){
+        $user = self::where('id', $user_id)->first();
+        $user->busy = 1;
+        $user->save();
+    }
+    public static function makeFree($user_id){
+        $user = self::where('id', $user_id)->first();
+        $user->busy = 0;
+        $user->save();
+    }
 }

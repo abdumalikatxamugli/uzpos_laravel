@@ -6,14 +6,20 @@ use App\Exceptions\WarehouseOutOfProductException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderItem\BulkStoreRequest;
 use App\Http\Requests\Payment\StoreRequest;
+use App\Models\CollectionRequest;
+use App\Http\Requests\Order\CollectionRequest as CollectionHttpRequest;
+use App\Http\Requests\Order\DeliverRequest as DeliveryHttpRequest;
+use App\Models\DeliveryRequest;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Payment;
 use App\Models\Point;
 use App\Models\PointProduct;
 use App\Models\Transfer;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 use PDO;
 
 class OrderController extends Controller
@@ -26,7 +32,11 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::orderBy('order_no')->paginate(10);
-        return view('dashboard.order.index')->with('orders', $orders);
+        $collectors = User::where('user_role', User::roles['COLLECTOR'])->where('busy', USER::FREE)->get();
+        $delivers = User::where('user_role', User::roles['DELIVERY'])->where('busy', USER::FREE)->get();
+        return view('dashboard.order.index')->with('orders', $orders)
+                                            ->with('collectors', $collectors)
+                                            ->with('delivers', $delivers);
     }
     /**
      * create new emplty order
@@ -128,68 +138,21 @@ class OrderController extends Controller
         return redirect()->back();
     }
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('dashboard.order.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
+     * edit order
      */
     public function edit(Order $order)
     {   
         return view('dashboard.order.edit')->with('order', $order);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Order $order)
-    {
-        //
+    public function assignCollector(Order $order, CollectionHttpRequest $request){
+        CollectionRequest::createFromArrayWithUser($request->validated(), auth()->user());
+        User::makeBusy($request->input('assigned_id'));
+        return redirect()->back();
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Order $order)
-    {
-        //
+    public function assignDeliver(Order $order, DeliveryHttpRequest $request){
+        DeliveryRequest::createFromArrayWithUser($request->validated(), auth()->user());
+        User::makeBusy($request->input('assigned_id'));
+        return redirect()->back();
     }
 }
