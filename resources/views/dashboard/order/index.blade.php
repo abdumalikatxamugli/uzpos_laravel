@@ -7,7 +7,7 @@
             <a class="btn btn-success btn-sm mb-0" href="{{route('dashboard.order.new', 1)}}">Добавить</a>
         </h4>
         @include('partials.validation_errors')
-        <table class="table text-center">
+        <table class="table text-center" style="font-size:12px">
             <thead>
                 <tr>
                     <td>#</td>
