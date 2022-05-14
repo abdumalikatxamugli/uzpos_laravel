@@ -10,12 +10,14 @@ class Chat extends Model
     use HasFactory;
 
     const CLIENT = 'client';
-    const STAFF = 'staff';
+    const COLLECTOR = 'collector';
+    const DELIVER = 'deliver';
 
     const CLIENT_TYPE = 0;
-    const STAFF_TYPE = 1;
+    const COLLECTOR_TYPE = 1;
+    const DELIVER_TYPE = 2;
 
-    public static function login($phone, $type, $chatId, $isCollector = false){
+    public static function login($phone, $type, $chatId){
         $phone = str_replace("+998", "", $phone);
 
         if($type == self::CLIENT_TYPE){
@@ -37,12 +39,8 @@ class Chat extends Model
             return true;
         }
 
-        if($type == self::STAFF_TYPE){
-            if($isCollector){
-                $staff = User::where('phone', $phone)->where('user_role', User::roles['COLLECTOR'])->first();
-            }else{
-                $staff = User::where('phone', $phone)->where('user_role', User::roles['DELIVERY'])->first();
-            }
+        if($type == self::COLLECTOR_TYPE){
+            $staff = User::where('phone', $phone)->where('user_role', User::roles['COLLECTOR'])->first();
             if(!$staff){
                 return false;
             }
