@@ -95,5 +95,9 @@ class TelegramController extends Controller
             $telegram->send_my_tasks();
             return;
         }
+        if($step == Telegram::STEP_I_FINISH_COLLECTION){
+            $telegram->finishCollection();
+            return;
+        }
     }
 }

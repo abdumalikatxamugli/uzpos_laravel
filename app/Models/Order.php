@@ -228,8 +228,14 @@ class Order extends Model
     public static function getCollectorOrder($collector_id){
       $collectionRequest = CollectionRequest::where('assigned_id', $collector_id)->first();
       if(!$collectionRequest){
-        return 'У вас пока нету задач';
+        return (object) ['text'=>'У вас пока нету задач', 'links'=>null];
       }
-      return $collectionRequest->order->getCollectorOrderDetail();
+      $links = [
+        [
+          "text"=>"Я закончил",
+          "callback_data"=>json_encode(['type'=>'finishOrderCollector', 'cNo'=>$collectionRequest->id])
+        ]
+      ];
+      return (object) ['text'=>$collectionRequest->order->getCollectorOrderDetail(), 'links'=>$links];
     }
 }

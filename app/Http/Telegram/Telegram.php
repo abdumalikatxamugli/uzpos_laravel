@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Telegram;
 
+use App\Models\CollectionRequest;
 use App\Models\Order;
 
 /**
@@ -21,6 +22,7 @@ class Telegram{
     const STEP_ORDER_DETAIL = 3;
     const STEP_ORDERS_NEXT = 4;
     const STEP_GET_MY_TASKS = 5;
+    const STEP_I_FINISH_COLLECTION = 6;
 
     public $data;
     public $chatId;
@@ -83,6 +85,9 @@ class Telegram{
             }
             if(json_decode($data['callback_query']['data'])->type == 'selOrd'){
                 return self::STEP_ORDER_DETAIL;
+            }
+            if(json_decode($data['callback_query']['data'])->type == 'finishOrderCollector'){
+                return self::STEP_I_FINISH_COLLECTION;
             }
         }
         if(isset($data['message']['text']) && $data['message']['text']=='мои задачи'){
@@ -227,20 +232,28 @@ class Telegram{
         $this->rawSend($message, $this->token);
     }
     public function send_my_tasks(){
+        $order = Order::getCollectorOrder($this->staffId);
         $message = [
-            'text'=>Order::getCollectorOrder($this->staffId),
+            'text'=>$order->text,
             'chat_id'=>$this->chatId,
-            "reply_markup"=>[
-                "resize_keyboard"=>true,
-                "keyboard"=>[
-                    [
-                        [
-                            "text"=>"мои задачи"
-                        ]
-                    ]
+            'reply_markup'=>[
+                'inline_keyboard'=>[
+                    $order->links
                 ]
             ]
         ];
+        // dd($message);
         $this->rawSend($message, $this->token);
+    }
+    public function finishCollection(){
+        $collectionRequestId = json_decode($this->data['callback_query']['data'])->cNo;
+        $collectionRequest = CollectionRequest::where('id', $collectionRequestId)->first();
+        $collectionRequest->finish();
+        $message = [
+            'text'=>'Хорошо',
+            'chat_id'=>$this->chatId
+        ];
+        $this->sendMessage($message); 
+        $this->answerCallbackQuery();
     }
 }

@@ -36,5 +36,13 @@ class CollectionRequest extends Model
      * 
      * custom function
      */
+
+     public function finish(){
+         $this->status = 0;
+         $this->save();
+         $collector = $this->assigned;
+         $collector->busy = 0;
+         $collector->save();
+     }
     
 }
