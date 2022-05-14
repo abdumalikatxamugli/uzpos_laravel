@@ -203,6 +203,7 @@ class Telegram{
             'chat_id'=>$this->chatId
         ];
         $this->sendMessage($message); 
+        $this->answerCallbackQuery();
     }
     public function answerCallbackQuery(){
         if(isset($this->data['callback_query'])){
