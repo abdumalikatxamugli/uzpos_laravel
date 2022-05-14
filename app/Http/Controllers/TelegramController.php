@@ -127,7 +127,7 @@ class TelegramController extends Controller
             $telegram->unauthorized_error();
             return;
         }
-
+        return;
         if($step == Telegram::STEP_GET_MY_TASKS){
             $telegram->send_my_tasks();
             return;
