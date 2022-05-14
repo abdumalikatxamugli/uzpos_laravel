@@ -2,6 +2,7 @@
 namespace App\Http\Telegram;
 
 use App\Models\CollectionRequest;
+use App\Models\DeliveryRequest;
 use App\Models\Order;
 
 /**
@@ -23,6 +24,7 @@ class Telegram{
     const STEP_ORDERS_NEXT = 4;
     const STEP_GET_MY_TASKS = 5;
     const STEP_I_FINISH_COLLECTION = 6;
+    const STEP_I_FINISH_DELIVERY = 7;
 
     public $data;
     public $chatId;
@@ -88,6 +90,9 @@ class Telegram{
             }
             if(json_decode($data['callback_query']['data'])->type == 'finishOrderCollector'){
                 return self::STEP_I_FINISH_COLLECTION;
+            }
+            if(json_decode($data['callback_query']['data'])->type == 'finishOrderDelivery'){
+                return self::STEP_I_FINISH_DELIVERY;
             }
         }
         if(isset($data['message']['text']) && $data['message']['text']=='мои задачи'){
@@ -263,4 +268,15 @@ class Telegram{
         $this->sendMessage($message); 
         $this->answerCallbackQuery();
     }
+    public function finishDelivery(){
+        $deliveryRequestId = json_decode($this->data['callback_query']['data'])->dNo;
+        $deliveryRequest = DeliveryRequest::where('id', $deliveryRequestId)->first();
+        $deliveryRequest->finish();
+        $message = [
+            'text'=>'Хорошо',
+            'chat_id'=>$this->chatId
+        ];
+        $this->sendMessage($message); 
+        $this->answerCallbackQuery();
+    }    
 }

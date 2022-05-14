@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Http\Requests\Order\DeliverRequest;
 use App\Traits\Fabricatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -241,7 +240,7 @@ class Order extends Model
         ];
       }
       if($staff->user_role == User::roles['DELIVERY']){
-        $task = DeliverRequest::where('assigned_id', $staff_id)->where('status', 1)->first();
+        $task = DeliveryRequest::where('assigned_id', $staff_id)->where('status', 1)->first();
         if(!$task){
           return (object) ['text'=>'У вас пока нету задач', 'links'=>null];
         }

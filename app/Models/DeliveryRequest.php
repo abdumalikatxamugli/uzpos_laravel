@@ -31,4 +31,15 @@ class DeliveryRequest extends Model
         $status = $this->status == 1 ? 'Актив':'Завершен';
         return "{$status} : {$this->assigned->full_name}";
     }
+
+    /**
+     * custom function
+     */
+    public function finish(){
+        $this->status = 0;
+        $this->save();
+        $collector = $this->assigned;
+        $collector->busy = 0;
+        $collector->save();
+    }
 }
