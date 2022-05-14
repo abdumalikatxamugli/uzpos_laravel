@@ -238,7 +238,11 @@ class Order extends Model
       if($this->deliveryRequest){
         $address = "\nАдрес: {$this->deliveryRequest->to_address} \n";
       }
-      $phone = "Телефон: {$this->client->phone_number} \n";
+      $phone = "";
+      if($this->client){
+        $phone = "Телефон: {$this->client->phone_number} \n";
+      }
+      
       $response = $response.$title.$body.$address.$phone; 
       
       return $response;
