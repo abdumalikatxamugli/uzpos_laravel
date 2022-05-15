@@ -23,7 +23,7 @@ class TransferResourceController extends Controller
      */
     public function index()
     {
-        $transfers = Transfer::paginate(10);
+        $transfers = Transfer::orderByDesc('created_at')->paginate(10);
         return view("dashboard.transfer.index")->with("transfers", $transfers);
     }
 

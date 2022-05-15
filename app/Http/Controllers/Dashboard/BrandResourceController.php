@@ -18,7 +18,7 @@ class BrandResourceController extends Controller
      */
     public function index()
     {
-        $brands = Brand::paginate(10);
+        $brands = Brand::orderByDesc('created_at')->paginate(10);
         return view("dashboard.brand.index")->with("brands", $brands);
     }
 

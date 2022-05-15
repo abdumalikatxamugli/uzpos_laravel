@@ -17,7 +17,7 @@ class MetricResourceControlller extends Controller
      */
     public function index()
     {
-        $metrics = Metric::paginate(10);
+        $metrics = Metric::orderByDesc('created_at')->paginate(10);
         return view('dashboard.metric.index')->with('metrics', $metrics);
     }
 

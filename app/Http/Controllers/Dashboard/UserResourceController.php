@@ -18,7 +18,7 @@ class UserResourceController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10);
+        $users = User::orderByDesc('id')->paginate(10);
         return view("dashboard.user.index")->with("users", $users);
     }
 

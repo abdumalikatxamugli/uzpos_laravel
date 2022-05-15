@@ -18,7 +18,7 @@ class ClientResourceController extends Controller
      */
     public function index()
     {
-        $clients = Client::paginate(10);
+        $clients = Client::orderByDesc('created_at')->paginate(10);
         return view("dashboard.client.index")->with("clients", $clients);
     }
 

@@ -18,7 +18,7 @@ class PointResourceController extends Controller
      */
     public function index()
     {
-        $points = Point::paginate(10);
+        $points = Point::orderByDesc('created_at')->paginate(10);
         return view("dashboard.point.index")->with("points", $points);
     }
 

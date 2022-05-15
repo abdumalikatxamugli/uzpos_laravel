@@ -20,7 +20,7 @@ class TransferItemResourceController extends Controller
      */
     public function index()
     {
-        $transferItems = TransferItem::paginate(10);
+        $transferItems = TransferItem::orderByDesc('created_at')->paginate(10);
         return view("dashboard.transferItem.index")->with("transferItems", $transferItems);
     }
 

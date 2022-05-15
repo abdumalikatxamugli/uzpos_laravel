@@ -21,7 +21,7 @@ class ItemResourceController extends Controller
      */
     public function index()
     {
-        $items = Item::paginate(10);
+        $items = Item::orderByDesc('created_at')->paginate(10);
         return view("dashboard.item.index")->with("items", $items);
     }
 

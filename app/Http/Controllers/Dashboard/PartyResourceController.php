@@ -22,7 +22,7 @@ class PartyResourceController extends Controller
      */
     public function index()
     {
-        $parties = Party::paginate(10);
+        $parties = Party::orderByDesc('created_at')->paginate(10);
         return view("dashboard.party.index")->with("parties", $parties);
     }
 

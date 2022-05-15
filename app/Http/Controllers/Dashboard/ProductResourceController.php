@@ -21,7 +21,7 @@ class ProductResourceController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(10);
+        $products = Product::orderByDesc('created_at')->paginate(10);
         return view("dashboard.product.index")->with("products", $products);
     }
 
