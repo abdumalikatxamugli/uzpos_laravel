@@ -72,7 +72,7 @@ class TransferResourceController extends Controller
     public function edit(Transfer $transfer)
     {
         $orders = [];
-        dd($transfer->reason);
+        dd(str_contains("Для заказа", $transfer->reason));
         if(str_contains("Для заказа", $transfer->reason)){
             $orders = Order::where('id', str_replace('Для заказа ', '', $transfer->reason))->get();
         }
