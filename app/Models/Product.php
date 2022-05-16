@@ -21,7 +21,11 @@ class Product extends UuidModel
     * custom functions
     */
   public static function genBarcode(){
-    $barcode = rand(100000000000, 99900000000000);
+    for($i=0; $i<12; $i++){
+      $barcode .= rand(0,9);
+      $i++;
+    }
+   
     if(self::where('bar_code', $barcode)->first()){
       return self::genBarcode();
     }
