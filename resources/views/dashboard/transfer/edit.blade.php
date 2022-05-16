@@ -76,7 +76,7 @@
 @if(str_contains($transfer->reason, "Для заказа"))
     <div class="card-body">
         <h4 class="d-flex justify-content-between mb-5">
-            <span>Заказ</span>
+            <span>{{ $transfer->reason }}</span>
         </h4>
         @include('partials.validation_errors')
         <table class="table text-center" style="font-size:12px">
