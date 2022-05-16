@@ -21,6 +21,7 @@ class Product extends UuidModel
     * custom functions
     */
   public static function genBarcode(){
+    $barcode = "";
     for($i=0; $i<12; $i++){
       $barcode .= rand(0,9);
       $i++;
