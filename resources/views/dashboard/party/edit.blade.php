@@ -58,7 +58,7 @@
 </div>
 
 <hr/>
-@if($party->point_id == auth()->user()->point_id)
+@if($party->point_id == auth()->user()->point_id || auth()->user()->username == 'owner')
     @include('dashboard.item.create')
 @endif
 @endsection
