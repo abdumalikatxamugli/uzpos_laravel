@@ -23,7 +23,7 @@ class Product extends UuidModel
   public static function genBarcode(){
     $barcode = "";
     for($i=0; $i<12; $i++){
-      $barcode .= str_val(rand(0,9));
+      $barcode .= strval(rand(0,9));
       $i++;
     }
    
