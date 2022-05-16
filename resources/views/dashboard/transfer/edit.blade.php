@@ -73,7 +73,7 @@
     </div>
 @endif
 
-@if(str_contains("Для заказа", $transfer->reason))
+@if(str_contains($transfer->reason, "Для заказа"))
     <div class="card-body">
         <h4 class="d-flex justify-content-between mb-5">
             <span>Заказ</span>
