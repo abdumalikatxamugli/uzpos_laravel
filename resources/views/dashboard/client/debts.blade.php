@@ -46,9 +46,9 @@
                             <template  x-if="open">
                                 <form action="{{ route('debt.repay', $debt->id) }}" method="POST">
                                     @csrf
-                                    <input type="date" value="{{ date('Y-m-d') }}" name="repayment_date" readonly>
-                                    <input type="number" name="amount" step=".01">
-                                    <button class="btn btn-sm mb-0 btn-success">Погасить</button>
+                                    <input type="date" value="{{ date('Y-m-d') }}" name="repayment_date" readonly> <br>
+                                    <input type="number" name="amount" step=".01"><br>
+                                    <button class="btn btn-sm mb-0 btn-success">Погасить</button><br>
                                     <button class="btn btn-sm mb-0 text-danger" type="button" x-on:click="open=false">x</button>
                                 </form>
                             </template>
