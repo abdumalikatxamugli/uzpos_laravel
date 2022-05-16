@@ -24,7 +24,6 @@ class Product extends UuidModel
     $barcode = "";
     for($i=0; $i<12; $i++){
       $barcode .= strval(rand(0,9));
-      $i++;
     }
    
     if(self::where('bar_code', $barcode)->first()){
