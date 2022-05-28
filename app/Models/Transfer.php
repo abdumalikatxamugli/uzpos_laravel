@@ -71,7 +71,7 @@ class Transfer extends Model
     }
   }
   /**
-   * custom orders
+   * custom functions
    */
   public function finishTransfer(){
     $this->status = 2;

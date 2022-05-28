@@ -98,5 +98,9 @@ class PartyResourceController extends Controller
         $party->delete();
         return redirect()->route("dashboard.party.index");
     }
+    public function finish(Party $party){
+        $party->finishParty();
+        return redirect()->back();
+    }
 }
         

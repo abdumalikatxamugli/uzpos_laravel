@@ -60,6 +60,47 @@ class PointProduct extends UuidModel
         throw new WarehouseOutOfProductException(); 
       }
     }
+    public static function addItemByParty($party){
+      DB::transaction(function() use($party){
+        foreach($party->items as $item){
+          $pointProduct = PointProduct::where([
+            'product_id'=> $item->product_id,        
+            'point_id'=> $party->point_id
+          ])->first();
+    
+          if($pointProduct){
+            $pointProduct->quantity = $pointProduct->quantity + $item->quantity;
+            $pointProduct->save();
+            return;
+          }
+          $pointProduct = new self();
+          $pointProduct->point_id = $item->party->point_id;
+          $pointProduct->product_id = $item->product_id;
+          $pointProduct->quantity = $item->quantity;
+          $pointProduct->created_by_id = auth()->user()->id;
+          $pointProduct->save();
+          }
+      });      
+    }
+    public static function removeItemByParty($party){
+      DB::transaction(function() use($party){
+        foreach($party->items as $item){
+          $pointProduct = PointProduct::where([
+            'product_id'=> $item->product_id,        
+            'point_id'=> $party->point_id
+          ])->first();
+    
+          if($pointProduct->quantity >= $item->quantity ){
+            $pointProduct->quantity = $pointProduct->quantity - $item->quantity;
+            $pointProduct->save();
+            return;
+          }else{
+            throw new WarehouseOutOfProductException(); 
+          }
+        }
+      });
+      
+    }
     public static function removeItemByOrder($order){
       DB::transaction(function() use($order){
         foreach($order->items as $item){

@@ -7,22 +7,28 @@
 
 <div class="card-body">
     <a href="{{ route('dashboard.party.index') }}" class="text-danger text-sm font-weight-light mb-3 d-block">Back</a>
-    <form action="{{ route('dashboard.party.update', $party->id) }}" method="POST">
-        @csrf
-        @method('PUT')
+    <div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div>Дата приема</div>
                 <h5>{{ date( 'd.m.Y' , strtotime( $party->check_in ) ) }}</h5>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div>Пункт приема</div>
                 <h5>
                     {{ $party->point->name }}
                 </h5>
             </div>
+            @if($party->status == 1 && $party->point_id == auth()->user()->point_id)
+                <div class="col-md-2">
+                    <form action="{{ route('dashboard.party.finish', $party->id) }}">
+                        @csrf
+                        <button class="btn btn-lg btn-danger mb-0">Завершить</button>
+                    </form>
+                </div>
+            @endif
         </div>
-    </form>
+    </div>
 </div>
 <hr/>
 <div class="card-body px-0 pt-0 pb-2">

@@ -5,6 +5,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Dashboard\BrandResourceController;
 use App\Http\Controllers\Dashboard\CategoryResourceController;
 use App\Http\Controllers\Dashboard\ClientResourceController;
+use App\Http\Controllers\Dashboard\ExpenseResourceController;
 use App\Http\Controllers\Dashboard\ItemResourceController;
 use App\Http\Controllers\Dashboard\MetricResourceControlller;
 use App\Http\Controllers\Dashboard\PartyResourceController;
@@ -24,6 +25,7 @@ Route::post("/", [AuthController::class, 'dashboardLogin'])->name("dashboard.log
 
 Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
     Route::get("main", [DashboardController::class, 'main'])->name('dashboard.main');
+    //basic crud routes
     Route::resource('metric', MetricResourceControlller::class, ['as'=>'dashboard']);
     Route::resource('point', PointResourceController::class, ['as'=>'dashboard']);
     Route::resource('client', ClientResourceController::class, ['as'=>'dashboard']);
@@ -34,13 +36,15 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
     Route::resource('party', PartyResourceController::class, ['as'=>'dashboard']);
     Route::resource('item', ItemResourceController::class, ['as'=>'dashboard']);
     Route::resource('transfer', TransferResourceController::class, ['as'=>'dashboard']);
-    Route::get('transfer/finish/{transfer}', [TransferResourceController::class, 'finish'])->name('dashboard.transfer.finish');
     Route::resource('transferItem', TransferItemResourceController::class, ['as'=>'dashboard']);
+    Route::resource('expense', ExpenseResourceController::class, ['as'=>'dashboard']);
+    //transfer status change
+    Route::get('transfer/finish/{transfer}', [TransferResourceController::class, 'finish'])->name('dashboard.transfer.finish');
+    //party status change
+    Route::get('party/finish/{party}', [PartyResourceController::class, 'finish'])->name('dashboard.party.finish');
     // Route::get("orders", OrderListController::class, ['as'=>'dashboard']);
     Route::get("goodsReport", [ReportContoller::class, 'goodsReport'])->name('dashboard.goodsReport');
     Route::get('logout', [AuthController::class, 'logout'])->name('dashboard.logout');
-
-
     //order routes
     Route::get('neworder/{type}', [OrderController::class, 'new'])->name('dashboard.order.new');
     Route::resource('orders', OrderController::class, ['as'=>'dashboard']);  
@@ -61,13 +65,10 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
     Route::get('debts/{client}', [DebtController::class, 'index'])->name('debt.client.index');
     Route::post('debts/repay/{payment}', [DebtController::class, 'repay'] )->name('debt.repay');
     Route::get('debts/repays/{payment}', [DebtController::class, 'repay_history'])->name('debt.repay_history');
-
-
     /**
      * 
      * Collector and delivery
      */
-
      Route::post('order/assignCollector/', [OrderController::class, 'assignCollector'])->name('assignCollector');
      Route::post('order/assignDeliver/', [OrderController::class, 'assignDeliver'])->name('assignDeliver');
 });

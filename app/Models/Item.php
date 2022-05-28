@@ -27,11 +27,12 @@ class Item extends UuidModel
         static::creating(function($item){
             $item->id = (string) Str::uuid();
         });
-        static::created(function ($item) {
-            PointProduct::addItem($item);
-        });
-        static::deleting(function ($item) {
-            PointProduct::removeItem($item);
-        });
+        // static::created(function ($item) {
+        //     PointProduct::addItem($item);
+        // });
+        // static::deleting(function ($item) {
+        //     PointProduct::removeItem($item);
+        // });
     }
+    
 }
