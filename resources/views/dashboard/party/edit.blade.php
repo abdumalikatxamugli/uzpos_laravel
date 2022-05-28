@@ -49,7 +49,7 @@
                 <td class="mb-0 text-sm">{{ $item->product->name }}</td>
                 <td class="mb-0 text-sm">{{ $item->quantity }} </td>
                 <td class="mb-0 text-sm">
-                    @if($party->created_by_id == auth()->user()->id)
+                    @if($party->status==1 && $party->created_by_id == auth()->user()->id)
                         <form action="{{ route('dashboard.item.destroy', $item->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -64,7 +64,7 @@
 </div>
 
 <hr/>
-@if($party->point_id == auth()->user()->point_id || auth()->user()->username == 'owner')
+@if($party->status==1 && $party->point_id == auth()->user()->point_id || auth()->user()->username == 'owner')
     @include('dashboard.item.create')
 @endif
 @endsection
