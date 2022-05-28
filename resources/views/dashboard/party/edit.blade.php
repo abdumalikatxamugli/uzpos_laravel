@@ -64,7 +64,7 @@
 </div>
 
 <hr/>
-@if($party->status==1 && $party->point_id == auth()->user()->point_id || auth()->user()->username == 'owner')
+@if($party->status==1 && ( $party->point_id == auth()->user()->point_id || auth()->user()->username == 'owner' ) )
     @include('dashboard.item.create')
 @endif
 @endsection
