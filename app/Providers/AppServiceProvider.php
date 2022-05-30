@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Payment;
 use App\Models\Point;
 use App\Models\Product;
@@ -41,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('points', $points)
                 ->with('products', $products);
         });
-        View::composer('dashboard.reports.goodsReport', function ($view) {
+        View::composer('dashboard.reports.goods', function ($view) {
 
             $points = Point::where(function($query){
                 $user = auth()->user();
@@ -49,7 +51,9 @@ class AppServiceProvider extends ServiceProvider
                     $query->where('id', $user->point_id);
                 }                
             })->get();
-            $view->with('points', $points);
+            $categories = Category::orderBy('name')->get();
+            $brands = Brand::orderBy('name')->get();
+            $view->with('points', $points)->with('brands', $brands)->with('categories', $categories);
         });
         View::composer('dashboard.party.create', function ($view) {
 

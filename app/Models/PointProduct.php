@@ -24,6 +24,9 @@ class PointProduct extends UuidModel
     public function product(){
       return $this->belongsTo(Product::class, 'product_id', 'id');
     }
+    public function point(){
+      return $this->belongsTo(Point::class, 'point_id', 'id');
+    }
     /**
      * custom methods
      */

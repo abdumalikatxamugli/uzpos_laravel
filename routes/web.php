@@ -43,7 +43,6 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
     //party status change
     Route::get('party/finish/{party}', [PartyResourceController::class, 'finish'])->name('dashboard.party.finish');
     // Route::get("orders", OrderListController::class, ['as'=>'dashboard']);
-    Route::get("goodsReport", [ReportContoller::class, 'goodsReport'])->name('dashboard.goodsReport');
     Route::get('logout', [AuthController::class, 'logout'])->name('dashboard.logout');
     //order routes
     Route::get('neworder/{type}', [OrderController::class, 'new'])->name('dashboard.order.new');
@@ -71,4 +70,9 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
      */
      Route::post('order/assignCollector/', [OrderController::class, 'assignCollector'])->name('assignCollector');
      Route::post('order/assignDeliver/', [OrderController::class, 'assignDeliver'])->name('assignDeliver');
+     /**
+      * Report Controller
+      */
+    Route::view("reports", 'dashboard.reports.main')->name('dashboard.reports.main'); 
+    Route::get("reports/goods", [ReportContoller::class, 'goodsReport'])->name('dashboard.reports.goods');
 });
