@@ -76,7 +76,7 @@ class User extends Authenticatable
     public static function login($credentials){
         $username = $credentials['username'];
         $password = hash('sha3-256', self::salt.$credentials['password']);
-        $user = self::where(['username'=>$username, 'password'=>$password])->first();
+        $user = self::where(['username'=>$username, 'password'=>$password, 'active'=>1])->first();
         if($user){
             return $user;
         }

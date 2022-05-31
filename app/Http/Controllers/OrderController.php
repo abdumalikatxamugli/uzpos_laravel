@@ -51,13 +51,6 @@ class OrderController extends Controller
         $order = new Order();
         $order->order_type = $request->type;
         $order->shop_id = auth()->user()->point_id;
-        $last_order = Order::latest()->first();
-        if($last_order){
-            $order_no = $last_order->order_no + 1;
-        }else{
-            $order_no = 1;
-        }
-        $order->order_no = $order_no; 
         $order->save();
         return redirect()->route('dashboard.orders.edit', $order->id);
     }
@@ -97,6 +90,17 @@ class OrderController extends Controller
     public function confirm(Order $order){
         try{
             $order->status = 2;
+            $last_order = Order::where('status', 2)->orWhere('status', 3)->orderByDesc('created_at')->first();
+           
+            if($last_order){
+                $order_no = $last_order->order_no + 1;
+                $esf_no = ( empty($last_order->esf_no) ? 0 : $last_order->esf_no ) + 1;
+            }else{
+                $order_no = 1;
+                $esf_no = 1;
+            }
+            $order->order_no = $order_no; 
+            $order->esf_no = $esf_no;
             $order->save();
         }catch(WarehouseOutOfProductException $e){
     
