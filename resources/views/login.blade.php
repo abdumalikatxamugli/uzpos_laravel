@@ -47,14 +47,13 @@
     <div class="d-flex align-items-center justify-content-center" style="height: 100vh">
         <div class="card " style="background-color: rgba(22, 109, 22, 0.4);">
             <div class="card-body">
-                <!-- @include("partials.validation_errors")
+                @include("partials.validation_errors")
                 <form action="{{route('dashboard.login')}}" method="POST" class="text-center">
                     @csrf
                     <input type="text" name="username" class="form-control form-control-sm mb-3">
                     <input type="password" name="password" class="form-control form-control-sm mb-3">
                     <button class="btn btn-sm btn-success">Login</button>
-                </form> -->
-                <h1>ДОСТУП ЗАКРЫТ</h1>
+                </form>
             </div>
         </div>
     </div>

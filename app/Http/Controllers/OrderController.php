@@ -169,4 +169,10 @@ class OrderController extends Controller
         User::makeBusy($request->input('assigned_id'));
         return redirect()->back();
     }
+    /**
+     * generate esf for order
+     */
+    public function generateEsf(Order $order){
+        return view('dashboard.order.esf')->with('order', $order);
+    }
 }

@@ -13,6 +13,7 @@
                     <td>#</td>
                     <!-- <td>Уникальный ID заказа</td> -->
                     <td>Номер заказа</td>
+                    <td>Номер счет фактуры</td>
                     <td>Статус заказа</td>
                     <td>Тип</td>
                     <td>Клиент</td>
@@ -29,7 +30,8 @@
                 <tr>
                     <td>{{ $index+1 }}</td>
                     <!-- <td>{{ $order->id}}</td> -->
-                    <td>{{ $order->order_no}}</td>
+                    <td>{{ str_pad($order->order_no, 4, '0', STR_PAD_LEFT ) }}</td>
+                    <td>{{ str_pad($order->esf_no, 4, '0', STR_PAD_LEFT )}}</td>
                     <td>{{ $order->status_name}}</td>
                     <td>{{ $order->order_type_name}}</td>
                     <td>{{ $order->getClientFullName() }}</td>

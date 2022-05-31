@@ -16,7 +16,13 @@ class Product extends UuidModel
      * Properties
      */
    protected $table = 'uzpos_core_product';
-
+  
+   /**
+    * Relations
+    */
+    public function metric(){
+      return $this->belongsTo(Metric::class, 'metric_id', 'id');
+    }
    /**
     * custom functions
     */

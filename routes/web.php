@@ -57,6 +57,8 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
     Route::get('order/confirm/{order}', [OrderController::class, 'confirm'])->name('order.confirm');
     Route::get('order/break/{order}', [OrderController::class, 'break'])->name('order.break');
     Route::get('order/searchAvailableItems/{order}', [OrderController::class, 'searchAvailableItems'])->name('order.searchAvailableItems');
+    //schet faktura generate
+    Route::get('order/esf/{order}', [OrderController::class, 'generateEsf'])->name('order.genEsf');
     //send transfer request to other point
     Route::get('order/openTransfer/{order}/{point}', [OrderController::class, 'openTransfer'])->name('order.openTransfer');
     Route::post('order/openTransferPartial/{order}/{point}', [OrderController::class, 'openTransferPartial'])->name('order.openTransferPartial');
