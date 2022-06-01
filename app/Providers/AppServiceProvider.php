@@ -43,18 +43,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('points', $points)
                 ->with('products', $products);
         });
-        View::composer('dashboard.reports.goods', function ($view) {
-
-            $points = Point::where(function($query){
-                $user = auth()->user();
-                if($user->user_role != User::roles['ADMIN']){
-                    $query->where('id', $user->point_id);
-                }                
-            })->get();
-            $categories = Category::orderBy('name')->get();
-            $brands = Brand::orderBy('name')->get();
-            $view->with('points', $points)->with('brands', $brands)->with('categories', $categories);
-        });
+        
         View::composer('dashboard.party.create', function ($view) {
 
             $points = Point::where(function($query){
@@ -110,6 +99,45 @@ class AppServiceProvider extends ServiceProvider
             $view->with('products', $products)
                 ->with('payment_types', $payment_types)
                 ->with('currencies', $currencies);
+        });
+
+        View::composer('dashboard.reports.goods', function ($view) {
+
+            $points = Point::where(function($query){
+                $user = auth()->user();
+                if($user->user_role != User::roles['ADMIN']){
+                    $query->where('id', $user->point_id);
+                }                
+            })->get();
+            $categories = Category::orderBy('name')->get();
+            $brands = Brand::orderBy('name')->get();
+            $view->with('points', $points)->with('brands', $brands)->with('categories', $categories);
+        });
+        
+        View::composer('dashboard.reports.runout', function ($view) {
+
+            $points = Point::where(function($query){
+                $user = auth()->user();
+                if($user->user_role != User::roles['ADMIN']){
+                    $query->where('id', $user->point_id);
+                }                
+            })->get();
+            $categories = Category::orderBy('name')->get();
+            $brands = Brand::orderBy('name')->get();
+            $view->with('points', $points)->with('brands', $brands)->with('categories', $categories);
+        });
+
+        View::composer('dashboard.reports.goodsByDivision', function ($view) {
+
+            $points = Point::where(function($query){
+                $user = auth()->user();
+                if($user->user_role != User::roles['ADMIN']){
+                    $query->where('id', $user->point_id);
+                }                
+            })->get();
+            $categories = Category::orderBy('name')->get();
+            $brands = Brand::orderBy('name')->get();
+            $view->with('points', $points)->with('brands', $brands)->with('categories', $categories);
         });
        
     }

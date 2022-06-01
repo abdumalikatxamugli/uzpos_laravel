@@ -8,48 +8,48 @@
                 <tr>
                     <td class="p-0">
                         <a href="{{ route('dashboard.reports.goods') }}" class="d-block p-1">
-                            Остаток товаров
+                            Остаток товаров ( по брендам/категориям )
                         </a>
                     </td>
                 </tr>
                 <tr>
                     <td class="p-0">
-                        <a href="#" class="d-block p-1">
+                        <a href="{{ route('dashboard.reports.runout') }}" class="d-block p-1">
                             Заканчивающиеся товары
                         </a>
                     </td>                    
                 </tr>
                 <tr>
                     <td class="p-0">
-                        <a href="#" class="d-block p-1">
+                        <a href="{{ route('dashboard.reports.goodsByDivision') }}" class="d-block p-1">
                             Отчет товаров по магазинам
                         </a>
                     </td>                    
                 </tr>
                 <tr>
                     <td class="p-0">
-                        <a href="#" class="d-block p-1">
+                        <a href="{{ route('dashboard.reports.salesByProduct') }}" class="d-block p-1">
                             Расход продуктов(Оптом / Розничный)
                         </a>
                     </td>                    
                 </tr>
                 <tr>
                     <td class="p-0">
-                        <a href="#" class="d-block p-1">
+                        <a href="{{ route('dashboard.reports.esfByPeriod') }}" class="d-block p-1">
                             Счет-фактуры
                         </a>
                     </td>                    
                 </tr>
                 <tr>
                     <td class="p-0">
-                        <a href="#" class="d-block p-1">
+                        <a href="{{ route('dashboard.reports.debts') }}" class="d-block p-1">
                             Список долгов клиентов
                         </a>
                     </td>                    
                 </tr>
                 <tr>
                     <td class="p-0">
-                        <a href="#" class="d-block p-1">
+                        <a href="{{ route('dashboard.reports.expenses') }}" class="d-block p-1">
                             Расход магазина
                         </a>
                     </td>                    

@@ -77,4 +77,10 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
       */
     Route::view("reports", 'dashboard.reports.main')->name('dashboard.reports.main'); 
     Route::get("reports/goods", [ReportContoller::class, 'goodsReport'])->name('dashboard.reports.goods');
+    Route::get("reports/runout", [ReportContoller::class, 'runout'])->name('dashboard.reports.runout');
+    Route::get("reports/goods-by-division", [ReportContoller::class, 'goodsByDivision'])->name('dashboard.reports.goodsByDivision');
+    Route::get("reports/sales-by-product-and-order-type", [ReportContoller::class, 'salesByProductAndOrderType'])->name('dashboard.reports.salesByProduct');
+    Route::get("reports/expenses", [ReportContoller::class, 'expenses'])->name('dashboard.reports.expenses');
+    Route::get("reports/esf-by-period", [ReportContoller::class, 'esfByPeriod'])->name('dashboard.reports.esfByPeriod');
+    Route::get("reports/debts", [ReportContoller::class, 'debts'])->name('dashboard.reports.debts');
 });

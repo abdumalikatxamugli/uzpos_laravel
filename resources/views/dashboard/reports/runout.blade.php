@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="card-body">
-<h4>Отчет по товарам (бренд/категория)</h4>
+<h4>Заканчивающиеся товары</h4>
 <form>
     <input type="hidden" name="run" value="1">
     <div class="row">
         <b>Фильтры</b>
-        <!-- <div class="col-md-2">
+        <div class="col-md-2">
             <span>Склад/магазин</span>
             <select name="point_id" class="form-control">
                 @if($is_admin)
@@ -17,8 +17,8 @@
                     <option value="{{ $point->id }}" {{$current_point_id == $point->id ? 'selected' : '' }}> {{ $point->name }} </option>
                 @endforeach
             </select>
-        </div> -->
-        <div class="col-md-2">
+        </div>
+        <!-- <div class="col-md-2">
         
             <span>Бренд</span>
             <select name="brand_id" class="form-control">
@@ -37,9 +37,7 @@
                     <option value="{{ $category->id }}" {{$current_category_id == $category->id ? 'selected' : '' }}> {{ $category->name }} </option>
                 @endforeach
             </select>
-        </div>
-        
-       
+        </div> -->
 
         <div class="col-md-3 d-flex align-items-end">
             <button class="btn btn-success btn font-weight-bold mb-0">Найти</button>
