@@ -35,7 +35,7 @@
         <div class="col-md-4">
             <select name="user_role" class="form-control mb-3">
                 <option value="0" {{$user->user_role == 0 ? 'selected' : '' }}>Админ</option>
-                <option value="2" {{$user->user_role == 2 ? 'selected' : '' }}>Продовец</option>
+                <option value="2" {{$user->user_role == 1 ? 'selected' : '' }}>Продовец</option>
                 <option value="3" {{$user->user_role == 3 ? 'selected' : '' }}>Складчик</option>
                 <option value="4" {{$user->user_role == 4 ? 'selected' : '' }}>Сборщик</option>
                 <option value="7" {{$user->user_role == 7 ? 'selected' : '' }}>Доставшик</option>

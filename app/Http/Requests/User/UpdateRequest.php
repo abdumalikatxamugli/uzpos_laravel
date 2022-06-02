@@ -30,7 +30,7 @@ class UpdateRequest extends FormRequest
             "password"=>"required",
             "is_active"=>"required",
             "point_id"=>"required",
-            "password"=>"required",
+            "password"=>"nullable",
             "phone"=>"required",
             "user_role"=>"required",
         ];

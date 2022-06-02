@@ -80,7 +80,10 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
     Route::get("reports/runout", [ReportContoller::class, 'runout'])->name('dashboard.reports.runout');
     Route::get("reports/goods-by-division", [ReportContoller::class, 'goodsByDivision'])->name('dashboard.reports.goodsByDivision');
     Route::get("reports/sales-by-product-and-order-type", [ReportContoller::class, 'salesByProductAndOrderType'])->name('dashboard.reports.salesByProduct');
+    Route::get("reports/sales-by-order-type", [ReportContoller::class, 'salesByOrderType'])->name('dashboard.reports.salesByOrderType');
     Route::get("reports/expenses", [ReportContoller::class, 'expenses'])->name('dashboard.reports.expenses');
     Route::get("reports/esf-by-period", [ReportContoller::class, 'esfByPeriod'])->name('dashboard.reports.esfByPeriod');
     Route::get("reports/debts", [ReportContoller::class, 'debts'])->name('dashboard.reports.debts');
+    Route::get("reports/sales-by-points", [ReportContoller::class, 'salesByPoint'])->name('dashboard.reports.salesByPoint');
+    Route::get("reports/clients", [ReportContoller::class, 'clientReport'])->name('dashboard.reports.clients');
 });

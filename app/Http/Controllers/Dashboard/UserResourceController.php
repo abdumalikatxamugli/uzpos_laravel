@@ -82,6 +82,10 @@ class UserResourceController extends Controller
      */
     public function update(UpdateRequest $request, User $user)
     {
+        $validated = $request->validated();
+        if(!$validated['password']){
+            unset($validated['password']);
+        }
         $user->updateFromArray($request->validated(), $user->id);
         return redirect()->route("dashboard.user.index");
     }

@@ -3,13 +3,13 @@
 @section('content')
     <div class="card-body">
         <h4 class="d-flex justify-content-between mb-5">
-            <span>Счет фактуры по данному периоду</span>
+            <span>Расходы магазина по данному периоду</span>
         </h4>
         <form class="mb-5">
             <label>От</label>
-            <input type="date" name="from" required>
+            <input type="date" name="from" required  value="{{$from}}">
             <label>До</label>
-            <input type="date" name="to" required>
+            <input type="date" name="to" required value="{{$to}}">
             <button class="btn btn-sm btn-info mb-0">Показать</button>
         </form>
         @include('partials.validation_errors')

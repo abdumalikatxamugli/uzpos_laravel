@@ -54,6 +54,9 @@ class Order extends Model
     public function deliveryRequest(){
       return $this->hasOne(DeliveryRequest::class, 'order_id', 'id');
     }
+    public function division(){
+      return $this->belongsTo(Point::class, 'shop_id', 'id');
+    }
     /**
      * 
      * constants
