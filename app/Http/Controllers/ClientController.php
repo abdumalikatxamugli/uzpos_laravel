@@ -46,17 +46,17 @@ class ClientController extends Controller
     public function createAndAppendtoOrder(Request $request, Order $order){
         try{
             try{
-                $this->validate_store($request);
+                $clientData = $this->validate_store($request);
             }catch(HttpResponseException $e){
                return $e->getResponse();
             }
-            $clientData = $request->validated();
             $clientData['client_no'] = Client::getClientNumber();
             $client = Client::createFromArrayWithUser($clientData, auth()->user());
             $order->client_id = $client->id;
             $order->save();
             return ['error'=>0];
         }catch(Exception $e){
+            dd($e);
             return ['error'=>-1];
         }
     }

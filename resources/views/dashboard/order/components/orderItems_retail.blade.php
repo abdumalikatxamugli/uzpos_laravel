@@ -77,8 +77,8 @@
                                 <input  x-bind:name="'items['+index+'][quantity]'"  type="number" class="form-control" x-model="item.quantity">
                             </td>
                             <td>
-                                <input type="hidden" x-bind:name="'items['+index+'][price]'" x-model="item.cost">
-                                <span x-text="item.cost"   ></span>
+                                <input type="number" x-bind:name="'items['+index+'][price]'" x-model="item.cost" class="form-control" >
+                                <!-- <span x-text="item.cost"   ></span> -->
                             </td>
                             <td>
                                 <span x-text="new Intl.NumberFormat().format(item.quantity * item.cost)" ></span>

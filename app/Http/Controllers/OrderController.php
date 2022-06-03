@@ -33,10 +33,10 @@ class OrderController extends Controller
     {
         switch(auth()->user()->user_role){
             case User::roles['ADMIN'] : 
-                $orders = Order::orderBy('order_no')->paginate(10);
+                $orders = Order::orderBy('order_no','desc')->paginate(10);
                 break;
             default:
-                $orders = Order::where('shop_id', auth()->user()->point_id)->orderBy('order_no')->paginate(10);        
+                $orders = Order::where('shop_id', auth()->user()->point_id)->orderBy('order_no', 'desc')->paginate(10);        
         }
         $collectors = User::where('user_role', User::roles['COLLECTOR'])->where('busy', USER::FREE)->get();
         $delivers = User::where('user_role', User::roles['DELIVERY'])->where('busy', USER::FREE)->get();

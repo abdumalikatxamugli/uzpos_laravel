@@ -31,6 +31,9 @@ class Client extends UuidModel
   public function orders(){
     return $this->hasMany(Order::class, 'client_id', 'id');
   }
+  public function chat(){
+    return $this->hasOne(Chat::class, 'clientId', 'id');
+  }
 
    /**accessors */
 

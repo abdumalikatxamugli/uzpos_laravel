@@ -68,8 +68,8 @@
                                 <input  x-bind:name="'items['+index+'][quantity]'"  type="number" class="form-control" x-model="item.quantity">
                             </td>
                             <td>
-                                <input type="hidden" x-bind:name="'items['+index+'][price]'" x-model="item.cost">
-                                <span x-text="item.cost"   ></span>
+                                <input type="number" x-bind:name="'items['+index+'][price]'" x-model="item.cost" class="form-control">
+                                <!-- <span x-text="item.cost"   ></span> -->
                             </td>
                             <td>
                                 <span x-text="new Intl.NumberFormat().format(item.quantity * item.cost)" ></span>
@@ -116,10 +116,11 @@
                const app = this
                $(el).select2({placeholder:'Выберите продукт', allowClear:true})
                                         .on("change", changeEventHandler.bind(app, index))
-
+               
                function changeEventHandler(index, event){
                     if(event.target.value){
                         const product_id = event.target.value
+                       
                         this.items[index].cost = this.products[product_id].bulk_price;
                     }else{
                         this.items[index].cost = 0;

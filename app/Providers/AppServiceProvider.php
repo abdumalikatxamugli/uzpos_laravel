@@ -44,7 +44,22 @@ class AppServiceProvider extends ServiceProvider
             $view->with('points', $points)
                 ->with('products', $products);
         });
-        
+        View::composer('dashboard.transfer.create', function ($view) {
+
+            $toPoints = Point::where(function($query){
+                $user = auth()->user();
+                if($user->user_role != User::roles['ADMIN']){
+                    $query->where('id', '<>', $user->point_id);
+                }                
+            })->get();
+            $fromPoints = Point::where(function($query){
+                $user = auth()->user();
+                if($user->user_role != User::roles['ADMIN']){
+                    $query->where('id', $user->point_id);
+                }                
+            })->get();
+            $view->with('toPoints', $toPoints)->with('fromPoints', $fromPoints);
+        });
         View::composer(['dashboard.party.edit', 'dashboard.party.create'], function ($view) {
 
             $points = Point::where(function($query){
@@ -67,8 +82,21 @@ class AppServiceProvider extends ServiceProvider
             $view->with('toPoints', $points);
         });
         
-        View::composer(['dashboard.order.edit_retail_order', 'dashboard.order.edit'], function($view){
+        View::composer('dashboard.product.index', function ($view) {
+            $all_products = Product::orderBy('name')->get();
+            $view->with('all_products', $all_products);
+        });
+
+        View::composer(['dashboard.order.edit_retail_order'], function($view){
             $products = Product::all()->keyBy('bar_code');
+            $payment_types =  Payment::PAYMENT_TYPES;
+            $currencies = Payment::CURRENCIES;
+            $view->with('products', $products)
+                ->with('payment_types', $payment_types)
+                ->with('currencies', $currencies);
+        });
+        View::composer(['dashboard.order.edit'], function($view){
+            $products = Product::all()->keyBy('id');
             $payment_types =  Payment::PAYMENT_TYPES;
             $currencies = Payment::CURRENCIES;
             $view->with('products', $products)

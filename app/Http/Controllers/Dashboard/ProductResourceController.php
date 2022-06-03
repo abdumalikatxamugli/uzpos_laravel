@@ -19,10 +19,16 @@ class ProductResourceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::orderByDesc('created_at')->paginate(10);
-        return view("dashboard.product.index")->with("products", $products);
+        $current_product_id = $request->query('product_id');
+        if(isset($current_product_id) && $current_product_id != 0){
+            $products = Product::where('id', $current_product_id)->orderByDesc('created_at')->paginate(10);
+        }else{
+            $products = Product::orderByDesc('created_at')->paginate(10);
+        }
+        
+        return view("dashboard.product.index")->with("products", $products)->with('current_product_id', $current_product_id);
     }
 
     /**
