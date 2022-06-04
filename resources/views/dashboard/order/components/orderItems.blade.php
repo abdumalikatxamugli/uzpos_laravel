@@ -110,7 +110,8 @@
         return {
             items: [{product_id:null, quantity:null, cost:null},{product_id:null, quantity:null, cost:null}],
             init : function(){
-                this.products = JSON.parse(`{{ $products->toJson() !!}}`);
+                this.products = @json($products);
+                console.log(this.products)
             },
             init_row: function(el, index){
                const app = this
