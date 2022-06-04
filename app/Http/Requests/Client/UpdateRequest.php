@@ -29,7 +29,7 @@ class UpdateRequest extends FormRequest
             "lname"=>"exclude_if:client_type,1|required",
             "mname"=>"nullable",
             "dbirth"=>"nullable",
-            "occupation"=>"exclude_if:client_type,1|required",
+            "occupation"=>"nullable",
             "inn"=>"exclude_if:client_type,0|required",
             "company_name"=>"exclude_if:client_type,0|required",
             "phone_number"=>"required|unique:uzpos_sales_client",
