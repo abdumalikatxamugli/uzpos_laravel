@@ -84,7 +84,9 @@ class AppServiceProvider extends ServiceProvider
         
         View::composer('dashboard.product.index', function ($view) {
             $all_products = Product::orderBy('name')->get();
-            $view->with('all_products', $all_products);
+            $categories = Category::orderBy('name')->get();
+            $brands = Brand::orderBy('name')->get();
+            $view->with('all_products', $all_products)->with('categories', $categories)->with('brands', $brands);
         });
 
         View::composer(['dashboard.order.edit_retail_order'], function($view){

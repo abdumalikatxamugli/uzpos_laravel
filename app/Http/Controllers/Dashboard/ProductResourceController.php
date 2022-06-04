@@ -22,13 +22,30 @@ class ProductResourceController extends Controller
     public function index(Request $request)
     {
         $current_product_id = $request->query('product_id');
-        if(isset($current_product_id) && $current_product_id != 0){
-            $products = Product::where('id', $current_product_id)->orderByDesc('created_at')->paginate(10);
-        }else{
-            $products = Product::orderByDesc('created_at')->paginate(10);
+        $current_category_id = $request->query('category_id');
+        $current_brand_id = $request->query('brand_id');
+        $run = $request->query('run');
+
+        $products = Product::whereNotNull('id');
+
+        if($run){
+            if(isset($current_product_id) && $current_product_id != 0){
+                $products = $products->where('id', $current_product_id);
+            }
+            if ($current_category_id!=0) {
+                $products = $products->where("category_id", "=", $current_category_id);
+            }
+            if ($current_brand_id!=0) {
+                $products = $products->where("brand_id", "=", $current_brand_id);
+            }
         }
-        
-        return view("dashboard.product.index")->with("products", $products)->with('current_product_id', $current_product_id);
+
+        $products= $products->orderBy('created_at', 'desc')->paginate(10);
+
+        return view("dashboard.product.index")->with("products", $products)
+                                        ->with('current_product_id', $current_product_id)
+                                        ->with('current_category_id', $current_category_id)
+                                        ->with('current_brand_id', $current_brand_id);
     }
 
     /**

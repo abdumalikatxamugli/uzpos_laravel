@@ -28,6 +28,24 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="col-md-2">
+                    <span>Бренд</span>
+                    <select name="brand_id" class="form-control">
+                        <option value="0">Все</option>
+                        @foreach($brands as $brand)
+                            <option value="{{ $brand->id }}" {{$current_brand_id == $brand->id ? 'selected' : '' }}> {{ $brand->name }} </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <span>Категория</span>
+                    <select name="category_id" class="form-control">
+                        <option value="0">Все</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}" {{$current_category_id == $category->id ? 'selected' : '' }}> {{ $category->name }} </option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="col-md-3 d-flex align-items-end">
                     <button class="btn btn-success btn font-weight-bold mb-0">Посмотреть</button>
                 </div>
