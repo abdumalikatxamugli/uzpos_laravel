@@ -119,10 +119,10 @@ class Order extends Model
       return $paid;
     }
 
-    public function getTotalPaidByType($type){
+    public function getTotalPaidByCurrencyType($type){
       $paid = 0;
       foreach($this->payments as $payment){
-        if($payment->payment_type == $type){
+        if($payment->currency == $type){
           $paid += $payment->amount_real;
         }
       }
