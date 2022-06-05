@@ -5,10 +5,13 @@
         <h4>Заказ</h4>
         <small>ID: {{ $order->id }}</small> <br/>
         <small>Общая сумма: $ {{ number_format($order->getTotalCost(), 2,'.', ' ')}}</small><br/>
-        <small>Оплачено: <br>
-                         {{number_format($order->getTotalPaidByCurrencyType(1),2, '.', ' ') }} в долларах</small>
+        Оплачено: <br>
+                         $ {{number_format($order->getTotalPaidByCurrencyType(1),2, '.', ' ') }} в долларах
                          <br/>
-                         {{number_format($order->getTotalPaidByCurrencyType(0),2, '.', ' ') }} в сумах</small></br>    
+                         $ {{number_format($order->getTotalPaidByCurrencyType(0),2, '.', ' ') }} в сумах в эквиваленте 
+                         {{number_format($order->getTotalPaidBySoums(0),2, '.', ' ') }} UZS    
+
+                        </br>    
 
         <small>Долг: {{number_format( $order->getTotalCost() - $order->getTotalPaid(), 2, '.', ' ') }}</small><br/>
         <div class="d-flex align-items-center" style="gap:10px">

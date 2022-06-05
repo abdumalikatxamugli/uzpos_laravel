@@ -113,21 +113,21 @@ class Order extends Model
     }
     public function getTotalPaid(){
       $paid = 0;
-      foreach($this->payments as $payment){
-        $paid += $payment->amount_real;
-      }
+      $paid = $this->payments->sum('amount_real');
       return $paid;
     }
 
     public function getTotalPaidByCurrencyType($type){
       $paid = 0;
-      foreach($this->payments as $payment){
-        if($payment->currency == $type){
-          $paid += $payment->amount_real;
-        }
-      }
+      $paid = $this->payments->where('currency', $type)->sum('amount_real');
       return $paid;
     }
+    public function getTotalPaidBySoums($type){
+      $paid = 0;
+      $paid = $this->payments->where('currency', $type)->sum('amount');
+      return $paid;
+    }
+    
 
     /**
      * 
