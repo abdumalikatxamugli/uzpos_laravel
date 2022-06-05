@@ -5,7 +5,11 @@
         <h4>Заказ</h4>
         <small>ID: {{ $order->id }}</small> <br/>
         <small>Общая сумма: $ {{ number_format($order->getTotalCost(), 2,'.', ' ')}}</small><br/>
-        <small>Оплачено: $ {{number_format($order->getTotalPaid(),2, '.', ' ') }}</small><br/>
+        <small>Оплачено: <br>
+                         {{number_format($order->getTotalPaidByType(1),2, '.', ' ') }} в долларах</small>
+                         <br/>
+                         {{number_format($order->getTotalPaidByType(0),2, '.', ' ') }} в сумах</small></br>    
+
         <small>Долг: {{number_format( $order->getTotalCost() - $order->getTotalPaid(), 2, '.', ' ') }}</small><br/>
         <div class="d-flex align-items-center" style="gap:10px">
             <small>Статус: </small><button class="btn btn-sm btn-primary mb-0">{{$order->status_name}}</button>

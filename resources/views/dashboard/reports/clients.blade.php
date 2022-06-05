@@ -18,7 +18,7 @@
                 <tr>
                     <td>{{ $result->client_type == 0 ? $result->lname.' '.$result->fname : $result->company_name }}</td>
                     <td>{{ $result->quantity }}</td>
-                    <td>{{ $result->oi_quantity }} СУМ</td>
+                    <td>{{ $result->oi_quantity }} USD</td>
                 </tr>
                 @endforeach
             </tbody>
