@@ -39,14 +39,14 @@ class PointProduct extends UuidModel
       if($pointProduct){
         $pointProduct->quantity = $pointProduct->quantity + $item->quantity;
         $pointProduct->save();
-        return;
+      }else{
+        $pointProduct = new self();
+        $pointProduct->point_id = $item->party->point_id;
+        $pointProduct->product_id = $item->product_id;
+        $pointProduct->quantity = $item->quantity;
+        $pointProduct->created_by_id = auth()->user()->id;
+        $pointProduct->save();
       }
-      $pointProduct = new self();
-      $pointProduct->point_id = $item->party->point_id;
-      $pointProduct->product_id = $item->product_id;
-      $pointProduct->quantity = $item->quantity;
-      $pointProduct->created_by_id = auth()->user()->id;
-      $pointProduct->save();
     }
     
     public static function removeItem($item){
@@ -58,7 +58,6 @@ class PointProduct extends UuidModel
       if($pointProduct->quantity >= $item->quantity ){
         $pointProduct->quantity = $pointProduct->quantity - $item->quantity;
         $pointProduct->save();
-        return;
       }else{
         throw new WarehouseOutOfProductException(); 
       }
@@ -74,7 +73,7 @@ class PointProduct extends UuidModel
           if($pointProduct){
             $pointProduct->quantity = $pointProduct->quantity + $item->quantity;
             $pointProduct->save();
-            return;
+            continue;
           }
           $pointProduct = new self();
           $pointProduct->point_id = $item->party->point_id;
@@ -96,7 +95,6 @@ class PointProduct extends UuidModel
           if($pointProduct->quantity >= $item->quantity ){
             $pointProduct->quantity = $pointProduct->quantity - $item->quantity;
             $pointProduct->save();
-            return;
           }else{
             throw new WarehouseOutOfProductException(); 
           }
