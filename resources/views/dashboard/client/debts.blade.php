@@ -2,12 +2,21 @@
 
 @section('content')
     <div class="card-body">
+        <style>
+            .small_table{
+                font-size: 12px;
+            }
+            .small_table td,.small_table th{
+                padding: 2px;
+            }
+        </style>
         <h4>Долги: {{$client->full_name}}</h4>
         @include('partials.validation_errors')
-        <table class="table table-striped text-center">
+        <table class="table table-striped text-center small_table">
             <thead>
                 <tr>
                     <th>Дата задолженности</th>
+                    <th>Валюта задолженности</th>
                     <th>Сумма задолженности</th>
                     <th>Погашенная сумма</th>
                     <th>Баланс</th>
@@ -20,9 +29,10 @@
                 @foreach($debts as $debt)
                     <tr>
                         <td>{{ date('d.m.Y', strtotime($debt->payment_date) ) }}</td>
+                        <td>{{ $debt->currency == 0 ? 'Сум' : 'Доллары' }}</td>
                         <td>{{ $debt->amount }}</td>
                         <td>{{ $debt->total_repaid }}</td>
-                        <td>{{$debt->total_repaid - $debt->amount }}</td>
+                        <td>{{ $debt->total_repaid - $debt->amount }}</td>
                         <td>
                             <a href="{{ route('debt.repay_history', $debt->id) }}" class="btn btn-link mb-0 btn-sm text-danger">
                                 Посмотреть историю погашений

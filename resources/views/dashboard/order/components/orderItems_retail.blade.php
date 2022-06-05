@@ -96,7 +96,7 @@
                         <td class="text-secondary">Итого</td>
                         <td x-text="calcTotalQuantity"></td>
                         <td></td>
-                        <td x-text="calcTotalCost"></td>
+                        <td>$ <span x-text="calcTotalCost"></span></td>
                     </tr>
                 </tbody>
             </table>

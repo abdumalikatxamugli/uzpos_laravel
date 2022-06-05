@@ -16,14 +16,14 @@ class DebtController extends Controller
             ->leftJoin("repayments", function($join){
                 $join->on("repayments.payment_id", "=", "uzpos_sales_payment.id");
             })
-            ->selectRaw("uzpos_sales_payment.id, uzpos_sales_payment.payment_date, uzpos_sales_payment.order_id, uzpos_sales_payment.amount, sum(repayments.amount) as total_repaid")
+            ->selectRaw("uzpos_sales_payment.id, uzpos_sales_payment.payment_date, uzpos_sales_payment.order_id, uzpos_sales_payment.amount,  uzpos_sales_payment.amount_real, uzpos_sales_payment.currency, sum(repayments.amount) as total_repaid")
             ->whereIn("order_id", function($query) use ($client){
                 $query->from("uzpos_sales_order")
                 ->select("id")
                 ->where("client_id", "=", $client->id);
             })
             ->where("payment_type", "=", Payment::DEBT)
-            ->groupBy('uzpos_sales_payment.payment_date', "uzpos_sales_payment.order_id", "uzpos_sales_payment.amount", "uzpos_sales_payment.id" )
+            ->groupBy('uzpos_sales_payment.payment_date', "uzpos_sales_payment.order_id", "uzpos_sales_payment.amount", "uzpos_sales_payment.amount_real", "uzpos_sales_payment.currency", "uzpos_sales_payment.id" )
             ->orderBy("uzpos_sales_payment.id","desc")
             ->get();
         

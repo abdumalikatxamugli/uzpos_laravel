@@ -21,8 +21,8 @@
                         <td>{{$index+1}}</td>
                         <td>{{$item->product->name}}</td>
                         <td>{{$item->quantity}}</td>
-                        <td>{{$item->price}}</td>
-                        <td>{{$item->quantity*$item->price}}</td>
+                        <td>$ {{$item->price}}</td>
+                        <td>$ {{$item->quantity*$item->price}}</td>
                         <td>
                             @if($order->status == 1  && $order->shop_id == auth()->user()->point_id)
                                 <form action="{{ route('dashboard.order.item.delete', $item->id) }}">
@@ -68,16 +68,15 @@
                                 <input  x-bind:name="'items['+index+'][quantity]'"  type="number" class="form-control" x-model="item.quantity">
                             </td>
                             <td>
-                                <input type="number" x-bind:name="'items['+index+'][price]'" x-model="item.cost" class="form-control">
-                                <!-- <span x-text="item.cost"   ></span> -->
+                                <input type="number" x-bind:name="'items['+index+'][price]'" x-model="item.cost" class="form-control" step=".01">                        
                             </td>
                             <td>
                                 <span x-text="new Intl.NumberFormat().format(item.quantity * item.cost)" ></span>
                             </td>
                             <td>
-                                    <button type="button" class="btn btn-danger btn-sm mb-0" x-on:click="removeItem(index)">
-                                        Убрать
-                                    </button>
+                                <button type="button" class="btn btn-danger btn-sm mb-0" x-on:click="removeItem(index)">
+                                    Убрать
+                                </button>
                             </td>
                         </tr>
                     </template>
@@ -85,9 +84,9 @@
                     <tr>
                         <td></td>
                         <td class="text-secondary">Итого</td>
-                        <td x-text="calcTotalQuantity"></td>
+                        <td><span  x-text="calcTotalQuantity"></span></td>
                         <td></td>
-                        <td x-text="calcTotalCost"></td>
+                        <td>$<span x-text="calcTotalCost"></span></td>
                     </tr>
                 </tbody>
             </table>

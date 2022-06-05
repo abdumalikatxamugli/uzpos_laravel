@@ -4,8 +4,8 @@
     <div class="card-body">
         <h4>Заказ</h4>
         <small>ID: {{ $order->id }}</small> <br/>
-        <small>Общая сумма: {{ number_format($order->getTotalCost(), 2,'.', ' ')}}</small><br/>
-        <small>Оплачено: {{number_format($order->getTotalPaid(),2, '.', ' ') }}</small><br/>
+        <small>Общая сумма: $ {{ number_format($order->getTotalCost(), 2,'.', ' ')}}</small><br/>
+        <small>Оплачено: $ {{number_format($order->getTotalPaid(),2, '.', ' ') }}</small><br/>
         <small>Долг: {{number_format( $order->getTotalCost() - $order->getTotalPaid(), 2, '.', ' ') }}</small><br/>
         <div class="d-flex align-items-center" style="gap:10px">
             <small>Статус: </small><button class="btn btn-sm btn-primary mb-0">{{$order->status_name}}</button>
@@ -75,7 +75,7 @@
                     <td>Валюта</td>
                     <td>Сумма</td>
                     <td>Курс</td>
-                    <td>Сумма в сумах</td>
+                    <td>Сумма в долларах</td>
                     <td>Убрать</td>
                 </tr>
             </thead>
@@ -116,16 +116,16 @@
         @if($order->status == 1 && $order->shop_id == auth()->user()->point_id)
             <form action="{{route('order.append.payments')}}" method="POST">
                 @csrf
-                <div x-data="{currency_type:0, currency_kurs: 1, amount:0}">
+                <div x-data="{currency_type:1, currency_kurs: 1, amount:{{ round( $order->getTotalCost() - $order->getTotalPaid() , 2) }} }">
                     <table class="table text-center">
                         <thead>
                             <tr>
                                 <td>Дата оплаты</td>
                                 <td>Тип оплаты</td>
-                                <td>Валюта</td>
                                 <td>Сумма</td>
+                                <td>Валюта</td>
                                 <td>Курс</td>
-                                <td>Сумма в сумах</td>
+                                <td>Сумма в долларах</td>
                                 <td></td>
                             </tr>
                         </thead>
@@ -134,19 +134,12 @@
                         <tr>
                             <td>
                                 <input type="hidden" name="order_id" value="{{ $order->id }}">
-                                <input type="date" class="form-control" name="payment_date">
+                                <input type="date" class="form-control" name="payment_date" value="{{ date('Y-m-d') }}" readonly>
                             </td>
                             <td>
                                 <select id="" class="form-control" name="payment_type" >
                                         @foreach($payment_types as $ptype)
-                                            <option value="{{ $ptype['code'] }}">{{ $ptype['name'] }}</option>
-                                        @endforeach
-                                </select>
-                            </td>
-                            <td>
-                                <select id="" class="form-control" name="currency" x-model = "currency_type">
-                                    @foreach($currencies as $ptype)
-                                            <option value="{{ $ptype['code'] }}">{{ $ptype['name'] }}</option>
+                                            <option value="{{ $ptype['code'] }}" {{ $ptype['code']==1?'selected':'' }} >{{ $ptype['name'] }}</option>
                                         @endforeach
                                 </select>
                             </td>
@@ -154,10 +147,22 @@
                                 <input type="text" class="form-control" name="amount" x-model = "amount">
                             </td>
                             <td>
-                                <input type="text" class="form-control" name="currency_kurs" x-model = "currency_kurs">
+                                <select class="form-control" name="currency" x-model = "currency_type" x-on:change="if(currency_type==1){ currency_kurs=1 }">
+                                    @foreach($currencies as $ptype)
+                                        <option value="{{ $ptype['code'] }}">{{ $ptype['name'] }}</option>
+                                    @endforeach
+                                </select>
                             </td>
                             <td>
-                                <input type="text" class="form-control" readonly name="amount_real" x-bind:value = "currency_kurs * amount">
+                                <template x-if="currency_type==0">
+                                    <input type="text" class="form-control" name="currency_kurs" x-model = "currency_kurs">
+                                </template>
+                                <template x-if="currency_type==1">
+                                    <input type="text" class="form-control" name="currency_kurs" x-model = "currency_kurs" readonly>
+                                </template>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" readonly name="amount_real" x-bind:value = "Math.round( amount/currency_kurs * 100 ) / 100">
                             </td>
                             <td>
                                 <button class="btn btn-info">Сохранить</button>
