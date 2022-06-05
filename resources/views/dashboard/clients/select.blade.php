@@ -24,15 +24,15 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label for="client_pinfl">ПИНФЛ</label>
-                            <input type="text" class="form-control" id="client_pinfl" x-model="client.pinfl">
+                            <input type="text" class="form-control" id="client_pinfl" x-model="client.pinfl" maxlength="14">
                         </div>
                         <div class="col-md-2">
                             <label for="client_psery">Паспорт серия</label>
-                            <input type="text" class="form-control" id="client_psery" x-model="client.psery">
+                            <input type="text" class="form-control" id="client_psery" x-model="client.psery" maxlength="2">
                         </div>
                         <div class="col-md-3">
                             <label for="client_pnumber">Паспорт номер</label>
-                            <input type="text" class="form-control" id="client_pnumber" x-model="client.pnumber">
+                            <input type="text" class="form-control" id="client_pnumber" x-model="client.pnumber" maxlength="7">
                         </div>
                         <div class="col-md-3">
                             <label for="client_occupation">Профессия</label>
@@ -60,7 +60,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="client_inn">ИНН</label>
-                            <input type="text" class="form-control" id="client_inn" x-model="client.inn">
+                            <input type="text" class="form-control" id="client_inn" x-model="client.inn" maxlength="9">
                         </div>
                         <div class="col-md-6">
                             <label for="client_company_name">Название</label>
@@ -71,7 +71,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="client_phone_number">Телефон</label>
-                        <input type="text" class="form-control" id="client_phone_number" x-model="client.phone_number">
+                        <input type="text" class="form-control" id="client_phone_number" x-model="client.phone_number" maxlength="9">
                     </div>
                     <div class="col-md-6 d-flex align-items-end">
                         <button class="btn btn-warning btn-sm mb-0 w-100" x-on:click="saveClient">Сохранить и прикрепит к заказу</button>
@@ -180,7 +180,7 @@
                                   alert("Возникла непредвиденная ошибка");
                               }
                           })
-                          .catch(err=>console.log(err))
+                          .catch(err=>alert(err))
                     }    
                 }
             }
