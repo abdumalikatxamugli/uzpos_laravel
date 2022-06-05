@@ -98,32 +98,25 @@ class Order extends Model
       }
     }
     public function getTotalItemCount(){
-      $quantity = 0;
-      foreach($this->items as $item){
-        $quantity += $item->quantity;
-      }
+      $quantity = $this->items->sum('quantity');
       return $quantity;
     }
     public function getTotalCost(){
-      $cost = 0;
-      foreach($this->items as $item){
-        $cost += $item->price * $item->quantity;
-      }
+      $cost = $this->items->sum(function($t){
+        return $t->price * $t->quantity;
+      });
       return $cost;
     }
     public function getTotalPaid(){
-      $paid = 0;
       $paid = $this->payments->sum('amount_real');
       return $paid;
     }
 
     public function getTotalPaidByCurrencyType($type){
-      $paid = 0;
       $paid = $this->payments->where('currency', $type)->sum('amount_real');
       return $paid;
     }
     public function getTotalPaidBySoums($type){
-      $paid = 0;
       $paid = $this->payments->where('currency', $type)->sum('amount');
       return $paid;
     }
@@ -141,10 +134,7 @@ class Order extends Model
 
     public function hasEnoughPayment(){
       $shouldBePaid = $this->getTotalCost();
-      $paid = 0;
-      foreach($this->payments as $payment){
-        $paid = $paid + $payment->amount_real;
-      }
+      $paid = $this->getTotalPaid();
       
       if((string) $shouldBePaid == (string) $paid){
         return true;
