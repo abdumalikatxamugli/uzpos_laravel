@@ -46,7 +46,8 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
     Route::get('logout', [AuthController::class, 'logout'])->name('dashboard.logout');
     //order routes
     Route::get('neworder/{type}', [OrderController::class, 'new'])->name('dashboard.order.new');
-    Route::resource('orders', OrderController::class, ['as'=>'dashboard']);  
+    Route::get('ordersList/{status}/{other_shop?}', [OrderController::class, 'index'])->name('dashboard.orders.index');  
+    Route::get('orders/edit/{order}', [OrderController::class, 'edit'])->name('dashboard.orders.edit');  
     Route::get('client/select/{order}', [ClientController::class, 'select'])->name('dashboard.order.client.select'); 
     Route::get('client/append/{order}/{client}', [ClientController::class, 'appendToOrder'])->name('dashboard.client.appendToOrder');
     Route::post('client/append/{order}', [ClientController::class, 'createAndAppendtoOrder'])->name('dashboard.client.createAndAppendtoOrder');
@@ -57,6 +58,7 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
     Route::get('order/confirm/{order}', [OrderController::class, 'confirm'])->name('order.confirm');
     Route::get('order/break/{order}', [OrderController::class, 'break'])->name('order.break');
     Route::get('order/searchAvailableItems/{order}', [OrderController::class, 'searchAvailableItems'])->name('order.searchAvailableItems');
+    Route::post('order/changeFromPoint/{order}', [OrderController::class, 'changeFromPoint'])->name('order.changeFromPoint');
     //schet faktura generate
     Route::get('order/esf/{order}', [OrderController::class, 'generateEsf'])->name('order.genEsf');
     //send transfer request to other point

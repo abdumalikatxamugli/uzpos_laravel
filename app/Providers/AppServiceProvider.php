@@ -93,17 +93,21 @@ class AppServiceProvider extends ServiceProvider
             $products = Product::all()->keyBy('bar_code');
             $payment_types =  Payment::PAYMENT_TYPES;
             $currencies = Payment::CURRENCIES;
+            $points = Point::orderBy('name')->get();
             $view->with('products', $products)
                 ->with('payment_types', $payment_types)
-                ->with('currencies', $currencies);
+                ->with('currencies', $currencies)
+                ->with('points', $points);
         });
         View::composer(['dashboard.order.edit'], function($view){
             $products = Product::all()->keyBy('id');
             $payment_types =  Payment::PAYMENT_TYPES;
             $currencies = Payment::CURRENCIES;
+            $points = Point::orderBy('name')->get();
             $view->with('products', $products)
                 ->with('payment_types', $payment_types)
-                ->with('currencies', $currencies);
+                ->with('currencies', $currencies)
+                ->with('points', $points);
         });
 
         View::composer('*', function($view){

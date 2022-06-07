@@ -111,7 +111,7 @@ class PointProduct extends UuidModel
         foreach($order->items as $item){
           $pointProduct = PointProduct::where([
             'product_id'=> $item->product_id,        
-            'point_id'=> $order->shop_id
+            'point_id'=> $order->from_point_id
           ])->first();
 
           if($pointProduct->quantity >= $item->quantity ){
@@ -128,7 +128,7 @@ class PointProduct extends UuidModel
         foreach($order->items as $item){
           $pointProduct = PointProduct::where([
             'product_id'=> $item->product_id,        
-            'point_id'=> $order->shop_id
+            'point_id'=> $order->from_point_id
           ])->first();
           if(!$pointProduct){
             $pointProduct = new PointProduct();

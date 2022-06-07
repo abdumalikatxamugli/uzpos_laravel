@@ -29,20 +29,27 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        switch(auth()->user()->user_role){
-            case User::roles['ADMIN'] : 
-                $orders = Order::orderBy('order_no','desc')->paginate(10);
-                break;
-            default:
-                $orders = Order::where('shop_id', auth()->user()->point_id)->orderBy('order_no', 'desc')->paginate(10);        
+        $orders = Order::where('status', $request->status);
+        if(auth()->user()->user_role != User::roles['ADMIN']){
+            if($request->other_shop!=1){
+                $orders = $orders->where('shop_id', auth()->user()->point_id);  
+            }      
         }
+        if($request->other_shop==1){
+            $orders = $orders->where('from_point_id', auth()->user()->point_id)->where('from_point_id', '<>', 'shop_id');
+        }
+        $orders = $orders->orderBy('order_no', 'desc')->paginate(10);
         $collectors = User::where('user_role', User::roles['COLLECTOR'])->where('busy', USER::FREE)->get();
         $delivers = User::where('user_role', User::roles['DELIVERY'])->where('busy', USER::FREE)->get();
+        $status_text = Order::getStatusText($request->status);
         return view('dashboard.order.index')->with('orders', $orders)
                                             ->with('collectors', $collectors)
-                                            ->with('delivers', $delivers);
+                                            ->with('delivers', $delivers)
+                                            ->with('status_text', $status_text)
+                                            ->with('status', $request->status)
+                                            ->with('other_shop', $request->other_shop);
     }
     /**
      * create new empty order
@@ -51,6 +58,7 @@ class OrderController extends Controller
         $order = new Order();
         $order->order_type = $request->type;
         $order->shop_id = auth()->user()->point_id;
+        $order->from_point_id = auth()->user()->point_id;
         $order->save();
         return redirect()->route('dashboard.orders.edit', $order->id);
     }
@@ -174,5 +182,14 @@ class OrderController extends Controller
      */
     public function generateEsf(Order $order){
         return view('dashboard.order.esf')->with('order', $order);
+    }
+    /**
+     * change from point id of order
+     */
+    public function changeFromPoint(Request $request, Order $order){
+        $fromPoint = $request->input('point_id');
+        $order->from_point_id = $fromPoint;
+        $order->save();
+        return redirect()->back();
     }
 }

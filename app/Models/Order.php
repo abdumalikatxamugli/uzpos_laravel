@@ -57,6 +57,9 @@ class Order extends Model
     public function division(){
       return $this->belongsTo(Point::class, 'shop_id', 'id');
     }
+    public function from_point(){
+      return $this->belongsTo(Point::class, 'from_point_id', 'id');
+    }
     /**
      * 
      * constants
@@ -84,12 +87,23 @@ class Order extends Model
           return 'БРАК';
        }
      }
+     
      public function getOrderTypeNameAttribute(){
        return $this->order_type == self::RETAIL_TYPE ? 'Розничный' : 'Оптовый';
      }
     /**
      * custom functions
      */
+    public static function getStatusText($status){
+      switch($status){
+       case 1:
+         return 'ЧЕРНОВЕК';
+       case 2:
+         return 'ПОДВЕРЖДЕН';
+       case 3:
+         return 'БРАК';
+      }
+    }
     public function getClientFullName(){
       if($this->client){
         return $this->client->fullName;
@@ -144,7 +158,7 @@ class Order extends Model
     public function hasEnoughItems(){
       foreach($this->items as $item){
         $quantityToSubtract = $item->quantity;
-        $quantityAvailable = PointProduct::getAvailableAmount($item->product_id, $this->shop_id);
+        $quantityAvailable = PointProduct::getAvailableAmount($item->product_id, $this->from_point_id);
         if($quantityAvailable - $quantityToSubtract < 0){
           return false;
         }

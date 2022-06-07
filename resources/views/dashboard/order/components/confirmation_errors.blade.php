@@ -9,7 +9,9 @@
     @if(!$order->hasEnoughItems())
         <div class="alert text-danger">
             В хранилище недостаточно товара для оформления заказа
-            <button class="btn btn-primary btn-sm mb-0" onclick="searchPointProduct()">Поискать у других складов и магазинов</button>
+            @if( $order->from_point_id == $order->shop_id )
+                <button class="btn btn-primary btn-sm mb-0" onclick="searchPointProduct()">Поискать у других складов и магазинов</button>
+            @endif
         </div>
     @endif
     

@@ -181,6 +181,41 @@
             </form> 
         @endif
         <hr>
+        <div class="row my-5 text-center" x-data="{open:false}">
+            <div class="col-md-4">
+                <h5>Место сбора</h5>  
+            </div>
+            <div class="col-md-4">
+                <template x-if="!open">    
+                    <h5>{{ $order->from_point->name }}</h5>
+                </template>
+                <template x-if="open">
+                    <form action="{{route('order.changeFromPoint', $order)}}" method="POST">
+                        @csrf  
+                        <div class="row"> 
+                            <div class="col-md-8"> 
+                                <select name="point_id" class="form-control">
+                                    @foreach($points as $point)
+                                        <option value="{{$point->id}}">{{$point->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-success">Поменять</button>
+                            </div>
+                        </div>
+                    </form>
+                </template>                
+            </div>
+            <div class="col-md-4">
+                @if($order->status==1  && $order->shop_id == auth()->user()->point_id)
+                    <template x-if="!open">
+                        <button type="button" class="btn btn-success" x-on:click="open=true">Поменять</button>
+                    </template>
+                @endif
+            </div>
+        </div>    
+        <hr>
         @if($order->status == 1 && $order->shop_id == auth()->user()->point_id)
             <div class="my-3">
                 @if($order->canBeConfirmed() && $order->client)

@@ -62,10 +62,31 @@
               </script>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('dashboard.orders.index') }}">
+              <a class="nav-link" href="{{ route('dashboard.orders.index', 1) }}">
                 <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
                 </div>
-                <span class="nav-link-text ms-1">Заказы</span>
+                <span class="nav-link-text ms-1">Принятые Заказы</span>
+              </a>
+            </li> 
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('dashboard.orders.index', 2) }}">
+                <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+                </div>
+                <span class="nav-link-text ms-1">Завершенные Заказы</span>
+              </a>
+            </li> 
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('dashboard.orders.index', 3) }}">
+                <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+                </div>
+                <span class="nav-link-text ms-1">Отбр. Заказы</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('dashboard.orders.index', ['status'=>2, 'other_shop'=>1]) }}">
+                <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+                </div>
+                <span class="nav-link-text ms-1">Заказы от др.</span>
               </a>
             </li> 
             <li class="nav-item">
@@ -163,12 +184,33 @@
             </script>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('dashboard.orders.index') }}">
+            <a class="nav-link" href="{{ route('dashboard.orders.index', 1) }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
               </div>
-              <span class="nav-link-text ms-1">Заказы</span>
+              <span class="nav-link-text ms-1">Принятые Заказы</span>
             </a>
           </li> 
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('dashboard.orders.index', 2) }}">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+              </div>
+              <span class="nav-link-text ms-1">Завершенные Заказы</span>
+            </a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('dashboard.orders.index', 3) }}">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+              </div>
+              <span class="nav-link-text ms-1">Отбр. Заказы</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('dashboard.orders.index', ['status'=>2, 'other_shop'=>1]) }}">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+              </div>
+              <span class="nav-link-text ms-1">Заказы от др.</span>
+            </a>
+          </li>  
           <li class="nav-item">
             <a class="nav-link" href="{{ route('dashboard.client.index') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
