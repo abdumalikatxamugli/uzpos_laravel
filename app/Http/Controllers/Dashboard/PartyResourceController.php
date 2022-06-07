@@ -102,5 +102,9 @@ class PartyResourceController extends Controller
         $party->finishParty();
         return redirect()->back();
     }
+    public function finish2(Party $party){
+        $party->finishParty2();
+        return redirect()->back();
+    }
 }
         

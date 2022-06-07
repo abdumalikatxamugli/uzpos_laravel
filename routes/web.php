@@ -86,4 +86,9 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
     Route::get("reports/debts", [ReportContoller::class, 'debts'])->name('dashboard.reports.debts');
     Route::get("reports/sales-by-points", [ReportContoller::class, 'salesByPoint'])->name('dashboard.reports.salesByPoint');
     Route::get("reports/clients", [ReportContoller::class, 'clientReport'])->name('dashboard.reports.clients');
+
+    //fix party finish
+
+    Route::get('party/finish2/{party}', [PartyResourceController::class, 'finish2'])->name('dashboard.party.finish');  
+    
 });

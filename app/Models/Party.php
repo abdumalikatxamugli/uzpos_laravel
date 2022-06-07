@@ -69,5 +69,8 @@ class Party extends Model
       $this->status = 2;
       $this->save();
     }
+    public function finishParty2(){
+      PointProduct::addItemByParty($this, true);
+    }
 }
 
