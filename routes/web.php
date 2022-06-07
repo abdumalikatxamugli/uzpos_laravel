@@ -89,6 +89,6 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
 
     //fix party finish
 
-    Route::get('party/finish2/{party}', [PartyResourceController::class, 'finish2'])->name('dashboard.party.finish');  
+    // Route::get('party/finish2/{party}', [PartyResourceController::class, 'finish2'])->name('dashboard.party.finish');  
     
 });
