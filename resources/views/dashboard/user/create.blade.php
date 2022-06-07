@@ -34,7 +34,7 @@
         <div class="col-md-4">
             <select name="user_role" class="form-control mb-3">
                 <option value="0">Админ</option>
-                <option value="2">Продовец</option>
+                <option value="1">Продовец</option>
                 <option value="3">Складчик</option>
                 <option value="4">Сборщик</option>
                 <option value="7">Доставшик</option>
