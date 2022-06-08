@@ -84,7 +84,7 @@
                     <div class="col-md-6">
                         <h4 style="text-align:right">Kimga/Кому</h4>
                         <div  style="text-align:right">
-                            <b> {{ $order->client->full_name }} ( {{ $order->client->get_region_name() }} ) </b> <br>
+                            <b> {{ $order->client->full_name }} {{ $order->client->get_region_name() }} </b> <br>
                             <b>Телефон: </b> {{ $order->client->phone }}
                             @if($order->client->client_type==1)
                             <b>ИНН:</b> {{ $order->client->inn }} <br>
