@@ -87,7 +87,7 @@ class Client extends UuidModel
    * custom function 
    */
   public function get_region_name(){
-    if($this->region){
+    if(isset($this->region)){
       return "( ".self::regionDict[$this->region]." )";
     }
     return '';
