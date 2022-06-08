@@ -46,6 +46,14 @@
         <div class="col-md-4">
             <input type="text" name="phone_number" class="form-control mb-3" placeholder="Номер телефона" value="{{$client->phone_number}}">
         </div>
+        <div class="col-md-12 mb-5">
+            <label>Область</label><br>
+            <select name="region" class="form-control">
+                @foreach($regions as $index=>$region)
+                    <option value="{{$index}}" {{ $client->region == $index ? 'selected':'' }}>{{ $region }}</option>
+                @endforeach
+            </select>
+        </div>
     </div>
     <button class="btn btn-success btn-sm font-weight-bold">save</button>
 </form>

@@ -11,6 +11,7 @@ class UpdateRequest extends FormRequest
      *
      * @return bool
      */
+
     public function authorize()
     {
         return true;
@@ -23,6 +24,7 @@ class UpdateRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             "client_type"=>"required",
             "fname"=>"exclude_if:client_type,1|required",
@@ -32,7 +34,8 @@ class UpdateRequest extends FormRequest
             "occupation"=>"nullable",
             "inn"=>"exclude_if:client_type,0|required",
             "company_name"=>"exclude_if:client_type,0|required",
-            "phone_number"=>"required|unique:uzpos_sales_client",
+            "phone_number"=>"required|unique:uzpos_sales_client,phone_number,".$this->client->id,
+            "region"=>"nullable"
         ];
     }
 }

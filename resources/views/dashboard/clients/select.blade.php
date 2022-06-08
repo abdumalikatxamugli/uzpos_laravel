@@ -73,6 +73,14 @@
                         <label for="client_phone_number">Телефон</label>
                         <input type="text" class="form-control" id="client_phone_number" x-model="client.phone_number" maxlength="9">
                     </div>
+                    <div class="col-md-12 mb-5">
+                        <label>Область</label><br>
+                        <select name="region" class="form-control">
+                            @foreach($regions as $index=>$region)
+                                <option value="{{$index}}">{{ $region }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="col-md-6 d-flex align-items-end">
                         <button class="btn btn-warning btn-sm mb-0 w-100" x-on:click="saveClient">Сохранить и прикрепит к заказу</button>
                     </div>

@@ -76,13 +76,19 @@
                     <div class="col-md-6">
                         <h4>Kimdan/От кого</h4>
                         <div >
-                            Protools
+                            <b>"PROTOOLS" mas’uliyati cheklangan jamiyati</b> <br>
+                            <b>ИНН:</b> 307132732 <br>
+                            <b>Адресс:</b> Toshkent shahri, Olmazor tumani, QORA-QAMISH-2/1-MAVZESI, 16-UY, 4-XONA <br>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <h4 style="text-align:right">Kimga/Кому</h4>
                         <div  style="text-align:right">
-                            {{ $order->client->full_name }}
+                            <b> {{ $order->client->full_name }} ( {{ $order->client->get_region_name() }} ) </b> <br>
+                            <b>Телефон: </b> {{ $order->client->phone }}
+                            @if($order->client->client_type==1)
+                            <b>ИНН:</b> {{ $order->client->inn }} <br>
+                            @endif
                         </div>
                     </div>
                 </div>

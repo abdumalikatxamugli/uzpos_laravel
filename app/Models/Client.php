@@ -24,6 +24,23 @@ class Client extends UuidModel
     const FIZ = 0;
     const YUR = 1;
 
+    const regionDict = [
+      0=>'ТОШКЕНТ ШАХРИ',
+      1=>'ТОШКЕНТ ВИЛОЯТИ',
+      2=>'СИРДАРЁ ВИЛОЯТИ',
+      3=>'ЖИЗЗАХ ВИЛОЯТИ',
+      4=>'САМАРКАНД ВИЛОЯТИ',
+      5=>'ФАРГОНА ВИЛОЯТИ',
+      6=>'НАМАНГАН ВИЛОЯТИ',
+      7=>'АНДИЖОН ВИЛОЯТИ',
+      8=>'КАШКАДАРЁ ВИЛОЯТИ',
+      9=>'СУРХОНДАРЁ ВИЛОЯТИ',
+      10=>'БУХОРО ВИЛОЯТИ',
+      11=>'НАВОИЙ ВИЛОЯТИ',
+      12=>'ХОРАЗМ ВИЛОЯТИ',
+      13=>'КОРАКАЛПОГИСТОН РЕСПУБЛИКАСИ'
+    ];
+
   /**
    * Relations
    * 
@@ -65,5 +82,14 @@ class Client extends UuidModel
     }else{
       return 1;
     }
- }
+  }
+  /**
+   * custom function 
+   */
+  public function get_region_name(){
+    if($this->region){
+      return self::regionDict[$this->region];
+    }
+    return '';
+  }
 }

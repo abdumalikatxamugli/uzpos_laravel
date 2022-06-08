@@ -134,5 +134,10 @@ class AppServiceProvider extends ServiceProvider
             $clients = Client::all();
             $view->with('clients', $clients);
         });
+        
+        View::composer(['dashboard.client.create', 'dashboard.client.edit', 'dashboard.clients.select'], function($view){
+            $regions = Client::regionDict;
+            $view->with('regions', $regions);
+        });
     }
 }
