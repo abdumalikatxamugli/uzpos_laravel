@@ -9,6 +9,8 @@ use App\Models\PointProduct;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Exports\goodReportExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 use function PHPUnit\Framework\isNull;
 
@@ -20,7 +22,7 @@ class ReportContoller extends Controller
         $brand_id = $request->query('brand_id');
         $exists = $request->query('exists');
         $run = $request->query('run');
-        if(empty($point_id)){
+        if(empty($point_id) && auth()->user()->username != 'owner'){
             $point_id = auth()->user()->point_id;
         }
         if(!isset($exists)){
@@ -66,7 +68,8 @@ class ReportContoller extends Controller
                                             ->with('current_point_id', $point_id)
                                             ->with('current_category_id', $category_id)
                                             ->with('current_brand_id', $brand_id)
-                                            ->with('exists', $exists);
+                                            ->with('exists', $exists)
+                                            ->with('run', $run);
     }
     public function runout(Request $request){
         $point_id = $request->query('point_id');
@@ -158,6 +161,7 @@ class ReportContoller extends Controller
                 $result = $result->where("pp.quantity", "=", 0);
             }
             $result = $result->orderBy("pp.point_id", "desc")->get();
+        
         }else{
             $result = [];
         }
@@ -170,6 +174,15 @@ class ReportContoller extends Controller
                                             ->with('current_brand_id', $brand_id)
                                             ->with('exists', $exists);
     }
+    public function goodsExport(Request $request){
+        $point_id = $request->query('point_id');
+        $category_id = $request->query('category_id');
+        $brand_id = $request->query('brand_id');
+        $exists = $request->query('exists');
+
+        $goodsReportExcel = new goodReportExport($point_id, $category_id, $brand_id, $exists);
+        return Excel::download($goodsReportExcel, 'goodReportExport.xlsx'); 
+    } 
     public function salesByProductAndOrderType(){
         
         $result = DB::table("uzpos_core_product AS p")

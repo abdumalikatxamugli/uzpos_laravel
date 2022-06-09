@@ -93,4 +93,8 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
 
     // Route::get('party/finish2/{party}', [PartyResourceController::class, 'finish2'])->name('dashboard.party.finish');  
     
+
+    //exports
+
+    Route::get('reports/goods-by-division/export', [ReportContoller::class, 'goodsExport'])->name('goodsExport');
 });

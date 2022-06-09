@@ -9,6 +9,11 @@
 </h4>
 <form>
     <input type="hidden" name="run" value="1">
+    @if($run)
+        <a href="{{ route('goodsExport', ['point_id'=>$current_point_id, 'category_id'=>$current_category_id, 'brand_id'=>$current_brand_id, 'exists'=>$exists]) }}" target="_blank" class="btn btn-danger mb-3 btn-sm">
+            Экспортировать в excel
+        </a>
+    @endif
     <div class="row">
         <b>Фильтры</b>
         @if($is_admin)
