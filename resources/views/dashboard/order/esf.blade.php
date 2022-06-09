@@ -63,6 +63,7 @@
             th, td {
                 border: 1px solid black;
                 padding: 5px;
+                text-align: center;
             }
         </style>
     </head>
@@ -98,10 +99,10 @@
                 <table border="1">
                     <thead>
                         <tr>
-                            <th>№</th>
+                            <th width="5%">№</th>
                             <th>Nomi <br> Название</th>
                             <th>Uchl.bir <br> Ед. изм.</th>
-                            <th>Soni <br> Кол-во</th>
+                            <th width="10%">Soni <br> Кол-во</th>
                             <th>Narxi <br> Цена</th>
                             <th>Summasi <br> Сумма</th>
                         </tr>
