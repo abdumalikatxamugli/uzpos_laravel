@@ -22,6 +22,7 @@
                     <td>Всего оплачено</td>
                     <td>Место заказа</td>
                     <td>Место сбора</td>
+                    <td>СФ</td>
                     <td>Посмотреть</td>
                     <td>Сборщик</td>
                     <td>Доставщик</td>
@@ -42,6 +43,9 @@
                     <td>{{ $order->getTotalPaid() }} </td>
                     <td>{{ $order->division->name }} </td>
                     <td>{{ $order->from_point->name }} </td>
+                    <td> 
+                        <a class="btn btn-danger btn-sm mb-0" href="{{route('order.genEsf', $order->id)}}" target="_blank">Скачать</a> 
+                    </td>  
                     <td> 
                         <a class="btn btn-danger btn-sm mb-0" href="{{route('dashboard.orders.edit', $order->id)}}">Посмотреть</a> 
                     </td>

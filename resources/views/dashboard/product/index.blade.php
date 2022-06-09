@@ -81,7 +81,7 @@
         @endforeach
     </tbody>
 </table>
-{{ $products->links() }}
+{{ $products->withQueryString()->links() }}
 
 <script>
     $(document).ready(function(){
