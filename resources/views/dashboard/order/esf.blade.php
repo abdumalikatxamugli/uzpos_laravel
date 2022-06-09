@@ -7,6 +7,9 @@
                 font-size: 16px;
                 background: rgb(204, 204, 204);
             }
+            *{
+                color: black !important;
+            }
             div.page {
                 background: white;
                 display: block;
@@ -55,11 +58,11 @@
                 width: 100%;
                 table-layout: fixed;
                 overflow-wrap: break-word;
-                
+                font-size: 13px;
             }
             th, td {
                 border: 1px solid black;
-                padding: 10px;
+                padding: 5px;
             }
         </style>
     </head>
@@ -69,22 +72,22 @@
         </button>
         <div class="page" size="A4" layout="landscape">
             <div class="container">
-                <h2 class="mb-5 text-center">
+                <h4 class="mb-5 text-center">
                     Yuk xati/Накладная № {{ str_pad($order->esf_no, 4, '0', STR_PAD_LEFT ) }}
-                </h2>
+                </h4>
                 <div class="row mb-5">
                     <div class="col-md-6">
-                        <h4>Kimdan/От кого</h4>
+                        <div>Kimdan/От кого</div>
                         <div >
-                            <b>"PROTOOLS" mas’uliyati cheklangan jamiyati</b> <br>
+                            <h5>"PROTOOLS" mas’uliyati cheklangan jamiyati</h5> 
                             <b>ИНН:</b> 307132732 <br>
                             <b>Адресс:</b> Toshkent shahri, Olmazor tumani, QORA-QAMISH-2/1-MAVZESI, 16-UY, 4-XONA <br>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <h4 style="text-align:right">Kimga/Кому</h4>
+                        <div style="text-align:right">Kimga/Кому</div>
                         <div  style="text-align:right">
-                            <b> {{ $order->client->full_name }} {{ $order->client->get_region_name() }} </b> <br>
+                            <h5> {{ $order->client->full_name }} {{ $order->client->get_region_name() }} </h5> 
                             <b>Телефон: </b> {{ $order->client->phone_number }} <br>
                             @if($order->client->client_type==1)
                             <b>ИНН:</b> {{ $order->client->inn }} <br>
