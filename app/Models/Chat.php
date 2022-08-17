@@ -18,6 +18,9 @@ class Chat extends Model
     const DELIVER_TYPE = 2;
 
     public static function login($phone, $type, $chatId){
+        if(strlen($phone)==12){
+            $phone = substr($phone, 3);
+        }
         $phone = str_replace("+998", "", $phone);
 
         if($type == self::CLIENT_TYPE){
