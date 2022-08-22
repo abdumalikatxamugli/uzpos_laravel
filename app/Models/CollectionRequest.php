@@ -32,7 +32,7 @@ class CollectionRequest extends Model
         return "{$status} : {$this->assigned_full_name}";
     }
     public function getAssignedFullNameAttribute(){
-        return $this->assigned?$this->assigned_full_name:'';
+        return $this->assigned?$this->assigned->full_name:'';
     }
 
     /**
