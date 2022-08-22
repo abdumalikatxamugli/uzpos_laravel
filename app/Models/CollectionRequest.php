@@ -29,7 +29,10 @@ class CollectionRequest extends Model
      */
     public function getStatusTextAttribute(){
         $status = $this->status == 1 ? 'Актив':'Завершен';
-        return "{$status} : {$this->assigned->full_name}";
+        return "{$status} : {$this->assigned_full_name}";
+    }
+    public function getAssignedFullNameAttribute(){
+        return $this->assigned?$this->assigned_full_name:'';
     }
 
     /**
