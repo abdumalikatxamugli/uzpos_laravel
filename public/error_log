@@ -1,0 +1,179 @@
+[24-Apr-2022 16:10:53 Asia/Tashkent] PHP Warning:  Undefined array key "script" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:10:53 Asia/Tashkent] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_PREFIX" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:10:53 Asia/Tashkent] PHP Warning:  Undefined array key "HTTPS" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:10:53 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /home/ecorpuz/public_html/public/adminner-1234.php:20
+Stack trace:
+#0 /home/ecorpuz/public_html/public/adminner-1234.php(169): remove_slashes()
+#1 {main}
+  thrown in /home/ecorpuz/public_html/public/adminner-1234.php on line 20
+[24-Apr-2022 16:11:03 Asia/Tashkent] PHP Warning:  Undefined array key "script" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:11:03 Asia/Tashkent] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_PREFIX" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:11:03 Asia/Tashkent] PHP Warning:  Undefined array key "HTTPS" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:11:03 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /home/ecorpuz/public_html/public/adminner-1234.php:20
+Stack trace:
+#0 /home/ecorpuz/public_html/public/adminner-1234.php(169): remove_slashes()
+#1 {main}
+  thrown in /home/ecorpuz/public_html/public/adminner-1234.php on line 20
+[24-Apr-2022 16:11:15 Asia/Tashkent] PHP Warning:  Undefined array key "script" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:11:15 Asia/Tashkent] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_PREFIX" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:11:15 Asia/Tashkent] PHP Warning:  Undefined array key "HTTPS" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:11:15 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /home/ecorpuz/public_html/public/adminner-1234.php:20
+Stack trace:
+#0 /home/ecorpuz/public_html/public/adminner-1234.php(169): remove_slashes()
+#1 {main}
+  thrown in /home/ecorpuz/public_html/public/adminner-1234.php on line 20
+[24-Apr-2022 16:11:16 Asia/Tashkent] PHP Warning:  Undefined array key "script" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:11:16 Asia/Tashkent] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_PREFIX" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:11:16 Asia/Tashkent] PHP Warning:  Undefined array key "HTTPS" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:11:16 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /home/ecorpuz/public_html/public/adminner-1234.php:20
+Stack trace:
+#0 /home/ecorpuz/public_html/public/adminner-1234.php(169): remove_slashes()
+#1 {main}
+  thrown in /home/ecorpuz/public_html/public/adminner-1234.php on line 20
+[24-Apr-2022 16:11:17 Asia/Tashkent] PHP Warning:  Undefined array key "script" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:11:17 Asia/Tashkent] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_PREFIX" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:11:17 Asia/Tashkent] PHP Warning:  Undefined array key "HTTPS" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:11:17 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /home/ecorpuz/public_html/public/adminner-1234.php:20
+Stack trace:
+#0 /home/ecorpuz/public_html/public/adminner-1234.php(169): remove_slashes()
+#1 {main}
+  thrown in /home/ecorpuz/public_html/public/adminner-1234.php on line 20
+[24-Apr-2022 16:11:17 Asia/Tashkent] PHP Warning:  Undefined array key "script" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:11:17 Asia/Tashkent] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_PREFIX" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:11:17 Asia/Tashkent] PHP Warning:  Undefined array key "HTTPS" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:11:17 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /home/ecorpuz/public_html/public/adminner-1234.php:20
+Stack trace:
+#0 /home/ecorpuz/public_html/public/adminner-1234.php(169): remove_slashes()
+#1 {main}
+  thrown in /home/ecorpuz/public_html/public/adminner-1234.php on line 20
+[24-Apr-2022 16:11:18 Asia/Tashkent] PHP Warning:  Undefined array key "script" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:11:18 Asia/Tashkent] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_PREFIX" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:11:18 Asia/Tashkent] PHP Warning:  Undefined array key "HTTPS" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:11:18 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /home/ecorpuz/public_html/public/adminner-1234.php:20
+Stack trace:
+#0 /home/ecorpuz/public_html/public/adminner-1234.php(169): remove_slashes()
+#1 {main}
+  thrown in /home/ecorpuz/public_html/public/adminner-1234.php on line 20
+[24-Apr-2022 16:11:18 Asia/Tashkent] PHP Warning:  Undefined array key "script" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:11:18 Asia/Tashkent] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_PREFIX" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:11:18 Asia/Tashkent] PHP Warning:  Undefined array key "HTTPS" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[24-Apr-2022 16:11:18 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /home/ecorpuz/public_html/public/adminner-1234.php:20
+Stack trace:
+#0 /home/ecorpuz/public_html/public/adminner-1234.php(169): remove_slashes()
+#1 {main}
+  thrown in /home/ecorpuz/public_html/public/adminner-1234.php on line 20
+[08-May-2022 23:11:21 Asia/Tashkent] PHP Warning:  Undefined array key "script" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[08-May-2022 23:11:21 Asia/Tashkent] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_PREFIX" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[08-May-2022 23:11:21 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /home/ecorpuz/public_html/public/adminner-1234.php:20
+Stack trace:
+#0 /home/ecorpuz/public_html/public/adminner-1234.php(169): remove_slashes()
+#1 {main}
+  thrown in /home/ecorpuz/public_html/public/adminner-1234.php on line 20
+[08-May-2022 23:11:42 Asia/Tashkent] PHP Warning:  Undefined array key "script" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[08-May-2022 23:11:42 Asia/Tashkent] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_PREFIX" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[08-May-2022 23:11:42 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /home/ecorpuz/public_html/public/adminner-1234.php:20
+Stack trace:
+#0 /home/ecorpuz/public_html/public/adminner-1234.php(169): remove_slashes()
+#1 {main}
+  thrown in /home/ecorpuz/public_html/public/adminner-1234.php on line 20
+[08-May-2022 23:11:43 Asia/Tashkent] PHP Warning:  Undefined array key "script" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[08-May-2022 23:11:43 Asia/Tashkent] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_PREFIX" in /home/ecorpuz/public_html/public/adminner-1234.php on line 169
+[08-May-2022 23:11:43 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /home/ecorpuz/public_html/public/adminner-1234.php:20
+Stack trace:
+#0 /home/ecorpuz/public_html/public/adminner-1234.php(169): remove_slashes()
+#1 {main}
+  thrown in /home/ecorpuz/public_html/public/adminner-1234.php on line 20
+[08-May-2022 23:14:16 Asia/Tashkent] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.29. in /home/ecorpuz/public_html/vendor/composer/platform_check.php on line 24
+[08-May-2022 23:38:03 Asia/Tashkent] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.29. in /home/ecorpuz/public_html/vendor/composer/platform_check.php on line 24
+[08-May-2022 23:38:04 Asia/Tashkent] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.29. in /home/ecorpuz/public_html/vendor/composer/platform_check.php on line 24
+[08-May-2022 23:56:19 Asia/Tashkent] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.29. in /home/ecorpuz/public_html/vendor/composer/platform_check.php on line 24
+[09-Jun-2022 19:30:35 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "view" does not exist in /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:877
+Stack trace:
+#0 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(877): ReflectionClass->__construct()
+#1 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(758): Illuminate\Container\Container->build()
+#2 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(855): Illuminate\Container\Container->resolve()
+#3 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(694): Illuminate\Foundation\Application->resolve()
+#4 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(840): Illuminate\Container\Container->make()
+#5 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1417): Illuminate\Foundation\Application->make()
+#6 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\Container\Container->offsetGet()
+#7 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#8 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(331): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(18): Illuminate\Support\Facades\Facade::__callStatic()
+#10 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(603): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#11 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(584): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#12 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(515): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#13 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(421): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#14 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(341): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#15 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(196): Illuminate\Foundation\Exceptions\Handler->render()
+#16 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(173): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#17 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(231): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#18 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}()
+#19 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [view] does not exist. in /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:879
+Stack trace:
+#0 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(758): Illuminate\Container\Container->build()
+#1 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(855): Illuminate\Container\Container->resolve()
+#2 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(694): Illuminate\Foundation\Application->resolve()
+#3 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(840): Illuminate\Container\Container->make()
+#4 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1417): Illuminate\Foundation\Application->make()
+#5 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\Container\Container->offsetGet()
+#6 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#7 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(331): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#8 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(18): Illuminate\Support\Facades\Facade::__callStatic()
+#9 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(603): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#10 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(584): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#11 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(515): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#12 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(421): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#13 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(341): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#14 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(196): Illuminate\Foundation\Exceptions\Handler->render()
+#15 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(173): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#16 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(231): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}()
+#18 {main}
+  thrown in /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 879
+[09-Jun-2022 19:30:35 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "view" does not exist in /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:877
+Stack trace:
+#0 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(877): ReflectionClass->__construct()
+#1 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(758): Illuminate\Container\Container->build()
+#2 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(855): Illuminate\Container\Container->resolve()
+#3 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(694): Illuminate\Foundation\Application->resolve()
+#4 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(840): Illuminate\Container\Container->make()
+#5 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1417): Illuminate\Foundation\Application->make()
+#6 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\Container\Container->offsetGet()
+#7 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#8 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(331): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(18): Illuminate\Support\Facades\Facade::__callStatic()
+#10 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(603): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#11 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(584): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#12 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(515): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#13 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(421): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#14 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(341): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#15 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(196): Illuminate\Foundation\Exceptions\Handler->render()
+#16 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(173): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#17 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(231): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#18 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}()
+#19 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [view] does not exist. in /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:879
+Stack trace:
+#0 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(758): Illuminate\Container\Container->build()
+#1 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(855): Illuminate\Container\Container->resolve()
+#2 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(694): Illuminate\Foundation\Application->resolve()
+#3 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(840): Illuminate\Container\Container->make()
+#4 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1417): Illuminate\Foundation\Application->make()
+#5 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\Container\Container->offsetGet()
+#6 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#7 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(331): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#8 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(18): Illuminate\Support\Facades\Facade::__callStatic()
+#9 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(603): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#10 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(584): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#11 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(515): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#12 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(421): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#13 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(341): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#14 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(196): Illuminate\Foundation\Exceptions\Handler->render()
+#15 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(173): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#16 /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(231): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}()
+#18 {main}
+  thrown in /home/ecorpuz/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 879
