@@ -17,6 +17,20 @@ class DefaultUserSeeder extends Seeder
      */
     public function run()
     {
+        $shop = new Point();
+        $shop->name = 'Head Office';
+        $shop->save();
+
+        $user = new User();
+        $user->username = 'owner';
+        $user->password = 'owner';
+        $user->first_name = 'admin';
+        $user->last_name = 'admin';
+        $user->is_active = 1;
+        $user->user_role = User::roles['ADMIN'];
+        $user->point_id = $shop->id;
+        $user->save(); 
+
         $user = new User();
         $user->username = 'root3';
         $user->password = 'r00t';

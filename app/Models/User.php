@@ -32,6 +32,15 @@ class User extends Authenticatable
         'DELIVERY' => 7,
         'OWNER'=>8
     ];
+    const ADMIN = 0;
+    const SELLER = 1;
+    const WAREHOUSE_MANAGER = 2;
+    const COLLECTOR = 3;
+    const ACCOUNTANT = 4;
+    const SHOP_MANAGER = 5;
+    const DELIVERY = 6;
+    const OWNER = 7;
+
     const BUSY = 1;
     const FREE = 0;
     /**

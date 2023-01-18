@@ -4,10 +4,10 @@
 
 @include('partials.validation_errors')
 
-<div class="card-header mb-4 pb-0">
-    <div class="d-flex justify-content-between">
+<div class="card-header-primary mb-4 ">
+    <div class="d-flex justify-content-between align-items-center">
         <h3>Приход товаров</h3>
-        <a href="{{ route('dashboard.party.create') }}" class="btn btn-info btn-sm text-dark font-weight-bold"> Create </a>
+        <a href="{{ route('dashboard.party.create') }}" class="btn btn-white btn-sm text-dark font-weight-bold"> Create </a>
     </div>
 </div>
 <div class="card-body  px-0 pt-0 pb-2">

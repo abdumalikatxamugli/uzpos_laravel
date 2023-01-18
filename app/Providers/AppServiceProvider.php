@@ -9,10 +9,11 @@ use App\Models\Payment;
 use App\Models\Point;
 use App\Models\Product;
 use App\Models\User;
+use App\PermissionManagement\Menu;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -37,6 +38,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrapFive();
+
+        View::composer('*', function($view){
+            $menu = new Menu();
+            $view->with('menu', $menu);
+        });
 
         View::composer('dashboard.transfer.edit', function ($view) {
             $points = Point::all();

@@ -6,16 +6,16 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-<div class="card-header mb-4 pb-0">
-    <div class="d-flex justify-content-between">
+<div class="card-header card-header-primary">
+    <div class="d-flex justify-content-between  align-items-center">
         <h3>Products</h3>
-        <a href="{{ route('dashboard.product.create') }}" class="btn btn-info btn-sm text-dark font-weight-bold"> Create </a>
+        <a href="{{ route('dashboard.product.create') }}" class="btn btn-white btn-sm text-dark font-weight-bold"> Create </a>
     </div>
 </div>
 
 <div class="card-body  px-0 pt-0 pb-2">
     <div class="p-3">
-    <form>
+        <form class="px-5">
             <input type="hidden" name="run" value="1">
             <div class="row">
                 <b>Фильтры</b>

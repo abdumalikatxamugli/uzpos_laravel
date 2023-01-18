@@ -1,13 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="card-body">
-        <h4 class="d-flex justify-content-between mb-5">
+    <div class="card-header-primary">
+        <h4 class="d-flex justify-content-between">
             <span>Заказы {{ $other_shop == 1 ? 'от других':'' }} [ {{$status_text}} ]</span>
-            <a class="btn btn-success btn-sm mb-0" href="{{route('dashboard.order.new', 1)}}">Добавить</a>
+            <a class="btn btn-white btn-sm mb-0" href="{{route('dashboard.order.new', 1)}}">Добавить</a>
         </h4>
-        @include('partials.validation_errors')
-        <table class="table text-center" style="font-size:12px">
+    </div>
+    <div class="card-body">
+         @include('partials.validation_errors')
+        <table class="table table-bordered text-center" style="font-size:12px">
             <thead>
                 <tr>
                     <td>#</td>
