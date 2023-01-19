@@ -1,24 +1,25 @@
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <div x-data="start()" x-init="init()">
     @if(count($order->items) > 0)
-        <table class="table text-center table-bordered mb-5" >
-            <thead>
+        <table class="table text-center mb-5" >
+            <thead class="text-center">
                 <tr>
-                    <th width="2%">#</th>
-                    <th class="fs-6 text-success" width="30%">Название</th>
-                    <th class="fs-6 text-success" width="10%">Количество</th>
-                    <th class="fs-6 text-success">Цена</th>
-                    <th class="fs-6 text-success">Общая цена</th>
-                    <th class="fs-6 text-success">Убрать</th>
+                    <th class="text-primary" width="2%"><strong>#</strong></th>
+                    <th class="text-primary" width="30%"><strong>Штрих код</string></th>
+                    <th class="text-primary" width="30%"><strong>Название</string></th>
+                    <th class="text-primary" width="10%"><strong>Количество</string></th>
+                    <th class="text-primary"><strong>Цена</string></th>
+                    <th class="text-primary"><strong>Общая цена</string></th>
+                    <th class="text-primary"><strong>Убрать</string></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($order->items as $index=>$item)
                     <tr>
                         <td>{{$index+1}}</td>
+                        <td>{{$item->product->bar_code}}</td>
                         <td>{{$item->product->name}}</td>
                         <td>{{$item->quantity}}</td>
                         <td>{{$item->price}}</td>
@@ -26,7 +27,9 @@
                         <td>
                             @if($order->status == 1  && $order->shop_id == auth()->user()->point_id)
                                 <form action="{{ route('dashboard.order.item.delete', $item->id) }}">
-                                    <button class="btn btn-danger btn-sm mb-0">Убрать</button>
+                                    <button class="btn btn-danger btn-sm mb-0">
+                                        <i class="material-icons">close</i>
+                                    </button>
                                 </form>
                             @endif
                         </td>
@@ -44,12 +47,12 @@
                 <thead>
                     <tr>
                         <th width="2%">#</th>
-                        <th class="fs-6 text-info" width="30%">Штрих код</th>
-                        <th class="fs-6 text-info" width="20%">Название</th>
-                        <th class="fs-6 text-info" width="10%">Количество</th>
-                        <th class="fs-6 text-info">Цена</th>
-                        <th class="fs-6 text-info">Общая цена</th>
-                        <th class="fs-6 text-info">Убрать</th>
+                        <th class="text-primary" width="30%">Штрих код</th>
+                        <th class="text-primary" width="20%">Название</th>
+                        <th class="text-primary" width="10%">Количество</th>
+                        <th class="text-primary">Цена</th>
+                        <th class="text-primary">Общая цена</th>
+                        <th class="text-primary">Убрать</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -85,7 +88,7 @@
                             </td>
                             <td>
                                     <button type="button" class="btn btn-danger btn-sm mb-0" x-on:click="removeItem(index)">
-                                        Убрать
+                                        <i class="material-icons">close</i>
                                     </button>
                             </td>
                         </tr>
@@ -102,13 +105,15 @@
             </table>
         
             <div class="d-flex align-items-center justify-content-center">
-                <button type="button" class="btn btn-info p-3" x-on:click="addItem">
-                    ещё
+                <button type="button" class="btn btn-primary p-3" x-on:click="addItem">
+                    <i class="material-icons">add</i>
                 </button>
             </div>
             <hr/>
             <div class="d-flex justify-content-end">
-                <button class="btn btn-success btn-lg">Сохранить</button>       
+                <button class="btn btn-primary btn-lg px-3">
+                    <i class="material-icons">check</i>
+                </button>       
             </div>
         </form>
     @endif

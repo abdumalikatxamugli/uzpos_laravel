@@ -1,48 +1,59 @@
 @extends('layouts.appWithoutSidebar')
 
 @section('content')
-    <div class="card-body">
+    <div class="card-header-primary">
         <h4>Заказ [Розничный] </h4>
         <small>ID: {{ $order->id }}</small> <br/>
-        <small>Общая сумма: {{ number_format($order->getTotalCost(), 2,'.', ' ')}}</small><br/>
-        <small>Оплачено: {{number_format($order->getTotalPaid(),2, '.', ' ') }}</small><br/>
-        <small>Долг: {{number_format( $order->getTotalCost() - $order->getTotalPaid(), 2, '.', ' ') }}</small><br/>
-        <div class="d-flex align-items-center" style="gap:10px">
-            <small>Статус: </small><button class="btn btn-sm btn-primary mb-0">{{$order->status_name}}</button>
-        </div>
     </div>
-    <hr>
     <div class="card-body">
-        <h5 class="mb-5 d-flex justify-content-between">
-            <b>Данные клиента</b>
+        <table class="table text-center mb-5">
+            <thead class="text-primary" >
+                <tr>
+                    <th><strong>Общая сумма</strong></th>
+                    <th><strong>Оплачено</strong></th>
+                    <th><strong>Долг</strong></th>
+                    <th><strong>Статус</strong></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ number_format($order->getTotalCost(), 2,'.', ' ')}}</td>
+                    <td>{{number_format($order->getTotalPaid(),2, '.', ' ') }}</td>
+                    <td>{{number_format( $order->getTotalCost() - $order->getTotalPaid(), 2, '.', ' ') }}</td>
+                    <td><strong>{{$order->status_name}}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    
+        <h4 class="my-5 d-flex justify-content-between">
+            <b class="text-primary">Данные клиента</b>
             @if($order->status == 1 && $order->shop_id == auth()->user()->point_id)
-                <button class="btn btn-info mb-0 d-flex align-items-center justify-content-center" style="gap:10px;" onclick="addClient()">
-                    <i class="ni ni-circle-08" style="font-size:14px;"></i>
-                    <span >Добавить</span>
+                <button class="btn btn-primary text-white mb-0 d-flex align-items-center justify-content-center" style="gap:10px;" onclick="addClient()">
+                    <span>
+                        <i class="material-icons">add</i>
+                    </span>
                 </button>
             @endif
-        </h5>
-        <div>
-            
-        </div>
-        <div class="row">
+        </h4>
+        
+        <div class="row text-center">
             <div class="col-md-4">
-                <h6>Тип клиента</h6>
+                <h6 class="text-primary">Тип клиента</h6>
                 <hr/>
                 <b>{{$order->client? $order->client->client_type_name : '' }}</b>
             </div>
             <div class="col-md-3">
-                <h6>ФИО/Название</h6>
+                <h6 class="text-primary">ФИО/Название</h6>
                 <hr/>
                 <b>{{$order->getClientFullName()}}</b>
             </div>
             <div class="col-md-3">
-                <h6>Реквизиты</h6>
+                <h6 class="text-primary">Реквизиты</h6>
                 <hr/>
                 <b>{{$order->client ? $order->client->getClientCredentials() : ''}}</b>
             </div>
             <div class="col-md-2">
-                <h6>Долги</h6>
+                <h6 class="text-primary">Долги</h6>
                 <hr/>
                 @if($order->client)
                     <a href="{{ route('debt.client.index', $order->client->id) }}" class="btn btn-link mb-0 btn-sm text-danger" target="_blank">
@@ -51,32 +62,30 @@
                 @endif
             </div>
         </div>
-        
     </div>
     <hr>
-    <div class="card-body">
-        <h5 class="mb-5 d-flex justify-content-between">
+    <div class="card-body my-5">
+        <h4 class="mb-5 text-primary d-flex justify-content-between">
             <b>Товары</b>
-        </h5>
+        </h4>
         <div>
             @include('dashboard.order.components.orderItems_retail')            
         </div>        
     </div>
-    <hr>
     <div class="card-body">
-        <h5 class="mb-5 d-flex justify-content-between">
+        <h4 class="mb-5 text-primary d-flex justify-content-between">
             <b>Оплата</b>
-        </h5>
+        </h4>
         <table class="table text-center mb-5">
-            <thead>
+            <thead class="text-primary">
                 <tr>
-                    <td>Дата оплаты</td>
-                    <td>Тип оплаты</td>
-                    <td>Валюта</td>
-                    <td>Сумма</td>
-                    <td>Курс</td>
-                    <td>Сумма в долларах</td>
-                    <td>Убрать</td>
+                    <th><strong>Дата оплаты</strong></th>
+                    <th><strong>Тип оплаты</strong></th>
+                    <th><strong>Валюта</strong></th>
+                    <th><strong>Сумма</strong></th>
+                    <th><strong>Курс</strong></th>
+                    <th><strong>Сумма в долларах</strong></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -104,7 +113,9 @@
                         @if($order->status == 1 && $order->shop_id == auth()->user()->point_id)
                             <form action="{{route('order.payments.delete', $payment->id)}}">
                                 @csrf
-                                <button class="btn btn-danger btn-sm mb-0">Убрать</button>
+                                <button class="btn btn-danger btn-sm mb-0">
+                                    <i class="material-icons">close</i>
+                                </button>
                             </form>
                         @endif
                     </td>
@@ -118,15 +129,15 @@
                 @csrf
                 <div x-data="{currency_type:1, currency_kurs: 1, amount:{{ round( $order->getTotalCost() - $order->getTotalPaid() , 2) }} }">
                     <table class="table text-center">
-                        <thead>
+                        <thead class="text-primary text-center">
                             <tr>
-                                <td>Дата оплаты</td>
-                                <td>Тип оплаты</td>
-                                <td>Сумма</td>
-                                <td>Валюта</td>
-                                <td>Курс</td>
-                                <td>Сумма в долларах</td>
-                                <td></td>
+                                <th>Дата оплаты</th>
+                                <th>Тип оплаты</th>
+                                <th>Сумма</th>
+                                <th>Валюта</th>
+                                <th>Курс</th>
+                                <th>Сумма в долларах</th>
+                                <th></th>
                             </tr>
                         </thead>
                     
@@ -134,10 +145,10 @@
                         <tr>
                             <td>
                                 <input type="hidden" name="order_id" value="{{ $order->id }}">
-                                <input type="date" class="form-control" name="payment_date" value="{{ date('Y-m-d') }}" readonly>
+                                <input type="date" class="form-control px-2" name="payment_date" value="{{ date('Y-m-d') }}" readonly>
                             </td>
                             <td>
-                                <select id="" class="form-control" name="payment_type" >
+                                <select class="form-control px-2" name="payment_type" >
                                         @foreach($payment_types as $ptype)
                                             <option value="{{ $ptype['code'] }}" {{ $ptype['code']==1?'selected':'' }} >{{ $ptype['name'] }}</option>
                                         @endforeach
@@ -147,7 +158,7 @@
                                 <input type="text" class="form-control" name="amount" x-model = "amount">
                             </td>
                             <td>
-                                <select class="form-control" name="currency" x-model = "currency_type" x-on:change="if(currency_type==1){ currency_kurs=1 }">
+                                <select class="form-control px-2" name="currency" x-model = "currency_type" x-on:change="if(currency_type==1){ currency_kurs=1 }">
                                     @foreach($currencies as $ptype)
                                         <option value="{{ $ptype['code'] }}">{{ $ptype['name'] }}</option>
                                     @endforeach
@@ -155,17 +166,19 @@
                             </td>
                             <td>
                                 <template x-if="currency_type==0">
-                                    <input type="text" class="form-control" name="currency_kurs" x-model = "currency_kurs">
+                                    <input type="text" class="form-control px-2" name="currency_kurs" x-model = "currency_kurs">
                                 </template>
                                 <template x-if="currency_type==1">
-                                    <input type="text" class="form-control" name="currency_kurs" x-model = "currency_kurs" readonly>
+                                    <input type="text" class="form-control px-2" name="currency_kurs" x-model = "currency_kurs" readonly>
                                 </template>
                             </td>
                             <td>
-                                <input type="text" class="form-control" readonly name="amount_real" x-bind:value = "Math.round( amount/currency_kurs * 100 ) / 100">
+                                <input type="text" class="form-control px-2" readonly name="amount_real" x-bind:value = "Math.round( amount/currency_kurs * 100 ) / 100">
                             </td>
                             <td>
-                                <button class="btn btn-info">Сохранить</button>
+                                <button class="btn btn-primary">
+                                    <i class="material-icons">check</i>
+                                </button>
                             </td>
                         </tr>
                     </tbody>
