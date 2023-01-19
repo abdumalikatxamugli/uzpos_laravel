@@ -5,7 +5,7 @@
 @include('partials.validation_errors')
 <div class="card-header-primary mb-4">
     <div class="d-flex justify-content-between align-items-center">
-        <h3>Перещении</h3>
+        <h3 class="m-0">Перещении</h3>
         <a href="{{ route('dashboard.transfer.create') }}" class="btn btn-white btn-sm text-dark font-weight-bold"> Добавить </a>
     </div>
 </div>
@@ -13,14 +13,14 @@
     <table class="table text-center">
         <thead>
             <tr>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Дата</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Статус</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">От</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">К</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Причина</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Посмотреть</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Отменить</th>
+                <th>#</th>
+                <th>Дата</th>
+                <th>Статус</th>
+                <th>От</th>
+                <th>К</th>
+                <th>Причина</th>
+                <th>Посмотреть</th>
+                <th>Отменить</th>
             </tr>
         </thead>
         <tbody>

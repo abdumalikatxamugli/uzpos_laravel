@@ -40,6 +40,9 @@ The above copyright notice and this permission notice shall be included in all c
     .my-nav-treeview .nav-link p{
       font-size: 0.8rem;
     }
+    .menu-open .my-nav-treeview{
+      display: block;
+    }
   </style>
 </head>
 
@@ -64,6 +67,11 @@ The above copyright notice and this permission notice shall be included in all c
             </a>
           </li>
         </ul>
+        <script>
+          function openModal(el){
+            window.open(`${el.dataset.href}`, 'name' + Math.random(), 'width=1200,height=800');
+          }
+        </script>
       </div>
     </div>
     <div class="main-panel">
@@ -134,11 +142,12 @@ The above copyright notice and this permission notice shall be included in all c
       </nav>
       <!-- End Navbar -->
       <div class="content">
+        @yield('dashboard')
         <div class="container-fluid">
           <div class="card">
             @yield('content')
-          </div>          
-        </div>
+          </div>  
+        </div>       
       </div>
       <footer class="footer">
         <div class="container-fluid">

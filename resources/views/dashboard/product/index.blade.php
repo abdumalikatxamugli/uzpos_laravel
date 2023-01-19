@@ -6,21 +6,20 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-<div class="card-header card-header-primary">
+<div class="card-header-primary">
     <div class="d-flex justify-content-between  align-items-center">
-        <h3>Products</h3>
+        <h3  class="m-0">Products</h3>
         <a href="{{ route('dashboard.product.create') }}" class="btn btn-white btn-sm text-dark font-weight-bold"> Create </a>
     </div>
 </div>
 
-<div class="card-body  px-0 pt-0 pb-2">
-    <div class="p-3">
-        <form class="px-5">
+<div class="card-body px-0 pt-0 pb-2">
+    <div>
+        <form class="px-5 my-4">
             <input type="hidden" name="run" value="1">
             <div class="row">
-                <b>Фильтры</b>
-                <div class="col-md-2">
-                    <span>Название</span>
+                <div class="col-md-4">
+                    <span class="text-primary">Название</span>
                     <select name="product_id" class="form-control" id="product_id">
                         <option value="0">Все</option>
                         @foreach($all_products as $product)
@@ -28,8 +27,8 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-2">
-                    <span>Бренд</span>
+                <div class="col-md-4">
+                    <span class="text-primary">Бренд</span>
                     <select name="brand_id" class="form-control">
                         <option value="0">Все</option>
                         @foreach($brands as $brand)
@@ -37,8 +36,8 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-2">
-                    <span>Категория</span>
+                <div class="col-md-3">
+                    <span class="text-primary">Категория</span>
                     <select name="category_id" class="form-control">
                         <option value="0">Все</option>
                         @foreach($categories as $category)
@@ -46,8 +45,10 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-3 d-flex align-items-end">
-                    <button class="btn btn-success btn font-weight-bold mb-0">Посмотреть</button>
+                <div class="col-md-1 d-flex align-items-end">
+                    <button class="btn btn-success btn font-weight-bold mb-0">
+                        <i class="material-icons">search</i>
+                    </button>
                 </div>
             </div>
         </form>
@@ -56,11 +57,11 @@
 <table class="table text-center">
     <thead>
         <tr>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Штрих код</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Edit</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Delete</th>
+            <th>#</th>
+            <th>Name</th>
+            <th>Штрих код</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>

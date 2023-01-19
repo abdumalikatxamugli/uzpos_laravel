@@ -2,21 +2,23 @@
 
     @section('content')
 
-    <div class="card-header-primary mb-4 ">
+    <div class="card-header-primary">
         <div class="d-flex justify-content-between align-items-center">
-            <h3>Clients</h3>
-            <a href="{{ route('dashboard.client.create') }}" class="btn btn-white btn-sm text-dark font-weight-bold"> Create </a>
+            <h3 class="m-0">Clients</h3>
+            <a href="{{ route('dashboard.client.create') }}" class="btn btn-white btn-sm text-primary font-weight-bold">
+                Create 
+            </a>
         </div>
     </div>
     <div class="card-body  px-0 pt-0 pb-2">
-        <table class="table text-center">
+        <table class="table text-center mt-5">
             <thead>
                 <tr>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Долги</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Edit</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Delete</th>
+                    <th>#</th>
+                    <th width="80%">Название</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -26,12 +28,12 @@
                         <td class="mb-0 text-sm">{{$client->client_type == 0 ? $client->fname . ' ' . $client->lname . ' ' . $client->mname : $client->company_name}}</td>
                         <td>
                             <a href="{{ route('debt.client.index', $client) }}" target="_blank" class="btn btn-success btn-sm mb-0">
-                                Показать долги
+                                <i class="material-icons">paid</i>
                             </a>
                         </td>
                         <td class="mb-0 text-sm">
-                            <a href="{{ route('dashboard.client.edit', $client->id) }}" class="bnt btn-warning btn-sm text-dark font-weight-bold text-xs btn-hover">
-                                Edit
+                            <a href="{{ route('dashboard.client.edit', $client->id) }}" class="btn btn-warning btn-sm">
+                                <i class="material-icons">edit</i>
                             </a>
                         </td>                        
                         <td class="mb-0 text-sm">
@@ -39,7 +41,9 @@
                                 <form action="{{ route('dashboard.client.destroy', $client->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm text-white font-weight-bold text-xs btn-hover">Delete</button>
+                                    <button class="btn btn-danger btn-sm text-white">
+                                        <i class="material-icons">delete</i>
+                                    </button>
                                 </form>
                             @endif
                         </td>

@@ -6,20 +6,20 @@
 
 <div class="card-header-primary mb-4 ">
     <div class="d-flex justify-content-between align-items-center">
-        <h3>Приход товаров</h3>
-        <a href="{{ route('dashboard.party.create') }}" class="btn btn-white btn-sm text-dark font-weight-bold"> Create </a>
+        <h3 class="m-0">Приход товаров</h3>
+        <a href="{{ route('dashboard.party.create') }}" class="btn btn-white btn-sm text-primary font-weight-bold"> Create </a>
     </div>
 </div>
 <div class="card-body  px-0 pt-0 pb-2">
     <table class="table text-center">
         <thead>
             <tr>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Дата</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Филиал</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Статус</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Посмотреть</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Удалить</th>
+                <th>#</th>
+                <th>Дата</th>
+                <th>Филиал</th>
+                <th>Статус</th>
+                <th>Посмотреть</th>
+                <th>Удалить</th>
             </tr>
         </thead>
         <tbody>

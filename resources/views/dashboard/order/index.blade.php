@@ -4,7 +4,7 @@
     <div class="card-header-primary">
         <h4 class="d-flex justify-content-between">
             <span>Заказы {{ $other_shop == 1 ? 'от других':'' }} [ {{$status_text}} ]</span>
-            <a class="btn btn-white btn-sm mb-0" href="{{route('dashboard.order.new', 1)}}">Добавить</a>
+            <a class="btn btn-white btn-sm mb-0 text-primary" href="{{route('dashboard.order.new', 1)}}">Добавить</a>
         </h4>
     </div>
     <div class="card-body">
@@ -24,8 +24,8 @@
                     <td>Всего оплачено</td>
                     <td>Место заказа</td>
                     <td>Место сбора</td>
-                    <td>СФ</td>
-                    <td>Посмотреть</td>
+                    <td></td>
+                    <td></td>
                     <td>Сборщик</td>
                     <td>Доставщик</td>
                 </tr>
@@ -46,10 +46,14 @@
                     <td>{{ $order->division->name }} </td>
                     <td>{{ $order->from_point->name }} </td>
                     <td> 
-                        <a class="btn btn-danger btn-sm mb-0" href="{{route('order.genEsf', $order->id)}}" target="_blank">Скачать</a> 
+                        <a class="btn btn-primary btn-sm mb-0" href="{{route('order.genEsf', $order->id)}}" target="_blank">
+                            <i class="material-icons">download</i>
+                        </a> 
                     </td>  
                     <td> 
-                        <a class="btn btn-danger btn-sm mb-0" href="{{route('dashboard.orders.edit', $order->id)}}">Посмотреть</a> 
+                        <a class="btn btn-primary btn-sm mb-0" href="{{route('dashboard.orders.edit', $order->id)}}">
+                            <i class="material-icons">visibility</i>
+                        </a> 
                     </td>
                     @if($status==2)
                         <td>

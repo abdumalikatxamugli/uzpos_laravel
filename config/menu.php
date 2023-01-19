@@ -4,9 +4,7 @@
  * Application menu here
  */
 
-use App\Models\RawMaterialIncomeHistory;
 use App\Models\User;
-use App\Models\Vozvrat;
 
 /**
  * MENU structure
@@ -29,21 +27,22 @@ return [
                         'title'=>'Розничный заказ',
                         'roles'=>[User::ADMIN],
                         'route'=>'dashboard.order.new',
-                        'params'=>['type'=>2]             
+                        'params'=>['type'=>"2"],
+                        'modal'=>true
                     ]
                     ,
                     [
                         'title'=>'Принятые Заказы',
                         'roles'=>[User::ADMIN],
                         'route'=> 'dashboard.orders.index',
-                        'params'=>['status'=>1]
+                        'params'=>['status'=>"1"]
                     ]
                     ,
                     [
                         'title'=>'Завершенные Заказы',
                         'roles'=>[User::ADMIN],
                         'route'=>'dashboard.orders.index',
-                        'params'=>['status'=>2]
+                        'params'=>['status'=>"2"]
                         
                     ]
                     ,
@@ -51,14 +50,14 @@ return [
                         'title'=>'Отбр. Заказы',
                         'roles'=>[User::ADMIN],
                         'route'=>'dashboard.orders.index',
-                        'params'=>['status'=>3]
+                        'params'=>['status'=>"3"]
                     ]
                     ,
                     [
                         'title'=>'Заказы от др.',
                         'roles'=>[User::ADMIN],
                         'route'=>'dashboard.orders.index',
-                        'params'=>['status'=>2, 'other_shop'=>1]
+                        'params'=>['status'=>"2", 'other_shop'=>1]
                     ]
                 ]
             ]

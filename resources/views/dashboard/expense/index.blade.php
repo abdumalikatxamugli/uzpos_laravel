@@ -4,7 +4,7 @@
 
 <div class="card-header-primary mb-4">
     <div class="d-flex justify-content-between align-items-center">
-        <h3>Расходы</h3>
+        <h3 class="m-0">Расходы</h3>
         <a href="{{ route('dashboard.expense.create') }}" class="btn btn-white btn-sm text-dark font-weight-bold"> Добавить </a>
     </div>
 </div>
@@ -12,12 +12,12 @@
     <table class="table text-center">
         <thead>
             <tr>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Дата</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Сотрудник</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Филиал</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Сумма</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Удалить</th>
+                <th>#</th>
+                <th>Дата</th>
+                <th>Сотрудник</th>
+                <th>Филиал</th>
+                <th>Сумма</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>

@@ -1,5 +1,5 @@
 @if(count($order->items) == 0)
-    <div class="alert text-danger">Нелзя оформить пустой заказ</div>
+    <div class="alert text-danger  border border-danger p-3">Нелзя оформить пустой заказ</div>
 @else
 
     @if(!$order->hasEnoughPayment())

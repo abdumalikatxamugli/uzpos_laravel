@@ -4,7 +4,7 @@
 
 <div class="card-header-primary mb-3">
     <div class="d-flex justify-content-between align-items-center">
-        <h3>Users</h3>
+        <h3 class="m-0">Users</h3>
         <a href="{{ route('dashboard.user.create') }}" class="btn btn-white btn-sm text-dark font-weight-bold"> Create </a>
     </div>
 </div>
@@ -12,10 +12,10 @@
     <table class="table text-center">
         <thead>
             <tr>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">username</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Edit</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Delete</th>
+                <th>#</th>
+                <th width="80%">username</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -24,13 +24,17 @@
                     <td>{{$number+1}}</td>
                     <td class="mb-0 text-sm">{{$user->username}}</td>
                     <td class="mb-0 text-sm">
-                        <a href="{{ route('dashboard.user.edit', $user->id) }}" class="bnt btn-warning btn-sm text-dark font-weight-bold text-xs btn-hover">Edit</a>
+                        <a href="{{ route('dashboard.user.edit', $user->id) }}" class="btn btn-sm btn-warning">
+                            <i class="material-icons">edit</i>
+                        </a>
                     </td>
                     <td class="mb-0 text-sm">
                         <form action="{{ route('dashboard.user.destroy', $user->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger btn-sm text-white font-weight-bold text-xs btn-hover">Delete</button>
+                            <button class="btn btn-danger btn-sm text-white font-weight-bold text-xs btn-hover">
+                                <i class="material-icons">delete</i>
+                            </button>
                         </form>
                     </td>
                 </tr>

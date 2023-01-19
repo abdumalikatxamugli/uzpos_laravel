@@ -27,19 +27,29 @@ class MenuItem{
                 $active = "active";
             }
         }
-        if(isset($structure['children'])){
-            $icon = "far fa-plus-square";
+        
+        
+        if(isset($structure['modal']) && $structure['modal'])
+        {
+            $anchor = <<<ANCHOR
+                <a href="#" class="nav-link" data-href="{$href}" onclick='openModal(this)'>
+                    <i class="material-icons">library_books</i>
+                    <p> {$structure['title']}</p>
+                </a>
+            ANCHOR;
         }else{
-            $icon = "fas fa-th";
+            $anchor = <<<ANCHOR
+                <a class="nav-link " href="{$href}">
+                    <i class="material-icons">library_books</i>
+                    <p> {$structure['title']}</p>
+                </a>
+            ANCHOR;
         }
         
         
         $item =  <<<ITEM
-                <li class="nav-item">
-                    <a class="nav-link {$active}" href="{$href}">
-                        <i class="material-icons">library_books</i>
-                        <p> {$structure['title']}</p>
-                    </a>
+                <li class="nav-item {$active} {$menuOpen}">
+                    $anchor
                     {$children}
                 </li>  
         ITEM;

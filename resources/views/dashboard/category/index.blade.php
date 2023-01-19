@@ -4,7 +4,7 @@
 
 <div class="card-header-primary mb-4">
     <div class="d-flex justify-content-between align-items-center">
-        <h3>Категории</h3>
+        <h3  class="m-0">Категории</h3>
         <a href="{{ route('dashboard.category.create') }}" class="btn btn-white btn-sm text-dark font-weight-bold"> Create </a>
     </div>
 </div>
@@ -12,10 +12,10 @@
     <table class="table text-center">
         <thead>
             <tr>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Edit</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Delete</th>
+                <th>#</th>
+                <th>Name</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
