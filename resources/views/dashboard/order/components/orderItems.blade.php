@@ -1,4 +1,3 @@
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
@@ -12,7 +11,7 @@
                     <th class="fs-6 text-success" width="10%">Количество</th>
                     <th class="fs-6 text-success">Цена</th>
                     <th class="fs-6 text-success">Общая цена</th>
-                    <th class="fs-6 text-success">Убрать</th>
+                    <th class="fs-6 text-success"></th>
                 </tr>
             </thead>
             <tbody>
@@ -26,7 +25,9 @@
                         <td>
                             @if($order->status == 1  && $order->shop_id == auth()->user()->point_id)
                                 <form action="{{ route('dashboard.order.item.delete', $item->id) }}">
-                                    <button class="btn btn-danger btn-sm mb-0">Убрать</button>
+                                    <button class="btn btn-danger btn-sm mb-0">
+                                        <i class="material-icons">close</i>
+                                    </button>
                                 </form>
                             @endif
                         </td>
@@ -48,7 +49,7 @@
                         <th class="fs-6 text-info" width="10%">Количество</th>
                         <th class="fs-6 text-info">Цена</th>
                         <th class="fs-6 text-info">Общая цена</th>
-                        <th class="fs-6 text-info">Убрать</th>
+                        <th class="fs-6 text-info"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,7 +76,7 @@
                             </td>
                             <td>
                                 <button type="button" class="btn btn-danger btn-sm mb-0" x-on:click="removeItem(index)">
-                                    Убрать
+                                    <i class="material-icons">close</i>
                                 </button>
                             </td>
                         </tr>
@@ -93,12 +94,14 @@
         
             <div class="d-flex align-items-center justify-content-center">
                 <button type="button" class="btn btn-info p-3" x-on:click="addItem">
-                    ещё
+                    <i class="material-icons">add</i>
                 </button>
             </div>
             <hr/>
             <div class="d-flex justify-content-end">
-                <button class="btn btn-success btn-lg">Сохранить</button>       
+                <button class="btn btn-success btn-lg">
+                    <i class="material-icons">check</i>
+                </button>       
             </div>
         </form>
     @endif

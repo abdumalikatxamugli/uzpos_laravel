@@ -97,4 +97,11 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
     //exports
 
     Route::get('reports/goods-by-division/export', [ReportContoller::class, 'goodsExport'])->name('goodsExport');
+
+
+    /**
+     * New reports
+     */
+    Route::get('reports/2/1', [ReportContoller::class, 'report_2_1'])->name('dashboard.report_2_1');
+    Route::get('reports/2/2', [ReportContoller::class, 'report_2_2'])->name('dashboard.report_2_2');
 });

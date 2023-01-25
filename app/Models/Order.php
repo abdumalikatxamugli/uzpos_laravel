@@ -17,7 +17,7 @@ class Order extends Model
      */
     public $incrementing = false;
     protected $keyType = 'string';
-   protected $table = 'uzpos_sales_order';
+    protected $table = 'uzpos_sales_order';
 
    /**
     * events 
@@ -150,7 +150,7 @@ class Order extends Model
       $shouldBePaid = $this->getTotalCost();
       $paid = $this->getTotalPaid();
       
-      if((string) $shouldBePaid == (string) $paid){
+      if((string) $shouldBePaid <= (string) $paid){
         return true;
       }
       return false;

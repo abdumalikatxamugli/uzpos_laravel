@@ -1,31 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="card-body">
+    <div class="card-header-primary">
         <h4>Заказ</h4>
-        <small>ID: {{ $order->id }}</small> <br/>
-        <small>Общая сумма: $ {{ number_format($order->getTotalCost(), 2,'.', ' ')}}</small><br/>
-        Оплачено: <br>
-                         $ {{number_format($order->getTotalPaidByCurrencyType(1),2, '.', ' ') }} в долларах
-                         <br/>
-                         $ {{number_format($order->getTotalPaidByCurrencyType(0),2, '.', ' ') }} в сумах в эквиваленте 
-                         {{number_format($order->getTotalPaidBySoums(0),2, '.', ' ') }} UZS    
-
-                        </br>    
-
-        <small>Долг: {{number_format( $order->getTotalCost() - $order->getTotalPaid(), 2, '.', ' ') }}</small><br/>
-        <div class="d-flex align-items-center" style="gap:10px">
-            <small>Статус: </small><button class="btn btn-sm btn-primary mb-0">{{$order->status_name}}</button>
-        </div>
+        <small>ID: {{ $order->id }}</small>
+    </div>
+    <div class="card-body">
+        
+        <table class="table text-center mb-5">
+            <thead class="text-primary" >
+                <tr>
+                    <th><strong>Общая сумма</strong></th>
+                    <th><strong>Оплачено</strong></th>
+                    <th><strong>Долг</strong></th>
+                    <th><strong>Статус</strong></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ number_format($order->getTotalCost(), 2,'.', ' ')}}</td>
+                    <td>{{number_format($order->getTotalPaid(),2, '.', ' ') }}</td>
+                    <td>{{number_format( $order->getTotalCost() - $order->getTotalPaid(), 2, '.', ' ') }}</td>
+                    <td><strong>{{$order->status_name}}</strong></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <hr>
     <div class="card-body">
         <h5 class="mb-5 d-flex justify-content-between">
             <b>Данные клиента</b>
             @if($order->status == 1 && $order->shop_id == auth()->user()->point_id)
-                <button class="btn btn-info mb-0 d-flex align-items-center justify-content-center" style="gap:10px;" onclick="addClient()">
-                    <i class="ni ni-circle-08" style="font-size:14px;"></i>
-                    <span >Добавить</span>
+                <button class="btn btn-info mb-0 d-flex align-items-center justify-content-center" onclick="addClient()">
+                    <span>
+                        <i class="material-icons">add</i>
+                    </span>
                 </button>
             @endif
         </h5>
@@ -74,7 +83,7 @@
         <h5 class="mb-5 d-flex justify-content-between">
             <b>Оплата</b>
         </h5>
-        <table class="table text-center mb-5">
+        <table class="table table-bordered text-center mb-5">
             <thead>
                 <tr>
                     <td>Дата оплаты</td>
@@ -111,7 +120,9 @@
                         @if($order->status == 1 && $order->shop_id == auth()->user()->point_id)
                             <form action="{{route('order.payments.delete', $payment->id)}}">
                                 @csrf
-                                <button class="btn btn-danger btn-sm mb-0">Убрать</button>
+                                <button class="btn btn-danger btn-sm mb-0">
+                                    <i class="material-icons">close</i>
+                                </button>
                             </form>
                         @endif
                     </td>
@@ -141,20 +152,20 @@
                         <tr>
                             <td>
                                 <input type="hidden" name="order_id" value="{{ $order->id }}">
-                                <input type="date" class="form-control" name="payment_date" value="{{ date('Y-m-d') }}" readonly>
+                                <input type="date" class="form-control px-2" name="payment_date" value="{{ date('Y-m-d') }}" readonly>
                             </td>
                             <td>
-                                <select id="" class="form-control" name="payment_type" >
+                                <select id="" class="form-control px-2" name="payment_type" >
                                         @foreach($payment_types as $ptype)
                                             <option value="{{ $ptype['code'] }}" {{ $ptype['code']==1?'selected':'' }} >{{ $ptype['name'] }}</option>
                                         @endforeach
                                 </select>
                             </td>
                             <td>
-                                <input type="text" class="form-control" name="amount" x-model = "amount">
+                                <input type="text" class="form-control px-2" name="amount" x-model = "amount">
                             </td>
                             <td>
-                                <select class="form-control" name="currency" x-model = "currency_type" x-on:change="if(currency_type==1){ currency_kurs=1 }">
+                                <select class="form-control px-2" name="currency" x-model = "currency_type" x-on:change="if(currency_type==1){ currency_kurs=1 }">
                                     @foreach($currencies as $ptype)
                                         <option value="{{ $ptype['code'] }}">{{ $ptype['name'] }}</option>
                                     @endforeach
@@ -162,17 +173,19 @@
                             </td>
                             <td>
                                 <template x-if="currency_type==0">
-                                    <input type="text" class="form-control" name="currency_kurs" x-model = "currency_kurs">
+                                    <input type="text" class="form-control px-2" name="currency_kurs" x-model = "currency_kurs">
                                 </template>
                                 <template x-if="currency_type==1">
-                                    <input type="text" class="form-control" name="currency_kurs" x-model = "currency_kurs" readonly>
+                                    <input type="text" class="form-control px-2" name="currency_kurs" x-model = "currency_kurs" readonly>
                                 </template>
                             </td>
                             <td>
-                                <input type="text" class="form-control" readonly name="amount_real" x-bind:value = "Math.round( amount/currency_kurs * 100 ) / 100">
+                                <input type="text" class="form-control px-2" readonly name="amount_real" x-bind:value = "Math.round( amount/currency_kurs * 100 ) / 100">
                             </td>
                             <td>
-                                <button class="btn btn-info">Сохранить</button>
+                                <button class="btn btn-info">
+                                    <i class="material-icons">check</i>
+                                </button>
                             </td>
                         </tr>
                     </tbody>
@@ -183,7 +196,9 @@
         <hr>
         <div class="row my-5 text-center" x-data="{open:false}">
             <div class="col-md-4">
-                <h5>Место сбора</h5>  
+                <h5>
+                    Место сбора
+                </h5>  
             </div>
             <div class="col-md-4">
                 <template x-if="!open">    

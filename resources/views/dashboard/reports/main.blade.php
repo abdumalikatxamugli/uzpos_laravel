@@ -1,145 +1,50 @@
 @extends('layouts.app')
 
 @section('content')
-    @if($is_warehouse)
-    <div class="card-body">
-        <h2 class="mb-5">Отчеты для складчика</h2>
-        <table class="table table-hover" border="1">
-            <tbody>
-                <tr>
-                    <td class="p-0">
-                        <a href="{{ route('dashboard.reports.goods') }}" class="d-block p-1">
-                            Остаток товаров ( по брендам/категориям )
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="p-0">
-                        <a href="{{ route('dashboard.reports.runout') }}" class="d-block p-1">
-                            Заканчивающиеся товары
-                        </a>
-                    </td>                    
-                </tr>
-                <tr>
-                    <td class="p-0">
-                        <a href="{{ route('dashboard.reports.goodsByDivision') }}" class="d-block p-1">
-                            Отчет товаров по магазинам
-                        </a>
-                    </td>                    
-                </tr>
-                <tr>
-                    <td class="p-0">
-                        <a href="{{ route('dashboard.reports.salesByProduct') }}" class="d-block p-1">
-                            Расход продуктов(Оптом / Розничный)
-                        </a>
-                    </td>                    
-                </tr>
-                <tr>
-                    <td class="p-0">
-                        <a href="{{ route('dashboard.reports.esfByPeriod') }}" class="d-block p-1">
-                            Счет-фактуры
-                        </a>
-                    </td>                    
-                </tr>
-            </tbody>
-        </table>
+    <style>
+        .report-header{
+            text-align: center;
+        }
+        .report-header i{
+            font-size: 80px;
+        }
+    </style>
+    <div class="card-header-primary mb-5">
+        <h3 class="m-0">Отчеты (Главный)</h3>
     </div>
-    @endif
-    @if($is_seller)
-    <div class="card-body">
-        <h2 class="mb-5">Отчеты для магазина</h2>
-        <table class="table table-hover" border="1">
-            <tbody>
-                <tr>
-                    <td class="p-0">
-                        <a href="{{ route('dashboard.reports.goods') }}" class="d-block p-1">
-                            Остаток товара в магазине ( по брендам/категориям )
+    <div class="card-body pt-3">
+        <h3 class="text-secondary">Отчеты по продаже</h3>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header pt-3">
+                        <div class="report-header">
+                            <i class="material-icons">document_scanner</i>
+                        </div>
+                    </div>
+                    <div class="card-body text-center">
+                        <hr>
+                        <a class="text-primary text-title" href="{{route('dashboard.report_2_1')}}">
+                            <h4>КАССА (2.1)</h4>
                         </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="p-0">
-                        <a href="{{ route('dashboard.reports.runout') }}" class="d-block p-1">
-                            Заканчивающиеся товары в магазине 
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header pt-3">
+                        <div class="report-header">
+                            <i class="material-icons">document_scanner</i>
+                        </div>
+                    </div>
+                    <div class="card-body text-center">
+                        <hr>
+                        <a class="text-primary text-title" href="{{route('dashboard.report_2_2')}}">
+                            <h4>Счёт-фактуры (2.2)</h4>
                         </a>
-                    </td>                    
-                </tr>
-                <tr>
-                    <td class="p-0">
-                        <a href="{{ route('dashboard.reports.esfByPeriod') }}" class="d-block p-1">
-                            Список счет-фактур(только текуший магазин)
-                        </a>
-                    </td>                    
-                </tr>
-                <tr>
-                    <td class="p-0">
-                        <a href="{{ route('dashboard.reports.debts') }}" class="d-block p-1">
-                            Список долгов клиентов
-                        </a>
-                    </td>                    
-                </tr>
-                <tr>
-                    <td class="p-0">
-                        <a href="{{ route('dashboard.reports.expenses') }}" class="d-block p-1">
-                            Расход магазина
-                        </a>
-                    </td> 
-                </tr>
-                <tr>
-                    <td class="p-0">
-                        <a href="{{ route('dashboard.reports.salesByOrderType') }}" class="d-block p-1">
-                            Продажа магазина (Оптом / Розничный)
-                        </a>
-                    </td>                    
-                </tr>
-                <tr>
-                    <td class="p-0">
-                        <a href="{{ route('dashboard.reports.salesByProduct') }}" class="d-block p-1">
-                            Продажа магазина по продуктам(Оптом / Розничный)
-                        </a>
-                    </td>                    
-                </tr>
-                
-                
-            </tbody>
-        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    @endif
-    @if($is_admin)
-    <div class="card-body">
-        <h2 class="mb-5">Отчеты (Главный)</h2>
-        <table class="table table-hover" border="1">
-            <tbody>
-                <tr>
-                    <td class="p-0">
-                        <a href="{{ route('dashboard.reports.goods') }}" class="d-block p-1">
-                            Остаток по товарам (Имеющиеся/Заканчивающиеся/ по брендам/категориям )
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="p-0">
-                        <a href="{{ route('dashboard.reports.salesByPoint') }}" class="d-block p-1">
-                            Отчет по продаже(по периоду/по магазину) 
-                        </a>
-                    </td>                    
-                </tr>
-                <tr>
-                    <td class="p-0">
-                        <a href="{{ route('dashboard.reports.clients') }}" class="d-block p-1">
-                            Статистика по клиентам(по заказам/по обёму)
-                        </a>
-                    </td>                    
-                </tr>
-                <tr>
-                    <td class="p-0">
-                        <a href="{{ route('dashboard.reports.esfByPeriod') }}" class="d-block p-1">
-                            Cчет-фактур(по номеру/по периоду/по клиенту)
-                        </a>
-                    </td>                    
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    @endif
 @endsection

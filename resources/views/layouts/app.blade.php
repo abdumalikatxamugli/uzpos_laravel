@@ -28,6 +28,11 @@ The above copyright notice and this permission notice shall be included in all c
   <link href="{{asset('assets2/css/material-dashboard.css?v=2.1.2')}}" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="{{asset('assets2/demo/demo.css')}}" rel="stylesheet" />
+  
+  <!--   Core JS Files   -->
+  <script src="{{asset('assets2/js/core/jquery.min.js')}}"></script>
+  <script src="{{asset('assets2/js/core/popper.min.js')}}"></script>
+  <script src="{{asset('alpine.min.js')}}" defer></script>
   <style>
     .my-nav-treeview{
       display: none;
@@ -187,9 +192,6 @@ The above copyright notice and this permission notice shall be included in all c
     </div>
   </div>
   
-  <!--   Core JS Files   -->
-  <script src="{{asset('assets2/js/core/jquery.min.js')}}"></script>
-  <script src="{{asset('assets2/js/core/popper.min.js')}}"></script>
   <script src="{{asset('assets2/js/core/bootstrap-material-design.min.js')}}"></script>
   <script src="{{asset('assets2/js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
   <!-- Plugin for the momentJs  -->
