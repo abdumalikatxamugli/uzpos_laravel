@@ -51,4 +51,47 @@ class ReportContoller extends Controller
         $result = DB::select($sql);
         return view('dashboard.reports.report2_2')->with('result',$result);
     }
+    public function report_2_3()
+    {
+        $sql = "select up.name as point_name, p.name as product_name, 
+                        sum(oi.quantity) as total_quantity, 
+                        p.bar_code, 
+                        sum(oi.quantity * oi.price) as total_price
+
+                        from uzpos_core_point up
+                        join uzpos_sales_order uo on uo.from_point_id = up.id
+                        join uzpos_sales_orderitem oi on oi.order_id = uo.id
+                        join uzpos_core_product p on p.id = oi.product_id
+                
+                group by up.name, p.name, p.bar_code;";
+        $result = DB::select($sql);
+        return view('dashboard.reports.report2_3')->with('result',$result);
+    }
+    public function report_2_4()
+    {
+        $sql = "select up.name as point_name, p.name as product_name, 
+                                    sum(oi.quantity) as total_quantity, 
+                                    p.bar_code, 
+                                    sum(oi.quantity * oi.price) as total_price,
+                                    date(uo.created_at) as order_day
+                                    from uzpos_core_point up
+                                    join uzpos_sales_order uo on uo.from_point_id = up.id
+                                    join uzpos_sales_orderitem oi on oi.order_id = uo.id
+                                    join uzpos_core_product p on p.id = oi.product_id
+
+                            group by up.name, p.name, p.bar_code, date(uo.created_at)
+                            order by uo.created_at asc;";
+        $result = DB::select($sql);
+        return view('dashboard.reports.report2_4')->with('result',$result);
+    }
+    public function report_2_5()
+    {
+        $sql = "select up.name, date(e.created_at) as expense_day, sum(e.amount) as point_name
+                       from uzpos_core_point up
+                       join expenses e on e.division_id = up.id
+                       group by up.name, date(e.created_at)
+                       order by date(e.created_at) asc;";
+        $result = DB::select($sql);
+        return view('dashboard.reports.report2_5')->with('result',$result);
+    }
 }
