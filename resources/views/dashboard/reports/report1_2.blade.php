@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="card-header-primary">
-        Отчеты по продажам - по рознице ( 2.3 ) 
+        Материальные отчёты - Заканчивающиеся товары (1.2)
     </div>
     <div class="card-body">
         <table class="table table-hover text-center">
@@ -13,32 +13,27 @@
                 <tr class="text-secondary ">
                     <th>
                         <small>
-                        ТОЧКА
+                        Филиал
                         </small>
                     </th>
                     <th>
                         <small>
-                        НАИМЕНОВАНИЕ
+                        Продукт
                         </small>
                     </th>
                     <th>
                         <small>
-                         ШТ
+                        Количество
                         </small>
                     </th>
                     <th>
                         <small>
-                        ШТРИХ-КОД
+                        Категория
                         </small>
                     </th>
                     <th>
-                        <small>   
-                        СУММА
-                        </small>
-                    </th>
-                    <th>
-                        <small>   
-                        ДАТА
+                        <small>
+                        Бренд
                         </small>
                     </th>
                 </tr>
@@ -48,10 +43,9 @@
                 <tr>
                     <td>{{$r->point_name}}</td>
                     <td>{{$r->product_name}}</td>
-                    <td>{{$r->total_quantity}}</td>
-                    <td>{{$r->bar_code}}</td>
-                    <td>{{$r->total_price}}</td>
-                    <td>{{$r->created_day}}</td>               
+                    <td>{{$r->total_count}}</td>
+                    <td>{{$r->category_name ?? '-'}}</td>
+                    <td>{{$r->brand_name ?? '-'}}</td>              
                 </tr>
                 @endforeach
             </tbody>

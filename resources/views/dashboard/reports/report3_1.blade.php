@@ -3,42 +3,30 @@
 @section('content')
 
     <div class="card-header-primary">
-        Отчеты по продажам - по рознице ( 2.3 ) 
+        Отчёты по клиентам - Клиенты (3.1)
     </div>
     <div class="card-body">
         <table class="table table-hover text-center">
             <thead>
-            						
-
                 <tr class="text-secondary ">
                     <th>
                         <small>
-                        ТОЧКА
+                        ИМЯ
                         </small>
                     </th>
                     <th>
                         <small>
-                        НАИМЕНОВАНИЕ
+                        ID
                         </small>
                     </th>
                     <th>
                         <small>
-                         ШТ
+                        РЕГИОН
                         </small>
                     </th>
                     <th>
                         <small>
-                        ШТРИХ-КОД
-                        </small>
-                    </th>
-                    <th>
-                        <small>   
-                        СУММА
-                        </small>
-                    </th>
-                    <th>
-                        <small>   
-                        ДАТА
+                        КОНТАКТ
                         </small>
                     </th>
                 </tr>
@@ -46,12 +34,10 @@
             <tbody>
                 @foreach($result as $r)
                 <tr>
-                    <td>{{$r->point_name}}</td>
-                    <td>{{$r->product_name}}</td>
-                    <td>{{$r->total_quantity}}</td>
-                    <td>{{$r->bar_code}}</td>
-                    <td>{{$r->total_price}}</td>
-                    <td>{{$r->created_day}}</td>               
+                    <td>{{$r->client_name}}</td>
+                    <td>{{$r->id}}</td>
+                    <td>{{$r->region_id??'-'}}</td>
+                    <td>{{$r->phone_number ?? '-'}}</td>            
                 </tr>
                 @endforeach
             </tbody>

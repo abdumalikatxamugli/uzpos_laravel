@@ -3,42 +3,45 @@
 @section('content')
 
     <div class="card-header-primary">
-        Отчеты по продажам - по рознице ( 2.3 ) 
+        Отчёты по клиентам - Долги клиенты (3.2)
     </div>
     <div class="card-body">
         <table class="table table-hover text-center">
             <thead>
-            						
-
                 <tr class="text-secondary ">
                     <th>
                         <small>
-                        ТОЧКА
+                        ИМЯ
                         </small>
                     </th>
                     <th>
                         <small>
-                        НАИМЕНОВАНИЕ
+                        ID
                         </small>
                     </th>
                     <th>
                         <small>
-                         ШТ
+                        РЕГИОН
                         </small>
                     </th>
                     <th>
                         <small>
-                        ШТРИХ-КОД
+                        КОНТАКТ
                         </small>
                     </th>
                     <th>
-                        <small>   
-                        СУММА
+                        <small>
+                        СУММА ДОЛГА
                         </small>
                     </th>
                     <th>
-                        <small>   
+                        <small>
                         ДАТА
+                        </small>
+                    </th>
+                    <th>
+                        <small>
+                        ТОЧКА ПРОДАЖ
                         </small>
                     </th>
                 </tr>
@@ -46,12 +49,13 @@
             <tbody>
                 @foreach($result as $r)
                 <tr>
-                    <td>{{$r->point_name}}</td>
-                    <td>{{$r->product_name}}</td>
-                    <td>{{$r->total_quantity}}</td>
-                    <td>{{$r->bar_code}}</td>
-                    <td>{{$r->total_price}}</td>
-                    <td>{{$r->created_day}}</td>               
+                    <td>{{$r->client_name}}</td>
+                    <td>{{$r->id}}</td>
+                    <td>{{$r->region_id??'-'}}</td>
+                    <td>{{$r->phone_number ?? '-'}}</td>  
+                    <td>{{$r->amount }}</td>   
+                    <td>{{$r->order_day }}</td>   
+                    <td>{{$r->point_name }}</td>             
                 </tr>
                 @endforeach
             </tbody>

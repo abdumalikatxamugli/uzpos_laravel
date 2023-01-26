@@ -94,4 +94,114 @@ class ReportContoller extends Controller
         $result = DB::select($sql);
         return view('dashboard.reports.report2_5')->with('result',$result);
     }
+
+    /**
+     * Material reports
+     */
+    public function report_1_1()
+    {
+        $sql = "select  up.name as point_name,
+                        p.name as product_name,
+                        sum(upp.quantity) as total_count,
+                        c.name as category_name,
+                        b.name as brand_name
+                                from uzpos_core_point up
+                                join uzpos_core_pointproduct upp on upp.point_id = up.id
+                                join uzpos_core_product p on p.id = upp.product_id
+                                left join uzpos_core_category c on c.id = p.category_id
+                                left join uzpos_core_brand b on b.id = p.brand_id
+                                
+                                group by up.name,  p.name, c.name, b.name
+                                order by p.name asc;";
+        $result = DB::select($sql);
+        return view('dashboard.reports.report1_1')->with('result',$result);
+    }
+    public function report_1_2()
+    {
+        $sql = "select  up.name as point_name,
+                        p.name as product_name,
+                        sum(upp.quantity) as total_count,
+                        c.name as category_name,
+                        b.name as brand_name
+                                from uzpos_core_point up
+                                join uzpos_core_pointproduct upp on upp.point_id = up.id
+                                join uzpos_core_product p on p.id = upp.product_id
+                                left join uzpos_core_category c on c.id = p.category_id
+                                left join uzpos_core_brand b on b.id = p.brand_id
+                                
+                                group by up.name,  p.name, c.name, b.name
+                                having sum(upp.quantity) < 10
+                                order by p.name asc;";
+        $result = DB::select($sql);
+        return view('dashboard.reports.report1_2')->with('result',$result);
+    }
+    public function report_1_3()
+    {
+        $sql = "select  up.name as point_name,
+                        p.name as product_name,
+                        sum(upp.quantity) as total_count,
+                        c.name as category_name,
+                        b.name as brand_name
+                                from uzpos_core_point up
+                                join uzpos_core_pointproduct upp on upp.point_id = up.id
+                                join uzpos_core_product p on p.id = upp.product_id
+                                left join uzpos_core_category c on c.id = p.category_id
+                                left join uzpos_core_brand b on b.id = p.brand_id
+                                
+                                group by up.name,  p.name, c.name, b.name
+                                having sum(upp.quantity) = 0
+                                order by p.name asc;";
+        $result = DB::select($sql);
+        return view('dashboard.reports.report1_3')->with('result',$result);
+    }
+    public function report_1_4()
+    {
+        $sql = "select up.name as point_name, p.name as product_name, 
+                                    sum(oi.quantity) as total_quantity, 
+                                    p.bar_code, 
+                                    sum(oi.quantity * oi.price) as total_price,
+                                    date(uo.created_at) as order_day
+                                    from uzpos_core_point up
+                                    join uzpos_sales_order uo on uo.from_point_id = up.id
+                                    join uzpos_sales_orderitem oi on oi.order_id = uo.id
+                                    join uzpos_core_product p on p.id = oi.product_id
+
+                            group by up.name, p.name, p.bar_code, date(uo.created_at)
+                            order by uo.created_at asc;";
+        $result = DB::select($sql);
+        return view('dashboard.reports.report1_4')->with('result',$result);
+    }
+    
+    /**
+     * Client report
+     */
+    public function report_3_1()
+    {
+        $sql = "select case c.client_type when 0 then concat(c.lname, ' ', c.fname, ' ', c.mname) else c.company_name end as client_name,
+                            c.id,
+                            c.region,
+                            c.phone_number
+                                from uzpos_sales_client c 
+                                order by client_name asc;";
+        $result = DB::select($sql);
+        return view('dashboard.reports.report3_1')->with('result',$result);
+    }
+    public function report_3_2()
+    {
+        $sql = "select case c.client_type when 0 then concat(c.lname, ' ', c.fname, ' ', c.mname) else c.company_name end as client_name,
+                            c.id,
+                            c.region,
+                            c.phone_number,
+                            p.amount,
+                            date(o.created_at) as order_day,
+                            up.name as point_name
+                                from uzpos_sales_client c 
+                                join uzpos_sales_order o on o.client_id = c.id
+                                join uzpos_core_point up on up.id =o.from_point_id 
+                                join uzpos_sales_payment p on p.order_id = o.id and p.payment_type = 3
+                                
+                                order by client_name asc;";
+        $result = DB::select($sql);
+        return view('dashboard.reports.report3_2')->with('result',$result);
+    }
 }
