@@ -51,7 +51,7 @@
                     <td>{{$r->total_quantity}}</td>
                     <td>{{$r->bar_code}}</td>
                     <td>{{$r->total_price}}</td>
-                    <td>{{$r->created_day}}</td>               
+                    <td>{{$r->order_day}}</td>               
                 </tr>
                 @endforeach
             </tbody>

@@ -86,7 +86,7 @@ class ReportContoller extends Controller
     }
     public function report_2_5()
     {
-        $sql = "select up.name, date(e.created_at) as expense_day, sum(e.amount) as point_name
+        $sql = "select up.name as point_name, date(e.created_at) as expense_day, sum(e.amount) as total_sum
                        from uzpos_core_point up
                        join expenses e on e.division_id = up.id
                        group by up.name, date(e.created_at)

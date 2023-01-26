@@ -31,11 +31,9 @@
             <tbody>
                 @foreach($result as $r)
                 <tr>
-                    <td>{{$r->point_name}}</td>
-                    <td>{{$r->expense_day}}</td>
-                    <td>{{$r->total_quantity}}</td>
-                    <td>{{$r->bar_code}}</td>
-                    <td>{{$r->total_price}}</td>              
+                    <td>{{$r->point_name}}</td>                    
+                    <td>{{$r->total_sum}}</td>
+                    <td>{{$r->expense_day}}</td>           
                 </tr>
                 @endforeach
             </tbody>
