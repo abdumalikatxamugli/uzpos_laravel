@@ -15,7 +15,7 @@
             <div class="card-footer">
                 <div class="stats">
                 <i class="material-icons">paid</i>
-                <span>Продано за день</span>
+                <span>Продано </span>
                 <span>{{$most_sold_product_count}} штук</span>
                 </div>
             </div>
