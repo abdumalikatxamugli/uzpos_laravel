@@ -9,14 +9,14 @@
                 <i class="material-icons">star</i>
                 </div>
                 <p class="card-category">Самый продаваемый товар</p>
-                <h3 class="card-title">Iphone 11
+                <h3 class="card-title">{{$most_sold_product_name}}
                 </h3>
             </div>
             <div class="card-footer">
                 <div class="stats">
                 <i class="material-icons">paid</i>
                 <span>Продано за день</span>
-                <span>54 штук</span>
+                <span>{{$most_sold_product_count}} штук</span>
                 </div>
             </div>
             </div>
