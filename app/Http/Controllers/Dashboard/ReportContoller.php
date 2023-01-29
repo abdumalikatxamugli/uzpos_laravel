@@ -3,14 +3,8 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\Expense;
-use App\Models\Order;
-use App\Models\PointProduct;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Exports\goodReportExport;
-use Maatwebsite\Excel\Facades\Excel;
+use Shuchkin\SimpleXLSXGen;
 
 use function PHPUnit\Framework\isNull;
 
@@ -29,6 +23,27 @@ class ReportContoller extends Controller
                         group by up.name, date(uo.created_at), total_expense;";
         $result = DB::select($sql);
         return view('dashboard.reports.report2_1')->with('result',$result);
+    }
+    public function report_2_1_download()
+    {
+        $sql = "select up.name as point_name, date(uo.created_at) as created_date, sum(ui.price*ui.quantity) as total_cost,
+                        (select sum(e.amount) from expenses e where e.division_id = uo.from_point_id) as total_expense,
+                        sum(case p.currency when 0 then p.amount else 0 end) as uzs_payment,
+                        sum(case p.currency when 1 then p.amount else 0 end) as usd_payment
+                        from uzpos_core_point up 
+                        join uzpos_sales_order uo on uo.from_point_id = up.id and uo.status=2
+                        join uzpos_sales_orderitem ui on ui.order_id = uo.id 
+                        join uzpos_sales_payment p on p.order_id = uo.id                    
+                        group by up.name, date(uo.created_at), total_expense;";
+        $result = DB::select($sql);
+        $headers = ["КАССА ТОЧКЕ", "ДАТА", "ОБШИЙ СУММА", "РАСХОД", "СУМ", "ДОЛЛАР"];
+        $data = [$headers];
+        foreach($result as $row)
+        {
+            $data[] = array_values((array) $row);
+        }
+        $xlsx = SimpleXLSXGen::fromArray($data);
+        return $xlsx->downloadAs('report.xlsx');
     }
     public function report_2_2()
     {

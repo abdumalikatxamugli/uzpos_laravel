@@ -24,44 +24,6 @@
                 </tr>
             </tbody>
         </table>
-    
-        <h4 class="my-5 d-flex justify-content-between">
-            <b class="text-primary">Данные клиента</b>
-            @if($order->status == 1 && $order->shop_id == auth()->user()->point_id)
-                <button class="btn btn-primary text-white mb-0 d-flex align-items-center justify-content-center" style="gap:10px;" onclick="addClient()">
-                    <span>
-                        <i class="material-icons">add</i>
-                    </span>
-                </button>
-            @endif
-        </h4>
-        
-        <div class="row text-center">
-            <div class="col-md-4">
-                <h6 class="text-primary">Тип клиента</h6>
-                <hr/>
-                <b>{{$order->client? $order->client->client_type_name : '' }}</b>
-            </div>
-            <div class="col-md-3">
-                <h6 class="text-primary">ФИО/Название</h6>
-                <hr/>
-                <b>{{$order->getClientFullName()}}</b>
-            </div>
-            <div class="col-md-3">
-                <h6 class="text-primary">Реквизиты</h6>
-                <hr/>
-                <b>{{$order->client ? $order->client->getClientCredentials() : ''}}</b>
-            </div>
-            <div class="col-md-2">
-                <h6 class="text-primary">Долги</h6>
-                <hr/>
-                @if($order->client)
-                    <a href="{{ route('debt.client.index', $order->client->id) }}" class="btn btn-link mb-0 btn-sm text-danger" target="_blank">
-                        Посмотреть историю долгов
-                    </a>
-                @endif
-            </div>
-        </div>
     </div>
     <hr>
     <div class="card-body my-5">

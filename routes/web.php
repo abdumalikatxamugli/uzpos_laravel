@@ -103,6 +103,7 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
      * New reports
      */
     Route::get('reports/2/1', [ReportContoller::class, 'report_2_1'])->name('dashboard.report_2_1');
+    Route::get('reports/2/1/download', [ReportContoller::class, 'report_2_1_download'])->name('dashboard.report_2_1_download');
     Route::get('reports/2/2', [ReportContoller::class, 'report_2_2'])->name('dashboard.report_2_2');
     Route::get('reports/2/3', [ReportContoller::class, 'report_2_3'])->name('dashboard.report_2_3');
     Route::get('reports/2/4', [ReportContoller::class, 'report_2_4'])->name('dashboard.report_2_4');

@@ -8,15 +8,14 @@
                 <div class="card-icon">
                 <i class="material-icons">star</i>
                 </div>
-                <p class="card-category">Самый продаваемый товар</p>
-                <h3 class="card-title">{{$most_sold_product_name}}
+                <p class="card-category">Количество заказов за день</p>
+                <h3 class="card-title">{{$order_count}}
                 </h3>
             </div>
             <div class="card-footer">
                 <div class="stats">
-                <i class="material-icons">paid</i>
-                <span>Продано </span>
-                <span>{{$most_sold_product_count}} штук</span>
+                    <i class="material-icons">date_range</i>
+                    <span>{{date('d.m.Y')}}</span>
                 </div>
             </div>
             </div>
@@ -27,12 +26,13 @@
                 <div class="card-icon">
                 <i class="material-icons">store</i>
                 </div>
-                <p class="card-category">Прыбил</p>
-                <h3 class="card-title">$34,245</h3>
+                <p class="card-category">Поступления</p>
+                <h3 class="card-title">$ {{ number_format( $payment_total , 2, ".", "" ) }}</h3>
             </div>
             <div class="card-footer">
                 <div class="stats">
-                <i class="material-icons">date_range</i> За последные 24 часа
+                    <i class="material-icons">date_range</i> 
+                    <span>{{date('d.m.Y')}}</span>
                 </div>
             </div>
             </div>
@@ -44,12 +44,12 @@
                 <i class="material-icons">money_off</i>
                 </div>
                 <p class="card-category">Расходы</p>
-                <h3 class="card-title">$ 75</h3>
+                <h3 class="card-title">$ {{ number_format($expense_total, 2, ".", " ") }}</h3>
             </div>
             <div class="card-footer">
                 <div class="stats">
-                <i class="material-icons">store</i>
-                <span>Больше всех тратит Ташкентский городской филиал</span>
+                    <i class="material-icons">date_range</i>
+                    <span>{{date('d.m.Y')}}</span>
                 </div>
             </div>
             </div>
@@ -61,11 +61,12 @@
                 <i class="fa fa-money"></i>
                 </div>
                 <p class="card-category">Долги</p>
-                <h3 class="card-title">$245</h3>
+                <h3 class="card-title">$ {{ number_format($debt_total, 2, ".", " ") }}</h3>
             </div>
             <div class="card-footer">
                 <div class="stats">
-                <i class="material-icons">date_range</i> За последные 24 часа
+                    <i class="material-icons">date_range</i>
+                    <span>{{date('d.m.Y')}}</span>
                 </div>
             </div>
             </div>
@@ -78,15 +79,14 @@
                 <div class="ct-chart" id="dailySalesChart"></div>
             </div>
             <div class="card-body">
-                <h4 class="card-title">Продажи</h4>
+                <h4 class="card-title">Test</h4>
                 <p class="card-category">
-                <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span>
-                    рост за последнею неделю
+                    test
                 </p>
             </div>
             <div class="card-footer">
                 <div class="stats">
-                <i class="material-icons">access_time</i> обновлено сейчас
+                <i class="material-icons">access_time</i> 
                 </div>
             </div>
             </div>
@@ -97,12 +97,12 @@
                 <div class="ct-chart" id="websiteViewsChart"></div>
             </div>
             <div class="card-body">
-                <h4 class="card-title">Продажи по филиалам</h4>
-                <p class="card-category">По объёму</p>
+                <h4 class="card-title">Test</h4>
+                <p class="card-category">Test</p>
             </div>
             <div class="card-footer">
                 <div class="stats">
-                <i class="material-icons">access_time</i> обновлено сейчас
+                <i class="material-icons">access_time</i>
                 </div>
             </div>
             </div>
@@ -113,12 +113,12 @@
                 <div class="ct-chart" id="completedTasksChart"></div>
             </div>
             <div class="card-body">
-                <h4 class="card-title">Долги</h4>
-                <p class="card-category">За последнею неделю</p>
+                <h4 class="card-title">Test</h4>
+                <p class="card-category">Test</p>
             </div>
             <div class="card-footer">
                 <div class="stats">
-                <i class="material-icons">access_time</i> обновлено сейчас
+                <i class="material-icons">access_time</i>
                 </div>
             </div>
             </div>
