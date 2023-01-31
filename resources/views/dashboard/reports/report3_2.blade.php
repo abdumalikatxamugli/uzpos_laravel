@@ -2,8 +2,11 @@
 
 @section('content')
 
-    <div class="card-header-primary">
+    <div class="card-header-primary d-flex justify-content-between">
         Отчёты по клиентам - Долги клиенты (3.2)
+        <a href="{{route('dashboard.report_3_2_download')}}" class="btn btn-primary bg-white text-primary">
+            <i class="material-icons">download</i>
+        </a>
     </div>
     <div class="card-body">
         <table class="table table-hover text-center">

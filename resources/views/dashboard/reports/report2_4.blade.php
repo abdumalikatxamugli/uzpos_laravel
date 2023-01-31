@@ -2,8 +2,11 @@
 
 @section('content')
 
-    <div class="card-header-primary">
-        Отчеты по продажам - по рознице ( 2.3 ) 
+    <div class="card-header-primary d-flex justify-content-between">
+        Отчеты по продажам - по рознице ( 2.4 ) 
+        <a href="{{route('dashboard.report_2_4_download')}}" class="btn btn-primary bg-white text-primary">
+            <i class="material-icons">download</i>
+        </a>
     </div>
     <div class="card-body">
         <table class="table table-hover text-center">

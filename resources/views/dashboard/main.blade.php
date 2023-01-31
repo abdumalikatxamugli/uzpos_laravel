@@ -72,7 +72,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row d-none">
         <div class="col-md-4">
             <div class="card card-chart">
             <div class="card-header card-header-success">
@@ -124,7 +124,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row d-none">
         <div class="col-lg-6 col-md-12">
             <div class="card">
             <div class="card-header card-header-tabs card-header-primary">
