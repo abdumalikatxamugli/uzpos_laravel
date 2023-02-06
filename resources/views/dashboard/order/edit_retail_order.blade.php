@@ -148,14 +148,14 @@
                     return {
                         payment_type: 1,
                         currency: 1,
-                        currency_rate:1,
+                        currency_kurs:1,
                         amount:0,
                         amount_real:0,
                         payed_amount: 0,
                         change_amount:0,
                         setAmount:function(){
                             this.amount = this.payed_amount - this.change_amount;
-                            this.amount_real = this.amount / this.currency_rate;
+                            this.amount_real = this.amount / this.currency_kurs;
                         }
                     }
                 }
