@@ -122,7 +122,7 @@
                                 </select>
                             </td>
                             <td>
-                                <input type="number" step="0.01" name="currency_kurs" class="form-control">
+                                <input type="number" step="0.01" name="currency_kurs" class="form-control" x-model="currency_kurs">
                             </td>
                             <td>
                                 <input type="number" step="0.01" name="payed_amount" class="form-control" x-model="payed_amount" x-on:change="setAmount()">
