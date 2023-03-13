@@ -87,17 +87,27 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
     Route::get('reports/2/1/download', [ReportContoller::class, 'report_2_1_download'])->name('dashboard.report_2_1_download');
 
     Route::get('reports/2/2', [ReportContoller::class, 'report_2_2'])->name('dashboard.report_2_2');
+    Route::get('reports/2/2/download', [ReportContoller::class, 'report_2_2_download'])->name('dashboard.report_2_2_download');
     Route::get('reports/2/3', [ReportContoller::class, 'report_2_3'])->name('dashboard.report_2_3');
+    Route::get('reports/2/3/download', [ReportContoller::class, 'report_2_3_download'])->name('dashboard.report_2_3_download');
     Route::get('reports/2/4', [ReportContoller::class, 'report_2_4'])->name('dashboard.report_2_4');
+    Route::get('reports/2/4/download', [ReportContoller::class, 'report_2_4_download'])->name('dashboard.report_2_4_download');
     Route::get('reports/2/5', [ReportContoller::class, 'report_2_5'])->name('dashboard.report_2_5');
+    Route::get('reports/2/5/download', [ReportContoller::class, 'report_2_5_download'])->name('dashboard.report_2_5_download');
 
 
     Route::get('reports/1/1', [ReportContoller::class, 'report_1_1'])->name('dashboard.report_1_1');
+    Route::get('reports/1/1/download', [ReportContoller::class, 'report_1_1_download'])->name('dashboard.report_1_1_download');
     Route::get('reports/1/2', [ReportContoller::class, 'report_1_2'])->name('dashboard.report_1_2');
+    Route::get('reports/1/2/download', [ReportContoller::class, 'report_1_2_download'])->name('dashboard.report_1_2_download');
     Route::get('reports/1/3', [ReportContoller::class, 'report_1_3'])->name('dashboard.report_1_3');
+    Route::get('reports/1/3/download', [ReportContoller::class, 'report_1_3_download'])->name('dashboard.report_1_3_download');
     Route::get('reports/1/4', [ReportContoller::class, 'report_1_4'])->name('dashboard.report_1_4');
+    Route::get('reports/1/4/download', [ReportContoller::class, 'report_1_4_download'])->name('dashboard.report_1_4_download');
 
 
     Route::get('reports/3/1', [ReportContoller::class, 'report_3_1'])->name('dashboard.report_3_1');
+    Route::get('reports/3/1/download', [ReportContoller::class, 'report_3_1_download'])->name('dashboard.report_3_1_download');
     Route::get('reports/3/2', [ReportContoller::class, 'report_3_2'])->name('dashboard.report_3_2');
+    Route::get('reports/3/2/download', [ReportContoller::class, 'report_3_2_download'])->name('dashboard.report_3_2_download');
 });

@@ -89,16 +89,15 @@
         @if($order->status == 1 && $order->shop_id == auth()->user()->point_id)
             <form action="{{route('order.append.payments')}}" method="POST">
                 @csrf
-                <div x-data="{currency_type:1, currency_kurs: 1, amount:{{ round( $order->getTotalCost() - $order->getTotalPaid() , 2) }} }">
+                <div x-data="paymentManager()">
                     <table class="table text-center">
                         <thead class="text-primary text-center">
                             <tr>
-                                <th>Дата оплаты</th>
                                 <th>Тип оплаты</th>
-                                <th>Сумма</th>
                                 <th>Валюта</th>
                                 <th>Курс</th>
-                                <th>Сумма в долларах</th>
+                                <th>Оплчено</th>
+                                <th>Сдачи</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -107,35 +106,31 @@
                         <tr>
                             <td>
                                 <input type="hidden" name="order_id" value="{{ $order->id }}">
-                                <input type="date" class="form-control px-2" name="payment_date" value="{{ date('Y-m-d') }}" readonly>
-                            </td>
-                            <td>
-                                <select class="form-control px-2" name="payment_type" >
+                                <input type="hidden" class="form-control px-2" name="payment_date" value="{{ date('Y-m-d') }}" readonly>
+                            
+                                <select class="form-control px-2" name="payment_type" x-model="payment_type">
                                         @foreach($payment_types as $ptype)
                                             <option value="{{ $ptype['code'] }}" {{ $ptype['code']==1?'selected':'' }} >{{ $ptype['name'] }}</option>
                                         @endforeach
                                 </select>
                             </td>
                             <td>
-                                <input type="text" class="form-control" name="amount" x-model = "amount">
-                            </td>
-                            <td>
-                                <select class="form-control px-2" name="currency" x-model = "currency_type" x-on:change="if(currency_type==1){ currency_kurs=1 }">
+                                <select class="form-control px-2" name="currency" x-model="currency">
                                     @foreach($currencies as $ptype)
                                         <option value="{{ $ptype['code'] }}">{{ $ptype['name'] }}</option>
                                     @endforeach
                                 </select>
                             </td>
                             <td>
-                                <template x-if="currency_type==0">
-                                    <input type="text" class="form-control px-2" name="currency_kurs" x-model = "currency_kurs">
-                                </template>
-                                <template x-if="currency_type==1">
-                                    <input type="text" class="form-control px-2" name="currency_kurs" x-model = "currency_kurs" readonly>
-                                </template>
+                                <input type="number" step="0.01" name="currency_kurs" class="form-control" x-model="currency_kurs">
                             </td>
                             <td>
-                                <input type="text" class="form-control px-2" readonly name="amount_real" x-bind:value = "Math.round( amount/currency_kurs * 100 ) / 100">
+                                <input type="number" step="0.01" name="payed_amount" class="form-control" x-model="payed_amount" x-on:change="setAmount()">
+                            </td>
+                            <td>
+                                <input type="number" step="0.01" name="change_amount" class="form-control" x-model="change_amount" x-on:change="setAmount()">
+                                <input type="hidden" name="amount" x-model="amount">
+                                <input type="hidden" name="amount_real" x-model="amount_real">
                             </td>
                             <td>
                                 <button class="btn btn-primary">
@@ -147,6 +142,24 @@
                     </table>
                 </div>           
             </form> 
+            <script>
+                function paymentManager()
+                {
+                    return {
+                        payment_type: 1,
+                        currency: 1,
+                        currency_kurs:1,
+                        amount:0,
+                        amount_real:0,
+                        payed_amount: 0,
+                        change_amount:0,
+                        setAmount:function(){
+                            this.amount = this.payed_amount - this.change_amount;
+                            this.amount_real = this.amount / this.currency_kurs;
+                        }
+                    }
+                }
+            </script>
         @endif
         <hr>
         @if($order->status == 1 && $order->shop_id == auth()->user()->point_id)

@@ -31,6 +31,8 @@ class StoreRequest extends FormRequest
             'currency'=>'required',
             'currency_kurs'=>'required',
             'amount_real'=>'required',
+            'payed_amount'=>'required',
+            'change_amount'=>'required'
         ];
     }
 }
