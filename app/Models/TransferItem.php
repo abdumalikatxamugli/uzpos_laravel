@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use App\Traits\Fabricatable;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
 
 
-class TransferItem extends UuidModel
+class TransferItem extends Model
 {
     /**
     * Traits
@@ -16,7 +16,7 @@ class TransferItem extends UuidModel
      * Properties
      */
     
-    protected $table = 'uzpos_core_transferitem';
+    protected $table = 'transferitems';
     public function product(){
         return $this->belongsTo(Product::class,'product_id', 'id');
     }

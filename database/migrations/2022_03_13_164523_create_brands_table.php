@@ -13,8 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('uzpos_sales_order', function(Blueprint $table){
-            $table->integer('order_no')->nullable()->change();
+        Schema::create('brands', function (Blueprint $table) {
+            $table->id();
+
+            $table->string('name');
+
+            $table->unsignedBigInteger('created_by_id');
+            $table->foreign('created_by_id')->references('id')->on('users')->constrained();
+            
+            $table->timestamps();
         });
     }
 
@@ -25,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('brands');
     }
 };

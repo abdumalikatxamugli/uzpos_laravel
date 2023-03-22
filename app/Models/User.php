@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Exceptions\WrongCredentialsException;
 use App\Traits\Fabricatable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -18,7 +17,7 @@ class User extends Authenticatable
      /**
       * Properties
       */
-    protected $table = 'auth_user';
+    protected $table = 'users';
     protected $hidden = ['password', 'token'];
     public $timestamps = false;
     const salt = 'ujEdKc.{u2-?f(y5';

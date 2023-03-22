@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,24 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('repayments', function (Blueprint $table) {
+        Schema::create('items', function (Blueprint $table) {
             $table->id();
+            $table->integer('quantity')->nullable();
             
-            $table->date('repayment_date');
-
-            $table->decimal('amount');
-
-            $table->unsignedBigInteger('currency_type');
-            $table->foreign('currency_type')->references('id')->on('currency');
-            
-            $table->decimal('currency_rate');
-
             $table->unsignedBigInteger('created_by_id');
             $table->foreign('created_by_id')->references('id')->on('users')->constrained();
             
-            $table->unsignedBigInteger('payment_id');
-            $table->foreign('payment_id')->references('id')->on('payments')->constrained();
+            $table->unsignedBigInteger('party_id');
+            $table->foreign('party_id')->references('id')->on('party');
             
+            $table->unsignedBigInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('products');
+
             $table->timestamps();
         });
     }
@@ -42,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('repayments');
+        Schema::dropIfExists('items');
     }
-};
+}

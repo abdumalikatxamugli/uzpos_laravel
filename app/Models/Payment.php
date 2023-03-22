@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use App\Traits\Fabricatable;
+use Illuminate\Database\Eloquent\Model;
 
-class Payment extends UuidModel
+class Payment extends Model
 {
     /**
     * Traits
@@ -13,7 +14,7 @@ class Payment extends UuidModel
     /**
      * Properties
      */
-   protected $table = 'uzpos_sales_payment';
+   protected $table = 'payments';
    /**
     * Relations
     */

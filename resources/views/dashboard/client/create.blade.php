@@ -67,7 +67,7 @@
         </div>
         <div class="col-md-12 mb-5">
             <label>Область</label><br>
-            <select name="region" class="form-control">
+            <select name="region_id" class="form-control">
                 @foreach($regions as $index=>$region)
                     <option value="{{$index}}">{{ $region }}</option>
                 @endforeach

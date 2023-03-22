@@ -15,5 +15,5 @@ class Category extends Model
     /**
     * Properties
     */
-    protected $table = 'uzpos_core_category';
+    protected $table = 'category';
 }

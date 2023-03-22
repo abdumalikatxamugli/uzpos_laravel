@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('auth_user', function (Blueprint $table) {
-            $table->integer('busy')->default(0);
+        Schema::create('regions', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('auth_user', function (Blueprint $table) {
-            $table->dropIfExists('busy');
-        });
+        Schema::dropIfExists('regions');
     }
 };

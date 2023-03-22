@@ -15,12 +15,19 @@ return new class extends Migration
     {
         Schema::create('uzpos_collectionrequest', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('created_at', 6)->nullable()->useCurrent();
-            $table->dateTime('updated_at', 6)->nullable()->useCurrent();
+           
             $table->integer('status');
-            $table->bigInteger('assigned_id')->nullable()->index('uzpos_sales_deliveryrequest_assigned_id_b687c3a4_fk_auth_user_id');
-            $table->bigInteger('created_by_id')->nullable()->index('uzpos_sales_delivery_created_by_id_725314bb_fk_auth_user');
-            $table->char('order_id')->index('uzpos_sales_delivery_order_id_21b57939_fk_uzpos_sal');
+
+            $table->unsignedBigInteger('assigned_id')->nullable();
+            $table->foreign('assigned_id')->references('id')->on('users');
+            
+            $table->unsignedBigInteger('created_by_id');
+            $table->foreign('created_by_id')->references('id')->on('users')->constrained();
+            
+            $table->unsignedBigInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('orders');
+
+            $table->timestamps();
         });
     }
 

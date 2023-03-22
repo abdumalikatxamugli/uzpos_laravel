@@ -15,18 +15,13 @@ class Order extends Model
     /**
      * Properties
      */
-    public $incrementing = false;
-    protected $keyType = 'string';
-    protected $table = 'uzpos_sales_order';
+    protected $table = 'orders';
 
    /**
     * events 
     */
     protected static function booted()
     {
-        static::creating(function($order){
-            $order->id = (string) Str::uuid();
-        });
         static::updating(function($order){
           if($order->status == 2 && $order->getOriginal('status')==1){
             PointProduct::removeItemByOrder($order);

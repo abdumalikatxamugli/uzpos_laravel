@@ -4,8 +4,9 @@ namespace App\Models;
 
 use App\Traits\Fabricatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Product extends UuidModel
+class Product extends Model
 {
     /**
     * Traits
@@ -15,7 +16,7 @@ class Product extends UuidModel
     /**
      * Properties
      */
-   protected $table = 'uzpos_core_product';
+   protected $table = 'products';
   
    /**
     * Relations

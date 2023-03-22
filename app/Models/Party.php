@@ -11,9 +11,7 @@ class Party extends Model
    /**
      * Settings
      */
-    protected $table = 'uzpos_core_party';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    protected $table = 'party';
     /**
     * Traits
     */

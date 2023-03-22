@@ -9,7 +9,7 @@ class CollectionRequest extends Model
 {
     use Fabricatable;
 
-    protected $table = "uzpos_collectionrequest";
+    protected $table = "collectionrequest";
 
     /**
      * 

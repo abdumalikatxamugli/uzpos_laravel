@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\WrongCredentialsException;
+use App\Http\Requests\User\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +17,8 @@ class AuthController extends Controller
      * @expects username:password
      * @return View
      */
-    public function login(){
-        $validated = $this->validate_dashboardLogin();
+    public function login(LoginRequest $request){
+        $validated = $request->validated();
         try{
            $user = User::login($validated);
            Auth::login($user);

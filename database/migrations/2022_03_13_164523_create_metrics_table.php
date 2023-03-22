@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateMetricsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('uzpos_core_category', function (Blueprint $table) {
+        Schema::create('metrics', function (Blueprint $table) {
             $table->id();
+
             $table->string('name');
-            $table->bigInteger('created_by_id');
-            $table->foreign('created_by_id')->references('id')->on('auth_user')->constrained();
+
+            $table->unsignedBigInteger('created_by_id');
+            $table->foreign('created_by_id')->references('id')->on('users');
+            
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('uzpos_core_category');
+        Schema::dropIfExists('metrics');
     }
-};
+}

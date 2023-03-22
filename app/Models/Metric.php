@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use App\Traits\Fabricatable;
+use Illuminate\Database\Eloquent\Model;
 
-class Metric extends UuidModel
+class Metric extends Model
 {
      /**
      * Traits
@@ -13,5 +14,5 @@ class Metric extends UuidModel
      /**
       * Properties
       */
-    protected $table = 'uzpos_core_metric';
+    protected $table = 'metrics';
 }

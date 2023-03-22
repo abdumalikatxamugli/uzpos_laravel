@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use App\Traits\Fabricatable;
+use Illuminate\Database\Eloquent\Model;
 
-class OrderItem extends UuidModel
+class OrderItem extends Model
 {
     /**
     * Traits
@@ -13,7 +14,7 @@ class OrderItem extends UuidModel
     /**
      * Properties
      */
-   protected $table = 'uzpos_sales_orderitem';
+   protected $table = 'orderitem';
 
    public $timestamps = false;
 

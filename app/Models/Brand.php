@@ -14,5 +14,5 @@ class Brand extends Model
     /**
     * Properties
     */
-    protected $table = 'uzpos_core_brand';
+    protected $table = 'brands';
 }

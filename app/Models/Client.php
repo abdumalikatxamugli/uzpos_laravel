@@ -4,9 +4,9 @@ namespace App\Models;
 
 use App\Traits\Fabricatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
 
-class Client extends UuidModel
+class Client extends Model
 {
       /**
     * Traits
@@ -16,7 +16,7 @@ class Client extends UuidModel
    /**
     * Properties
     */
-   protected $table = 'uzpos_sales_client';
+   protected $table = 'clients';
 
    /**
     * constants
@@ -49,7 +49,7 @@ class Client extends UuidModel
     return $this->hasMany(Order::class, 'client_id', 'id');
   }
   public function chat(){
-    return $this->hasOne(Chat::class, 'clientId', 'id');
+    return $this->hasOne(Chat::class, 'client_id', 'id');
   }
 
    /**accessors */

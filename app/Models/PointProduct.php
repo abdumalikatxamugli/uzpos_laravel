@@ -4,9 +4,10 @@ namespace App\Models;
 
 use App\Exceptions\WarehouseOutOfProductException;
 use App\Traits\Fabricatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class PointProduct extends UuidModel
+class PointProduct extends Model
 {
     /**
     * Traits
@@ -15,7 +16,7 @@ class PointProduct extends UuidModel
     /**
      * Properties
      */
-   protected $table = 'uzpos_core_pointproduct';
+   protected $table = 'pointproduct';
 
    /**
     * Relations
@@ -25,7 +26,7 @@ class PointProduct extends UuidModel
       return $this->belongsTo(Product::class, 'product_id', 'id');
     }
     public function point(){
-      return $this->belongsTo(Point::class, 'point_id', 'id');
+      return $this->belongsTo(Point::class, 'division_id', 'id');
     }
     /**
      * custom methods

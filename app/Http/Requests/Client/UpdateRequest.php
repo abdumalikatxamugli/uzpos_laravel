@@ -34,7 +34,7 @@ class UpdateRequest extends FormRequest
             "occupation"=>"nullable",
             "inn"=>"exclude_if:client_type,0|required",
             "company_name"=>"exclude_if:client_type,0|required",
-            "phone_number"=>"required|unique:uzpos_sales_client,phone_number,".$this->client->id,
+            "phone_number"=>"required|unique:clients,phone_number,".$this->client->id,
             "region"=>"nullable"
         ];
     }

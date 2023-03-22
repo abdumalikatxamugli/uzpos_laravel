@@ -93,7 +93,7 @@ The above copyright notice and this permission notice shall be included in all c
             <span class="navbar-toggler-icon icon-bar"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end">
-            <form class="navbar-form">
+            <form class="navbar-form d-none">
               <div class="input-group no-border">
                 <input type="text" value="" class="form-control" placeholder="Search...">
                 <button type="submit" class="btn btn-white btn-round btn-just-icon">
@@ -103,7 +103,7 @@ The above copyright notice and this permission notice shall be included in all c
               </div>
             </form>
             <ul class="navbar-nav">
-              <li class="nav-item">
+              <li class="nav-item d-none">
                 <a class="nav-link" href="javascript:;">
                   <i class="material-icons">dashboard</i>
                   <p class="d-lg-none d-md-block">
@@ -111,7 +111,7 @@ The above copyright notice and this permission notice shall be included in all c
                   </p>
                 </a>
               </li>
-              <li class="nav-item dropdown">
+              <li class="nav-item dropdown d-none">
                 <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="material-icons">notifications</i>
                   <span class="notification">5</span>
@@ -135,8 +135,8 @@ The above copyright notice and this permission notice shall be included in all c
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                  <a class="dropdown-item" href="#">Profile</a>
-                  <a class="dropdown-item" href="#">Settings</a>
+                  <a class="dropdown-item d-none" href="#">Profile</a>
+                  <a class="dropdown-item d-none" href="#">Settings</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="{{route('dashboard.logout')}}">Log out</a>
                 </div>

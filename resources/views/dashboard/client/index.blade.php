@@ -25,7 +25,7 @@
                 @foreach($clients as $number => $client)
                     <tr>
                         <td>{{$number+1}}</td>
-                        <td class="mb-0 text-sm">{{$client->client_type == 0 ? $client->fname . ' ' . $client->lname . ' ' . $client->mname : $client->company_name}}</td>
+                        <td class="mb-0 text-sm">{{$client->client_type == 0 ? $client->first_name . ' ' . $client->last_name . ' ' . $client->middle_name : $client->company_name}}</td>
                         <td>
                             <a href="{{ route('debt.client.index', $client) }}" target="_blank" class="btn btn-success btn-sm mb-0">
                                 <i class="material-icons">paid</i>

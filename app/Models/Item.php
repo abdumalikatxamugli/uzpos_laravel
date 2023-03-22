@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use App\Traits\Fabricatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Item extends UuidModel
+class Item extends Model
 {
     /**
     * Traits
@@ -14,7 +15,7 @@ class Item extends UuidModel
     /**
     * Properties
     */
-    protected $table = 'uzpos_core_item';
+    protected $table = 'items';
 
     public function product(){
         return $this->belongsTo(Product::class,'product_id', 'id');

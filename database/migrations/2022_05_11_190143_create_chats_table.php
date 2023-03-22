@@ -16,11 +16,14 @@ return new class extends Migration
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
             $table->integer('chat_type');
-            $table->bigInteger('userId')->nullable();
-            $table->foreign('userId')->references('id')->on('auth_user');
-            $table->char('clientId')->nullable();
-            $table->foreign('clientId')->references('id')->on('uzpos_sales_client');
             $table->string("chatId");
+            
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
+            
+            $table->unsignedBigInteger('client_id')->nullable();
+            $table->foreign('client_id')->references('id')->on('clients');
+            
             $table->timestamps();
         });
     }

@@ -11,8 +11,6 @@ class Transfer extends Model
    /**
      * Settings
      */
-    public $incrementing = false;
-    protected $keyType = 'string';
     /**
     * Traits
     */
@@ -20,7 +18,7 @@ class Transfer extends Model
     /**
      * Properties
      */
-   protected $table = 'uzpos_core_transfer';
+   protected $table = 'transfers';
 
    /**
     * events

@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use App\Traits\Fabricatable;
+use Illuminate\Database\Eloquent\Model;
 
-class Point extends UuidModel
+class Point extends Model
 {
     /**
      * Traits
@@ -13,12 +14,12 @@ class Point extends UuidModel
      /**
       * Properties
       */
-    protected $table = 'uzpos_core_point';
+    protected $table = 'divisions';
     
     /**
      * Relations
      */
     public function pointProducts(){
-      return $this->hasMany(PointProduct::class, 'point_id', 'id');
+      return $this->hasMany(PointProduct::class, 'division_id', 'id');
     }
 }

@@ -56,8 +56,9 @@ class OrderController extends Controller
     public function new(Request $request){
         $order = new Order();
         $order->order_type = $request->type;
-        $order->shop_id = auth()->user()->point_id;
-        $order->from_point_id = auth()->user()->point_id;
+        $order->division_id = auth()->user()->division_id;
+        $order->supplying_division_id = auth()->user()->division_id;
+        $order->created_by_id =  auth()->user()->id;
         $order->save();
         return redirect()->route('dashboard.orders.edit', $order->id);
     }
