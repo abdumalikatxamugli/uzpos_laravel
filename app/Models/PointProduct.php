@@ -16,7 +16,7 @@ class PointProduct extends Model
     /**
      * Properties
      */
-   protected $table = 'pointproduct';
+   protected $table = 'pointproducts';
 
    /**
     * Relations
@@ -221,7 +221,7 @@ class PointProduct extends Model
      */
 
     public static function getAvailableAmount($product_id, $shop_id){
-      $pp = self::where(['point_id'=>$shop_id, 'product_id'=>$product_id])->first();
+      $pp = self::where(['division_id'=>$shop_id, 'product_id'=>$product_id])->first();
       if(!$pp){
         return 0;
       }

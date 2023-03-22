@@ -23,7 +23,7 @@
                         <td>$ {{$item->price}}</td>
                         <td>$ {{$item->quantity*$item->price}}</td>
                         <td>
-                            @if($order->status == 1  && $order->shop_id == auth()->user()->point_id)
+                            @if($order->status == 1  && $order->division_id == auth()->user()->division_id)
                                 <form action="{{ route('dashboard.order.item.delete', $item->id) }}">
                                     <button class="btn btn-danger btn-sm mb-0">
                                         <i class="material-icons">close</i>
@@ -38,7 +38,7 @@
         <hr/>
     @endif
     @include('partials.validation_errors')
-    @if($order->status == 1 && $order->shop_id == auth()->user()->point_id)
+    @if($order->status == 1 && $order->division_id == auth()->user()->division_id)
         <form action="{{ route('dashboard.order.items.save') }}" method="POST">
             @csrf
             <table class="table text-center table-bordered" >

@@ -252,7 +252,7 @@
     </div>
     <script>
         function addClient(){
-            window.open(`{{ route('dashboard.order.client.select', $order->id) }}`, 'name' + Math.random(), 'width=1200,height=800');
+            window.open(`{{ route('dashboard.client.index', $order->id) }}`, 'name' + Math.random(), 'width=1200,height=800');
         }
         function triggerRefresh() {
             window.location.assign(window.location.href);

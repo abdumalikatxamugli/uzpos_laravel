@@ -50,10 +50,10 @@ class Order extends Model
       return $this->hasOne(DeliveryRequest::class, 'order_id', 'id');
     }
     public function division(){
-      return $this->belongsTo(Point::class, 'shop_id', 'id');
+      return $this->belongsTo(Point::class, 'division_id', 'id');
     }
     public function from_point(){
-      return $this->belongsTo(Point::class, 'from_point_id', 'id');
+      return $this->belongsTo(Point::class, 'supplying_division_id', 'id');
     }
     /**
      * 

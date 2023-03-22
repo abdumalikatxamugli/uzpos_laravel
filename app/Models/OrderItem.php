@@ -14,7 +14,7 @@ class OrderItem extends Model
     /**
      * Properties
      */
-   protected $table = 'orderitem';
+   protected $table = 'orderitems';
 
    public $timestamps = false;
 
