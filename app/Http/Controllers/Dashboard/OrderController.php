@@ -85,6 +85,8 @@ class OrderController extends Controller
      */
     public function addPayment(StoreRequest $request){
         $data = $request->validated();
+        $data['payed_amount_usd'] = $data['payed_amount'] / $data['payed_currency_rate'];        
+        $data['change_amount_usd'] = $data['change_amount'] / $data['change_currency_rate'];
         $payment = Payment::createFromArray($data);
         return redirect()->back();
     }

@@ -55,7 +55,7 @@ class Payment extends Model
     ];
     const CURRENCIES = [
       'UZS'=>[
-        'code'=>0,
+        'code'=>2,
         'name'=>'Сум'
       ],
       'USD'=>[
@@ -64,7 +64,7 @@ class Payment extends Model
       ]
     ];
     const CURRENCIES_REVERT = [
-      0=>'Сум',
+      2=>'Сум',
       1=>'Доллары'
     ];
     /** 

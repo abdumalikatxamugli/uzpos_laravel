@@ -25,14 +25,15 @@ class StoreRequest extends FormRequest
     {
         return [
             'order_id'=>'required',
+            'amount'=>'required',
             'payment_type'=>'required',
             'payment_date'=>'required',
-            'amount'=>'required',
-            'currency'=>'required',
-            'currency_kurs'=>'required',
-            'amount_real'=>'required',
             'payed_amount'=>'required',
-            'change_amount'=>'required'
+            'payed_currency_type'=>'required',
+            'payed_currency_rate'=>'required',
+            'change_amount'=>'required',
+            'change_currency_type'=>'required',
+            'change_currency_rate'=>'required'
         ];
     }
 }

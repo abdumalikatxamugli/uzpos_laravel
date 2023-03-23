@@ -25,6 +25,8 @@ return new class extends Migration
             
             $table->decimal('currency_rate');
 
+            $table->decimal('amount_usd');
+
             $table->unsignedBigInteger('created_by_id');
             $table->foreign('created_by_id')->references('id')->on('users')->constrained();
             

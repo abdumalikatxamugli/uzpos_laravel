@@ -88,10 +88,7 @@
                 <tr>
                     <td>Дата оплаты</td>
                     <td>Тип оплаты</td>
-                    <td>Валюта</td>
                     <td>Сумма</td>
-                    <td>Курс</td>
-                    <td>Сумма в долларах</td>
                     <td>Убрать</td>
                 </tr>
             </thead>
@@ -104,17 +101,9 @@
                     <td>
                         {{ $payment->payment_type_name }}
                     </td>
-                    <td>
-                        {{ $payment->currency_type_name }} 
-                    </td>
+                    
                     <td>
                         {{ $payment->amount }}
-                    </td>
-                    <td>
-                        {{ $payment->currency_kurs }}
-                    </td>
-                    <td>
-                        {{ $payment->amount_real }}
                     </td>
                     <td>
                         @if($order->status == 1 && $order->shop_id == auth()->user()->point_id)
@@ -131,65 +120,70 @@
             </tbody>
         </table>
         <hr/>
-        @if($order->status == 1 && $order->shop_id == auth()->user()->point_id)
+        @if($order->status == 1 && $order->division_id == auth()->user()->division_id)
             <form action="{{route('order.append.payments')}}" method="POST">
                 @csrf
-                <div x-data="{currency_type:1, currency_kurs: 1, amount:{{ round( $order->getTotalCost() - $order->getTotalPaid() , 2) }} }">
-                    <table class="table text-center">
-                        <thead>
-                            <tr>
-                                <td>Дата оплаты</td>
-                                <td>Тип оплаты</td>
-                                <td>Сумма</td>
-                                <td>Валюта</td>
-                                <td>Курс</td>
-                                <td>Сумма в долларах</td>
-                                <td></td>
-                            </tr>
-                        </thead>
-                    
-                    <tbody>
-                        <tr>
-                            <td>
-                                <input type="hidden" name="order_id" value="{{ $order->id }}">
-                                <input type="date" class="form-control px-2" name="payment_date" value="{{ date('Y-m-d') }}" readonly>
-                            </td>
-                            <td>
-                                <select id="" class="form-control px-2" name="payment_type" >
-                                        @foreach($payment_types as $ptype)
-                                            <option value="{{ $ptype['code'] }}" {{ $ptype['code']==1?'selected':'' }} >{{ $ptype['name'] }}</option>
-                                        @endforeach
-                                </select>
-                            </td>
-                            <td>
-                                <input type="text" class="form-control px-2" name="amount" x-model = "amount">
-                            </td>
-                            <td>
-                                <select class="form-control px-2" name="currency" x-model = "currency_type" x-on:change="if(currency_type==1){ currency_kurs=1 }">
-                                    @foreach($currencies as $ptype)
-                                        <option value="{{ $ptype['code'] }}">{{ $ptype['name'] }}</option>
-                                    @endforeach
-                                </select>
-                            </td>
-                            <td>
-                                <template x-if="currency_type==0">
-                                    <input type="text" class="form-control px-2" name="currency_kurs" x-model = "currency_kurs">
-                                </template>
-                                <template x-if="currency_type==1">
-                                    <input type="text" class="form-control px-2" name="currency_kurs" x-model = "currency_kurs" readonly>
-                                </template>
-                            </td>
-                            <td>
-                                <input type="text" class="form-control px-2" readonly name="amount_real" x-bind:value = "Math.round( amount/currency_kurs * 100 ) / 100">
-                            </td>
-                            <td>
-                                <button class="btn btn-info">
-                                    <i class="material-icons">check</i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                    </table>
+                <div>
+                    <input type="hidden" name="order_id" value="{{ $order->id }}">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Сумма к оплате</label>
+                            <input type="text" readonly name="amount" class="form-control px-2" value="{{round( $order->getTotalCost() - $order->getTotalPaid() )}}">
+                        </div>
+                        <div class="col-md-3">
+                            <label>Дата оплаты</label>
+                            <input type="date" class="form-control px-2" name="payment_date" value="{{ date('Y-m-d') }}" readonly>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-3">
+                            <label>Тип оплаты</label>
+                            <select class="form-control px-2" name="payment_type" >
+                                @foreach($payment_types as $ptype)
+                                    <option value="{{ $ptype['code'] }}" {{ $ptype['code']==1?'selected':'' }} >{{ $ptype['name'] }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Оплачено</label>
+                            <input type="text" class="form-control px-2" name="payed_amount">
+                        </div>
+                        <div class="col-md-3">
+                            <label>На валюте</label>
+                            <select class="form-control px-2" name="payed_currency_type">
+                                @foreach($currencies as $ptype)
+                                    <option value="{{ $ptype['code'] }}">{{ $ptype['name'] }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label>По курсу</label>
+                            <input type="text" class="form-control px-2" name="payed_currency_rate" >
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-3">
+                            <label>Возврщено</label>
+                            <input type="text" class="form-control px-2" name="change_amount">
+                        </div>
+                        <div class="col-md-3">
+                            <label>На валюте</label>
+                            <select class="form-control px-2" name="change_currency_type">
+                                @foreach($currencies as $ptype)
+                                    <option value="{{ $ptype['code'] }}">{{ $ptype['name'] }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label>По курсу</label>
+                            <input type="text" class="form-control px-2" name="change_currency_rate" >
+                        </div>
+                        <div class="col-md-3 d-flex align-items-end justify-content-end">
+                            <button class="btn btn-info">
+                                <i class="material-icons">check</i>
+                            </button>
+                        </div>
+                    </div>
                 </div>           
             </form> 
         @endif

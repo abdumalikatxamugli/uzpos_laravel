@@ -27,12 +27,14 @@ class CreatePaymentsTable extends Migration
             $table->unsignedBigInteger('payed_currency_type');
             $table->foreign('payed_currency_type')->references('id')->on('currency');
             $table->decimal('payed_currency_rate');
+            $table->decimal('payed_amount_usd');
 
             $table->decimal('change_amount');
             
             $table->unsignedBigInteger('change_currency_type');
             $table->foreign('change_currency_type')->references('id')->on('currency');
             $table->decimal('change_currency_rate');
+            $table->decimal('change_amount_usd');
             
             $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')->references('id')->on('orders');
