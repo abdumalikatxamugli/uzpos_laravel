@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends($popup?'layouts.appWithoutSidebar':'layouts.app')
 
 @section('content')
 
@@ -6,7 +6,7 @@
 
 <div class="card-body">
 
-<form action="{{ route('dashboard.client.update', $client->id) }}" method="POST">
+<form action="{{ route_with_query_params('dashboard.client.update', $client->id) }}" method="POST">
     @method('PUT')
     @csrf
     <input type="hidden" name="client_type" value="{{$client->client_type}}">

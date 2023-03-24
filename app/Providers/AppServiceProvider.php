@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Client;
+use App\Models\Order;
 use App\Models\Payment;
 use App\Models\Point;
 use App\Models\Product;
@@ -141,6 +142,18 @@ class AppServiceProvider extends ServiceProvider
         View::composer(['dashboard.client.create', 'dashboard.client.edit', 'dashboard.clients.select'], function($view){
             $regions = Client::regionDict;
             $view->with('regions', $regions);
+        });
+        View::composer(['dashboard.client.index', 'dashboard.client.create', 'dashboard.client.edit'], function($view){
+            $popup = request()->query('popup')?true:false;
+            if($popup){
+                $order = Order::where('id', request()->query('order_id'))->first();
+                if(!$order){
+                    abort(404);
+                }
+                $view->with('order', $order)->with('popup', $popup);
+            }else{
+                $view->with('popup', $popup);
+            }
         });
     }
 }

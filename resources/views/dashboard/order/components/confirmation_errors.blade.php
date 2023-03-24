@@ -17,7 +17,7 @@
         </div>
     @endif
     
-    @if(!$order->client)
+    @if($order->type == 1 && !$order->client)
         <div class="alert text-danger border border-danger ">
             Заказу не привязан клиент
         </div>

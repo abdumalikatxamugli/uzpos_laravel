@@ -117,8 +117,9 @@ class Order extends Model
       return $cost;
     }
     public function getTotalPaid(){
-      $paid = $this->payments->sum('amount_real');
-      return $paid;
+      $paid = $this->payments->sum('payed_amount_usd');
+      $change = $this->payments->sum('change_amount_usd');
+      return $paid - $change;
     }
 
     public function getTotalPaidByCurrencyType($type){
@@ -142,8 +143,8 @@ class Order extends Model
     }
 
     public function hasEnoughPayment(){
-      $shouldBePaid = $this->getTotalCost();
-      $paid = $this->getTotalPaid();
+      $shouldBePaid = round($this->getTotalCost(), 2);
+      $paid = round($this->getTotalPaid(), 2);
       
       if((string) $shouldBePaid <= (string) $paid){
         return true;

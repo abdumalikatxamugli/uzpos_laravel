@@ -42,7 +42,7 @@ class ClientResourceController extends Controller
     {
         $validated = $request->validated();
         Client::createFromArrayWithUser($validated, $user);
-        return redirect()->route("dashboard.client.index");
+        return redirect()->route("dashboard.client.index", $request->query());
     }
 
     /**
@@ -78,7 +78,7 @@ class ClientResourceController extends Controller
     {
         $validated = $request->validated();
         $client->updateFromArray($validated, $client->id);
-        return redirect()->route("dashboard.client.index");
+        return redirect()->route("dashboard.client.index", $request->query());
     }
 
     /**

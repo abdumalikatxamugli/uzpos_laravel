@@ -80,114 +80,7 @@
     </div>
     <hr>
     <div class="card-body">
-        <h5 class="mb-5 d-flex justify-content-between">
-            <b>Оплата</b>
-        </h5>
-        <table class="table table-bordered text-center mb-5">
-            <thead>
-                <tr>
-                    <td>Дата оплаты</td>
-                    <td>Тип оплаты</td>
-                    <td>Сумма</td>
-                    <td>Убрать</td>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($order->payments as $payment)
-                <tr>
-                    <td>
-                        {{ $payment->payment_date }}
-                    </td>
-                    <td>
-                        {{ $payment->payment_type_name }}
-                    </td>
-                    
-                    <td>
-                        {{ $payment->amount }}
-                    </td>
-                    <td>
-                        @if($order->status == 1 && $order->shop_id == auth()->user()->point_id)
-                            <form action="{{route('order.payments.delete', $payment->id)}}">
-                                @csrf
-                                <button class="btn btn-danger btn-sm mb-0">
-                                    <i class="material-icons">close</i>
-                                </button>
-                            </form>
-                        @endif
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-        <hr/>
-        @if($order->status == 1 && $order->division_id == auth()->user()->division_id)
-            <form action="{{route('order.append.payments')}}" method="POST">
-                @csrf
-                <div>
-                    <input type="hidden" name="order_id" value="{{ $order->id }}">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label>Сумма к оплате</label>
-                            <input type="text" readonly name="amount" class="form-control px-2" value="{{round( $order->getTotalCost() - $order->getTotalPaid() )}}">
-                        </div>
-                        <div class="col-md-3">
-                            <label>Дата оплаты</label>
-                            <input type="date" class="form-control px-2" name="payment_date" value="{{ date('Y-m-d') }}" readonly>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-3">
-                            <label>Тип оплаты</label>
-                            <select class="form-control px-2" name="payment_type" >
-                                @foreach($payment_types as $ptype)
-                                    <option value="{{ $ptype['code'] }}" {{ $ptype['code']==1?'selected':'' }} >{{ $ptype['name'] }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <label>Оплачено</label>
-                            <input type="text" class="form-control px-2" name="payed_amount">
-                        </div>
-                        <div class="col-md-3">
-                            <label>На валюте</label>
-                            <select class="form-control px-2" name="payed_currency_type">
-                                @foreach($currencies as $ptype)
-                                    <option value="{{ $ptype['code'] }}">{{ $ptype['name'] }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <label>По курсу</label>
-                            <input type="text" class="form-control px-2" name="payed_currency_rate" >
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-3">
-                            <label>Возврщено</label>
-                            <input type="text" class="form-control px-2" name="change_amount">
-                        </div>
-                        <div class="col-md-3">
-                            <label>На валюте</label>
-                            <select class="form-control px-2" name="change_currency_type">
-                                @foreach($currencies as $ptype)
-                                    <option value="{{ $ptype['code'] }}">{{ $ptype['name'] }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <label>По курсу</label>
-                            <input type="text" class="form-control px-2" name="change_currency_rate" >
-                        </div>
-                        <div class="col-md-3 d-flex align-items-end justify-content-end">
-                            <button class="btn btn-info">
-                                <i class="material-icons">check</i>
-                            </button>
-                        </div>
-                    </div>
-                </div>           
-            </form> 
-        @endif
-        <hr>
+        @include('dashboard.order.components.payment')
         <div class="row my-5 text-center" x-data="{open:false}">
             <div class="col-md-4">
                 <h5>
@@ -246,7 +139,7 @@
     </div>
     <script>
         function addClient(){
-            window.open(`{{ route('dashboard.client.index', $order->id) }}`, 'name' + Math.random(), 'width=1200,height=800');
+            window.open(`{{ route('dashboard.client.index') }}?popup=true&order_id={{$order->id}}`, 'name' + Math.random(), 'width=1200,height=800');
         }
         function triggerRefresh() {
             window.location.assign(window.location.href);

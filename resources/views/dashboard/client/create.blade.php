@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends($popup?'layouts.appWithoutSidebar':'layouts.app')
 
 @section('content')
 
@@ -6,7 +6,7 @@
 
 <div class="card-body">
 
-<form action="{{ route('dashboard.client.store') }}" method="POST">
+<form action="{{ route_with_query_params('dashboard.client.store') }}" method="POST">
     @csrf
     <div class="row" x-data="{client_type:1}">
         <div class="col-md-6">

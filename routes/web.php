@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Dashboard\BrandResourceController;
 use App\Http\Controllers\Dashboard\CategoryResourceController;
 use App\Http\Controllers\Dashboard\ClientResourceController;
@@ -58,6 +59,8 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
     Route::get('order/break/{order}', [OrderController::class, 'break'])->name('order.break');
     Route::get('order/searchAvailableItems/{order}', [OrderController::class, 'searchAvailableItems'])->name('order.searchAvailableItems');
     Route::post('order/changeFromPoint/{order}', [OrderController::class, 'changeFromPoint'])->name('order.changeFromPoint');
+    Route::get('client/append/{order}/{client}', [ClientController::class, 'appendToOrder'])->name('dashboard.client.append.order');
+
     //schet faktura generate
     Route::get('order/esf/{order}', [OrderController::class, 'generateEsf'])->name('order.genEsf');
     
