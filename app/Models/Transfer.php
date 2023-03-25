@@ -26,14 +26,6 @@ class Transfer extends Model
 
     protected static function booted()
     {
-        static::creating(function ($item) {
-            $item->id = (string) Str::uuid();
-            // PointProduct::transferItem($item);
-        });
-        // static::deleting(function ($item) {
-        //     PointProduct::revertTranferItem($item);
-        // });
-
         static::updating(function($transfer){
           if($transfer->status == 2 && $transfer->getOriginal('status')==1){
             PointProduct::transferItemBulk($transfer);
@@ -51,11 +43,11 @@ class Transfer extends Model
    * Relations
    */
   public function from_point(){
-    return $this->belongsTo(Point::class, 'from_point_id', 'id');
+    return $this->belongsTo(Point::class, 'from_division_id', 'id');
   }
   
   public function to_point(){
-    return $this->belongsTo(Point::class, 'to_point_id', 'id');
+    return $this->belongsTo(Point::class, 'to_division_id', 'id');
   }
   /**
    * accessors

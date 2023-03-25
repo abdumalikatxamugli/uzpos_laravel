@@ -34,7 +34,7 @@ class StoreRequest extends FormRequest
                 function($attribute, $item, $fail){
                     $fromPointProduct = PointProduct::where([
                         'product_id'=> $item->product_id,        
-                        'point_id'=> $item->transfer->from_point_id
+                        'division_id'=> $item->transfer->from_point_id
                     ])->first();
                         
                     if(!$fromPointProduct || $fromPointProduct->quantity < $item->quantity){

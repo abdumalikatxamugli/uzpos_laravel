@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Requests\Debt\RepayRequest;
 use App\Models\Client;
@@ -13,19 +13,19 @@ class DebtController extends Controller
 {
     public function index(Client $client){
         
-        $debts =  DB::table("uzpos_sales_payment")
+        $debts =  DB::table("payments")
             ->leftJoin("repayments", function($join){
-                $join->on("repayments.payment_id", "=", "uzpos_sales_payment.id");
+                $join->on("repayments.payment_id", "=", "payments.id");
             })
-            ->selectRaw("uzpos_sales_payment.id, uzpos_sales_payment.payment_date, uzpos_sales_payment.order_id, uzpos_sales_payment.amount,  uzpos_sales_payment.amount_real, uzpos_sales_payment.currency, sum(repayments.amount) as total_repaid")
+            ->selectRaw("payments.id, payments.payment_date, payments.order_id, payments.payed_amount,  payments.payed_amount_usd, payments.payed_currency_type, sum(repayments.amount) as total_repaid")
             ->whereIn("order_id", function($query) use ($client){
-                $query->from("uzpos_sales_order")
+                $query->from("orders")
                 ->select("id")
                 ->where("client_id", "=", $client->id);
             })
             ->where("payment_type", "=", Payment::DEBT)
-            ->groupBy('uzpos_sales_payment.payment_date', "uzpos_sales_payment.order_id", "uzpos_sales_payment.amount", "uzpos_sales_payment.amount_real", "uzpos_sales_payment.currency", "uzpos_sales_payment.id" )
-            ->orderBy("uzpos_sales_payment.id","desc")
+            ->groupBy('payments.payment_date', "payments.order_id", "payments.payed_amount", "payments.payed_amount_usd", "payments.payed_currency_type", "payments.id" )
+            ->orderBy("payments.id","desc")
             ->get();
         
         return view('dashboard.client.debts')

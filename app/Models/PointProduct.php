@@ -34,7 +34,7 @@ class PointProduct extends Model
     public static function addItem($item){
       $pointProduct = PointProduct::where([
           'product_id'=> $item->product_id,        
-          'point_id'=> $item->party->point_id
+          'division_id'=> $item->party->division_id
       ])->first();
 
       if($pointProduct){
@@ -42,7 +42,7 @@ class PointProduct extends Model
         $pointProduct->save();
       }else{
         $pointProduct = new self();
-        $pointProduct->point_id = $item->party->point_id;
+        $pointProduct->division_id = $item->party->division_id;
         $pointProduct->product_id = $item->product_id;
         $pointProduct->quantity = $item->quantity;
         $pointProduct->created_by_id = auth()->user()->id;
@@ -53,7 +53,7 @@ class PointProduct extends Model
     public static function removeItem($item){
       $pointProduct = PointProduct::where([
         'product_id'=> $item->product_id,        
-        'point_id'=> $item->party->point_id
+        'division_id'=> $item->party->division_id
       ])->first();
 
       if($pointProduct->quantity >= $item->quantity ){
@@ -68,7 +68,7 @@ class PointProduct extends Model
         foreach($party->items as $item){
           $pointProduct = PointProduct::where([
             'product_id'=> $item->product_id,        
-            'point_id'=> $party->point_id
+            'division_id'=> $party->division_id
           ])->first();
             
           if($pointProduct && $only_new){
@@ -80,7 +80,7 @@ class PointProduct extends Model
             continue;
           }else{
             $pointProduct = new self();
-            $pointProduct->point_id = $item->party->point_id;
+            $pointProduct->division_id = $item->party->division_id;
             $pointProduct->product_id = $item->product_id;
             $pointProduct->quantity = $item->quantity;
             $pointProduct->created_by_id = auth()->user()->id;
@@ -94,7 +94,7 @@ class PointProduct extends Model
         foreach($party->items as $item){
           $pointProduct = PointProduct::where([
             'product_id'=> $item->product_id,        
-            'point_id'=> $party->point_id
+            'division_id'=> $party->division_id
           ])->first();
     
           if($pointProduct->quantity >= $item->quantity ){
@@ -112,7 +112,7 @@ class PointProduct extends Model
         foreach($order->items as $item){
           $pointProduct = PointProduct::where([
             'product_id'=> $item->product_id,        
-            'point_id'=> $order->from_point_id
+            'division_id'=> $order->supplying_division_id
           ])->first();
 
           if($pointProduct->quantity >= $item->quantity ){
@@ -129,11 +129,11 @@ class PointProduct extends Model
         foreach($order->items as $item){
           $pointProduct = PointProduct::where([
             'product_id'=> $item->product_id,        
-            'point_id'=> $order->from_point_id
+            'division_id'=> $order->supplying_division_id
           ])->first();
           if(!$pointProduct){
             $pointProduct = new PointProduct();
-            $pointProduct->point_id = $order->shop_id;
+            $pointProduct->division_id = $order->shop_id;
             $pointProduct->product_id = $item->product_id;
             $pointProduct->save();
           }
@@ -159,12 +159,12 @@ class PointProduct extends Model
     public static function transferItem($item){
       $fromPointProduct = PointProduct::where([
           'product_id'=> $item->product_id,        
-          'point_id'=> $item->transfer->from_point_id
+          'division_id'=> $item->transfer->from_division_id
       ])->first();
 
       $toPointProduct = PointProduct::where([
           'product_id'=> $item->product_id,        
-          'point_id'=> $item->transfer->to_point_id
+          'division_id'=> $item->transfer->to_division_id
       ])->first();
 
       if($fromPointProduct->quantity < $item->quantity){
@@ -180,7 +180,7 @@ class PointProduct extends Model
           $toPointProduct->save();
         }else{
           $toPointProduct = new self();
-          $toPointProduct->point_id = $item->transfer->to_point_id;
+          $toPointProduct->division_id = $item->transfer->to_division_id;
           $toPointProduct->product_id = $item->product_id;
           $toPointProduct->quantity = $item->quantity;
           $toPointProduct->created_by_id = auth()->user()->id;
@@ -195,12 +195,12 @@ class PointProduct extends Model
     
       $fromPointProduct = PointProduct::where([
           'product_id'=> $item->product_id,        
-          'point_id'=> $item->transfer->from_point_id
+          'division_id'=> $item->transfer->from_division_id
       ])->first();
 
       $toPointProduct = PointProduct::where([
           'product_id'=> $item->product_id,        
-          'point_id'=> $item->transfer->to_point_id
+          'division_id'=> $item->transfer->to_division_id
       ])->first();
 
       if($toPointProduct->quantity < $item->quantity){
@@ -239,7 +239,7 @@ class PointProduct extends Model
       foreach($shops as $shop){
         $match = true;
         foreach($items as $item){
-          $available = self::where(['point_id'=>$shop->id, 'product_id'=>$item->product_id])->where('quantity', '>=', $item->quantity)->first();
+          $available = self::where(['division_id'=>$shop->id, 'product_id'=>$item->product_id])->where('quantity', '>=', $item->quantity)->first();
           if(!$available){
             $match = false;
           }

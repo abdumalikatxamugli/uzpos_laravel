@@ -190,7 +190,7 @@ class OrderController extends Controller
      */
     public function changeFromPoint(Request $request, Order $order){
         $fromPoint = $request->input('point_id');
-        $order->from_point_id = $fromPoint;
+        $order->supplying_division_id = $fromPoint;
         $order->save();
         return redirect()->back();
     }

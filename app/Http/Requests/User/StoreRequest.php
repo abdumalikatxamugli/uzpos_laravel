@@ -29,7 +29,7 @@ class StoreRequest extends FormRequest
             "username"=>"required",
             "password"=>"required",
             "is_active"=>"required",
-            "point_id"=>"required",
+            "division_id"=>"required",
             "password"=>"required",
             "phone"=>"required",
             "user_role"=>"required",

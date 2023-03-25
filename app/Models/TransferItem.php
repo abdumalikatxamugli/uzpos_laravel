@@ -30,7 +30,7 @@ class TransferItem extends Model
     public function validateStore($fail){
         $fromPointProduct = PointProduct::where([
             'product_id'=> $this->product_id,        
-            'point_id'=> $this->transfer->from_point_id
+            'division_id'=> $this->transfer->from_point_id
         ])->first();
             
         if(!$fromPointProduct || $fromPointProduct->quantity < $this->quantity){
@@ -40,7 +40,7 @@ class TransferItem extends Model
     public function validateDelete($fail){
         $toPointProduct = PointProduct::where([
             'product_id'=> $this->product_id,        
-            'point_id'=> $this->transfer->to_point_id
+            'division_id'=> $this->transfer->to_point_id
         ])->first();
     
         if($toPointProduct->quantity < $this->quantity){

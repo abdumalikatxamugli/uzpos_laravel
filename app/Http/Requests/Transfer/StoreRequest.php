@@ -25,8 +25,8 @@ class StoreRequest extends FormRequest
     {
         return [
             "transfer_date"=>"required",
-            "from_point_id"=>"required",
-            "to_point_id"=>"required"
+            "from_division_id"=>"required",
+            "to_division_id"=>"required"
         ];
     }
 }
