@@ -63,7 +63,7 @@
         </div>
 
         <div class="col-md-4">
-            <input type="text" name="phone_number" class="form-control mb-3" placeholder="Номер телефона">
+            <input type="text" name="phone_number" class="form-control mb-3" placeholder="Номер телефона" x-mask="(99)-999-99-99">
         </div>
         <div class="col-md-12 mb-5">
             <label>Область</label><br>

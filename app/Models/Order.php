@@ -137,9 +137,10 @@ class Order extends Model
      * check if order has enough payment and shop has enough items to accept the order
      */
     public function canBeConfirmed(){
+      $itemsCount = count($this->items);
       $hasEnoughPayment = $this->hasEnoughPayment();
       $hasEnoughItems = $this->hasEnoughItems();
-      return $hasEnoughPayment && $hasEnoughItems;
+      return $hasEnoughPayment && $hasEnoughItems && $itemsCount !== 0;
     }
 
     public function hasEnoughPayment(){

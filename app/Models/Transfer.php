@@ -68,6 +68,14 @@ class Transfer extends Model
     $this->save();
   }
   /**
+   * Check if transfer can be confirmed
+   */
+  public function canBeConfirmed()
+  {
+    $itemsCount = count($this->items);
+    return $itemsCount !== 0;
+  }
+  /**
    * create transfer from order for the fullmatch shop
    */
   public static function createFromOrder($order, $point){

@@ -21,7 +21,7 @@
                 <div>К Пункту</div>
                 <h5>{{ $transfer->to_point->name }}</h5>
             </div>
-            @if($transfer->status == 1 && $transfer->from_point_id == auth()->user()->point_id)
+            @if($transfer->status == 1 && $transfer->from_division_id == auth()->user()->division_id && $transfer->canBeConfirmed())
                 <div class="col-md-2">
                     <form action="{{ route('dashboard.transfer.finish', $transfer->id) }}">
                         @csrf

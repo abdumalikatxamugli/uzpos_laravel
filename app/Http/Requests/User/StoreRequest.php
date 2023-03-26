@@ -26,14 +26,20 @@ class StoreRequest extends FormRequest
         return [
             "first_name"=>"required",
             "last_name"=>"required",
-            "username"=>"required",
+            "username"=>["required","unique:users"],
             "password"=>"required",
             "is_active"=>"required",
             "division_id"=>"required",
             "password"=>"required",
-            "phone"=>"required",
+            "phone"=>["required", "size:9"],
             "user_role"=>"required",
         ];
+    }
+    public function all($keys = null)
+    {
+        $data = parent::all();
+        $data['phone'] = cleanPhoneNumber($data['phone']);
+        return $data;
     }
 }
 

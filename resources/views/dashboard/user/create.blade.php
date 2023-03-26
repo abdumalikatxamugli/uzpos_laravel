@@ -6,7 +6,7 @@
 
 <div class="card-body">
 
-<form action="{{ route('dashboard.user.store') }}" method="POST">
+<form action="{{ route('dashboard.user.store') }}" method="POST" x-data="{}">
     @csrf
     <div class="row">
         <div class="col-md-4">
@@ -16,7 +16,7 @@
             <input type="text" name="last_name" class="form-control mb-3" placeholder="Имя">
         </div>
         <div class="col-md-4">
-            <input type="text" name="phone" class="form-control mb-3" placeholder="Телефон">
+            <input type="text" name="phone" class="form-control mb-3" placeholder="Телефон" x-mask="(99)-999-99-99">
         </div>
         <div class="col-md-4">
             <input type="text" name="username" class="form-control mb-3" placeholder="Username">

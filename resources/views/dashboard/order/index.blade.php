@@ -51,7 +51,7 @@
                         </a> 
                     </td>  
                     <td> 
-                        <a class="btn btn-primary btn-sm mb-0" href="{{route('dashboard.orders.edit', $order->id)}}">
+                        <a class="btn btn-primary btn-sm mb-0" data-shref="{{route('dashboard.orders.edit', $order->id)}}" href="#" onclick="openOrder(this, {{$order->order_type}})">
                             <i class="material-icons">visibility</i>
                         </a> 
                     </td>
@@ -115,4 +115,16 @@
         </table>
         {{ $orders->links() }}
     </div>
+    <script>
+        function openOrder(el, type)
+        {
+            if(type == 1)
+            {
+                window.location.assign(el.dataset.shref);
+            }
+            else{
+                window.open(`${el.dataset.shref}`, 'name' + Math.random(), 'width=1200,height=800');
+            }
+        }
+    </script>
 @endsection

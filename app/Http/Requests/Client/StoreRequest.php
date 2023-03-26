@@ -35,9 +35,15 @@ class StoreRequest extends FormRequest
             "occupation"=>"nullable",
             "inn"=>"exclude_if:client_type,0|required",
             "company_name"=>"exclude_if:client_type,0|required",
-            "phone_number"=>"required|unique:clients",
+            "phone_number"=>["required", "unique:clients", "size:9"],
             "region_id"=>'nullable'
         ];
+    }
+    public function all($keys = null)
+    {
+        $data = parent::all();
+        $data['phone_number'] = cleanPhoneNumber($data['phone_number']);
+        return $data;
     }
 }
 

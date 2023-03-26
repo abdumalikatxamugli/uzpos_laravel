@@ -6,7 +6,7 @@
 
 <div class="card-body">
 
-<form action="{{ route_with_query_params('dashboard.client.update', $client->id) }}" method="POST">
+<form action="{{ route_with_query_params('dashboard.client.update', $client->id) }}" method="POST" x-data="{}">
     @method('PUT')
     @csrf
     <input type="hidden" name="client_type" value="{{$client->client_type}}">
@@ -44,11 +44,11 @@
         </div>
     @endif
         <div class="col-md-4">
-            <input type="text" name="phone_number" class="form-control mb-3" placeholder="Номер телефона" value="{{$client->phone_number}}">
+            <input type="text" name="phone_number" class="form-control mb-3" placeholder="Номер телефона" value="{{$client->phone_number}}" x-mask="(99)-999-99-99">
         </div>
         <div class="col-md-12 mb-5">
             <label>Область</label><br>
-            <select name="region" class="form-control">
+            <select name="region_id" class="form-control">
                 @foreach($regions as $index=>$region)
                     <option value="{{$index}}" {{ $client->region == $index ? 'selected':'' }}>{{ $region }}</option>
                 @endforeach

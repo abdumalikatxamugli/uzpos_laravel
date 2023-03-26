@@ -29,6 +29,9 @@ The above copyright notice and this permission notice shall be included in all c
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="{{asset('assets2/demo/demo.css')}}" rel="stylesheet" />
   <script src="{{asset('assets2/js/core/jquery.min.js')}}"></script>
+  <!-- Alpine Plugins -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
+ 
   <script src="{{asset('alpine.min.js')}}" defer></script>
   
   <style>

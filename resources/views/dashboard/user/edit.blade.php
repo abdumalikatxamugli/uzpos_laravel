@@ -9,7 +9,7 @@
 <form action="{{ route('dashboard.user.update', $user->id) }}" method="POST">
     @method('PUT')
     @csrf
-    <div class="row">
+    <div class="row" x-data="{}">
         <div class="col-md-4">
             <input type="text" name="first_name" class="form-control mb-3" placeholder="Фамилия" value="{{$user->first_name}}">
         </div>
@@ -17,7 +17,7 @@
             <input type="text" name="last_name" class="form-control mb-3" placeholder="Имя" value="{{$user->last_name}}">
         </div>
         <div class="col-md-4">
-            <input type="text" name="phone" class="form-control mb-3" placeholder="Телефон" value="{{$user->phone}}">
+            <input type="text" name="phone" class="form-control mb-3" placeholder="Телефон" value="{{$user->phone}}" x-mask="(99)-999-99-99">
         </div>
         <div class="col-md-4">
             <input type="text" name="username" class="form-control mb-3" placeholder="Username" value="{{$user->username}}">
