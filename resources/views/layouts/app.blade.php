@@ -70,7 +70,7 @@ The above copyright notice and this permission notice shall be included in all c
         <ul class="nav">
           {!! $menu->render() !!}
           <li class="nav-item active-pro ">
-            <a class="nav-link" href="./upgrade.html">
+            <a class="nav-link" href="#">
               <i class="material-icons">language</i>
               <p>Web</p>
             </a>
