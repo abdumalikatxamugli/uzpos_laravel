@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreign('division_id')->references('id')->on('divisions');
         });
         Schema::table('divisions', function (Blueprint $table) {
-            $table->unsignedBigInteger('division_id')->nullable();
-            $table->foreign('division_id')->references('id')->on('divisions');
+            $table->unsignedBigInteger('created_by_id')->nullable();
+            $table->foreign('created_by_id')->references('id')->on('users');
         });
     }
 
