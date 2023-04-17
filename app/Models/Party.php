@@ -45,7 +45,7 @@ class Party extends Model
       return $this->hasMany(Item::class,'party_id', 'id');
     }
     public function point(){
-      return $this->belongsTo(Point::class, 'point_id', 'id');
+      return $this->belongsTo(Point::class, 'division_id', 'id');
     }
 
     /**
