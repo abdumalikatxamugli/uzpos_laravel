@@ -17,7 +17,7 @@
             </div>
             <div class="col-md-6">
                 <div>Пункт приема</div>
-                <select name="point_id" class="form-control mb-3">
+                <select name="division_id" class="form-control mb-3">
                     @foreach($points as $point)
                         <option value="{{ $point->id }}">{{ $point->name }}</option>
                     @endforeach
