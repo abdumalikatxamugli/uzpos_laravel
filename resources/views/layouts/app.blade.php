@@ -69,12 +69,7 @@ The above copyright notice and this permission notice shall be included in all c
       <div class="sidebar-wrapper">
         <ul class="nav">
           {!! $menu->render() !!}
-          <li class="nav-item active-pro ">
-            <a class="nav-link" href="#">
-              <i class="material-icons">language</i>
-              <p>Web</p>
-            </a>
-          </li>
+         
         </ul>
         <script>
           function openModal(el){
