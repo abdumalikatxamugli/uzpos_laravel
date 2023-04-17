@@ -25,9 +25,9 @@ class Item extends Model
     }
     protected static function booted()
     {
-        static::creating(function($item){
-            $item->id = (string) Str::uuid();
-        });
+        // static::creating(function($item){
+        //     $item->id = (string) Str::uuid();
+        // });
         // static::created(function ($item) {
         //     PointProduct::addItem($item);
         // });
