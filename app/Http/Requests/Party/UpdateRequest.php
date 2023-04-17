@@ -25,7 +25,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             "check_in"=>"required",
-            "point_id"=>"required"
+            "division_id"=>"required"
         ];
     }
 }
