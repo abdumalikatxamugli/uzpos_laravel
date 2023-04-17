@@ -24,9 +24,9 @@ class Party extends Model
      */
     protected static function booted()
     {
-        static::creating(function ($item) {
-            $item->id = (string) Str::uuid();
-        });       
+        // static::creating(function ($item) {
+        //     $item->id = (string) Str::uuid();
+        // });       
 
         static::updating(function($party){
           if($party->status == 2 && $party->getOriginal('status')==1){
