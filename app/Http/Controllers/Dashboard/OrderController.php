@@ -37,7 +37,7 @@ class OrderController extends Controller
             }      
         }
         if($request->other_shop==1){
-            $orders = $orders->where('from_point_id', auth()->user()->point_id)->where('from_point_id', '<>', 'shop_id');
+            $orders = $orders->where('supplying_division_id', auth()->user()->point_id)->where('supplying_division_id', '<>', 'shop_id');
         }
         $orders = $orders->orderBy('order_no', 'desc')->paginate(10);
         $collectors = User::where('user_role', User::roles['COLLECTOR'])->where('busy', USER::FREE)->get();
