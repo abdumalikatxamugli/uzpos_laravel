@@ -213,7 +213,7 @@ class ReportContoller extends Controller
                         c.name as category_name,
                         b.name as brand_name
                                 from divisions up
-                                join divisionsproduct upp on upp.point_id = up.id
+                                join pointproducts upp on upp.point_id = up.id
                                 join uzpos_core_product p on p.id = upp.product_id
                                 left join uzpos_core_category c on c.id = p.category_id
                                 left join uzpos_core_brand b on b.id = p.brand_id
@@ -231,7 +231,7 @@ class ReportContoller extends Controller
                         c.name as category_name,
                         b.name as brand_name
                                 from divisions up
-                                join divisionsproduct upp on upp.point_id = up.id
+                                join pointproducts upp on upp.point_id = up.id
                                 join uzpos_core_product p on p.id = upp.product_id
                                 left join uzpos_core_category c on c.id = p.category_id
                                 left join uzpos_core_brand b on b.id = p.brand_id
@@ -256,7 +256,7 @@ class ReportContoller extends Controller
                         c.name as category_name,
                         b.name as brand_name
                                 from divisions up
-                                join divisionsproduct upp on upp.point_id = up.id
+                                join pointproducts upp on upp.point_id = up.id
                                 join uzpos_core_product p on p.id = upp.product_id
                                 left join uzpos_core_category c on c.id = p.category_id
                                 left join uzpos_core_brand b on b.id = p.brand_id
@@ -275,7 +275,7 @@ class ReportContoller extends Controller
                         c.name as category_name,
                         b.name as brand_name
                                 from divisions up
-                                join divisionsproduct upp on upp.point_id = up.id
+                                join pointproducts upp on upp.point_id = up.id
                                 join uzpos_core_product p on p.id = upp.product_id
                                 left join uzpos_core_category c on c.id = p.category_id
                                 left join uzpos_core_brand b on b.id = p.brand_id
@@ -301,7 +301,7 @@ class ReportContoller extends Controller
                         c.name as category_name,
                         b.name as brand_name
                                 from divisions up
-                                join divisionsproduct upp on upp.point_id = up.id
+                                join pointproducts upp on upp.point_id = up.id
                                 join uzpos_core_product p on p.id = upp.product_id
                                 left join uzpos_core_category c on c.id = p.category_id
                                 left join uzpos_core_brand b on b.id = p.brand_id
@@ -320,7 +320,7 @@ class ReportContoller extends Controller
                         c.name as category_name,
                         b.name as brand_name
                                 from divisions up
-                                join divisionsproduct upp on upp.point_id = up.id
+                                join pointproducts upp on upp.point_id = up.id
                                 join uzpos_core_product p on p.id = upp.product_id
                                 left join uzpos_core_category c on c.id = p.category_id
                                 left join uzpos_core_brand b on b.id = p.brand_id
