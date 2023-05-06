@@ -155,7 +155,7 @@ class Order extends Model
     public function hasEnoughItems(){
       foreach($this->items as $item){
         $quantityToSubtract = $item->quantity;
-        $quantityAvailable = PointProduct::getAvailableAmount($item->product_id, $this->from_point_id);
+        $quantityAvailable = PointProduct::getAvailableAmount($item->product_id, $this->supplying_division_id);
         if($quantityAvailable - $quantityToSubtract < 0){
           return false;
         }
