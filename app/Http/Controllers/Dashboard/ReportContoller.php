@@ -106,7 +106,7 @@ class ReportContoller extends Controller
                         from divisions up
                         join orders uo on uo.supplying_division_id = up.id
                         join orderitems oi on oi.order_id = uo.id
-                        join uzpos_core_product p on p.id = oi.product_id
+                        join products p on p.id = oi.product_id
                 
                 group by up.name, p.name, p.bar_code;";
         $result = DB::select($sql);
@@ -122,7 +122,7 @@ class ReportContoller extends Controller
                         from divisions up
                         join orders uo on uo.supplying_division_id = up.id
                         join orderitems oi on oi.order_id = uo.id
-                        join uzpos_core_product p on p.id = oi.product_id
+                        join products p on p.id = oi.product_id
                 
                 group by up.name, p.name, p.bar_code;";
         $result = DB::select($sql);
@@ -145,7 +145,7 @@ class ReportContoller extends Controller
                                     from divisions up
                                     join orders uo on uo.supplying_division_id = up.id
                                     join orderitems oi on oi.order_id = uo.id
-                                    join uzpos_core_product p on p.id = oi.product_id
+                                    join products p on p.id = oi.product_id
 
                             group by up.name, p.name, p.bar_code, date(uo.created_at)";
         $result = DB::select($sql);
@@ -161,7 +161,7 @@ class ReportContoller extends Controller
                                     from divisions up
                                     join orders uo on uo.supplying_division_id = up.id
                                     join orderitems oi on oi.order_id = uo.id
-                                    join uzpos_core_product p on p.id = oi.product_id
+                                    join products p on p.id = oi.product_id
 
                             group by up.name, p.name, p.bar_code, date(uo.created_at)";
         $result = DB::select($sql);
@@ -214,7 +214,7 @@ class ReportContoller extends Controller
                         b.name as brand_name
                                 from divisions up
                                 join pointproducts upp on upp.point_id = up.id
-                                join uzpos_core_product p on p.id = upp.product_id
+                                join products p on p.id = upp.product_id
                                 left join uzpos_core_category c on c.id = p.category_id
                                 left join uzpos_core_brand b on b.id = p.brand_id
                                 
@@ -232,7 +232,7 @@ class ReportContoller extends Controller
                         b.name as brand_name
                                 from divisions up
                                 join pointproducts upp on upp.point_id = up.id
-                                join uzpos_core_product p on p.id = upp.product_id
+                                join products p on p.id = upp.product_id
                                 left join uzpos_core_category c on c.id = p.category_id
                                 left join uzpos_core_brand b on b.id = p.brand_id
                                 
@@ -257,7 +257,7 @@ class ReportContoller extends Controller
                         b.name as brand_name
                                 from divisions up
                                 join pointproducts upp on upp.point_id = up.id
-                                join uzpos_core_product p on p.id = upp.product_id
+                                join products p on p.id = upp.product_id
                                 left join uzpos_core_category c on c.id = p.category_id
                                 left join uzpos_core_brand b on b.id = p.brand_id
                                 
@@ -276,7 +276,7 @@ class ReportContoller extends Controller
                         b.name as brand_name
                                 from divisions up
                                 join pointproducts upp on upp.point_id = up.id
-                                join uzpos_core_product p on p.id = upp.product_id
+                                join products p on p.id = upp.product_id
                                 left join uzpos_core_category c on c.id = p.category_id
                                 left join uzpos_core_brand b on b.id = p.brand_id
                                 
@@ -302,7 +302,7 @@ class ReportContoller extends Controller
                         b.name as brand_name
                                 from divisions up
                                 join pointproducts upp on upp.point_id = up.id
-                                join uzpos_core_product p on p.id = upp.product_id
+                                join products p on p.id = upp.product_id
                                 left join uzpos_core_category c on c.id = p.category_id
                                 left join uzpos_core_brand b on b.id = p.brand_id
                                 
@@ -321,7 +321,7 @@ class ReportContoller extends Controller
                         b.name as brand_name
                                 from divisions up
                                 join pointproducts upp on upp.point_id = up.id
-                                join uzpos_core_product p on p.id = upp.product_id
+                                join products p on p.id = upp.product_id
                                 left join uzpos_core_category c on c.id = p.category_id
                                 left join uzpos_core_brand b on b.id = p.brand_id
                                 
@@ -348,7 +348,7 @@ class ReportContoller extends Controller
                                     from divisions up
                                     join orders uo on uo.supplying_division_id = up.id
                                     join orderitems oi on oi.order_id = uo.id
-                                    join uzpos_core_product p on p.id = oi.product_id
+                                    join products p on p.id = oi.product_id
 
                             group by up.name, p.name, p.bar_code, date(uo.created_at)";
         $result = DB::select($sql);
@@ -364,7 +364,7 @@ class ReportContoller extends Controller
                                     from divisions up
                                     join orders uo on uo.supplying_division_id = up.id
                                     join orderitems oi on oi.order_id = uo.id
-                                    join uzpos_core_product p on p.id = oi.product_id
+                                    join products p on p.id = oi.product_id
 
                             group by up.name, p.name, p.bar_code, date(uo.created_at)";
         $result = DB::select($sql);
