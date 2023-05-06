@@ -140,10 +140,10 @@ class Order extends Model
       $itemsCount = count($this->items);
       $hasEnoughPayment = $this->hasEnoughPayment();
       $hasEnoughItems = $this->hasEnoughItems();
-      var_dump($itemsCount);
-      var_dump($hasEnoughPayment);
-      var_dump($hasEnoughItems);
-      exit();
+      // var_dump($itemsCount);
+      // var_dump($hasEnoughPayment);
+      // var_dump($hasEnoughItems);
+      // exit();
       return $hasEnoughPayment && $hasEnoughItems && $itemsCount !== 0;
     }
 
