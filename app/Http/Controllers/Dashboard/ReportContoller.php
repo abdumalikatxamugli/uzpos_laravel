@@ -61,7 +61,7 @@ class ReportContoller extends Controller
                             c.region
                             
                         from orders uo  
-                        join uzpos_sales_client c on uo.client_id = c.id
+                        join clients c on uo.client_id = c.id
                         join divisions up on uo.supplying_division_id = up.id and uo.status=2
                         join payments p on p.order_id = uo.id;";
         $result = DB::select($sql);
@@ -82,7 +82,7 @@ class ReportContoller extends Controller
                             c.region
                             
                         from orders uo  
-                        join uzpos_sales_client c on uo.client_id = c.id
+                        join clients c on uo.client_id = c.id
                         join divisions up on uo.supplying_division_id = up.id and uo.status=2
                         join payments p on p.order_id = uo.id;";
         $result = DB::select($sql);
@@ -215,8 +215,8 @@ class ReportContoller extends Controller
                                 from divisions up
                                 join pointproducts upp on upp.point_id = up.id
                                 join products p on p.id = upp.product_id
-                                left join uzpos_core_category c on c.id = p.category_id
-                                left join uzpos_core_brand b on b.id = p.brand_id
+                                left join category c on c.id = p.category_id
+                                left join brands b on b.id = p.brand_id
                                 
                                 group by up.name,  p.name, c.name, b.name
                                 order by p.name asc;";
@@ -233,8 +233,8 @@ class ReportContoller extends Controller
                                 from divisions up
                                 join pointproducts upp on upp.point_id = up.id
                                 join products p on p.id = upp.product_id
-                                left join uzpos_core_category c on c.id = p.category_id
-                                left join uzpos_core_brand b on b.id = p.brand_id
+                                left join category c on c.id = p.category_id
+                                left join brands b on b.id = p.brand_id
                                 
                                 group by up.name,  p.name, c.name, b.name
                                 order by p.name asc;";
@@ -258,8 +258,8 @@ class ReportContoller extends Controller
                                 from divisions up
                                 join pointproducts upp on upp.point_id = up.id
                                 join products p on p.id = upp.product_id
-                                left join uzpos_core_category c on c.id = p.category_id
-                                left join uzpos_core_brand b on b.id = p.brand_id
+                                left join category c on c.id = p.category_id
+                                left join brands b on b.id = p.brand_id
                                 
                                 group by up.name,  p.name, c.name, b.name
                                 having sum(upp.quantity) < 10
@@ -277,8 +277,8 @@ class ReportContoller extends Controller
                                 from divisions up
                                 join pointproducts upp on upp.point_id = up.id
                                 join products p on p.id = upp.product_id
-                                left join uzpos_core_category c on c.id = p.category_id
-                                left join uzpos_core_brand b on b.id = p.brand_id
+                                left join category c on c.id = p.category_id
+                                left join brands b on b.id = p.brand_id
                                 
                                 group by up.name,  p.name, c.name, b.name
                                 having sum(upp.quantity) < 10
@@ -303,8 +303,8 @@ class ReportContoller extends Controller
                                 from divisions up
                                 join pointproducts upp on upp.point_id = up.id
                                 join products p on p.id = upp.product_id
-                                left join uzpos_core_category c on c.id = p.category_id
-                                left join uzpos_core_brand b on b.id = p.brand_id
+                                left join category c on c.id = p.category_id
+                                left join brands b on b.id = p.brand_id
                                 
                                 group by up.name,  p.name, c.name, b.name
                                 having sum(upp.quantity) = 0
@@ -322,8 +322,8 @@ class ReportContoller extends Controller
                                 from divisions up
                                 join pointproducts upp on upp.point_id = up.id
                                 join products p on p.id = upp.product_id
-                                left join uzpos_core_category c on c.id = p.category_id
-                                left join uzpos_core_brand b on b.id = p.brand_id
+                                left join category c on c.id = p.category_id
+                                left join brands b on b.id = p.brand_id
                                 
                                 group by up.name,  p.name, c.name, b.name
                                 having sum(upp.quantity) = 0
@@ -390,7 +390,7 @@ class ReportContoller extends Controller
                             c.id,
                             c.region,
                             c.phone_number
-                                from uzpos_sales_client c 
+                                from clients c 
                                 order by client_name asc;";
         $result = DB::select($sql);
         return view('dashboard.reports.report3_1')->with('result',$result);
@@ -401,7 +401,7 @@ class ReportContoller extends Controller
                             c.id,
                             c.region,
                             c.phone_number
-                                from uzpos_sales_client c 
+                                from clients c 
                                 order by client_name asc;";
         $result = DB::select($sql);
         $headers = ["ИМЯ", "ID", "РЕГИОН", "КОНТАКТ"];
@@ -422,7 +422,7 @@ class ReportContoller extends Controller
                             p.amount,
                             date(o.created_at) as order_day,
                             up.name as point_name
-                                from uzpos_sales_client c 
+                                from clients c 
                                 join orders o on o.client_id = c.id
                                 join divisions up on up.id =o.supplying_division_id 
                                 join payments p on p.order_id = o.id and p.payment_type = 3
@@ -440,7 +440,7 @@ class ReportContoller extends Controller
                             p.amount,
                             date(o.created_at) as order_day,
                             up.name as point_name
-                                from uzpos_sales_client c 
+                                from clients c 
                                 join orders o on o.client_id = c.id
                                 join divisions up on up.id =o.supplying_division_id 
                                 join payments p on p.order_id = o.id and p.payment_type = 3
