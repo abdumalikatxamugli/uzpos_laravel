@@ -156,13 +156,10 @@ class Order extends Model
       foreach($this->items as $item){
         $quantityToSubtract = $item->quantity;
         $quantityAvailable = PointProduct::getAvailableAmount($item->product_id, $this->supplying_division_id);
-        var_dump($quantityAvailable);
-        var_dump($quantityToSubtract);
         if($quantityAvailable - $quantityToSubtract < 0){
           return false;
         }
       }
-      exit();
       return true;
     }
     public function getShortages(){
