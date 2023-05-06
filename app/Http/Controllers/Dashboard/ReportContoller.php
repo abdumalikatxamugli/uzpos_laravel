@@ -13,13 +13,13 @@ class ReportContoller extends Controller
     public function report_2_1()
     {
         $sql = "select up.name as point_name, date(uo.created_at) as created_date, sum(ui.price*ui.quantity) as total_cost,
-                        (select sum(e.amount) from expenses e where e.division_id = uo.from_point_id) as total_expense,
-                        sum(case p.currency when 0 then p.amount else 0 end) as uzs_payment,
-                        sum(case p.currency when 1 then p.amount else 0 end) as usd_payment
-                        from uzpos_core_point up 
-                        join uzpos_sales_order uo on uo.from_point_id = up.id and uo.status=2
-                        join uzpos_sales_orderitem ui on ui.order_id = uo.id 
-                        join uzpos_sales_payment p on p.order_id = uo.id                    
+                        (select sum(e.amount) from expenses e where e.division_id = uo.supplying_division_id) as total_expense,
+                        sum(case p.payed_currency_type when 0 then p.amount else 0 end) as uzs_payment,
+                        sum(case p.payed_currency_type when 1 then p.amount else 0 end) as usd_payment
+                        from divisions up 
+                        join orders uo on uo.supplying_division_id = up.id and uo.status=2
+                        join orderitems ui on ui.order_id = uo.id 
+                        join payments p on p.order_id = uo.id                    
                         group by up.name, date(uo.created_at), total_expense;";
         $result = DB::select($sql);
         return view('dashboard.reports.report2_1')->with('result',$result);
@@ -27,13 +27,13 @@ class ReportContoller extends Controller
     public function report_2_1_download()
     {
         $sql = "select up.name as point_name, date(uo.created_at) as created_date, sum(ui.price*ui.quantity) as total_cost,
-                        (select sum(e.amount) from expenses e where e.division_id = uo.from_point_id) as total_expense,
-                        sum(case p.currency when 0 then p.amount else 0 end) as uzs_payment,
-                        sum(case p.currency when 1 then p.amount else 0 end) as usd_payment
-                        from uzpos_core_point up 
-                        join uzpos_sales_order uo on uo.from_point_id = up.id and uo.status=2
-                        join uzpos_sales_orderitem ui on ui.order_id = uo.id 
-                        join uzpos_sales_payment p on p.order_id = uo.id                    
+                        (select sum(e.amount) from expenses e where e.division_id = uo.supplying_division_id) as total_expense,
+                        sum(case p.payed_currency_type when 0 then p.amount else 0 end) as uzs_payment,
+                        sum(case p.payed_currency_type when 1 then p.amount else 0 end) as usd_payment
+                        from divisions up 
+                        join orders uo on uo.supplying_division_id = up.id and uo.status=2
+                        join orderitems ui on ui.order_id = uo.id 
+                        join payments p on p.order_id = uo.id                    
                         group by up.name, date(uo.created_at), total_expense;";
         $result = DB::select($sql);
         $headers = ["КАССА ТОЧКЕ", "ДАТА", "ОБШИЙ СУММА", "РАСХОД", "СУМ", "ДОЛЛАР"];
@@ -52,7 +52,7 @@ class ReportContoller extends Controller
                          up.name as point_name, 
                          date(uo.created_at) as created_date, 
                          c.id as client_id,
-                         (Select sum(ui.price*ui.quantity) from uzpos_sales_orderitem ui where ui.order_id = uo.id) as total_sum,
+                         (Select sum(ui.price*ui.quantity) from orderitems ui where ui.order_id = uo.id) as total_sum,
                             case c.client_type when 0 then
                                 concat(c.fname, c.lname, c.mname) 
                                 else
@@ -60,10 +60,10 @@ class ReportContoller extends Controller
                             as client_name,
                             c.region
                             
-                        from uzpos_sales_order uo  
+                        from orders uo  
                         join uzpos_sales_client c on uo.client_id = c.id
-                        join uzpos_core_point up on uo.from_point_id = up.id and uo.status=2
-                        join uzpos_sales_payment p on p.order_id = uo.id;";
+                        join divisions up on uo.supplying_division_id = up.id and uo.status=2
+                        join payments p on p.order_id = uo.id;";
         $result = DB::select($sql);
         return view('dashboard.reports.report2_2')->with('result',$result);
     }
@@ -73,7 +73,7 @@ class ReportContoller extends Controller
                          up.name as point_name, 
                          date(uo.created_at) as created_date, 
                          c.id as client_id,
-                         (Select sum(ui.price*ui.quantity) from uzpos_sales_orderitem ui where ui.order_id = uo.id) as total_sum,
+                         (Select sum(ui.price*ui.quantity) from orderitems ui where ui.order_id = uo.id) as total_sum,
                             case c.client_type when 0 then
                                 concat(c.fname, c.lname, c.mname) 
                                 else
@@ -81,10 +81,10 @@ class ReportContoller extends Controller
                             as client_name,
                             c.region
                             
-                        from uzpos_sales_order uo  
+                        from orders uo  
                         join uzpos_sales_client c on uo.client_id = c.id
-                        join uzpos_core_point up on uo.from_point_id = up.id and uo.status=2
-                        join uzpos_sales_payment p on p.order_id = uo.id;";
+                        join divisions up on uo.supplying_division_id = up.id and uo.status=2
+                        join payments p on p.order_id = uo.id;";
         $result = DB::select($sql);
         
         $headers = ["Номер", "Сумма", "дата", "ID клиента", "Имя клиента", "Инфо", "Точка заказа"];
@@ -103,9 +103,9 @@ class ReportContoller extends Controller
                         p.bar_code, 
                         sum(oi.quantity * oi.price) as total_price
 
-                        from uzpos_core_point up
-                        join uzpos_sales_order uo on uo.from_point_id = up.id
-                        join uzpos_sales_orderitem oi on oi.order_id = uo.id
+                        from divisions up
+                        join orders uo on uo.supplying_division_id = up.id
+                        join orderitems oi on oi.order_id = uo.id
                         join uzpos_core_product p on p.id = oi.product_id
                 
                 group by up.name, p.name, p.bar_code;";
@@ -119,9 +119,9 @@ class ReportContoller extends Controller
                         p.bar_code, 
                         sum(oi.quantity * oi.price) as total_price
 
-                        from uzpos_core_point up
-                        join uzpos_sales_order uo on uo.from_point_id = up.id
-                        join uzpos_sales_orderitem oi on oi.order_id = uo.id
+                        from divisions up
+                        join orders uo on uo.supplying_division_id = up.id
+                        join orderitems oi on oi.order_id = uo.id
                         join uzpos_core_product p on p.id = oi.product_id
                 
                 group by up.name, p.name, p.bar_code;";
@@ -142,9 +142,9 @@ class ReportContoller extends Controller
                                     p.bar_code, 
                                     sum(oi.quantity * oi.price) as total_price,
                                     date(uo.created_at) as order_day
-                                    from uzpos_core_point up
-                                    join uzpos_sales_order uo on uo.from_point_id = up.id
-                                    join uzpos_sales_orderitem oi on oi.order_id = uo.id
+                                    from divisions up
+                                    join orders uo on uo.supplying_division_id = up.id
+                                    join orderitems oi on oi.order_id = uo.id
                                     join uzpos_core_product p on p.id = oi.product_id
 
                             group by up.name, p.name, p.bar_code, date(uo.created_at)";
@@ -158,9 +158,9 @@ class ReportContoller extends Controller
                                     p.bar_code, 
                                     sum(oi.quantity * oi.price) as total_price,
                                     date(uo.created_at) as order_day
-                                    from uzpos_core_point up
-                                    join uzpos_sales_order uo on uo.from_point_id = up.id
-                                    join uzpos_sales_orderitem oi on oi.order_id = uo.id
+                                    from divisions up
+                                    join orders uo on uo.supplying_division_id = up.id
+                                    join orderitems oi on oi.order_id = uo.id
                                     join uzpos_core_product p on p.id = oi.product_id
 
                             group by up.name, p.name, p.bar_code, date(uo.created_at)";
@@ -177,7 +177,7 @@ class ReportContoller extends Controller
     public function report_2_5()
     {
         $sql = "select up.name as point_name, date(e.created_at) as expense_day, sum(e.amount) as total_sum
-                       from uzpos_core_point up
+                       from divisions up
                        join expenses e on e.division_id = up.id
                        group by up.name, date(e.created_at)
                        order by date(e.created_at) asc;";
@@ -187,7 +187,7 @@ class ReportContoller extends Controller
     public function report_2_5_download()
     {
         $sql = "select up.name as point_name, date(e.created_at) as expense_day, sum(e.amount) as total_sum
-                       from uzpos_core_point up
+                       from divisions up
                        join expenses e on e.division_id = up.id
                        group by up.name, date(e.created_at)
                        order by date(e.created_at) asc;";
@@ -212,8 +212,8 @@ class ReportContoller extends Controller
                         sum(upp.quantity) as total_count,
                         c.name as category_name,
                         b.name as brand_name
-                                from uzpos_core_point up
-                                join uzpos_core_pointproduct upp on upp.point_id = up.id
+                                from divisions up
+                                join divisionsproduct upp on upp.point_id = up.id
                                 join uzpos_core_product p on p.id = upp.product_id
                                 left join uzpos_core_category c on c.id = p.category_id
                                 left join uzpos_core_brand b on b.id = p.brand_id
@@ -230,8 +230,8 @@ class ReportContoller extends Controller
                         sum(upp.quantity) as total_count,
                         c.name as category_name,
                         b.name as brand_name
-                                from uzpos_core_point up
-                                join uzpos_core_pointproduct upp on upp.point_id = up.id
+                                from divisions up
+                                join divisionsproduct upp on upp.point_id = up.id
                                 join uzpos_core_product p on p.id = upp.product_id
                                 left join uzpos_core_category c on c.id = p.category_id
                                 left join uzpos_core_brand b on b.id = p.brand_id
@@ -255,8 +255,8 @@ class ReportContoller extends Controller
                         sum(upp.quantity) as total_count,
                         c.name as category_name,
                         b.name as brand_name
-                                from uzpos_core_point up
-                                join uzpos_core_pointproduct upp on upp.point_id = up.id
+                                from divisions up
+                                join divisionsproduct upp on upp.point_id = up.id
                                 join uzpos_core_product p on p.id = upp.product_id
                                 left join uzpos_core_category c on c.id = p.category_id
                                 left join uzpos_core_brand b on b.id = p.brand_id
@@ -274,8 +274,8 @@ class ReportContoller extends Controller
                         sum(upp.quantity) as total_count,
                         c.name as category_name,
                         b.name as brand_name
-                                from uzpos_core_point up
-                                join uzpos_core_pointproduct upp on upp.point_id = up.id
+                                from divisions up
+                                join divisionsproduct upp on upp.point_id = up.id
                                 join uzpos_core_product p on p.id = upp.product_id
                                 left join uzpos_core_category c on c.id = p.category_id
                                 left join uzpos_core_brand b on b.id = p.brand_id
@@ -300,8 +300,8 @@ class ReportContoller extends Controller
                         sum(upp.quantity) as total_count,
                         c.name as category_name,
                         b.name as brand_name
-                                from uzpos_core_point up
-                                join uzpos_core_pointproduct upp on upp.point_id = up.id
+                                from divisions up
+                                join divisionsproduct upp on upp.point_id = up.id
                                 join uzpos_core_product p on p.id = upp.product_id
                                 left join uzpos_core_category c on c.id = p.category_id
                                 left join uzpos_core_brand b on b.id = p.brand_id
@@ -319,8 +319,8 @@ class ReportContoller extends Controller
                         sum(upp.quantity) as total_count,
                         c.name as category_name,
                         b.name as brand_name
-                                from uzpos_core_point up
-                                join uzpos_core_pointproduct upp on upp.point_id = up.id
+                                from divisions up
+                                join divisionsproduct upp on upp.point_id = up.id
                                 join uzpos_core_product p on p.id = upp.product_id
                                 left join uzpos_core_category c on c.id = p.category_id
                                 left join uzpos_core_brand b on b.id = p.brand_id
@@ -345,9 +345,9 @@ class ReportContoller extends Controller
                                     p.bar_code, 
                                     sum(oi.quantity * oi.price) as total_price,
                                     date(uo.created_at) as order_day
-                                    from uzpos_core_point up
-                                    join uzpos_sales_order uo on uo.from_point_id = up.id
-                                    join uzpos_sales_orderitem oi on oi.order_id = uo.id
+                                    from divisions up
+                                    join orders uo on uo.supplying_division_id = up.id
+                                    join orderitems oi on oi.order_id = uo.id
                                     join uzpos_core_product p on p.id = oi.product_id
 
                             group by up.name, p.name, p.bar_code, date(uo.created_at)";
@@ -361,9 +361,9 @@ class ReportContoller extends Controller
                                     p.bar_code, 
                                     sum(oi.quantity * oi.price) as total_price,
                                     date(uo.created_at) as order_day
-                                    from uzpos_core_point up
-                                    join uzpos_sales_order uo on uo.from_point_id = up.id
-                                    join uzpos_sales_orderitem oi on oi.order_id = uo.id
+                                    from divisions up
+                                    join orders uo on uo.supplying_division_id = up.id
+                                    join orderitems oi on oi.order_id = uo.id
                                     join uzpos_core_product p on p.id = oi.product_id
 
                             group by up.name, p.name, p.bar_code, date(uo.created_at)";
@@ -423,9 +423,9 @@ class ReportContoller extends Controller
                             date(o.created_at) as order_day,
                             up.name as point_name
                                 from uzpos_sales_client c 
-                                join uzpos_sales_order o on o.client_id = c.id
-                                join uzpos_core_point up on up.id =o.from_point_id 
-                                join uzpos_sales_payment p on p.order_id = o.id and p.payment_type = 3
+                                join orders o on o.client_id = c.id
+                                join divisions up on up.id =o.supplying_division_id 
+                                join payments p on p.order_id = o.id and p.payment_type = 3
                                 
                                 order by client_name asc;";
         $result = DB::select($sql);
@@ -441,9 +441,9 @@ class ReportContoller extends Controller
                             date(o.created_at) as order_day,
                             up.name as point_name
                                 from uzpos_sales_client c 
-                                join uzpos_sales_order o on o.client_id = c.id
-                                join uzpos_core_point up on up.id =o.from_point_id 
-                                join uzpos_sales_payment p on p.order_id = o.id and p.payment_type = 3
+                                join orders o on o.client_id = c.id
+                                join divisions up on up.id =o.supplying_division_id 
+                                join payments p on p.order_id = o.id and p.payment_type = 3
                                 
                                 order by client_name asc;";
         $result = DB::select($sql);

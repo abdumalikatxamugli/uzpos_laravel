@@ -47,8 +47,8 @@
                 <thead>
                     <tr>
                         <th width="2%">#</th>
-                        <th class="text-primary" width="30%">Штрих код</th>
                         <th class="text-primary" width="20%">Название</th>
+                        <th class="text-primary" width="30%">Штрих код</th>
                         <th class="text-primary" width="10%">Количество</th>
                         <th class="text-primary">Цена</th>
                         <th class="text-primary">Общая цена</th>
@@ -60,19 +60,19 @@
                         <tr>
                             <td x-text="index+1"></td>
                             <td>
-                                <input type="hidden" x-bind:name="'items['+index+'][order_id]'" value="{{ $order->id }}">
-                                <select x-bind:name="'items['+index+'][bar_code]'" id="" class="form-control" x-model="item.bar_code" x-init="init_row($el, index)">
+                                <select x-bind:name="'items['+index+'][product_id]'" id="" class="form-control" x-model="item.product_id" x-init="init_row($el, index)">
                                     <option></option>
                                     @foreach($products as $product)
-                                        <option value="{{ $product->bar_code }}">{{ $product->bar_code }}</option>
+                                        <option value="{{ $product->id }}">{{ $product->name }}</option>
                                     @endforeach
                                 </select>
                             </td>
                             <td>
-                                <select x-bind:name="'items['+index+'][product_id]'" id="" class="form-control" x-model="item.product_id">
+                                <input type="hidden" x-bind:name="'items['+index+'][order_id]'" value="{{ $order->id }}">
+                                <select x-bind:name="'items['+index+'][bar_code]'" id="" class="form-control" x-model="item.bar_code" >
                                     <option></option>
                                     @foreach($products as $product)
-                                        <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                        <option value="{{ $product->bar_code }}">{{ $product->bar_code }}</option>
                                     @endforeach
                                 </select>
                             </td>
@@ -133,9 +133,10 @@
 
                function changeEventHandler(index, event){
                     if(event.target.value){
-                        const bar_code = event.target.value
-                        this.items[index].cost = this.products[bar_code].bulk_price;
-                        this.items[index].product_id = this.products[bar_code].id;
+                        const product_id = event.target.value
+                        this.items[index].cost = this.products[product_id].bulk_price;
+                        this.items[index].bar_code = this.products[product_id].bar_code;
+                        this.items[index].product_id = this.products[product_id].id;
                     }else{
                         this.items[index].cost = 0;
                     }

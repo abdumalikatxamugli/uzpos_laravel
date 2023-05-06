@@ -94,7 +94,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         View::composer(['dashboard.order.edit_retail_order'], function($view){
-            $products = Product::all()->keyBy('bar_code');
+            $products = Product::all()->keyBy('id');
             $payment_types =  Payment::PAYMENT_TYPES;
             $currencies = Payment::CURRENCIES;
             $points = Point::orderBy('name')->get();

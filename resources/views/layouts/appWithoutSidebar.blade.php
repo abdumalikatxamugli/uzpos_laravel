@@ -32,7 +32,8 @@ The above copyright notice and this permission notice shall be included in all c
   <!-- Alpine Plugins -->
   <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
  
-  <script src="{{asset('alpine.min.js')}}" defer></script>
+  <!-- Alpine Core -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   
   <style>
     .my-nav-treeview{
