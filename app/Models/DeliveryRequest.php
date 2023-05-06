@@ -9,7 +9,7 @@ class DeliveryRequest extends Model
 {
     use Fabricatable;
 
-    protected $table = "deliveryrequest";
+    protected $table = "uzpos_sales_deliveryrequest";
 
     /**
      * 
