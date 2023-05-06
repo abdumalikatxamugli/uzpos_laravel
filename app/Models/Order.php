@@ -143,6 +143,7 @@ class Order extends Model
       var_dump($itemsCount);
       var_dump($hasEnoughPayment);
       var_dump($hasEnoughItems);
+      exit();
       return $hasEnoughPayment && $hasEnoughItems && $itemsCount !== 0;
     }
 
