@@ -3,6 +3,9 @@
 
 <div x-data="start()" x-init="init()">
     @if(count($order->items) > 0)
+        <h5 class="mb-3 d-flex justify-content-between">
+            <b>Сохраненные товары</b>
+        </h5>
         <table class="table text-center table-bordered mb-5" >
             <thead>
                 <tr>
@@ -35,10 +38,12 @@
                 @endforeach
             </tbody>
         </table>
-        <hr/>
     @endif
     @include('partials.validation_errors')
     @if($order->status == 1 && $order->division_id == auth()->user()->division_id)
+        <h5 class="mb-3 d-flex justify-content-between">
+            <b>Добавить товар</b>
+        </h5>
         <form action="{{ route('dashboard.order.items.save') }}" method="POST">
             @csrf
             <table class="table text-center table-bordered" >
@@ -106,7 +111,6 @@
                     <i class="material-icons">add</i>
                 </button>
             </div>
-            <hr/>
             <div class="d-flex justify-content-end">
                 <button class="btn btn-success btn-lg">
                     <i class="material-icons">check</i>

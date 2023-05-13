@@ -1,5 +1,5 @@
 <h5 class="mb-5 d-flex justify-content-between">
-    <b>Оплата</b>
+    <b>Сохраненные оплаты</b>
 </h5>
 <table class="table table-bordered text-center mb-5">
     <thead>
@@ -43,6 +43,7 @@
     <form action="{{route('order.append.payments')}}" method="POST" x-data="paymentManager()">
         @csrf
         <div>
+            <h4 class="mb-4" style="font-weight: bold">Оплата</h4>
             <input type="hidden" name="order_id" value="{{ $order->id }}">
             <div class="row">
                 <div class="col-md-3">
@@ -84,6 +85,7 @@
                     <input type="text" class="form-control px-2" readonly x-bind:value="payedAmountUsd()">
                 </div>
             </div>
+            <h4 class="mt-4" style="font-weight: bold">Сдача</h4>
             <div class="row mt-3">
                 <div class="col-md-3">
                     <label>Возврщено</label>

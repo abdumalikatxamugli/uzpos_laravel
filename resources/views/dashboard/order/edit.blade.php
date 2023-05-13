@@ -26,7 +26,6 @@
             </tbody>
         </table>
     </div>
-    <hr>
     <div class="card-body">
         <h5 class="mb-5 d-flex justify-content-between">
             <b>Данные клиента</b>
@@ -38,28 +37,22 @@
                 </button>
             @endif
         </h5>
-        <div>
-            
-        </div>
+        @if($order->client)
         <div class="row">
             <div class="col-md-4">
                 <h6>Тип клиента</h6>
-                <hr/>
                 <b>{{$order->client? $order->client->client_type_name : '' }}</b>
             </div>
             <div class="col-md-3">
                 <h6>ФИО/Название</h6>
-                <hr/>
                 <b>{{$order->getClientFullName()}}</b>
             </div>
             <div class="col-md-3">
                 <h6>Реквизиты</h6>
-                <hr/>
                 <b>{{$order->client ? $order->client->getClientCredentials() : ''}}</b>
             </div>
             <div class="col-md-2">
                 <h6>Долги</h6>
-                <hr/>
                 @if($order->client)
                     <a href="{{ route('debt.client.index', $order->client->id) }}" class="btn btn-link mb-0 btn-sm text-danger" target="_blank">
                         Посмотреть историю долгов
@@ -67,18 +60,13 @@
                 @endif
             </div>
         </div>
-        
+        @endif
     </div>
-    <hr>
     <div class="card-body">
-        <h5 class="mb-5 d-flex justify-content-between">
-            <b>Товары</b>
-        </h5>
         <div>
             @include('dashboard.order.components.orderItems')            
         </div>        
     </div>
-    <hr>
     <div class="card-body">
         @include('dashboard.order.components.payment')
         <div class="row my-5 text-center" x-data="{open:false}">
@@ -117,13 +105,12 @@
                 @endif
             </div>
         </div>    
-        <hr>
         @if($order->status == 1 && $order->shop_id == auth()->user()->point_id)
             <div class="my-3">
                 @if($order->canBeConfirmed() && $order->client)
                     <form action="{{ route('order.confirm', $order->id) }}">
                         @csrf
-                        <button class="btn btn-info w-100 p-3">ПОДВЕРЖДАТЬ</button>
+                        <button class="btn btn-info w-100 p-3">Подтверждать</button>
                     </form>
                 @else
                     @include('dashboard.order.components.confirmation_errors')
