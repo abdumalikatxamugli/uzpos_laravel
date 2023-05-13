@@ -45,8 +45,9 @@
                 <thead>
                     <tr>
                         <th width="2%">#</th>
-                        <th class="fs-6 text-info" width="30%">Название</th>
-                        <th class="fs-6 text-info" width="10%">Количество</th>
+                        <th class="fs-6 text-info" width="20%">Название</th>
+                        <th class="text-primary" width="20%">Штрих код</th>
+                        <th class="fs-6 text-info" width="20%">Количество</th>
                         <th class="fs-6 text-info">Цена</th>
                         <th class="fs-6 text-info">Общая цена</th>
                         <th class="fs-6 text-info"></th>
@@ -58,10 +59,18 @@
                             <td x-text="index+1"></td>
                             <td>
                                 <input type="hidden" x-bind:name="'items['+index+'][order_id]'" value="{{ $order->id }}">
-                                <select x-bind:name="'items['+index+'][product_id]'" id="" class="form-control" x-model="item.product_id" x-init="init_row($el, index)">
+                                <select x-bind:name="'items['+index+'][product_id]'" class="form-control select2" x-model="item.product_id" x-init="init_row($el, index)">
                                     <option></option>
                                     @foreach($products as $product)
                                         <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td>
+                                <select x-bind:name="'items['+index+'][product_id]'" class="form-control select2" x-model="item.product_id" x-init="init_row($el, index)">
+                                    <option></option>
+                                    @foreach($products as $product)
+                                        <option value="{{ $product->id }}">{{ $product->bar_code }}</option>
                                     @endforeach
                                 </select>
                             </td>
@@ -113,21 +122,23 @@
             items: [{product_id:null, quantity:null, cost:null},{product_id:null, quantity:null, cost:null}],
             init : function(){
                 this.products = @json($products);
-                console.log(this.products)
             },
             init_row: function(el, index){
-               const app = this
-               $(el).select2({placeholder:'Выберите продукт', allowClear:true})
+                const app = this
+                $(el).select2({placeholder:'Выберите продукт', allowClear:true})
                                         .on("change", changeEventHandler.bind(app, index))
                
-               function changeEventHandler(index, event){
+                function changeEventHandler(index, event){
                     if(event.target.value){
                         const product_id = event.target.value
-                       
                         this.items[index].cost = this.products[product_id].bulk_price;
+                        this.items[index].product_id = product_id;
                     }else{
                         this.items[index].cost = 0;
                     }
+                    this.$nextTick(()=>{
+                        $(".select2").trigger('change.select2');
+                    });
                }
             },
             calcTotalQuantity: function(){

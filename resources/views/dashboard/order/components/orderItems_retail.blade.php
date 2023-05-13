@@ -47,8 +47,8 @@
                 <thead>
                     <tr>
                         <th width="2%">#</th>
-                        <th class="text-primary" width="20%">Название</th>
                         <th class="text-primary" width="30%">Штрих код</th>
+                        <th class="text-primary" width="20%">Название</th>
                         <th class="text-primary" width="10%">Количество</th>
                         <th class="text-primary">Цена</th>
                         <th class="text-primary">Общая цена</th>
@@ -60,19 +60,19 @@
                         <tr>
                             <td x-text="index+1"></td>
                             <td>
-                                <select x-bind:name="'items['+index+'][product_id]'" id="" class="form-control" x-model="item.product_id" x-init="init_row($el, index)">
+                                <input type="hidden" x-bind:name="'items['+index+'][order_id]'" value="{{ $order->id }}">
+                                <select x-bind:name="'items['+index+'][bar_code]'" class="form-control" x-model="item.bar_code" x-init="init_row($el, index)">
                                     <option></option>
                                     @foreach($products as $product)
-                                        <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                        <option value="{{ $product->id }}">{{ $product->bar_code }}</option>
                                     @endforeach
                                 </select>
                             </td>
                             <td>
-                                <input type="hidden" x-bind:name="'items['+index+'][order_id]'" value="{{ $order->id }}">
-                                <select x-bind:name="'items['+index+'][bar_code]'" id="" class="form-control" x-model="item.bar_code" >
+                                <select x-bind:name="'items['+index+'][product_id]'" class="form-control" x-model="item.product_id" >
                                     <option></option>
                                     @foreach($products as $product)
-                                        <option value="{{ $product->bar_code }}">{{ $product->bar_code }}</option>
+                                        <option value="{{ $product->id }}">{{ $product->name }}</option>
                                     @endforeach
                                 </select>
                             </td>
@@ -87,9 +87,9 @@
                                 <span x-text="new Intl.NumberFormat().format(item.quantity * item.cost)" ></span>
                             </td>
                             <td>
-                                    <button type="button" class="btn btn-danger btn-sm mb-0" x-on:click="removeItem(index)">
-                                        <i class="material-icons">close</i>
-                                    </button>
+                                <button type="button" class="btn btn-danger btn-sm mb-0" x-on:click="removeItem(index)">
+                                    <i class="material-icons">close</i>
+                                </button>
                             </td>
                         </tr>
                     </template>
@@ -119,8 +119,7 @@
     @endif
 </div>
 <script>
-    function start() {
-        
+    function start() {        
         return {
             items: [{product_id:null, quantity:null, cost:null}],
             init : function(){
