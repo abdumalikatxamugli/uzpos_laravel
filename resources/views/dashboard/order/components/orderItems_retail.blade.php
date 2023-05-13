@@ -47,10 +47,10 @@
                 <thead>
                     <tr>
                         <th width="2%">#</th>
-                        <th class="text-primary" width="30%">Штрих код</th>
+                        <th class="text-primary" width="20%">Штрих код</th>
                         <th class="text-primary" width="20%">Название</th>
                         <th class="text-primary" width="10%">Количество</th>
-                        <th class="text-primary">Цена</th>
+                        <th class="text-primary" width="10%">Цена</th>
                         <th class="text-primary">Общая цена</th>
                         <th class="text-primary">Убрать</th>
                     </tr>
@@ -61,7 +61,7 @@
                             <td x-text="index+1"></td>
                             <td>
                                 <input type="hidden" x-bind:name="'items['+index+'][order_id]'" value="{{ $order->id }}">
-                                <select x-bind:name="'items['+index+'][bar_code]'" class="form-control" x-model="item.bar_code" x-init="init_row($el, index)">
+                                <select x-bind:name="'items['+index+'][product_id]'" class="form-control" x-model="item.bar_code" x-init="init_row($el, index)">
                                     <option></option>
                                     @foreach($products as $product)
                                         <option value="{{ $product->id }}">{{ $product->bar_code }}</option>
@@ -69,7 +69,7 @@
                                 </select>
                             </td>
                             <td>
-                                <select x-bind:name="'items['+index+'][product_id]'" class="form-control" x-model="item.product_id" >
+                                <select x-bind:name="'items['+index+'][product_id]'" class="form-control" x-model="item.product_id" readonly>
                                     <option></option>
                                     @foreach($products as $product)
                                         <option value="{{ $product->id }}">{{ $product->name }}</option>
