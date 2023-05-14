@@ -15,7 +15,9 @@
             <option value="1" {{$point->point_type == 1 ? "selected":""}}>Склад</option>
             <option value="2" {{$point->point_type == 2 ? "selected":""}}>Магазин</option>
         </select>
-        <button class="btn btn-sm font-weight-bold btn-info">update</button>
+        <button class="btn btn-sm font-weight-bold btn-info">
+            <i class="material-icons">check</i>
+        </button>
     </form>
 </div>
 

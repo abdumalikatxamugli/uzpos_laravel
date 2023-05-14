@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use App\Responses\ErrorMessageResponse;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -49,6 +50,13 @@ class Handler extends ExceptionHandler
         });
         $this->renderable(function (NotFoundException $e) {
             return ErrorMessageResponse::send(-1, 'Not found', 400);
+        });
+        $this->renderable(function (QueryException $e){
+            if($e->getCode() == "23000")
+            {
+                session()->flash('queryException', 'Ограничение целостности будет нарушено, если вы удалите элемент, поэтому система остановила действие удаления.');
+                return redirect()->back();
+            }
         });
     }
 }

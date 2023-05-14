@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+@include('partials.queryException')
 <div class="card-header mb-4 pb-0">
     <div class="d-flex justify-content-between">
         <h3>Measurements</h3>

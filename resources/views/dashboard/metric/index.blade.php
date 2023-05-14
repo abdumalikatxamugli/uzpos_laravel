@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+@include('partials.queryException')
 <div class="card-header-primary mb-4">
     <div class="d-flex justify-content-between  align-items-center">
         <h3 class="m-0">Единицы измерение</h3>
@@ -12,10 +12,10 @@
     <table class="table text-center">
         <thead>
             <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th class="small-text">#</th>
+                <th class="small-text">Название</th>
+                <th class="small-text" width="8%"></th>
+                <th class="small-text" width="8%"></th>
             </tr>
         </thead>
         <tbody>
@@ -24,13 +24,17 @@
                     <td>{{$number+1}}</td>
                     <td class="mb-0 text-sm">{{$metric->name}}</td>
                     <td class="mb-0 text-sm">
-                        <a href="{{ route('dashboard.metric.edit', $metric->id) }}" class="bnt btn-warning btn-sm text-dark font-weight-bold text-xs btn-hover">Edit</a>
+                        <a href="{{ route('dashboard.metric.edit', $metric->id) }}" class="btn btn-warning btn-sm text-dark font-weight-bold text-xs btn-hover">
+                            <i class="material-icons">visibility</i>
+                        </a>
                     </td>
                     <td class="mb-0 text-sm">
                         <form action="{{ route('dashboard.metric.destroy', $metric->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger btn-sm text-white font-weight-bold text-xs btn-hover">Delete</button>
+                            <button class="btn btn-danger btn-sm text-white font-weight-bold text-xs btn-hover">
+                                <i class="material-icons">delete</i>
+                            </button>
                         </form>
                     </td>
                 </tr>

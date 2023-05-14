@@ -40,6 +40,29 @@ class User extends Authenticatable
     const DELIVERY = 6;
     const OWNER = 7;
 
+    public function getRoleName()
+    {
+        switch($this->user_role)
+        {
+            case self::ADMIN:
+                return 'Админ';
+            case self::SELLER:
+                return 'Продавец';
+            case self::WAREHOUSE_MANAGER:
+                return 'Складчик';
+            case self::COLLECTOR:
+                return 'Сборщик';
+            case self::ACCOUNTANT:
+                return 'Бухгалтер';
+            case self::SHOP_MANAGER:
+                return 'Менеджер магазина';
+            case self::DELIVERY:
+                return 'Доставщик';
+            case self::OWNER:
+                return 'Владелец';
+        }
+    }
+
     const BUSY = 1;
     const FREE = 0;
     /**

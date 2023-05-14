@@ -1,21 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-
+@include('partials.queryException')
 <div class="card-header-primary mb-3">
     <div class="d-flex justify-content-between align-items-center">
-        <h3 class="m-0">Users</h3>
-        <a href="{{ route('dashboard.user.create') }}" class="btn btn-white btn-sm text-dark font-weight-bold"> Create </a>
+        <h3 class="m-0">
+            Пользователи
+            
+        </h3>
+        <a href="{{ route('dashboard.user.create') }}" class="btn btn-white btn-sm text-dark font-weight-bold">
+            Добавить
+        </a>
     </div>
 </div>
 <div class="card-body  px-0 pt-0 pb-2">
     <table class="table text-center">
         <thead>
             <tr>
-                <th>#</th>
-                <th width="80%">username</th>
-                <th></th>
-                <th></th>
+                <th class="small-text" width="10%">#</th>
+                <th class="small-text"> Имя пользователя </th>
+                <th class="small-text" width="8%"></th>
+                <th class="small-text" width="8%"></th>
             </tr>
         </thead>
         <tbody>

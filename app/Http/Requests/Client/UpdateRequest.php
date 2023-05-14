@@ -27,10 +27,10 @@ class UpdateRequest extends FormRequest
 
         return [
             "client_type"=>"required",
-            "fname"=>"exclude_if:client_type,1|required",
-            "lname"=>"exclude_if:client_type,1|required",
-            "mname"=>"nullable",
-            "dbirth"=>"nullable",
+            "first_name"=>"exclude_if:client_type,1|required",
+            "last_name"=>"exclude_if:client_type,1|required",
+            "middle_name"=>"nullable",
+            "date_birth"=>"nullable",
             "occupation"=>"nullable",
             "inn"=>"exclude_if:client_type,0|required",
             "company_name"=>"exclude_if:client_type,0|required",

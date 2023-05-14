@@ -15,16 +15,16 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-4">
-                    <input type="text" name="fname" class="form-control mb-3" placeholder="Фамилия" value="{{$client->fname}}">
+                    <input type="text" name="first_name" class="form-control mb-3" placeholder="Фамилия" value="{{$client->first_name}}">
                 </div>
                 <div class="col-md-4">
-                    <input type="text" name="lname" class="form-control mb-3" placeholder="Имя" value="{{$client->lname}}">
+                    <input type="text" name="last_name" class="form-control mb-3" placeholder="Имя" value="{{$client->last_name}}">
                 </div>
                 <div class="col-md-4">
-                    <input type="text" name="mname" class="form-control mb-3" placeholder="Отчество" value="{{$client->mname}}">
+                    <input type="text" name="middle_name" class="form-control mb-3" placeholder="Отчество" value="{{$client->middle_name}}">
                 </div>
                 <div class="col-md-4">
-                    <input type="date" name="dbirth" class="form-control mb-3" placeholder="Дата рождения" value="{{$client->dbirth}}">
+                    <input type="date" name="date_birth" class="form-control mb-3" placeholder="Дата рождения" value="{{$client->date_birth}}">
                 </div>
                 <div class="col-md-4">
                     <input type="text" name="occupation" class="form-control mb-3" placeholder="Профессия" value="{{$client->occupation}}">
@@ -50,12 +50,14 @@
             <label>Область</label><br>
             <select name="region_id" class="form-control">
                 @foreach($regions as $index=>$region)
-                    <option value="{{$index}}" {{ $client->region == $index ? 'selected':'' }}>{{ $region }}</option>
+                    <option value="{{$index}}" {{ $client->region_id == $index ? 'selected':'' }}>{{ $region }}</option>
                 @endforeach
             </select>
         </div>
     </div>
-    <button class="btn btn-success btn-sm font-weight-bold">save</button>
+    <button class="btn btn-success btn-sm font-weight-bold">
+        <i class="material-icons">check</i>
+    </button>
 </form>
 
 </div>

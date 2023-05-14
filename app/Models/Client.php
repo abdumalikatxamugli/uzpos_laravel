@@ -56,7 +56,7 @@ class Client extends Model
 
    public function getFullNameAttribute(){
      if($this->client_type == self::FIZ){
-       return "{$this->lname} {$this->fname} {$this->mname}";
+       return "{$this->last_name} {$this->first_name} {$this->middle_name}";
      }else{
        return "{$this->company_name}";
      }

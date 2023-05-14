@@ -15,7 +15,9 @@
         <option value="1">Склад</option>
         <option value="2">Магазин</option>
     </select>
-    <button class="btn btn-success btn-sm font-weight-bold">save</button>
+    <button class="btn btn-success btn-sm font-weight-bold">
+        <i class="material-icons">check</i>
+    </button>
 </form>
 
 </div>

@@ -3,11 +3,13 @@
 @section('content')
 
 @include('partials.validation_errors')
-
+@include('partials.queryException')
 <div class="card-header-primary mb-4 ">
     <div class="d-flex justify-content-between align-items-center">
         <h3 class="m-0">Приход товаров</h3>
-        <a href="{{ route('dashboard.party.create') }}" class="btn btn-white btn-sm text-primary font-weight-bold"> Create </a>
+        <a href="{{ route('dashboard.party.create') }}" class="btn btn-white btn-sm text-primary font-weight-bold"> 
+            Добавить
+        </a>
     </div>
 </div>
 <div class="card-body  px-0 pt-0 pb-2">
@@ -18,8 +20,8 @@
                 <th>Дата</th>
                 <th>Филиал</th>
                 <th>Статус</th>
-                <th>Посмотреть</th>
-                <th>Удалить</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -30,9 +32,11 @@
                     <td class="mb-0 text-sm">{{ $party->status_name }}</td>
                     <td class="mb-0 text-sm">{{ $party->point->name }}</td>
                     <td class="mb-0 text-sm">
-                        <a href="{{ route('dashboard.party.edit', $party->id) }}" class="bnt btn-warning btn-sm text-dark font-weight-bold text-xs btn-hover">Посмотреть</a>
+                        <a href="{{ route('dashboard.party.edit', $party->id) }}" class="btn btn-warning btn-sm text-dark ">
+                            <i class="material-icons">visibility</i>
+                        </a>
                     </td>
-                    <td class="mb-0 text-sm">
+                    {{-- <td class="mb-0 text-sm">
                         @if($party->status != 2 && $party->point_id == auth()->user()->point_id)
                             <form action="{{ route('dashboard.party.destroy', $party->id) }}" method="POST">
                                 @csrf
@@ -40,7 +44,7 @@
                                 <button class="btn btn-danger btn-sm text-white font-weight-bold text-xs btn-hover">Удалить</button>
                             </form>
                         @endif
-                    </td>
+                    </td> --}}
                 </tr>
             @endforeach
         </tbody>

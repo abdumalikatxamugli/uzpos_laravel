@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('partials.queryException')
     <div class="card-header-primary">
         <h4 class="d-flex justify-content-between">
             <span>Заказы {{ $other_shop == 1 ? 'от других':'' }} [ {{$status_text}} ]</span>

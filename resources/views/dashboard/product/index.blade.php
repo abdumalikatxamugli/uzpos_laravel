@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+@include('partials.queryException')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -12,8 +12,12 @@
 </style>
 <div class="card-header-primary">
     <div class="d-flex justify-content-between  align-items-center">
-        <h3  class="m-0">Products</h3>
-        <a href="{{ route('dashboard.product.create') }}" class="btn btn-white btn-sm text-dark font-weight-bold"> Create </a>
+        <h3 class="m-0">
+            Продукты
+        </h3>
+        <a href="{{ route('dashboard.product.create') }}" class="btn btn-white btn-sm text-dark font-weight-bold"> 
+            Добавить
+        </a>
     </div>
 </div>
 
@@ -50,7 +54,7 @@
                     </select>
                 </div>
                 <div class="col-md-1 d-flex align-items-end">
-                    <button class="btn btn-success btn font-weight-bold mb-0">
+                    <button class="btn btn-success btn-sm btn font-weight-bold mb-0">
                         <i class="material-icons">search</i>
                     </button>
                 </div>
@@ -61,11 +65,11 @@
 <table class="table text-center">
     <thead>
         <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Штрих код</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th class="small-text">#</th>
+            <th class="small-text">Название</th>
+            <th class="small-text">Штрих код</th>
+            <th class="small-text" width="8%"></th>
+            <th class="small-text" width="8%"></th>
         </tr>
     </thead>
     <tbody>
@@ -74,12 +78,18 @@
                 <td class="mb-0 text-sm">{{$key+1}}</td>
                 <td class="mb-0 text-sm">{{$product->name}}</td>
                 <td class="mb-0 text-sm">{{$product->bar_code}}</td>
-                <td><a class="bnt btn-warning btn-sm text-dark font-weight-bold text-xs btn-hover" href="{{ route('dashboard.product.edit', $product->id) }}">Edit</a></td>
+                <td>
+                    <a class="btn btn-warning btn-sm text-dark " href="{{ route('dashboard.product.edit', $product->id) }}">
+                        <i class="material-icons">edit</i>
+                    </a>
+                </td>
                 <td>
                     <form action="{{ route('dashboard.product.destroy', $product->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger btn-sm text-white font-weight-bold text-xs btn-hover">Delete</button>
+                        <button class="btn btn-danger btn-sm text-white font-weight-bold text-xs btn-hover">
+                            <i class="material-icons">delete</i>
+                        </button>
                     </form>
                 </td>
             </tr>

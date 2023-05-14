@@ -15,7 +15,18 @@ class Point extends Model
       * Properties
       */
     protected $table = 'divisions';
-    
+    const STOREHOUSE = 1;
+    const SHOP = 2;
+    public function getDivisionTypeAttribute()
+    {
+      switch($this->point_type)
+      {
+        case self::STOREHOUSE:
+          return 'Склад';
+        case self::SHOP:
+          return 'Магазин';
+      }
+    }
     /**
      * Relations
      */

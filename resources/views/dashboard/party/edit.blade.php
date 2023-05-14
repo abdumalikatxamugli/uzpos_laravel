@@ -6,7 +6,7 @@
 @include('partials.validation_errors')
 
 <div class="card-body">
-    <a href="{{ route('dashboard.party.index') }}" class="text-danger text-sm font-weight-light mb-3 d-block">Back</a>
+    {{-- <a href="{{ route('dashboard.party.index') }}" class="text-danger text-sm font-weight-light mb-3 d-block">Back</a> --}}
     <div>
         <div class="row">
             <div class="col-md-5">
@@ -19,11 +19,11 @@
                     {{ $party->point->name }}
                 </h5>
             </div>
-            @if($party->status == 1 && $party->point_id == auth()->user()->point_id)
+            @if($party->status == 1 && count( $party->items ) > 0 )
                 <div class="col-md-2">
                     <form action="{{ route('dashboard.party.finish', $party->id) }}">
                         @csrf
-                        <button class="btn btn-lg btn-danger mb-0">Завершить</button>
+                        <button class="btn btn-sm btn-danger mb-0">Завершить</button>
                     </form>
                 </div>
             @endif
@@ -36,10 +36,10 @@
     <table class="table  text-center">
         <thead>
             <tr>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Quantity</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Delete</th>
+                <th class="text-uppercase small-text">#</th>
+                <th class="text-uppercase small-text">Название</th>
+                <th class="text-uppercase small-text">Количество</th>
+                <th class="text-uppercase small-text"></th>
             </tr>
         </thead>
         <tbody>
@@ -53,7 +53,9 @@
                         <form action="{{ route('dashboard.item.destroy', $item->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger btn-sm text-white font-weight-bold text-xs btn-hover">Delete</button>
+                            <button class="btn btn-danger btn-sm text-white font-weight-bold text-xs btn-hover">
+                                <i class="material-icons">remove</i>
+                            </button>
                         </form>
                     @endif
                 </td>
