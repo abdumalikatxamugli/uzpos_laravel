@@ -120,7 +120,7 @@
                     <div class="card-body text-center">
                         <hr>
                         <a class="text-primary text-title" href="{{route('dashboard.report_1_2')}}">
-                            <h4>Заканчивающиеся товары (1.2)</h4>
+                            <h4>Закончивающиеся товары (1.2)</h4>
                         </a>
                     </div>
                 </div>
@@ -135,12 +135,12 @@
                     <div class="card-body text-center">
                         <hr>
                         <a class="text-primary text-title" href="{{route('dashboard.report_1_3')}}">
-                            <h4>Заканченные товары (1.3)</h4>
+                            <h4>Законченные товары (1.3)</h4>
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col">
+            {{-- <div class="col">
                 <div class="card">
                     <div class="card-header pt-3">
                         <div class="report-header">
@@ -154,7 +154,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
     <div class="card-body pt-3">

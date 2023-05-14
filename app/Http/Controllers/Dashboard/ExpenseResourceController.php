@@ -23,7 +23,7 @@ class ExpenseResourceController extends Controller
                 $expenses = Expense::orderBy('id')->paginate(10);
                 break;
             default:
-                $expenses = Expense::where('division_id', auth()->user()->point_id)->orderBy('id')->paginate(10);        
+                $expenses = Expense::where('division_id', auth()->user()->division_id)->orderBy('id')->paginate(10);        
         }
         return view("dashboard.expense.index")->with("expenses", $expenses);
     }
@@ -47,7 +47,7 @@ class ExpenseResourceController extends Controller
     public function store(StoreRequest $request, User $user)
     {
         $validated = $request->validated();
-        $validated['division_id'] = auth()->user()->point_id;
+        $validated['division_id'] = auth()->user()->division_id;
         Expense::createFromArrayWithUser($validated, $user);
         return redirect()->route("dashboard.expense.index");
     }

@@ -39,7 +39,7 @@
                 <tr>
                     <td>{{$r->client_name}}</td>
                     <td>{{$r->id}}</td>
-                    <td>{{$r->region_id??'-'}}</td>
+                    <td>{{getRegion($r->region_id)??'-'}}</td>
                     <td>{{$r->phone_number ?? '-'}}</td>            
                 </tr>
                 @endforeach

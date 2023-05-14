@@ -2,7 +2,7 @@
     <div class="alert alert-danger text-white text-sm">
         @foreach( session('errors')->getMessages() as $field => $errors)
             <span>{{ $field }}</span>
-            <ul>
+            <ul style="padding: 0;list-style:none">
                 @foreach($errors as $error)
                     <li> {{$error}} </li>
                 @endforeach

@@ -45,16 +45,23 @@ return [
                         'params'=>['status'=>"2"]
                         
                     ]
+                    // ,
+                    // [
+                    //     'title'=>'Отбр. Заказы',
+                    //     'roles'=>[User::ADMIN],
+                    //     'route'=>'dashboard.orders.index',
+                    //     'params'=>['status'=>"3"]
+                    // ]
                     ,
                     [
-                        'title'=>'Отбр. Заказы',
+                        'title'=>'Новый заказы от др.',
                         'roles'=>[User::ADMIN],
                         'route'=>'dashboard.orders.index',
-                        'params'=>['status'=>"3"]
+                        'params'=>['status'=>"1", 'other_shop'=>1]
                     ]
                     ,
                     [
-                        'title'=>'Заказы от др.',
+                        'title'=>'Зав. заказы от др.',
                         'roles'=>[User::ADMIN],
                         'route'=>'dashboard.orders.index',
                         'params'=>['status'=>"2", 'other_shop'=>1]
@@ -79,6 +86,12 @@ return [
                 'roles'=>[User::ADMIN],
                 'route'=>'dashboard.transfer.index',
             ]
+            ,
+            [
+                'title'=>'Запросы на перемешения',
+                'roles'=>[User::ADMIN],
+                'route'=>'transfer.request.get',
+            ]            
             ,
             [
                 'title'=>'Отчеты',

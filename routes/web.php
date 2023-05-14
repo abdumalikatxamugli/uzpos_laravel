@@ -18,6 +18,7 @@ use App\Http\Controllers\Dashboard\UserResourceController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DebtController;
 use App\Http\Controllers\Dashboard\OrderController;
+use App\Http\Controllers\TransferRequestController;
 use Illuminate\Support\Facades\Route;
 
 Route::view("/", "login")->name("dashboard.login");
@@ -60,6 +61,8 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
     Route::get('order/searchAvailableItems/{order}', [OrderController::class, 'searchAvailableItems'])->name('order.searchAvailableItems');
     Route::post('order/changeFromPoint/{order}', [OrderController::class, 'changeFromPoint'])->name('order.changeFromPoint');
     Route::get('client/append/{order}/{client}', [ClientController::class, 'appendToOrder'])->name('dashboard.client.append.order');
+    Route::post('transferRequest/create', [TransferRequestController::class, 'createRequest'])->name('transfer.request.create');
+    Route::get('transferRequests/get', [TransferRequestController::class, 'list'])->name('transfer.request.get');
 
     //schet faktura generate
     Route::get('order/esf/{order}', [OrderController::class, 'generateEsf'])->name('order.genEsf');

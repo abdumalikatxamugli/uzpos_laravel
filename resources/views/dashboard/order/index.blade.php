@@ -25,8 +25,8 @@
                     <td>Всего оплачено</td>
                     <td>Место заказа</td>
                     <td>Место сбора</td>
-                    <td></td>
-                    <td></td>
+                    <td>ЭСФ</td>
+                    <td>Просмотр</td>
                     <td>Сборщик</td>
                     <td>Доставщик</td>
                 </tr>
@@ -40,7 +40,6 @@
                     <td>{{ str_pad($order->esf_no, 4, '0', STR_PAD_LEFT )}}</td>
                     <td>{{ $order->status_name}}</td>
                     <td>{{ $order->order_type_name}}</td>
-                    <!-- <td>{{ $order->getClientFullName() }}</td> -->
                     <td>{{ $order->getTotalItemCount() }}</td>
                     <td>{{ $order->getTotalCost() }}</td>
                     <td>{{ $order->getTotalPaid() }} </td>

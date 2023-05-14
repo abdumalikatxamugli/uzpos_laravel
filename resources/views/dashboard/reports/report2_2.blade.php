@@ -59,7 +59,7 @@
                     <td>{{$r->created_date}}</td>
                     <td>{{$r->client_id}}</td>
                     <td>{{$r->client_name}}</td>
-                    <td>{{$r->region}}</td>   
+                    <td>{{getRegion($r->region_id)}}</td>   
                     <td>{{$r->point_name}}</td>                 
                 </tr>
                 @endforeach

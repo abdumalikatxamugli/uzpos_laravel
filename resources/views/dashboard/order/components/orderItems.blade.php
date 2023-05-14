@@ -99,6 +99,7 @@
                     <tr>
                         <td></td>
                         <td class="text-secondary">Итого</td>
+                        <td></td>
                         <td><span  x-text="calcTotalQuantity"></span></td>
                         <td></td>
                         <td>$<span x-text="calcTotalCost"></span></td>
@@ -123,7 +124,7 @@
     function start() {
         
         return {
-            items: [{product_id:null, quantity:null, cost:null},{product_id:null, quantity:null, cost:null}],
+            items: [{product_id:null, quantity:null, cost:null}],
             init : function(){
                 this.products = @json($products);
             },

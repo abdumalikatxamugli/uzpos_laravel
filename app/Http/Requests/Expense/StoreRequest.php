@@ -24,7 +24,9 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            "amount"=>"required"
+            "amount"=>"required",
+            "currency_type"=>"required",
+            "comment"=>"nullable"
         ];
     }
 }

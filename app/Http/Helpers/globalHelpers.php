@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Client;
 use Illuminate\Support\Facades\Request;
 
 if(!function_exists('isMenuOpen')){
@@ -17,6 +18,11 @@ if(!function_exists('isMenuOpen')){
             return true;
         }
         return false;
+    }
+}
+if(!function_exists('getRegion')){
+    function getRegion($region_id){
+        return Client::regionDict[$region_id];
     }
 }
 

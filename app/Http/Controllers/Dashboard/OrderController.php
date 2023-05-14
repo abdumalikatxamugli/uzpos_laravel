@@ -19,6 +19,7 @@ use App\Models\Transfer;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class OrderController extends Controller
@@ -33,11 +34,11 @@ class OrderController extends Controller
         $orders = Order::where('status', $request->status);
         if(auth()->user()->user_role != User::roles['ADMIN']){
             if($request->other_shop!=1){
-                $orders = $orders->where('shop_id', auth()->user()->point_id);  
+                $orders = $orders->where('division_id', auth()->user()->division_id);  
             }      
         }
         if($request->other_shop==1){
-            $orders = $orders->where('supplying_division_id', auth()->user()->point_id)->where('supplying_division_id', '<>', 'shop_id');
+            $orders = $orders->where('supplying_division_id', auth()->user()->division_id)->where('supplying_division_id', '<>', 'division_id');
         }
         $orders = $orders->orderBy('order_no', 'desc')->paginate(10);
         $collectors = User::where('user_role', User::roles['COLLECTOR'])->where('busy', USER::FREE)->get();
@@ -85,8 +86,9 @@ class OrderController extends Controller
      */
     public function addPayment(StoreRequest $request){
         $data = $request->validated();
-        $data['payed_amount_usd'] = $data['payed_amount'] / $data['payed_currency_rate'];        
-        $data['change_amount_usd'] = $data['change_amount'] / $data['change_currency_rate'];
+        $data['payed_amount_usd'] = $data['payed_amount'] / ( $data['payed_currency_type'] == Payment::UZS ? $data['payed_currency_rate'] : 1);        
+        $data['change_amount_usd'] = $data['change_amount'] / ( $data['change_currency_type'] == Payment::UZS ? $data['change_currency_rate'] : 1 );
+        $data['amount'] = $data['payed_amount_usd'] - $data['change_amount_usd'];
         $payment = Payment::createFromArray($data);
         return redirect()->back();
     }
@@ -132,13 +134,25 @@ class OrderController extends Controller
      * get list of shops that have enough items to satisfy the full or part of the order
      */
     public function searchAvailableItems(Order $order){
-        $shortages = $order->getShortages();
-        $matches = PointProduct::getMatches($shortages);
-        $fullMatches = $matches['fullMatches'];
-        $partialMatches = $matches['partialMatches'];
-        return view('dashboard.order.matches')->with('fullMatches', $fullMatches)
-                                    ->with('partialMatches', $partialMatches)
-                                    ->with('order', $order);
+        $matches = DB::select("select p.name as product_name, 
+                                      p.id as product_id,
+                                      oi.quantity as order_count, 
+                                      pp.quantity as storehouse_count, 
+                                      d.name as match_division, 
+                                      d.id as match_division_id,
+                                      (oi.quantity - pp.quantity) as request_quantity, 
+                                      pp2.quantity as match_count 
+                                      from orders o
+                                                join orderitems oi on oi.order_id  = o.id 
+                                                join products p on p.id = oi.product_id 
+                                                join pointproducts pp on pp.product_id = oi.product_id and pp.division_id = o.supplying_division_id 
+                                                join pointproducts pp2 on pp2.product_id  = oi.product_id and pp2.division_id  <> o.supplying_division_id and pp2.quantity >= ( oi.quantity - pp.quantity )
+                                                join divisions d on d.id = pp2.division_id
+                                                where o.id=4 and oi.quantity > pp.quantity 
+                                                order by oi.product_id asc
+        ");
+        return view('dashboard.order.matches')->with('matches', $matches)
+                                              ->with('order', $order);
     }
     /**
      * open transfer request from other shop 

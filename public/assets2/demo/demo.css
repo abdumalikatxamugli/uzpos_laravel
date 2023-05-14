@@ -63,3 +63,6 @@
 .small-text{
   font-size: 12px !important;
 }
+input:read-only{
+  border-radius: 5px;
+}

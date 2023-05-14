@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card-body">
-        <h4>FULL MATCH</h4>
+        <h4>Результаты поиска у других</h4>
         @if(session('message'))
             <div class="p-3 alert alert-danger text-white">
                 {{ session('message') }}
@@ -11,50 +11,29 @@
         <table class="table table-striped text-center mb-5">
             <thead>
                 <tr>
-                    <th>Название</th>
-                    <th>Отправить запрос</th>
+                    <th>Продукт</th>
+                    <th>Нужное количество</th>
+                    <th>Количество у нас</th>
+                    <th>Филиал</th>
+                    <th>Количество в филиале</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($fullMatches as $fm)
+                @foreach($matches as $m)
                 <tr>
-                    <td>{{ $fm->name }}</td>
+                    <td>{{ $m->product_name }}</td>
+                    <td>{{ $m->order_count }}</td>
+                    <td>{{ $m->storehouse_count }}</td>
+                    <td>{{ $m->match_division }}</td>
+                    <td>{{ $m->match_count }}</td>
                     <td>
-                        <form action="{{route('order.openTransfer', ['order'=>$order, 'point'=>$fm])}}">
-                            <button class="btn btn-warning btn-sm mb-0">Отправить запрос</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-        <hr/>
-        <h4>PARTIAL MATCH</h4>
-        <table class="table table-striped text-center">
-            <thead>
-                <tr>
-                    <th>Название</th>
-                    <th>Matching</th>
-                    <th>Отправить запрос</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($partialMatches as $pm)
-                <tr>
-                    <td>{{ $pm->get('shop')->name }}</td>
-                    <td>
-                        <ul>
-                            @foreach($pm->get('items') as $item)
-                                <li>
-                                    {{$item->product->name}} - {{$item->quantity}}
-                                </li>
-                            @endforeach
-                        </ul>
-                    </td>
-                    <td>
-                        <form action="{{ route('order.openTransferPartial', ['order'=>$order, 'point'=> $pm->get('shop')]) }}" method="POST">
+                        <form method="POST" action="{{route('transfer.request.create')}}">
                             @csrf
-                            <input type="hidden" name="items" value="{{ $pm->get('items')->toJson() }}">
+                            <input type="hidden" name="from_division_id" value="{{ $m->match_division_id }}">
+                            <input type="hidden" name="to_division_id" value="{{  $order->supplying_division_id }}">
+                            <input type="hidden" name="product_id" value="{{$m->product_id}}">
+                            <input type="hidden" name="quantity" value="{{$m->request_quantity}}">
                             <button class="btn btn-warning btn-sm mb-0">Отправить запрос</button>
                         </form>
                     </td>

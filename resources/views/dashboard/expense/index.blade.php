@@ -17,7 +17,6 @@
                 <th>Сотрудник</th>
                 <th>Филиал</th>
                 <th>Сумма</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -29,15 +28,6 @@
                     <td class="mb-0 text-sm">{{$expense->division->name}}</td>
                     <td class="mb-0 text-sm">{{$expense->amount}}</td>
                     
-                    <td class="mb-0 text-sm">
-                        @if($expense->created_by_id == auth()->user()->id && date('d.m.Y', strtotime($expense->created_at) ) == date('d.m.Y'))
-                            <form action="{{ route('dashboard.expense.destroy', $expense->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger btn-sm text-white font-weight-bold text-xs btn-hover">Delete</button>
-                            </form>
-                        @endif
-                    </td>
                 </tr>
             @endforeach
         </tbody>

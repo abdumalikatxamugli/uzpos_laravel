@@ -30,11 +30,11 @@ class TransferItem extends Model
     public function validateStore($fail){
         $fromPointProduct = PointProduct::where([
             'product_id'=> $this->product_id,        
-            'division_id'=> $this->transfer->from_point_id
+            'division_id'=> $this->transfer->from_division_id
         ])->first();
             
         if(!$fromPointProduct || $fromPointProduct->quantity < $this->quantity){
-            $fail('Warehouse or Shop does not have enough items to complete this operation');
+            $fail('У подразделения недостаточно товаров для выполнения этой операции.');
         }
     }
     public function validateDelete($fail){

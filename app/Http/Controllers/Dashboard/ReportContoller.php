@@ -54,11 +54,11 @@ class ReportContoller extends Controller
                          c.id as client_id,
                          (Select sum(ui.price*ui.quantity) from orderitems ui where ui.order_id = uo.id) as total_sum,
                             case c.client_type when 0 then
-                                concat(c.fname, c.lname, c.mname) 
+                                concat(c.first_name, c.last_name, c.middle_name) 
                                 else
                                 c.company_name end
                             as client_name,
-                            c.region
+                            c.region_id
                             
                         from orders uo  
                         join clients c on uo.client_id = c.id
@@ -75,7 +75,7 @@ class ReportContoller extends Controller
                          c.id as client_id,
                          (Select sum(ui.price*ui.quantity) from orderitems ui where ui.order_id = uo.id) as total_sum,
                             case c.client_type when 0 then
-                                concat(c.fname, c.lname, c.mname) 
+                                concat(c.first_name, c.last_name, c.middle_name) 
                                 else
                                 c.company_name end
                             as client_name,
@@ -386,9 +386,9 @@ class ReportContoller extends Controller
    
     public function report_3_1()
     {
-        $sql = "select case c.client_type when 0 then concat(c.lname, ' ', c.fname, ' ', c.mname) else c.company_name end as client_name,
+        $sql = "select case c.client_type when 0 then concat(c.last_name, ' ', c.first_name, ' ', c.middle_name) else c.company_name end as client_name,
                             c.id,
-                            c.region,
+                            c.region_id,
                             c.phone_number
                                 from clients c 
                                 order by client_name asc;";
@@ -397,9 +397,9 @@ class ReportContoller extends Controller
     }
     public function report_3_1_download()
     {
-        $sql = "select case c.client_type when 0 then concat(c.lname, ' ', c.fname, ' ', c.mname) else c.company_name end as client_name,
+        $sql = "select case c.client_type when 0 then concat(c.last_name, ' ', c.first_name, ' ', c.middle_name) else c.company_name end as client_name,
                             c.id,
-                            c.region,
+                            c.region_id,
                             c.phone_number
                                 from clients c 
                                 order by client_name asc;";
@@ -415,9 +415,9 @@ class ReportContoller extends Controller
     }
     public function report_3_2()
     {
-        $sql = "select case c.client_type when 0 then concat(c.lname, ' ', c.fname, ' ', c.mname) else c.company_name end as client_name,
+        $sql = "select case c.client_type when 0 then concat(c.last_name, ' ', c.first_name, ' ', c.middle_name) else c.company_name end as client_name,
                             c.id,
-                            c.region,
+                            c.region_id,
                             c.phone_number,
                             p.amount,
                             date(o.created_at) as order_day,
@@ -433,7 +433,7 @@ class ReportContoller extends Controller
     }
     public function report_3_2_download()
     {
-        $sql = "select case c.client_type when 0 then concat(c.lname, ' ', c.fname, ' ', c.mname) else c.company_name end as client_name,
+        $sql = "select case c.client_type when 0 then concat(c.last_name, ' ', c.first_name, ' ', c.middle_name) else c.company_name end as client_name,
                             c.id,
                             c.region,
                             c.phone_number,

@@ -2,6 +2,7 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <div class="card-body">
+    <h5 class="font-weight-bold mb-3">Добавить товар</h5>
     <form action="{{ route('dashboard.item.store') }}" method="POST">
         @csrf
         <input type="hidden" name="party_id" value="{{ $party->id }}">

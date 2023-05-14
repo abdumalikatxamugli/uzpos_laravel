@@ -36,7 +36,7 @@
     </div>
     <div class="card-body">
         @include('dashboard.order.components.payment')
-        @if($order->status == 1 && $order->division_id == auth()->user()->division_id)
+        @if($order->status == 1 && $order->supplying_division_id == auth()->user()->division_id)
             <div class="my-3">
                 @if($order->canBeConfirmed())
                     <form action="{{ route('order.confirm', $order->id) }}">
@@ -47,12 +47,6 @@
                     @include('dashboard.order.components.confirmation_errors')
                 @endif
             </div>
-        @endif
-        @if($order->status == 2 && $order->shop_id == auth()->user()->point_id)
-            <form action="{{ route('order.break', $order->id) }}">
-                @csrf
-                <button class="btn btn-danger w-100 p-3">Отбраковать заказ</button>
-            </form>
         @endif
     </div>
     <script>

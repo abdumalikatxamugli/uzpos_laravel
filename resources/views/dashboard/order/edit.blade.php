@@ -54,7 +54,7 @@
             <div class="col-md-2">
                 <h6>Долги</h6>
                 @if($order->client)
-                    <a href="{{ route('debt.client.index', $order->client->id) }}" class="btn btn-link mb-0 btn-sm text-danger" target="_blank">
+                    <a href="{{ route('debt.client.index', $order->client->id) }}" class="btn mb-0 btn-sm btn-danger" target="_blank">
                         Посмотреть историю долгов
                     </a>
                 @endif
@@ -107,7 +107,7 @@
         </div>    
         @if($order->status == 1 && $order->shop_id == auth()->user()->point_id)
             <div class="my-3">
-                @if($order->canBeConfirmed() && $order->client)
+                @if($order->canBeConfirmed() && $order->client && $order->supplying_division_id == auth()->user()->division_id)
                     <form action="{{ route('order.confirm', $order->id) }}">
                         @csrf
                         <button class="btn btn-info w-100 p-3">Подтверждать</button>
@@ -116,12 +116,6 @@
                     @include('dashboard.order.components.confirmation_errors')
                 @endif
             </div>
-        @endif
-        @if($order->status == 2 && $order->shop_id == auth()->user()->point_id)
-            <form action="{{ route('order.break', $order->id) }}">
-                @csrf
-                <button class="btn btn-danger w-100 p-3">Отбраковать заказ</button>
-            </form>
         @endif
     </div>
     <script>

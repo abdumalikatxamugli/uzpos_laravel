@@ -103,6 +103,10 @@ class AppServiceProvider extends ServiceProvider
                 ->with('currencies', $currencies)
                 ->with('points', $points);
         });
+        View::composer(['dashboard.expense.create'], function($view){
+            $currencies = Payment::CURRENCIES;
+            $view->with('currencies', $currencies);
+        });
         View::composer(['dashboard.order.edit'], function($view){
             $products = Product::all()->keyBy('id');
             $payment_types =  Payment::PAYMENT_TYPES;

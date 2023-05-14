@@ -117,9 +117,7 @@ class Order extends Model
       return $cost;
     }
     public function getTotalPaid(){
-      $paid = $this->payments->sum('payed_amount_usd');
-      $change = $this->payments->sum('change_amount_usd');
-      return $paid - $change;
+      return $this->payments->sum('amount');
     }
 
     public function getTotalPaidByCurrencyType($type){

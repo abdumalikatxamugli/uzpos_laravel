@@ -25,7 +25,6 @@ class StoreRequest extends FormRequest
     {
         return [
             'order_id'=>'required',
-            'amount'=>'required',
             'payment_type'=>'required',
             'payment_date'=>'required',
             'payed_amount'=>'required',

@@ -13,14 +13,12 @@
     <table class="table text-center">
         <thead>
             <tr>
-                <th>#</th>
-                <th>Дата</th>
-                <th>Статус</th>
-                <th>От</th>
-                <th>К</th>
-                <th>Причина</th>
-                <th>Посмотреть</th>
-                <th>Отменить</th>
+                <th class="small-text">#</th>
+                <th class="small-text">Дата</th>
+                <th class="small-text">Статус</th>
+                <th class="small-text">От</th>
+                <th class="small-text">К</th>
+                <th class="small-text"></th>
             </tr>
         </thead>
         <tbody>
@@ -33,18 +31,9 @@
                     <td class="mb-0 text-sm">{{ $transfer->to_point->name}}</td>
                     <td class="mb-0 text-sm">{{ $transfer->reason}}</td>
                     <td class="mb-0 text-sm">
-                        <a href="{{ route('dashboard.transfer.edit', $transfer->id) }}" class="bnt btn-warning btn-sm text-dark font-weight-bold text-xs btn-hover">
-                            Посмотреть
+                        <a href="{{ route('dashboard.transfer.edit', $transfer->id) }}" class="btn btn-warning btn-sm text-dark font-weight-bold text-xs btn-hover">
+                            <i class="material-icons">visibility</i>
                         </a>
-                    </td>
-                    <td class="mb-0 text-sm">
-                        @if($transfer->status == 1 && $transfer->from_point_id == auth()->user()->point_id)
-                            <form action="{{ route('dashboard.transfer.destroy', $transfer->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger btn-sm text-white font-weight-bold text-xs btn-hover">Отменить</button>
-                            </form>
-                        @endif
                     </td>
                 </tr>
             @endforeach

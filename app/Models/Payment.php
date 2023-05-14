@@ -63,6 +63,8 @@ class Payment extends Model
         'name'=>'Доллары'
       ]
     ];
+    const USD = 1;
+    const UZS = 2;
     const CURRENCIES_REVERT = [
       2=>'Сум',
       1=>'Доллары'
@@ -70,8 +72,8 @@ class Payment extends Model
     /** 
      * Accessors
      */
-    public function getCurrencyTypeNameAttribute(){
-      return self::CURRENCIES_REVERT[$this->currency]??'';
+    public function getCurrencyTypeName($currency){
+      return self::CURRENCIES_REVERT[$currency]??'';
     }
     
     public function getPaymentTypeNameAttribute(){
