@@ -90,7 +90,7 @@
                         <div  style="text-align:right">
                             <h5> {{ $order->client?->full_name }} {{ $order->client?->get_region_name() }} </h5> 
                             <b>Телефон: </b> {{ $order->client?->phone_number }} <br>
-                            @if($order->client->client_type==1)
+                            @if($order->client?->client_type==1)
                             <b>ИНН:</b> {{ $order->client?->inn }} <br>
                             @endif
                         </div>
