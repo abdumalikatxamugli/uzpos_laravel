@@ -149,7 +149,7 @@ class OrderController extends Controller
                                                 left join pointproducts pp on pp.product_id = oi.product_id and pp.division_id = o.supplying_division_id 
                                                 join pointproducts pp2 on pp2.product_id  = oi.product_id and pp2.division_id  <> o.supplying_division_id and pp2.quantity >= ( oi.quantity - COALESCE(pp.quantity, 0) )
                                                 join divisions d on d.id = pp2.division_id
-                                                where o.id=:order_id and oi.quantity >= pp2.quantity 
+                                                where o.id=:order_id
                                                 order by oi.product_id asc
         ";
         $stmt = $pdo->prepare($sql);
