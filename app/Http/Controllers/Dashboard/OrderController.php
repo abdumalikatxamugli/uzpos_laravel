@@ -21,7 +21,6 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-
 class OrderController extends Controller
 {
     /**
@@ -134,23 +133,29 @@ class OrderController extends Controller
      * get list of shops that have enough items to satisfy the full or part of the order
      */
     public function searchAvailableItems(Order $order){
-        $matches = DB::select("select p.name as product_name, 
+        $pdo = DB::connection()->getPdo();
+
+        $sql = "select p.name as product_name, 
                                       p.id as product_id,
                                       oi.quantity as order_count, 
-                                      pp.quantity as storehouse_count, 
+                                      COALESCE(pp.quantity, 0) as storehouse_count, 
                                       d.name as match_division, 
                                       d.id as match_division_id,
-                                      (oi.quantity - pp.quantity) as request_quantity, 
+                                      (oi.quantity - COALESCE(pp.quantity, 0)) as request_quantity, 
                                       pp2.quantity as match_count 
                                       from orders o
                                                 join orderitems oi on oi.order_id  = o.id 
                                                 join products p on p.id = oi.product_id 
-                                                join pointproducts pp on pp.product_id = oi.product_id and pp.division_id = o.supplying_division_id 
-                                                join pointproducts pp2 on pp2.product_id  = oi.product_id and pp2.division_id  <> o.supplying_division_id and pp2.quantity >= ( oi.quantity - pp.quantity )
+                                                left join pointproducts pp on pp.product_id = oi.product_id and pp.division_id = o.supplying_division_id 
+                                                join pointproducts pp2 on pp2.product_id  = oi.product_id and pp2.division_id  <> o.supplying_division_id and pp2.quantity >= ( oi.quantity - COALESCE(pp.quantity, 0) )
                                                 join divisions d on d.id = pp2.division_id
-                                                where o.id=4 and oi.quantity > pp.quantity 
+                                                where o.id=:order_id and oi.quantity >= pp2.quantity 
                                                 order by oi.product_id asc
-        ");
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([':order_id' => $order->id]);
+        $matches = $stmt->fetchAll();
+        
         return view('dashboard.order.matches')->with('matches', $matches)
                                               ->with('order', $order);
     }

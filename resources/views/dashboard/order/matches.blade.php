@@ -22,8 +22,11 @@
             <tbody>
                 @foreach($matches as $m)
                 <tr>
+                    @php
+                        $m = (object) $m;
+                    @endphp
                     <td>{{ $m->product_name }}</td>
-                    <td>{{ $m->order_count }}</td>
+                    <td>{{ $m->request_quantity }}</td>
                     <td>{{ $m->storehouse_count }}</td>
                     <td>{{ $m->match_division }}</td>
                     <td>{{ $m->match_count }}</td>
