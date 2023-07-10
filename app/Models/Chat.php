@@ -28,13 +28,13 @@ class Chat extends Model
             if(!$client){
                 return false;
             }
-            $chat = self::where('clientId', $client->id)->first();
+            $chat = self::where('client_id', $client->id)->first();
             if($chat){
                 $chat->delete();
             }
           
             $chat = new Chat();
-            $chat->clientId = $client->id;
+            $chat->client_id = $client->id;
             $chat->chatId = $chatId;
             $chat->chat_type=$type;
             $chat->save();
@@ -86,6 +86,6 @@ class Chat extends Model
         if(!$chat){
             return false;
         }
-        return $type == self::CLIENT_TYPE ? $chat->clientId : $chat->user_id;
+        return $type == self::CLIENT_TYPE ? $chat->client_id : $chat->user_id;
     }
 }
