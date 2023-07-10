@@ -47,7 +47,7 @@ class Chat extends Model
             if(!$staff){
                 return false;
             }
-            $chat = self::where('userId', $staff->id)->first();
+            $chat = self::where('user_id', $staff->id)->first();
             if($chat){
                 $chat->delete();
             }
@@ -65,7 +65,7 @@ class Chat extends Model
             if(!$staff){
                 return false;
             }
-            $chat = self::where('userId', $staff->id)->first();
+            $chat = self::where('user_id', $staff->id)->first();
             if($chat){
                 $chat->delete();
             }
