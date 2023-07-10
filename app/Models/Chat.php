@@ -53,7 +53,7 @@ class Chat extends Model
             }
           
             $chat = new Chat();
-            $chat->userId = $staff->id;
+            $chat->user_id = $staff->id;
             $chat->chatId = $chatId;
             $chat->chat_type=$type;
             $chat->save();
@@ -71,7 +71,7 @@ class Chat extends Model
             }
           
             $chat = new Chat();
-            $chat->userId = $staff->id;
+            $chat->user_id = $staff->id;
             $chat->chatId = $chatId;
             $chat->chat_type=$type;
             $chat->save();
@@ -86,6 +86,6 @@ class Chat extends Model
         if(!$chat){
             return false;
         }
-        return $type == self::CLIENT_TYPE ? $chat->clientId : $chat->userId;
+        return $type == self::CLIENT_TYPE ? $chat->clientId : $chat->user_id;
     }
 }
