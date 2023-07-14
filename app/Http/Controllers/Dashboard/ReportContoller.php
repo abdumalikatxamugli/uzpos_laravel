@@ -435,7 +435,7 @@ class ReportContoller extends Controller
     {
         $sql = "select case c.client_type when 0 then concat(c.last_name, ' ', c.first_name, ' ', c.middle_name) else c.company_name end as client_name,
                             c.id,
-                            c.region,
+                            c.region_id,
                             c.phone_number,
                             p.amount,
                             date(o.created_at) as order_day,
