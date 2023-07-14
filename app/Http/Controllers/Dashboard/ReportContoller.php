@@ -79,7 +79,7 @@ class ReportContoller extends Controller
                                 else
                                 c.company_name end
                             as client_name,
-                            c.region
+                            c.region_id
                             
                         from orders uo  
                         join clients c on uo.client_id = c.id
