@@ -29,6 +29,7 @@
                     <td>Просмотр</td>
                     <td>Сборщик</td>
                     <td>Доставщик</td>
+                    <td>Оповещать клиента</td>
                 </tr>
             </thead>
             <tbody>
@@ -107,6 +108,11 @@
                             @else
                                 {{$order->deliveryRequest->status_text}}
                             @endif
+                        </td>
+                        <td>
+                            <a href="{{route('dashboard.order.notifyClient', $order->id)}}" class="btn btn-success btn-sm">
+                                Оповещать клиента
+                            </a>
                         </td>
                     @endif
                 </tr>

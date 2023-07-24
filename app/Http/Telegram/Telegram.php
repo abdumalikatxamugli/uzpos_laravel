@@ -50,7 +50,7 @@ class Telegram{
             $error_msg = curl_error($ch);
         }
     }
-    private function sendMessage($data=[], $method = "sendMessage"){
+    public function sendMessage($data=[], $method = "sendMessage"){
         $token = $this->token;
         $url = "https://api.telegram.org/bot{$token}/{$method}";
         $ch = curl_init($url);

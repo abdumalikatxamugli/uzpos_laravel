@@ -9,6 +9,7 @@ use App\Http\Requests\Payment\StoreRequest;
 use App\Models\CollectionRequest;
 use App\Http\Requests\Order\CollectionRequest as CollectionHttpRequest;
 use App\Http\Requests\Order\DeliverRequest as DeliveryHttpRequest;
+use App\Http\Telegram\Telegram;
 use App\Models\DeliveryRequest;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -211,6 +212,20 @@ class OrderController extends Controller
         $fromPoint = $request->input('point_id');
         $order->supplying_division_id = $fromPoint;
         $order->save();
+        return redirect()->back();
+    }
+    public function notifyClient(Order $order)
+    {
+        $client = $order->client;
+        if($client->chat){
+        $telegram = new Telegram();
+            $text = $order->getClientOrderDetail();
+            $message = [
+                'text'=>$text,
+                'chat_id'=>$client->chat->chatId
+            ];
+            $telegram->sendMessage($message); 
+        }
         return redirect()->back();
     }
 }

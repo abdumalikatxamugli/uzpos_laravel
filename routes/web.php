@@ -49,6 +49,7 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function(){
     Route::get('neworder/{type}', [OrderController::class, 'new'])->name('dashboard.order.new');
     Route::get('orders/edit/{order}', [OrderController::class, 'edit'])->name('dashboard.orders.edit');  
     Route::get('orders/{status}/{other_shop?}', [OrderController::class, 'index'])->name('dashboard.orders.index');  
+    Route::get('order/{order}/notifyClient', [OrderController::class, 'notifyClient'])->name('dashboard.order.notifyClient');
     
     Route::post('order/items/save/', [OrderController::class, 'saveItems'])->name('dashboard.order.items.save');
     Route::get('order/item/delete/{orderItem}', [OrderController::class, 'deleteItem'])->name('dashboard.order.item.delete'); 
