@@ -220,6 +220,7 @@ class OrderController extends Controller
        
         if($client->chat){
         $telegram = new Telegram();
+        $telegram->token = Telegram::CLIENT_BOT_TOKEN;
             $text = $order->getClientOrderDetail();
             $message = [
                 'text'=>$text,
