@@ -217,6 +217,7 @@ class OrderController extends Controller
     public function notifyClient(Order $order)
     {
         $client = $order->client;
+        dd($client);
         if($client->chat){
         $telegram = new Telegram();
             $text = $order->getClientOrderDetail();
