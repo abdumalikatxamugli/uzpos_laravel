@@ -66,6 +66,7 @@ class Telegram{
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 
         $result = curl_exec($ch);
+        dd($result);
         if (curl_errno($ch)) {
             $error_msg = curl_error($ch);
         }
