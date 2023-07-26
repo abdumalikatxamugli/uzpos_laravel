@@ -14,7 +14,7 @@ use App\PermissionManagement\Menu;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-
+use Matrix\Operators\Division;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -158,6 +158,16 @@ class AppServiceProvider extends ServiceProvider
             }else{
                 $view->with('popup', $popup);
             }
+        });
+        View::composer(['dashboard.reports.report1_1'], function($view){
+            $divisions = Point::all();
+            $products = Product::all();
+            $categories = Category::all();
+            $brands = Brand::all();
+            $view->with('divisions', $divisions)
+                ->with('products', $products)
+                ->with('categories', $categories)
+                ->with('brands', $brands);
         });
     }
 }

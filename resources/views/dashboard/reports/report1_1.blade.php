@@ -8,12 +8,48 @@
             <i class="material-icons">download</i>
         </a>
     </div>
-    <div class="card-body">
+    <form class="card-body">
         <table class="table table-hover text-center">
             <thead>
-            						
-
-                <tr class="text-secondary ">
+                <tr>
+                    <th>
+                        <select name="division_id" id="" class="form-control">
+                            @foreach($divisions as $division)
+                                <option value="{{$division->id}}">{{$division->name}}</option>
+                            @endforeach
+                        </select>
+                    </th>
+                    <th>
+                        <select name="product_id" id="" class="form-control">
+                            @foreach($products as $product)
+                                <option value="{{$product->id}}">{{$product->name}}</option>
+                            @endforeach
+                        </select>
+                    </th>
+                    <th>
+                        
+                    </th>
+                    <th>
+                        <select name="category_id" id="" class="form-control">
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
+                        </select>
+                    </th>
+                    <th>
+                        <select name="brand_id" id="" class="form-control">
+                            @foreach($brands as $brand)
+                                <option value="{{$brand->id}}">{{$brand->name}}</option>
+                            @endforeach
+                        </select>
+                    </th>
+                    <th>
+                        <button class="btn btn-success">
+                            <i class="material-icons">search</i>
+                        </button>
+                    </th>
+                </tr>
+            	<tr class="text-secondary ">
                     <th>
                         <small>
                         Филиал
