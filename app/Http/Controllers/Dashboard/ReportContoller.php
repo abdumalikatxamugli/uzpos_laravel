@@ -272,6 +272,10 @@ class ReportContoller extends Controller
     }
     public function report_1_2()
     {
+        $brand_id = $_GET['brand_id']??0;
+        $category_id = $_GET['category_id']??0;
+        $product_id = $_GET['product_id']??0;
+        $division_id = $_GET['division_id']??0;
         $sql = "select  up.name as point_name,
                         p.name as product_name,
                         sum(upp.quantity) as total_count,
@@ -282,12 +286,27 @@ class ReportContoller extends Controller
                                 join products p on p.id = upp.product_id
                                 left join category c on c.id = p.category_id
                                 left join brands b on b.id = p.brand_id
-                                
+                                where  (:v_brand_id= 0 or :v_brand_id2 = b.id)
+                                and (:v_category_id= 0 or :v_category_id2 = c.id)
+                                and (:v_product_id = 0 or :v_product_id2 = p.id)
+                                and (:v_division_id = 0 or :v_division_id2 = up.id)
                                 group by up.name,  p.name, c.name, b.name
                                 having sum(upp.quantity) < 10
                                 order by p.name asc;";
-        $result = DB::select($sql);
-        return view('dashboard.reports.report1_2')->with('result',$result);
+        $pdo = DB::getPdo();
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':v_brand_id' => $brand_id ,':v_brand_id2' => $brand_id,
+            ':v_category_id' => $category_id ,':v_category_id2' => $category_id,
+            ':v_product_id' => $product_id ,':v_product_id2' => $product_id,
+            ':v_division_id' => $division_id ,':v_division_id2' => $division_id        
+        ]);
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return view('dashboard.reports.report1_2')->with('result',$result)
+                                                    ->with('brand_id',$brand_id)
+                                                    ->with('category_id',$category_id)
+                                                    ->with('product_id', $product_id)
+                                                    ->with('division_id', $division_id);
     }
     public function report_1_2_download()
     {
@@ -317,6 +336,10 @@ class ReportContoller extends Controller
     }
     public function report_1_3()
     {
+        $brand_id = $_GET['brand_id']??0;
+        $category_id = $_GET['category_id']??0;
+        $product_id = $_GET['product_id']??0;
+        $division_id = $_GET['division_id']??0;
         $sql = "select  up.name as point_name,
                         p.name as product_name,
                         sum(upp.quantity) as total_count,
@@ -327,12 +350,27 @@ class ReportContoller extends Controller
                                 join products p on p.id = upp.product_id
                                 left join category c on c.id = p.category_id
                                 left join brands b on b.id = p.brand_id
-                                
+                                where  (:v_brand_id= 0 or :v_brand_id2 = b.id)
+                                and (:v_category_id= 0 or :v_category_id2 = c.id)
+                                and (:v_product_id = 0 or :v_product_id2 = p.id)
+                                and (:v_division_id = 0 or :v_division_id2 = up.id)
                                 group by up.name,  p.name, c.name, b.name
                                 having sum(upp.quantity) = 0
                                 order by p.name asc;";
-        $result = DB::select($sql);
-        return view('dashboard.reports.report1_3')->with('result',$result);
+        $pdo = DB::getPdo();
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':v_brand_id' => $brand_id ,':v_brand_id2' => $brand_id,
+            ':v_category_id' => $category_id ,':v_category_id2' => $category_id,
+            ':v_product_id' => $product_id ,':v_product_id2' => $product_id,
+            ':v_division_id' => $division_id ,':v_division_id2' => $division_id        
+        ]);
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return view('dashboard.reports.report1_3')->with('result',$result)
+                                                    ->with('brand_id',$brand_id)
+                                                    ->with('category_id',$category_id)
+                                                    ->with('product_id', $product_id)
+                                                    ->with('division_id', $division_id);
     }
     public function report_1_3_download()
     {

@@ -28,7 +28,7 @@
                     <td class="mb-0 text-sm">{{$request->to_division->name}}</td>
                     <td class="mb-0 text-sm">
                         @foreach($request->items as $item)
-                            <ul>
+                            <ul style="list-style:none">
                                 <li>
                                     {{$item->product->name}} 
                                     -

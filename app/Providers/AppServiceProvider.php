@@ -159,8 +159,16 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('popup', $popup);
             }
         });
-        View::composer(['dashboard.reports.report1_1'], function($view){
-            $divisions = Point::all();
+        View::composer(['dashboard.reports.report1_1', 'dashboard.reports.report1_2', 'dashboard.reports.report1_3'], function($view){
+            $user = auth()->user();
+            if($user->role === 0)
+            {
+                $divisions = Point::all();
+            }else
+            {
+                $divisions = [$user->division];
+            }
+            
             $products = Product::all();
             $categories = Category::all();
             $brands = Brand::all();

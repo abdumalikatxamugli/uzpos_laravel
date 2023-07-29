@@ -13,7 +13,7 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <div class="mb-1 font-weight-bold">Дата приема</div>
-                <input type="date" name="check_in" class="form-control">
+                <input type="date" name="check_in" class="form-control" readonly value="{{ date('Y-m-d') }}">
             </div>
             <div class="col-md-6">
                 <div class="font-weight-bold">Пункт приема</div>

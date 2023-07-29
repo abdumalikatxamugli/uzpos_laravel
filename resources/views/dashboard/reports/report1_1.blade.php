@@ -14,15 +14,25 @@
                 <tr>
                     <th>
                         <select name="division_id" id="" class="form-control">
+                            @if(auth()->user()->user_role == 0)
+                                <option value="0">Все</option>
+                            @endif
                             @foreach($divisions as $division)
-                                <option value="{{$division->id}}">{{$division->name}}</option>
+                                <option value="{{$division->id}}" 
+                                        {{$division->id == $division_id ? 'selected':''}} 
+                                >{{$division->name}}</option>
                             @endforeach
                         </select>
                     </th>
                     <th>
                         <select name="product_id" id="" class="form-control">
+                            @if(auth()->user()->user_role == 0)
+                                <option value="0">Все</option>
+                            @endif
                             @foreach($products as $product)
-                                <option value="{{$product->id}}">{{$product->name}}</option>
+                                <option value="{{$product->id}}"
+                                            {{$product->id == $product_id ? 'selected':''}} 
+                                >{{$product->name}}</option>
                             @endforeach
                         </select>
                     </th>
@@ -31,15 +41,25 @@
                     </th>
                     <th>
                         <select name="category_id" id="" class="form-control">
+                            @if(auth()->user()->user_role == 0)
+                                <option value="0">Все</option>
+                            @endif
                             @foreach($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                <option value="{{$category->id}}"
+                                                {{$category->id == $category_id ? 'selected':''}} 
+                                >{{$category->name}}</option>
                             @endforeach
                         </select>
                     </th>
                     <th>
                         <select name="brand_id" id="" class="form-control">
+                            @if(auth()->user()->user_role == 0)
+                                <option value="0">Все</option>
+                            @endif
                             @foreach($brands as $brand)
-                                <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                <option value="{{$brand->id}}"
+                                            {{$brand->id == $brand_id ? 'selected':''}} 
+                                >{{$brand->name}}</option>
                             @endforeach
                         </select>
                     </th>

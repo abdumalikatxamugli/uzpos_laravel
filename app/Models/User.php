@@ -14,6 +14,16 @@ class User extends Authenticatable
      * Traits
      */
     use Fabricatable;
+
+    /**
+     * Relations
+     */
+
+    public function division()
+    {
+        return $this->belongsTo(Point::class, 'division_id', 'id');
+    }
+
      /**
       * Properties
       */
