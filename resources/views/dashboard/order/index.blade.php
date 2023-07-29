@@ -14,7 +14,7 @@
             <thead>
                 <tr>
                     <td>#</td>
-                    <!-- <td>Уникальный ID заказа</td> -->
+                    <td>Уникальный ID заказа</td>
                     <td>Номер заказа</td>
                     <td>Номер счет фактуры</td>
                     <td>Статус заказа</td>
@@ -36,7 +36,7 @@
                 @foreach($orders as $index=>$order)
                 <tr>
                     <td>{{ $index+1 }}</td>
-                    <!-- <td>{{ $order->id}}</td> -->
+                    <td>{{ $order->id}}</td>
                     <td>{{ str_pad($order->order_no, 4, '0', STR_PAD_LEFT ) }}</td>
                     <td>{{ str_pad($order->esf_no, 4, '0', STR_PAD_LEFT )}}</td>
                     <td>{{ $order->status_name}}</td>
