@@ -124,7 +124,18 @@
     function start() {
         
         return {
-            items: [{product_id:null, quantity:null, cost:null}],
+            items: [
+                {product_id:null, quantity:null, cost:null},
+                {product_id:null, quantity:null, cost:null},
+                {product_id:null, quantity:null, cost:null},
+                {product_id:null, quantity:null, cost:null},
+                {product_id:null, quantity:null, cost:null},
+                {product_id:null, quantity:null, cost:null},
+                {product_id:null, quantity:null, cost:null},
+                {product_id:null, quantity:null, cost:null},
+                {product_id:null, quantity:null, cost:null},
+                {product_id:null, quantity:null, cost:null}
+            ],
             init : function(){
                 this.products = @json($products);
             },
