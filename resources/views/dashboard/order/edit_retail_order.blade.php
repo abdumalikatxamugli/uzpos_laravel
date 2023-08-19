@@ -31,7 +31,7 @@
             <b>Товары</b>
         </h4>
         <div>
-            @include('dashboard.order.components.orderItems_retail')            
+            @include('dashboard.order.components.orderItems')            
         </div>        
     </div>
     <div class="card-body">
