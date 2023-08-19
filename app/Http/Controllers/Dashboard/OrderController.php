@@ -218,7 +218,7 @@ class OrderController extends Controller
     {
         $client = $order->client;
        
-        if($client->chat){
+        if($client && $client->chat){
         $telegram = new Telegram();
         $telegram->token = Telegram::CLIENT_BOT_TOKEN;
             $text = $order->getClientOrderDetail();
