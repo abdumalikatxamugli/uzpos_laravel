@@ -125,7 +125,9 @@
         
         return {
             items: [
-                {product_id:null, quantity:null, cost:null},
+                {product_id:null, quantity:null, cost:null}
+                @if($order->order_type =='1')
+                ,
                 {product_id:null, quantity:null, cost:null},
                 {product_id:null, quantity:null, cost:null},
                 {product_id:null, quantity:null, cost:null},
@@ -135,6 +137,7 @@
                 {product_id:null, quantity:null, cost:null},
                 {product_id:null, quantity:null, cost:null},
                 {product_id:null, quantity:null, cost:null}
+                @endif
             ],
             init : function(){
                 this.products = @json($products);

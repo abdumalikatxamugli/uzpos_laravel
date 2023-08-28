@@ -30,4 +30,16 @@ class BulkStoreRequest extends FormRequest
             'items.*.quantity'=>'required'
         ];
     }
+    public function all($keys = null)
+    {
+        $data = parent::all($keys);
+        foreach ($data['items'] as $key => $item)
+        {
+            if(empty($item['product_id']))
+            {
+                unset($data['items'][$key]);
+            }
+        }
+        return $data;
+    }
 }

@@ -67,7 +67,12 @@ class OrderController extends Controller
      * Save order items
      */
     public function saveItems(BulkStoreRequest $request){
-        $items = $request->validated()['items'];
+        $submitted_data = $request->validated();
+        if(count($submitted_data) === 0)
+        {
+            return redirect()->back();
+        }
+        $items = $submitted_data['items'];
         foreach($items as $item){
             OrderItem::createFromArray($item);
         }
