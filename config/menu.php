@@ -21,11 +21,11 @@ return [
         'applicationMenu'=>[
             [
                 'title'=>'Заказы',
-                'roles'=>[User::ADMIN],
+                'roles'=>[User::ADMIN, User::SELLER, User::WAREHOUSE_MANAGER],
                 'children'=>[
                     [
                         'title'=>'Розничный заказ',
-                        'roles'=>[User::ADMIN],
+                        'roles'=>[User::ADMIN, User::SELLER],
                         'route'=>'dashboard.order.new',
                         'params'=>['type'=>"2"],
                         'modal'=>true
@@ -33,7 +33,7 @@ return [
                     ,
                     [
                         'title'=>'Принятые Заказы',
-                        'roles'=>[User::ADMIN],
+                        'roles'=>[User::ADMIN, User::SELLER, User::WAREHOUSE_MANAGER],
                         'route'=> 'dashboard.orders.index',
                         'params'=>['status'=>"1"]
                     ]
@@ -53,37 +53,37 @@ return [
                     //     'params'=>['status'=>"3"]
                     // ]
                     ,
-                    [
-                        'title'=>'Новый заказы от др.',
-                        'roles'=>[User::ADMIN],
-                        'route'=>'dashboard.orders.index',
-                        'params'=>['status'=>"1", 'other_shop'=>1]
-                    ]
-                    ,
-                    [
-                        'title'=>'Зав. заказы от др.',
-                        'roles'=>[User::ADMIN],
-                        'route'=>'dashboard.orders.index',
-                        'params'=>['status'=>"2", 'other_shop'=>1]
-                    ]
+                    // [
+                    //     'title'=>'Новый заказы от др.',
+                    //     'roles'=>[User::ADMIN],
+                    //     'route'=>'dashboard.orders.index',
+                    //     'params'=>['status'=>"1", 'other_shop'=>1]
+                    // ]
+                    // ,
+                    // [
+                    //     'title'=>'Зав. заказы от др.',
+                    //     'roles'=>[User::ADMIN],
+                    //     'route'=>'dashboard.orders.index',
+                    //     'params'=>['status'=>"2", 'other_shop'=>1]
+                    // ]
                 ]
             ]
             ,
             [
                 'title'=>'Клиенты',
-                'roles'=>[User::ADMIN],
+                'roles'=>[User::ADMIN, User::SELLER],
                 'route'=>'dashboard.client.index',
             ]
             ,
             [
                 'title'=>'Приход товаров',
-                'roles'=>[User::ADMIN],
+                'roles'=>[User::ADMIN, User::WAREHOUSE_MANAGER],
                 'route'=>'dashboard.party.index',
             ]
             ,
             [
                 'title'=>'Перемешения товаров',
-                'roles'=>[User::ADMIN],
+                'roles'=>[User::ADMIN, User::SELLER, User::WAREHOUSE_MANAGER],
                 'route'=>'dashboard.transfer.index',
             ]
             ,
@@ -95,13 +95,13 @@ return [
             ,
             [
                 'title'=>'Отчеты',
-                'roles'=>[User::ADMIN],
+                'roles'=>[User::ADMIN, User::SELLER, User::WAREHOUSE_MANAGER],
                 'route'=>'dashboard.reports.main',
             ]
             ,
             [
                 'title'=>'Расходы',
-                'roles'=>[User::ADMIN],
+                'roles'=>[User::ADMIN, User::SELLER],
                 'route'=>'dashboard.expense.index',
             ]
             ,

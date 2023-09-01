@@ -34,12 +34,12 @@ class User extends Authenticatable
     const roles = [
         'ADMIN' => 0,
         'SELLER' => 1,
-        'WAREHOUSE_MANAGER' => 3,
-        'COLLECTOR' => 4,
-        'ACCOUNTANT' => 5,
-        'SHOP_MANAGER' => 6,
-        'DELIVERY' => 7,
-        'OWNER'=>8
+        'WAREHOUSE_MANAGER' => 2,
+        'COLLECTOR' => 3,
+        'ACCOUNTANT' => 4,
+        'SHOP_MANAGER' => 5,
+        'DELIVERY' => 6,
+        'OWNER'=>7
     ];
     const ADMIN = 0;
     const SELLER = 1;
