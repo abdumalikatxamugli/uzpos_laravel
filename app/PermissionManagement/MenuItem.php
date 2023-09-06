@@ -2,8 +2,8 @@
 namespace App\PermissionManagement;
 
 class MenuItem{
-    public function render($structure){
-        if(!in_array(auth()->user()->role_id, $structure['roles'] ) && !in_array("*", $structure['roles'] )){
+    public function render($structur e){
+        if(!in_array(auth()->user()->user_role, $structure['roles'] ) && !in_array("*", $structure['roles'] )){
             return "";
         }
         $children = "";
