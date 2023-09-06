@@ -43,12 +43,12 @@ class User extends Authenticatable
     ];
     const ADMIN = 0;
     const SELLER = 1;
-    const WAREHOUSE_MANAGER = 2;
-    const COLLECTOR = 3;
-    const ACCOUNTANT = 4;
-    const SHOP_MANAGER = 5;
-    const DELIVERY = 6;
-    const OWNER = 7;
+    const WAREHOUSE_MANAGER = 3;
+    const COLLECTOR = 4;
+    // const ACCOUNTANT = 4;
+    // const SHOP_MANAGER = 5;
+    const DELIVERY = 7;
+    // const OWNER = 7;
 
     public function getRoleName()
     {
