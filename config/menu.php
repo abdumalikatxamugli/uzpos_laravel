@@ -33,14 +33,14 @@ return [
                     ,
                     [
                         'title'=>'Принятые Заказы',
-                        'roles'=>[User::ADMIN, User::SELLER, User::WAREHOUSE_MANAGER],
+                        'roles'=>[User::ADMIN, User::SELLER],
                         'route'=> 'dashboard.orders.index',
                         'params'=>['status'=>"1"]
                     ]
                     ,
                     [
                         'title'=>'Завершенные Заказы',
-                        'roles'=>[User::ADMIN],
+                        'roles'=>[User::ADMIN, User::SELLER],
                         'route'=>'dashboard.orders.index',
                         'params'=>['status'=>"2"]
                         
