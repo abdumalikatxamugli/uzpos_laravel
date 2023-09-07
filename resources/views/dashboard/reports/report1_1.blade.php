@@ -26,9 +26,7 @@
                     </th>
                     <th>
                         <select name="product_id" id="" class="form-control">
-                            @if(auth()->user()->user_role == 0)
-                                <option value="0">Все</option>
-                            @endif
+                            <option value="0">Все</option>
                             @foreach($products as $product)
                                 <option value="{{$product->id}}"
                                             {{$product->id == $product_id ? 'selected':''}} 
@@ -41,9 +39,7 @@
                     </th>
                     <th>
                         <select name="category_id" id="" class="form-control">
-                            @if(auth()->user()->user_role == 0)
-                                <option value="0">Все</option>
-                            @endif
+                            <option value="0">Все</option>
                             @foreach($categories as $category)
                                 <option value="{{$category->id}}"
                                                 {{$category->id == $category_id ? 'selected':''}} 
@@ -53,9 +49,7 @@
                     </th>
                     <th>
                         <select name="brand_id" id="" class="form-control">
-                            @if(auth()->user()->user_role == 0)
-                                <option value="0">Все</option>
-                            @endif
+                            <option value="0">Все</option>
                             @foreach($brands as $brand)
                                 <option value="{{$brand->id}}"
                                             {{$brand->id == $brand_id ? 'selected':''}} 
