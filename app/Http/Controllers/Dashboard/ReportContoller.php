@@ -212,7 +212,7 @@ class ReportContoller extends Controller
         $brand_id = $_GET['brand_id']??0;
         $category_id = $_GET['category_id']??0;
         $product_id = $_GET['product_id']??0;
-        $division_id = $_GET['division_id']??0;
+        $division_id = $_GET['division_id']??auth()->user()->division_id;
         
         $sql = "select  up.name as point_name,
                         p.name as product_name,
