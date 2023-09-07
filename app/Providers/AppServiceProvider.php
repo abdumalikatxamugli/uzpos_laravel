@@ -53,13 +53,13 @@ class AppServiceProvider extends ServiceProvider
             $toPoints = Point::where(function($query){
                 $user = auth()->user();
                 if($user->user_role != User::roles['ADMIN']){
-                    $query->where('id', '<>', $user->point_id);
+                    $query->where('id', '<>', $user->division_id);
                 }                
             })->get();
             $fromPoints = Point::where(function($query){
                 $user = auth()->user();
                 if($user->user_role != User::roles['ADMIN']){
-                    $query->where('id', $user->point_id);
+                    $query->where('id', $user->division_id);
                 }                
             })->get();
             $view->with('toPoints', $toPoints)->with('fromPoints', $fromPoints);
@@ -69,7 +69,7 @@ class AppServiceProvider extends ServiceProvider
             $points = Point::where(function($query){
                 $user = auth()->user();
                 if($user->user_role != User::roles['ADMIN']){
-                    $query->where('id', $user->point_id);
+                    $query->where('id', $user->division_id);
                 }                
             })->get();
             $view->with('points', $points);
@@ -80,7 +80,7 @@ class AppServiceProvider extends ServiceProvider
             $points = Point::where(function($query){
                 $user = auth()->user();
                 if($user->user_role != User::roles['ADMIN']){
-                    $query->where('id', '<>', $user->point_id);
+                    $query->where('id', '<>', $user->division_id);
                 }                
             })->get();
             $view->with('toPoints', $points);
@@ -131,7 +131,7 @@ class AppServiceProvider extends ServiceProvider
             $points = Point::where(function($query){
                 $user = auth()->user();
                 if($user->user_role != User::roles['ADMIN'] && $user->user_role != User::roles['WAREHOUSE_MANAGER']){
-                    $query->where('id', $user->point_id);
+                    $query->where('id', $user->division_id);
                 }                
             })->get();
             $categories = Category::orderBy('name')->get();
