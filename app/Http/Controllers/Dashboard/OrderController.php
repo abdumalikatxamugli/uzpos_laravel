@@ -32,7 +32,7 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $orders = Order::where('status', $request->status);
-        // $orders = $orders->where('created_at', date('Y-m-d'));
+        $orders = $orders->where('created_at', date('Y-m-d'));
         if(auth()->user()->user_role != User::roles['ADMIN']){
             if($request->other_shop!=1){
                 $orders = $orders->where('division_id', auth()->user()->division_id);  
