@@ -115,7 +115,7 @@
                                 Оповещать клиента
                             </a>
                             @else
-                                {{ var_dump()$order->clientNotified)}}
+                                <?php var_dump()$order->clientNotified)?>
                             @endif
                         </td>
                     @endif
