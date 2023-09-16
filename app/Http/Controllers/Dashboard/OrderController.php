@@ -234,7 +234,7 @@ class OrderController extends Controller
                 'chat_id'=>$client->chat->chatId
             ];
             $result = $telegram->sendMessage($message); 
-            // $result = json_decode( $result );
+            $result = json_decode( $result );
             if( isset($result->ok) || $result->ok === true )
             {
                 $order->clientNotified = 1;
