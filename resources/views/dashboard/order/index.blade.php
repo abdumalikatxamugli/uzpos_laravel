@@ -110,12 +110,12 @@
                             @endif
                         </td>
                         <td>
-                            @if($order->clientNotified === 0)
+                            @if($order->clientNotified === '0')
                             <a href="{{route('dashboard.order.notifyClient', $order->id)}}" class="btn btn-success btn-sm">
                                 Оповещать клиента
                             </a>
                             @else
-                                <?php var_dump($order->clientNotified)?>
+                                Оповещен
                             @endif
                         </td>
                     @endif
