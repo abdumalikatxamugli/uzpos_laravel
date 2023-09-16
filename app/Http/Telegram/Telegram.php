@@ -70,6 +70,7 @@ class Telegram{
         if (curl_errno($ch)) {
             $error_msg = curl_error($ch);
         }
+        return $result;
     }
     public static function getStep($request){
         $data = $request->all();
