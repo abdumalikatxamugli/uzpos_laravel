@@ -114,6 +114,8 @@
                             <a href="{{route('dashboard.order.notifyClient', $order->id)}}" class="btn btn-success btn-sm">
                                 Оповещать клиента
                             </a>
+                            @else
+                                {{$order->clientNotified}}
                             @endif
                         </td>
                     @endif
