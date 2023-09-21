@@ -6,13 +6,16 @@ use App\Exceptions\WrongCredentialsException;
 use App\Traits\Fabricatable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
+    
     /**
      *
      * Traits
      */
+    use SoftDeletes;
     use Fabricatable;
 
     /**
